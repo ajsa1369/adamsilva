@@ -1,0 +1,276 @@
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { 
+  ArrowRight, 
+  Brain, 
+  Zap, 
+  Target, 
+  BarChart3, 
+  Shield, 
+  Users,
+  CheckCircle,
+  Star,
+  TrendingUp
+} from 'lucide-react';
+
+export const HomePage: React.FC = () => {
+  const benefits = [
+    {
+      icon: <TrendingUp className="h-6 w-6" />,
+      title: "Proven ROI Growth",
+      description: "AI-driven optimization delivers measurable improvements with up to 200% ROI on marketing investments"
+    },
+    {
+      icon: <Zap className="h-6 w-6" />,
+      title: "Lightning-Fast Implementation",
+      description: "Deploy sophisticated marketing systems in minutes, not months, with our automated AI solutions"
+    },
+    {
+      icon: <Target className="h-6 w-6" />,
+      title: "Hyper-Personalization",
+      description: "Create individual customer experiences at scale through advanced AI identity resolution and intent mapping"
+    },
+    {
+      icon: <Shield className="h-6 w-6" />,
+      title: "Enterprise Security",
+      description: "Maintain complete compliance with GDPR, CCPA, and TCPA through automated data protection systems"
+    }
+  ];
+
+  const services = [
+    {
+      icon: <Users className="h-8 w-8" />,
+      title: "Omnichannel Communication",
+      description: "Seamlessly engage customers across SMS, voice, email, and social media with AI-powered personalization",
+      path: "/services/omnichannel-communication"
+    },
+    {
+      icon: <Brain className="h-8 w-8" />,
+      title: "AI Website & Landing Pages",
+      description: "Generate high-converting pages instantly with automated A/B testing and competitor design cloning",
+      path: "/services/website-landing-pages"
+    },
+    {
+      icon: <BarChart3 className="h-8 w-8" />,
+      title: "Intelligent Campaign Management",
+      description: "Orchestrate complex marketing funnels with real-time optimization and AI-driven performance insights",
+      path: "/services/campaign-management"
+    }
+  ];
+
+  const stats = [
+    { number: "50%", label: "Average Revenue Increase" },
+    { number: "200%", label: "Marketing ROI Improvement" },
+    { number: "75%", label: "Reduction in Manual Tasks" },
+    { number: "90%", label: "Customer Satisfaction Rate" }
+  ];
+
+  return (
+    <div className="bg-white">
+      {/* Hero Section */}
+      <section className="relative bg-gradient-to-br from-blue-50 via-white to-teal-50 pt-16 pb-24 overflow-hidden">
+        <div className="absolute inset-0 bg-grid-pattern opacity-5"></div>
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center max-w-4xl mx-auto">
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 mb-6 leading-tight">
+              Transform Your Marketing with 
+              <span className="bg-gradient-to-r from-blue-600 to-teal-600 bg-clip-text text-transparent"> AI Intelligence</span>
+            </h1>
+            <p className="text-xl sm:text-2xl text-gray-600 mb-8 leading-relaxed max-w-3xl mx-auto">
+              Revolutionize customer engagement and drive exponential growth through our comprehensive suite of 
+              AI-powered marketing solutions. From automated omnichannel communication to predictive analytics, 
+              we deliver measurable results that transform businesses.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+              <Link 
+                to="/contact"
+                className="group bg-gradient-to-r from-blue-600 to-teal-600 text-white px-8 py-4 rounded-lg font-semibold text-lg hover:from-blue-700 hover:to-teal-700 transition-all duration-200 shadow-lg hover:shadow-xl flex items-center space-x-2"
+              >
+                <span>Start Your Transformation</span>
+                <ArrowRight className="h-5 w-5 group-hover:translate-x-1 transition-transform duration-200" />
+              </Link>
+              <Link 
+                to="/services/omnichannel-communication"
+                className="text-gray-700 px-8 py-4 rounded-lg font-medium text-lg border-2 border-gray-200 hover:border-blue-300 hover:text-blue-600 transition-all duration-200"
+              >
+                Explore Our Services
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Executive Summary */}
+      <section className="py-20 bg-gray-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="max-w-4xl mx-auto text-center mb-16">
+            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-6">
+              The Future of Marketing is Here
+            </h2>
+            <p className="text-lg text-gray-600 leading-relaxed">
+              Traditional marketing approaches struggle to meet today's evolving consumer expectations and real-time market dynamics. 
+              Adam Silva Consulting pioneers a comprehensive ecosystem of AI-powered services that transforms marketing from a 
+              fragmented, reactive discipline into a highly efficient, hyper-personalized, and strategically proactive engine 
+              for sustained competitive advantage.
+            </p>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {benefits.map((benefit, index) => (
+              <div key={index} className="bg-white p-6 rounded-xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow duration-200">
+                <div className="bg-gradient-to-r from-blue-600 to-teal-600 text-white p-3 rounded-lg w-fit mb-4">
+                  {benefit.icon}
+                </div>
+                <h3 className="text-lg font-semibold text-gray-900 mb-2">{benefit.title}</h3>
+                <p className="text-gray-600 text-sm leading-relaxed">{benefit.description}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Featured Services */}
+      <section className="py-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
+              Comprehensive AI-Powered Solutions
+            </h2>
+            <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+              Our integrated suite of eleven specialized services work synergistically to create a holistic marketing ecosystem 
+              that delivers exponential results through intelligent automation and predictive insights.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-12">
+            {services.map((service, index) => (
+              <div key={index} className="group bg-white p-8 rounded-xl shadow-sm border border-gray-100 hover:shadow-lg hover:border-blue-200 transition-all duration-300">
+                <div className="bg-gradient-to-r from-blue-600 to-teal-600 text-white p-4 rounded-lg w-fit mb-6 group-hover:scale-105 transition-transform duration-200">
+                  {service.icon}
+                </div>
+                <h3 className="text-xl font-semibold text-gray-900 mb-3">{service.title}</h3>
+                <p className="text-gray-600 mb-6 leading-relaxed">{service.description}</p>
+                <Link 
+                  to={service.path}
+                  className="inline-flex items-center text-blue-600 font-medium hover:text-blue-700 transition-colors duration-200"
+                >
+                  Learn More 
+                  <ArrowRight className="h-4 w-4 ml-2 group-hover:translate-x-1 transition-transform duration-200" />
+                </Link>
+              </div>
+            ))}
+          </div>
+
+          <div className="text-center">
+            <Link 
+              to="/services/omnichannel-communication"
+              className="inline-flex items-center bg-gray-900 text-white px-8 py-3 rounded-lg font-medium hover:bg-gray-800 transition-colors duration-200"
+            >
+              View All 11 Services
+              <ArrowRight className="h-5 w-5 ml-2" />
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* Performance Stats */}
+      <section className="py-20 bg-gradient-to-r from-blue-600 to-teal-600 text-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl sm:text-4xl font-bold mb-4">
+              Measurable Results That Matter
+            </h2>
+            <p className="text-xl opacity-90 max-w-3xl mx-auto">
+              Our AI-powered solutions deliver quantifiable improvements across every marketing metric, 
+              driving sustainable growth and competitive advantage for our clients.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
+            {stats.map((stat, index) => (
+              <div key={index} className="text-center">
+                <div className="text-4xl sm:text-5xl font-bold mb-2">{stat.number}</div>
+                <div className="text-lg opacity-90">{stat.label}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <section className="py-20">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-6">
+            Ready to Transform Your Marketing?
+          </h2>
+          <p className="text-lg text-gray-600 mb-8 leading-relaxed">
+            Join industry leaders who are already leveraging AI to drive unprecedented growth. 
+            Let's discuss how our comprehensive suite of AI-powered solutions can revolutionize your marketing strategy.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Link 
+              to="/contact"
+              className="bg-gradient-to-r from-blue-600 to-teal-600 text-white px-8 py-4 rounded-lg font-semibold text-lg hover:from-blue-700 hover:to-teal-700 transition-all duration-200 shadow-lg hover:shadow-xl"
+            >
+              Schedule Your Consultation
+            </Link>
+            <Link 
+              to="/services/omnichannel-communication"
+              className="text-gray-700 px-8 py-4 rounded-lg font-medium text-lg border-2 border-gray-200 hover:border-blue-300 hover:text-blue-600 transition-all duration-200"
+            >
+              Explore Our Solutions
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* Visual Elements Descriptions */}
+      <section className="py-16 bg-gray-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h2 className="text-2xl font-bold text-gray-900 mb-4">Innovation Visualized</h2>
+            <p className="text-gray-600">Conceptual representations of our AI-powered marketing ecosystem</p>
+          </div>
+          
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <div className="bg-white p-6 rounded-xl shadow-sm">
+              <div className="aspect-video bg-gradient-to-br from-blue-100 to-teal-100 rounded-lg mb-4 flex items-center justify-center">
+                <Brain className="h-16 w-16 text-blue-600" />
+              </div>
+              <h3 className="font-semibold text-gray-900 mb-2">AI Neural Network Visualization</h3>
+              <p className="text-sm text-gray-600">
+                Dynamic interconnected nodes representing our AI algorithms processing customer data, 
+                behavioral patterns, and predictive analytics in real-time, with flowing data streams 
+                connecting multiple marketing channels and touchpoints.
+              </p>
+            </div>
+            
+            <div className="bg-white p-6 rounded-xl shadow-sm">
+              <div className="aspect-video bg-gradient-to-br from-teal-100 to-blue-100 rounded-lg mb-4 flex items-center justify-center">
+                <BarChart3 className="h-16 w-16 text-teal-600" />
+              </div>
+              <h3 className="font-semibold text-gray-900 mb-2">Real-Time Performance Dashboard</h3>
+              <p className="text-sm text-gray-600">
+                Sleek, modern analytics interface displaying live marketing metrics, conversion funnels, 
+                and ROI improvements with animated charts, heatmaps, and predictive trend lines 
+                showcasing the power of intelligent automation.
+              </p>
+            </div>
+            
+            <div className="bg-white p-6 rounded-xl shadow-sm">
+              <div className="aspect-video bg-gradient-to-br from-orange-100 to-blue-100 rounded-lg mb-4 flex items-center justify-center">
+                <Target className="h-16 w-16 text-orange-600" />
+              </div>
+              <h3 className="font-semibold text-gray-900 mb-2">Omnichannel Customer Journey</h3>
+              <p className="text-sm text-gray-600">
+                Sophisticated customer journey map showing seamless transitions between email, SMS, 
+                social media, and voice channels, with AI-powered personalization points and 
+                real-time optimization indicators enhancing every touchpoint.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  );
+};
