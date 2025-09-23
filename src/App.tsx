@@ -15,34 +15,34 @@ import { SecurityCompliancePage } from './pages/services/SecurityCompliancePage'
 import { AnalyticsPage } from './pages/services/AnalyticsPage';
 import { IntentTargetingPage } from './pages/services/IntentTargetingPage';
 import { CompetitorMonitoringPage } from './pages/services/CompetitorMonitoringPage';
+import { Sitemap } from './pages/Sitemap';
 import { ScrollToTop } from './components/common/ScrollToTop';
 
 function App() {
   return (
-    <Router>
-      <div className="min-h-screen bg-white">
-        <ScrollToTop />
-        <Header />
-        <main>
-          <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/contact" element={<Contact />} />
-            <Route path="/services/omnichannel-communication" element={<OmnichannelPage />} />
-            <Route path="/services/website-landing-pages" element={<WebsiteLandingPage />} />
-            <Route path="/services/campaign-management" element={<CampaignManagementPage />} />
-            <Route path="/services/seo-ppc" element={<SEOPPCPage />} />
-            <Route path="/services/content-creation" element={<ContentCreationPage />} />
-            <Route path="/services/lead-management" element={<LeadManagementPage />} />
-            <Route path="/services/outreach-partnerships" element={<OutreachPage />} />
-            <Route path="/services/security-compliance" element={<SecurityCompliancePage />} />
-            <Route path="/services/analytics-reporting" element={<AnalyticsPage />} />
-            <Route path="/services/intent-targeting" element={<IntentTargetingPage />} />
-            <Route path="/services/competitor-monitoring" element={<CompetitorMonitoringPage />} />
-          </Routes>
-        </main>
-        <Footer />
-      </div>
-    </Router>
+    <>
+      <ScrollToTop />
+      <Header />
+      <Router>
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/services/omnichannel-platforms" element={<OmnichannelPage />} />
+          <Route path="/services/website-landing-pages" element={<WebsiteLandingPage />} />
+          <Route path="/services/campaign-management" element={<CampaignManagementPage />} />
+          <Route path="/services/seo-ppc" element={<SEOPPCPage />} />
+          <Route path="/services/content-creation" element={<ContentCreationPage />} />
+          <Route path="/services/lead-management" element={<LeadManagementPage />} />
+          <Route path="/services/outreach" element={<OutreachPage />} />
+          <Route path="/services/security-compliance" element={<SecurityCompliancePage />} />
+          <Route path="/services/analytics" element={<AnalyticsPage />} />
+          <Route path="/services/intent-targeting" element={<IntentTargetingPage />} />
+          <Route path="/services/competitor-monitoring" element={<CompetitorMonitoringPage />} />
+          <Route path="/sitemap" element={<Sitemap />} />
+        </Routes>
+      </Router>
+      <Footer />
+    </>
   );
 }
 
