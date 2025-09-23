@@ -1,0 +1,36 @@
+User-agent: *
+Allow: /
+
+# Block admin and internal areas
+Disallow: /admin/
+Disallow: /_next/
+Disallow: /api/
+Disallow: /.well-known/
+
+# Allow search engines to access images
+Allow: /images/
+Allow: /favicon.ico
+Allow: /android-chrome-*.png
+Allow: /apple-touch-icon.png
+
+# Crawl-delay for non-priority bots
+User-agent: *
+Crawl-delay: 1
+
+# Priority access for major search engines
+User-agent: Googlebot
+Crawl-delay: 0
+
+User-agent: Bingbot
+Crawl-delay: 0
+
+User-agent: Slurp
+Crawl-delay: 0
+
+# Sitemap locations
+Sitemap: https://www.adamsilvaconsulting.com/sitemap.xml
+Sitemap: https://www.adamsilvaconsulting.com/sitemap-services.xml
+Sitemap: https://www.adamsilvaconsulting.com/sitemap-content.xml
+Sitemap: https://www.adamsilvaconsulting.com/sitemap-authority.xml
+Sitemap: https://www.adamsilvaconsulting.com/sitemap-images.xml
+Sitemap: https://www.adamsilvaconsulting.com/sitemap-news.xml
