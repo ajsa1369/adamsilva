@@ -1,0 +1,5 @@
+# Netlify redirects for API routes
+/api/contact /.netlify/functions/contact-form 200
+
+# SPA fallback
+/* /index.html 200
