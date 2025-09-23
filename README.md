@@ -1,4 +1,4 @@
-# Adam Silva Consulting - Complete Deployment Packagea
+# Adam Silva Consulting - Complete Deployment Package
 
 **Production-Ready Website for Vercel Deployment**
 
