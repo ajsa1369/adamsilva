@@ -38,7 +38,7 @@
   ],
   "rewrites": [
     {
-      "source": "/((?!images|asc-assets|assets|favicon).*)",
+      "source": "/((?!api|_next/static|_next/image|favicon.ico|images|assets|android-chrome|apple-touch|favicon|site.webmanifest).*)",
       "destination": "/index.html"
     }
   ]
