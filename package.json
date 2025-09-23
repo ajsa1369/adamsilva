@@ -1,7 +1,7 @@
 {
   "name": "adam-silva-consulting",
   "version": "1.0.0",
-  "description": "Adam Silva Consulting - AI-Powered Digital Marketing Solutions",
+  "description": "Adam Silva Consulting - AI-Powered Digital Marketing Solutions", 
   "main": "index.html",
   "scripts": {
     "dev": "vite",
@@ -9,15 +9,6 @@
     "start": "vite preview",
     "preview": "vite preview"
   },
-  "keywords": [
-    "digital-marketing",
-    "ai-consulting",
-    "seo",
-    "content-automation",
-    "lead-generation"
-  ],
-  "author": "Adam Silva Consulting",
-  "license": "MIT",
   "dependencies": {
     "lucide-react": "^0.344.0",
     "react": "^18.3.1",
@@ -26,19 +17,13 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.9.1",
-    "@types/node": "^20.0.0",
     "@types/react": "^18.3.5",
     "@types/react-dom": "^18.3.0",
     "@vitejs/plugin-react": "^4.3.1",
-    "autoprefixer": "^10.4.20",
     "eslint": "^9.9.1",
     "eslint-plugin-react-hooks": "^5.1.0-rc.0",
     "eslint-plugin-react-refresh": "^0.4.9",
-    "globals": "^15.9.0",
-    "postcss": "^8.4.45",
-    "tailwindcss": "^3.4.10",
     "typescript": "^5.5.3",
-    "typescript-eslint": "^8.0.1",
     "vite": "^5.4.1"
   }
 }
