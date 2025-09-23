@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Header } from './components/layout/Header';
 import { Footer } from './components/layout/Footer';
 import { HomePage } from './pages/HomePage';
+import { Contact } from './pages/Contact';
 import { OmnichannelPage } from './pages/services/OmnichannelPage';
 import { WebsiteLandingPage } from './pages/services/WebsiteLandingPage';
 import { CampaignManagementPage } from './pages/services/CampaignManagementPage';
@@ -25,6 +26,7 @@ function App() {
         <main>
           <Routes>
             <Route path="/" element={<HomePage />} />
+            <Route path="/contact" element={<Contact />} />
             <Route path="/services/omnichannel-communication" element={<OmnichannelPage />} />
             <Route path="/services/website-landing-pages" element={<WebsiteLandingPage />} />
             <Route path="/services/campaign-management" element={<CampaignManagementPage />} />
