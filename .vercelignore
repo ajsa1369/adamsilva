@@ -1,0 +1,10 @@
+# Ignore cache directories
+node_modules/
+.next/
+.vercel/
+dist/
+.cache/
+
+# Ignore config files that might conflict
+postcss.config.js
+tailwind.config.js
