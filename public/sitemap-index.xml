@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <sitemap>
+    <loc>https://www.adamsilvaconsulting.com/sitemap.xml</loc>
+    <lastmod>2025-09-24T02:23:22+00:00</lastmod>
+  </sitemap>
+  <sitemap>
+    <loc>https://www.adamsilvaconsulting.com/sitemap-services.xml</loc>
+    <lastmod>2025-09-24T02:23:22+00:00</lastmod>
+  </sitemap>
+  <sitemap>
+    <loc>https://www.adamsilvaconsulting.com/sitemap-content.xml</loc>
+    <lastmod>2025-09-24T02:23:22+00:00</lastmod>
+  </sitemap>
+  <sitemap>
+    <loc>https://www.adamsilvaconsulting.com/sitemap-authority.xml</loc>
+    <lastmod>2025-09-24T02:23:22+00:00</lastmod>
+  </sitemap>
+  <sitemap>
+    <loc>https://www.adamsilvaconsulting.com/sitemap-images.xml</loc>
+    <lastmod>2025-09-24T02:23:22+00:00</lastmod>
+  </sitemap>
+  <sitemap>
+    <loc>https://www.adamsilvaconsulting.com/sitemap-news.xml</loc>
+    <lastmod>2025-09-24T02:23:22+00:00</lastmod>
+  </sitemap>
+</sitemapindex>
