@@ -1,8 +1,8 @@
 {
-  "name": "adam-silva-consulting",
+  "name": "asc-website",
   "version": "1.0.0",
   "description": "Adam Silva Consulting - AI-Powered Digital Marketing Solutions", 
-  "main": "index.html",
+  "private": true,
   "scripts": {
     "dev": "vite",
     "build": "vite build",
