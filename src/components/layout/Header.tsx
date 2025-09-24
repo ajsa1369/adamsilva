@@ -48,6 +48,17 @@ export const Header: React.FC = () => {
             >
               Home
             </Link>
+
+            <Link 
+              to="/insights" 
+              className={`font-medium transition-colors duration-200 ${
+                location.pathname.startsWith('/insights') 
+                  ? 'text-blue-600' 
+                  : 'text-gray-700 hover:text-blue-600'
+              }`}
+            >
+              Insights
+            </Link>
             
             {/* Services Dropdown */}
             <div 
@@ -104,6 +115,14 @@ export const Header: React.FC = () => {
                 className="block px-4 py-2 text-gray-700 hover:text-blue-600 font-medium"
               >
                 Home
+              </Link>
+
+              <Link 
+                to="/insights" 
+                onClick={() => setIsMenuOpen(false)}
+                className="block px-4 py-2 text-gray-700 hover:text-blue-600 font-medium"
+              >
+                Insights
               </Link>
               
               <div className="px-4">

@@ -15,6 +15,8 @@ import { SecurityCompliancePage } from './pages/services/SecurityCompliancePage'
 import { AnalyticsPage } from './pages/services/AnalyticsPage';
 import { IntentTargetingPage } from './pages/services/IntentTargetingPage';
 import { CompetitorMonitoringPage } from './pages/services/CompetitorMonitoringPage';
+import { InsightsIndex } from './pages/insights/InsightsIndex';
+import { InsightsPage } from './pages/insights/InsightsPage';
 import { Sitemap } from './pages/Sitemap';
 import { ScrollToTop } from './components/common/ScrollToTop';
 
@@ -27,6 +29,8 @@ function App() {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/insights" element={<InsightsIndex />} />
+          <Route path="/insights/the-ai-authority-imperative-gartners-50-traffic-decline-prediction" element={<InsightsPage />} />
           <Route path="/services/omnichannel-platforms" element={<OmnichannelPage />} />
           <Route path="/services/website-landing-pages" element={<WebsiteLandingPage />} />
           <Route path="/services/campaign-management" element={<CampaignManagementPage />} />
