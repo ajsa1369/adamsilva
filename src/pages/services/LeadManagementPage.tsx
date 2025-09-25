@@ -11,6 +11,8 @@ import {
   UserCheck,
   Brain
 } from 'lucide-react';
+import ServiceSchema from '../../components/seo/ServiceSchema';
+import FAQSchema, { FAQ } from '../../components/seo/FAQSchema';
 
 export const LeadManagementPage: React.FC = () => {
   const benefits = [
@@ -45,8 +47,61 @@ export const LeadManagementPage: React.FC = () => {
     "Predictive analytics for customer lifetime value forecasting"
   ];
 
+  const faqs: FAQ[] = [
+    {
+      question: "How does AI-powered lead management improve conversion rates?",
+      answer: "AI-powered lead management improves conversion rates by up to 300% through predictive lead scoring, automated customer segmentation, and hyper-personalized campaigns. Our AI analyzes behavioral patterns, predicts conversion likelihood, and delivers the right message at the optimal moment, ensuring higher engagement and better sales outcomes."
+    },
+    {
+      question: "What makes your lead scoring different from traditional methods?",
+      answer: "Our AI-powered predictive lead scoring analyzes hundreds of data points in real-time, including behavioral patterns, demographic information, engagement history, and conversion likelihood. Unlike traditional static scoring, our AI continuously learns and adapts, providing dynamic scores that reflect real-time prospect readiness and enabling sales teams to prioritize high-value prospects with 40% improved close rates."
+    },
+    {
+      question: "How quickly can I implement AI lead management systems?",
+      answer: "AI lead management systems can be deployed rapidly with initial optimization visible within 24-48 hours. Full implementation typically takes 7-14 days, including automated lead qualification, predictive scoring setup, and personalized nurturing sequences. Our automation reduces manual tasks by 85% and scales to manage vast data volumes at enterprise level."
+    },
+    {
+      question: "Can your AI lead management integrate with existing CRM systems?",
+      answer: "Yes, our AI lead management platform integrates seamlessly with existing CRM systems and marketing tools. We provide automated customer segmentation, intelligent chatbots for lead capture, personalized email sequences with optimal timing, and advanced customer persona building that enhances your current sales infrastructure while maintaining data consistency and workflow continuity."
+    }
+  ];
+
   return (
     <div className="bg-white">
+      {/* SEO Schema Markup */}
+      <ServiceSchema 
+        name="Precision Lead Management & Targeting"
+        description="Qualify leads, build detailed customer personas, and schedule engagement at the perfect time based on sophisticated AI analysis that maximizes conversion potential."
+        url="/services/lead-management"
+        offers={[
+          {
+            name: "AI-Powered Lead Scoring",
+            description: "Predictive lead scoring and qualification using advanced behavioral analysis",
+            category: "Lead Intelligence"
+          },
+          {
+            name: "Automated Customer Segmentation",
+            description: "Intelligent customer segmentation based on behavior and demographics",
+            category: "Customer Analytics"
+          },
+          {
+            name: "Intelligent Lead Capture",
+            description: "Real-time chatbots and engagement systems for optimal lead capture",
+            category: "Lead Generation"
+          },
+          {
+            name: "Personalized Nurturing",
+            description: "Email sequences and engagement with optimal timing optimization",
+            category: "Lead Nurturing"
+          }
+        ]}
+      />
+      
+      <FAQSchema 
+        faqs={faqs}
+        pageUrl="https://www.adamsilvaconsulting.com/services/lead-management"
+      />
+
       {/* Hero Section */}
       <section className="bg-gradient-to-br from-blue-50 via-white to-teal-50 pt-24 pb-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -236,6 +291,27 @@ export const LeadManagementPage: React.FC = () => {
                 personalized messaging recommendations for maximum engagement effectiveness.
               </p>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ Section */}
+      <section className="py-20">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl font-bold text-gray-900 mb-6">Frequently Asked Questions</h2>
+            <p className="text-lg text-gray-600">
+              Learn more about our AI-powered lead management and targeting solutions
+            </p>
+          </div>
+          
+          <div className="space-y-8">
+            {faqs.map((faq, index) => (
+              <div key={index} className="bg-white border border-gray-200 rounded-lg p-6 shadow-sm">
+                <h3 className="text-lg font-semibold text-gray-900 mb-3">{faq.question}</h3>
+                <p className="text-gray-700 leading-relaxed">{faq.answer}</p>
+              </div>
+            ))}
           </div>
         </div>
       </section>

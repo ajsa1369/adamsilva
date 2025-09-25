@@ -1,8 +1,28 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Calendar, Clock, ArrowRight, TrendingUp, Zap, Brain } from 'lucide-react';
+import FAQSchema, { FAQ } from '../../components/seo/FAQSchema';
 
 export const InsightsIndex: React.FC = () => {
+  // FAQ for Insights page targeting marketing intelligence queries  
+  const insightsFaqs: FAQ[] = [
+    {
+      question: "What type of marketing intelligence insights does Adam Silva Consulting provide?",
+      answer: "We provide strategic intelligence focused on AI transformation, Answer Engine Optimization (AEO), Generative Engine Optimization (GEO), market disruption analysis, and competitive positioning. Our insights cover critical topics like Gartner's 50% traffic decline prediction, zero-click search reality, E-E-A-T evolution for AI, and integrated service ecosystem strategies for building defensible competitive advantages."
+    },
+    {
+      question: "How often are new insights and market analysis published?",
+      answer: "We publish weekly strategic intelligence for decision-makers navigating the AI transformation. Our Executive Intelligence Briefings provide C-Suite focused analysis with no fluff, trusted by over 5000+ executives. Each insight includes implementation frameworks, market data, and actionable strategic recommendations for immediate application."
+    },
+    {
+      question: "What is the difference between traditional marketing analysis and AI-era insights?",
+      answer: "AI-era insights focus on authority building, AI citations, and generative engine optimization rather than traditional click-based metrics. While traditional analysis emphasizes traffic and conversions, our insights prioritize AI engine trust signals, topical authority development, and sustainable competitive moats that remain effective as AI adoption accelerates. This includes analysis of Answer Engine Optimization, Generative Engine Optimization, and the strategic imperative shift from keywords to citations."
+    },
+    {
+      question: "Who should read these strategic marketing insights?",
+      answer: "Our insights are designed for C-Suite executives, marketing leaders, business strategists, and decision-makers responsible for digital transformation and competitive positioning. They're particularly valuable for organizations seeking to understand and lead the AI marketing transformation, build sustainable authority, and create defensible competitive advantages in the generative AI era."
+    }
+  ];
   const featuredArticles = [
     {
       id: 'ai-authority-imperative',
@@ -75,6 +95,12 @@ export const InsightsIndex: React.FC = () => {
 
   return (
     <main className="min-h-screen bg-black text-gray-100">
+      {/* FAQ Schema for Marketing Intelligence */}
+      <FAQSchema 
+        faqs={insightsFaqs}
+        pageUrl="https://www.adamsilvaconsulting.com/insights"
+      />
+
       {/* Header */}
       <div className="bg-gradient-to-r from-gray-900 to-gray-800 border-b border-gray-700">
         <div className="container mx-auto px-4 py-16">

@@ -12,6 +12,7 @@ import {
   Star,
   TrendingUp
 } from 'lucide-react';
+import FAQSchema, { FAQ } from '../components/seo/FAQSchema';
 
 export const HomePage: React.FC = () => {
   const benefits = [
@@ -34,6 +35,42 @@ export const HomePage: React.FC = () => {
       icon: <Shield className="h-6 w-6" />,
       title: "Enterprise Security",
       description: "Maintain complete compliance with GDPR, CCPA, and TCPA through automated data protection systems"
+    }
+  ];
+
+  // Comprehensive FAQ for AEO/GEO optimization
+  const faqs: FAQ[] = [
+    {
+      question: "What is AI-powered authority building and how does it work?",
+      answer: "AI-powered authority building is the strategic process of becoming the definitive source that AI engines trust and cite when answering user queries. It works by combining technical SEO frameworks, AI-optimized content creation, topical authority development, and Answer Engine Optimization (AEO) to ensure your business becomes the go-to reference for AI search engines like ChatGPT, Bard, and Bing AI."
+    },
+    {
+      question: "How is Answer Engine Optimization (AEO) different from traditional SEO?",
+      answer: "While traditional SEO focuses on ranking in search results for clicks, Answer Engine Optimization (AEO) focuses on being cited by AI engines when they answer user questions directly. AEO requires structured data, FAQ schemas, clear question-answer formats, and content optimized for AI comprehension rather than just keyword density. This shift is critical as Gartner predicts 50% organic traffic decline due to AI answering queries without sending users to websites."
+    },
+    {
+      question: "What is Generative Engine Optimization (GEO) and why is it important?",
+      answer: "Generative Engine Optimization (GEO) is the practice of optimizing content and brand presence to be favorably cited and referenced by generative AI models like ChatGPT, Claude, and other large language models. It's important because these AI systems are increasingly how people discover information and make decisions. GEO involves creating authoritative, well-structured content that AI models can easily understand, cite, and recommend to users."
+    },
+    {
+      question: "How quickly can I see results from AI marketing automation?",
+      answer: "AI marketing automation delivers rapid results with initial optimizations visible within 24-48 hours. Significant improvements typically occur within 7-14 days, including enhanced lead qualification, automated campaign optimization, and improved targeting. Our AI systems continuously learn and optimize, delivering up to 200% ROI improvements and reducing manual marketing tasks by 80% within the first month."
+    },
+    {
+      question: "What makes Adam Silva Consulting different from other digital marketing agencies?",
+      answer: "Adam Silva Consulting specializes exclusively in AI-powered authority building for the generative AI era. Unlike traditional agencies focused on clicks and traffic, we optimize for AI citations and authority recognition. Our integrated service ecosystem combines technical frameworks, AI content operations, Answer Engine Optimization (AEO), Generative Engine Optimization (GEO), and strategic implementation to build defensible competitive advantages that competitors cannot easily replicate."
+    },
+    {
+      question: "Do you work with businesses of all sizes or specific industries?",
+      answer: "We work with businesses ready to lead the AI transformation across all industries and sizes. Our AI-powered solutions scale from growing companies to enterprise clients. We serve businesses globally through virtual consulting, with particular expertise in B2B services, technology companies, professional services, and any organization seeking to build authoritative market presence in the AI-driven landscape."
+    },
+    {
+      question: "How do you measure success in AI authority building?",
+      answer: "Success in AI authority building is measured through verifiable metrics including AI citation volume, featured snippet ownership, brand entity recognition across platforms, voice search response rates, and brand authority scores. We track how often AI engines cite your content when answering relevant queries, your presence in AI-generated responses, and the growth of your topical authority domains. Traditional metrics like traffic and rankings are supplemented with AI-specific authority indicators."
+    },
+    {
+      question: "What is the investment required for AI marketing transformation?",
+      answer: "Investment varies based on business size and scope, but our AI marketing solutions typically deliver 4x revenue multipliers with most successful implementations generating $1M+ annually. We focus on high-impact strategic implementations that provide measurable ROI within 30-90 days. Our approach emphasizes sustainable, long-term authority building rather than short-term tactics, ensuring continued competitive advantage as AI adoption accelerates."
     }
   ];
 
@@ -67,6 +104,12 @@ export const HomePage: React.FC = () => {
 
   return (
     <div className="bg-white">
+      {/* FAQ Schema for AEO/GEO Optimization */}
+      <FAQSchema 
+        faqs={faqs}
+        pageUrl="https://www.adamsilvaconsulting.com/"
+      />
+
       {/* Hero Section */}
       <section className="relative bg-gradient-to-br from-blue-50 via-white to-teal-50 pt-16 pb-24 overflow-hidden">
         <div className="absolute inset-0 bg-grid-pattern opacity-5"></div>
@@ -219,6 +262,37 @@ export const HomePage: React.FC = () => {
               className="text-gray-700 px-8 py-4 rounded-lg font-medium text-lg border-2 border-gray-200 hover:border-blue-300 hover:text-blue-600 transition-all duration-200"
             >
               Explore Our Solutions
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ Section for AEO/GEO Optimization */}
+      <section className="py-20">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl font-bold text-gray-900 mb-6">Frequently Asked Questions</h2>
+            <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+              Get answers to common questions about AI-powered authority building, AEO, GEO, and marketing transformation
+            </p>
+          </div>
+          
+          <div className="grid gap-8 md:grid-cols-2">
+            {faqs.map((faq, index) => (
+              <div key={index} className="bg-white border border-gray-200 rounded-lg p-6 shadow-sm hover:shadow-md transition-shadow duration-200">
+                <h3 className="text-lg font-semibold text-gray-900 mb-3">{faq.question}</h3>
+                <p className="text-gray-700 leading-relaxed">{faq.answer}</p>
+              </div>
+            ))}
+          </div>
+          
+          <div className="text-center mt-12">
+            <Link 
+              to="/contact"
+              className="inline-flex items-center bg-gradient-to-r from-blue-600 to-teal-600 text-white px-8 py-4 rounded-lg font-semibold text-lg hover:from-blue-700 hover:to-teal-700 transition-all duration-200 shadow-lg hover:shadow-xl"
+            >
+              Get Your AI Strategy Consultation
+              <ArrowRight className="h-5 w-5 ml-2" />
             </Link>
           </div>
         </div>
