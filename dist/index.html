@@ -268,29 +268,45 @@
     }
     </script>
     
-    <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
-    <link rel="shortcut icon" href="/favicon.ico" />
-    <link rel="icon" type="image/x-icon" href="/favicon/favicon.ico" />
-    <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png" />
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png" />
+    <!-- Favicon - Optimized for Search Engines -->
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="icon" href="/favicon/favicon.ico" sizes="any" />
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="192x192" href="/favicon/android-chrome-192x192.png" />
+    <link rel="icon" type="image/png" sizes="512x512" href="/favicon/android-chrome-512x512.png" />
     <link rel="manifest" href="/favicon/site.webmanifest" />
+    
+    <!-- Additional meta tags for better search engine recognition -->
+    <meta name="msapplication-TileImage" content="/favicon/android-chrome-192x192.png" />
     
     <!-- Performance Optimizations -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="theme-color" content="#1e40af" />
     <meta name="msapplication-TileColor" content="#1e40af" />
+    <meta name="msapplication-config" content="/favicon/browserconfig.xml" />
+    
+    <!-- Additional favicon hints for search engines -->
+    <meta name="application-name" content="Adam Silva Consulting" />
+    <meta name="apple-mobile-web-app-title" content="Adam Silva Consulting" />
     
     <!-- Security Headers -->
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://fonts.googleapis.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https:;" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://fonts.googleapis.com https://www.googletagmanager.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https: https://www.google-analytics.com https://analytics.google.com;" />
     
     <!-- Canonical URL -->
     <link rel="canonical" href="https://www.adamsilvaconsulting.com/" />
     
-    <!-- DNS Prefetch for External Resources -->
-    <link rel="dns-prefetch" href="//fonts.googleapis.com" />
-    <link rel="dns-prefetch" href="//fonts.gstatic.com" />
+    <!-- Google Analytics -->
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-7NEYMM8B1R"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-7NEYMM8B1R');
+    </script>
     <script type="module" crossorigin src="/assets/index-Bc4yI0ui.js"></script>
     <link rel="stylesheet" crossorigin href="/assets/index-CCHhwSPw.css">
   </head>
@@ -329,21 +345,6 @@
     </script>
     
     <!-- React Application Script -->
-    
-    <!-- Google Analytics (replace with actual tracking ID) -->
-    <script>
-      // Google Analytics 4 Implementation
-      // Replace 'G-XXXXXXXXXX' with actual tracking ID
-      /*
-      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-      
-      ga('create', 'G-XXXXXXXXXX', 'auto');
-      ga('send', 'pageview');
-      */
-    </script>
   
 <script>
 /**
