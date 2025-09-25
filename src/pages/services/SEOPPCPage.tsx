@@ -11,6 +11,8 @@ import {
   Eye,
   Lightbulb
 } from 'lucide-react';
+import ServiceSchema from '../../components/seo/ServiceSchema';
+import FAQSchema, { FAQ } from '../../components/seo/FAQSchema';
 
 export const SEOPPCPage: React.FC = () => {
   const benefits = [
@@ -45,8 +47,61 @@ export const SEOPPCPage: React.FC = () => {
     "SEO-optimized content generation with keyword targeting"
   ];
 
+  const faqs: FAQ[] = [
+    {
+      question: "How does AI improve SEO and PPC performance compared to traditional methods?",
+      answer: "AI-powered SEO and PPC delivers superior results through automated keyword gap analysis, real-time bid optimization, and predictive customer behavior modeling. Our AI reduces manual tasks by 80%, optimizes ad spending for 50% lower costs, and identifies emerging trends before competitors, ensuring market leadership and strategic advantage."
+    },
+    {
+      question: "What specific AI features are included in your SEO & PPC Superpowers service?",
+      answer: "Our service includes AI-powered keyword gap analysis and trend identification, automated bid optimization and budget allocation, real-time competitor strategy monitoring, dynamic ad variation creation and performance testing, predictive customer behavior modeling, and SEO-optimized content generation with keyword targeting."
+    },
+    {
+      question: "How quickly can I see results from AI-powered SEO and PPC campaigns?",
+      answer: "With AI automation, you can expect initial optimization improvements within 24-48 hours of campaign launch. Significant performance improvements typically become visible within 7-14 days, with AI continuously learning and optimizing campaigns for maximum ROI and competitive advantage."
+    },
+    {
+      question: "What makes your AI SEO and PPC different from other marketing automation tools?",
+      answer: "Our AI platform combines advanced machine learning, natural language processing, and predictive analytics to deliver hyper-targeted ads with 3x higher click-through rates. Unlike basic automation tools, our AI identifies keyword gaps, monitors competitor strategies in real-time, and creates dynamic ad variations that continuously improve performance."
+    }
+  ];
+
   return (
     <div className="bg-white">
+      {/* SEO Schema Markup */}
+      <ServiceSchema 
+        name="SEO & PPC Superpowers"
+        description="Dominate search and paid advertising with AI agents that analyze trends, identify keyword gaps, optimize ad bids, and generate SEO-focused content for maximum visibility and ROI."
+        url="/services/seo-ppc"
+        offers={[
+          {
+            name: "AI-Powered Keyword Analysis",
+            description: "Advanced keyword gap analysis and trend identification for competitive advantage",
+            category: "Search Engine Optimization"
+          },
+          {
+            name: "Automated Bid Optimization",
+            description: "Real-time bid optimization and budget allocation for maximum ROI",
+            category: "Pay-Per-Click Advertising"
+          },
+          {
+            name: "Competitor Strategy Monitoring",
+            description: "Real-time competitor strategy monitoring and analysis for market leadership",
+            category: "Competitive Intelligence"
+          },
+          {
+            name: "SEO Content Generation",
+            description: "AI-powered SEO-optimized content generation with keyword targeting",
+            category: "Content Optimization"
+          }
+        ]}
+      />
+      
+      <FAQSchema 
+        faqs={faqs}
+        pageUrl="https://www.adamsilvaconsulting.com/services/seo-ppc"
+      />
+
       {/* Hero Section */}
       <section className="bg-gradient-to-br from-blue-50 via-white to-teal-50 pt-24 pb-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -236,6 +291,27 @@ export const SEOPPCPage: React.FC = () => {
                 strategic interception and competitive advantage in search results.
               </p>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ Section */}
+      <section className="py-20">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl font-bold text-gray-900 mb-6">Frequently Asked Questions</h2>
+            <p className="text-lg text-gray-600">
+              Get answers to common questions about our AI-powered SEO & PPC services
+            </p>
+          </div>
+          
+          <div className="space-y-8">
+            {faqs.map((faq, index) => (
+              <div key={index} className="bg-white border border-gray-200 rounded-lg p-6 shadow-sm">
+                <h3 className="text-lg font-semibold text-gray-900 mb-3">{faq.question}</h3>
+                <p className="text-gray-700 leading-relaxed">{faq.answer}</p>
+              </div>
+            ))}
           </div>
         </div>
       </section>

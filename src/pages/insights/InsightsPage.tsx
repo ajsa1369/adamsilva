@@ -1,10 +1,32 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight, Calendar, Clock, Share2 } from 'lucide-react';
+import ArticleSchema from '../../components/seo/ArticleSchema';
 
 export const InsightsPage: React.FC = () => {
   return (
     <main className="min-h-screen bg-black text-gray-100">
+      {/* Article Schema */}
+      <ArticleSchema 
+        headline="The AI Authority Imperative: Gartner's 50% Traffic Decline Prediction"
+        description="Gartner's projection of 50% organic traffic decline marks the definitive end of click-based optimization. This comprehensive analysis explores why the strategic objective has irrevocably shifted from ranking for keywords to being cited for authority."
+        url="/insights/the-ai-authority-imperative-gartners-50-traffic-decline-prediction"
+        datePublished="2025-09-18T00:00:00Z"
+        dateModified="2025-09-18T00:00:00Z"
+        keywords={[
+          "AI authority building",
+          "Gartner traffic decline prediction", 
+          "search engine optimization",
+          "AI citations",
+          "digital marketing transformation",
+          "Answer Engine Optimization",
+          "Generative Engine Optimization",
+          "marketing intelligence"
+        ]}
+        wordCount={2800}
+        articleSection="Strategic Analysis"
+      />
+
       {/* Breadcrumb Navigation */}
       <div className="container mx-auto px-4 py-8">
         <nav className="flex text-sm text-gray-400 mb-8">

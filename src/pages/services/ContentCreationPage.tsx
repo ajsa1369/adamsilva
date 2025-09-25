@@ -11,6 +11,8 @@ import {
   Video,
   FileText
 } from 'lucide-react';
+import ServiceSchema from '../../components/seo/ServiceSchema';
+import FAQSchema, { FAQ } from '../../components/seo/FAQSchema';
 
 export const ContentCreationPage: React.FC = () => {
   const benefits = [
@@ -45,8 +47,61 @@ export const ContentCreationPage: React.FC = () => {
     "Real-time audience engagement analysis and response generation"
   ];
 
+  const faqs: FAQ[] = [
+    {
+      question: "How does AI-powered content creation maintain brand consistency at scale?",
+      answer: "Our AI platform learns your brand voice, tone, and messaging guidelines to ensure every piece of content - from social media posts to blog articles - maintains consistent brand identity. The AI analyzes your existing content patterns and applies them across all new content generation, while human oversight ensures quality control."
+    },
+    {
+      question: "What types of content can your AI create for my business?",
+      answer: "Our AI creates comprehensive content including ad copy, social media posts, blog articles, email sequences, video scripts, visual content enhancements, FAQ responses, product descriptions, and multilingual translations. The system handles both text and visual content optimization for maximum engagement."
+    },
+    {
+      question: "How quickly can I generate content with your AI platform?",
+      answer: "AI automates initial content creation, reducing production time by 90%. You can generate blog posts in minutes, create social media content in seconds, and produce ad copy variations instantly. The platform enables endless content variations while maintaining quality and brand consistency."
+    },
+    {
+      question: "Does AI-generated content help with SEO and search rankings?",
+      answer: "Yes, our AI analyzes keywords and content structure to improve search rankings and organic traffic by up to 150%. The platform optimizes content for search engines while maintaining natural readability, incorporates relevant keywords strategically, and structures content for featured snippets and voice search optimization."
+    }
+  ];
+
   return (
     <div className="bg-white">
+      {/* SEO Schema Markup */}
+      <ServiceSchema 
+        name="Content & Media Creation"
+        description="Generate compelling ad copy, social posts, blogs, and stunning images and videos at scale with AI-powered content creation that maintains brand consistency and drives engagement."
+        url="/services/content-creation"
+        offers={[
+          {
+            name: "AI-Powered Content Generation",
+            description: "Automated ad copy, social media posts, and blog content creation with brand consistency",
+            category: "Content Creation"
+          },
+          {
+            name: "Visual Content Enhancement",
+            description: "AI-driven visual content creation and enhancement for social platforms",
+            category: "Media Production"
+          },
+          {
+            name: "Multilingual Content Services",
+            description: "Content translation and cultural localization for global audiences",
+            category: "Localization"
+          },
+          {
+            name: "SEO Content Optimization",
+            description: "Content optimization for search rankings and organic traffic growth",
+            category: "Search Optimization"
+          }
+        ]}
+      />
+      
+      <FAQSchema 
+        faqs={faqs}
+        pageUrl="https://www.adamsilvaconsulting.com/services/content-creation"
+      />
+
       {/* Hero Section */}
       <section className="bg-gradient-to-br from-blue-50 via-white to-teal-50 pt-24 pb-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -235,6 +290,27 @@ export const ContentCreationPage: React.FC = () => {
                 content versioning for global market expansion.
               </p>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ Section */}
+      <section className="py-20">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl font-bold text-gray-900 mb-6">Frequently Asked Questions</h2>
+            <p className="text-lg text-gray-600">
+              Learn more about our AI-powered content and media creation services
+            </p>
+          </div>
+          
+          <div className="space-y-8">
+            {faqs.map((faq, index) => (
+              <div key={index} className="bg-white border border-gray-200 rounded-lg p-6 shadow-sm">
+                <h3 className="text-lg font-semibold text-gray-900 mb-3">{faq.question}</h3>
+                <p className="text-gray-700 leading-relaxed">{faq.answer}</p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
