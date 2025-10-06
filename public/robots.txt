@@ -1,3 +1,6 @@
+# Adam Silva Consulting - Robots.txt
+# Optimized for Google, Yandex, and AI Answer Engines
+
 User-agent: *
 Allow: /
 
@@ -6,29 +9,65 @@ Disallow: /admin/
 Disallow: /_next/
 Disallow: /api/
 Disallow: /.well-known/
+Disallow: /deploy-fixed/
+Disallow: /final_deploy/
+Disallow: /new_deploy/
 
-# Allow search engines to access images
+# Allow search engines to access all public content
 Allow: /images/
+Allow: /assets/
+Allow: /favicon/
 Allow: /favicon.ico
 Allow: /android-chrome-*.png
 Allow: /apple-touch-icon.png
+Allow: /site.webmanifest
 
 # Crawl-delay for non-priority bots
 User-agent: *
 Crawl-delay: 1
 
-# Priority access for major search engines
+# Priority access for major search engines (no delay)
 User-agent: Googlebot
 Crawl-delay: 0
+Allow: /
 
 User-agent: Bingbot
 Crawl-delay: 0
+Allow: /
 
 User-agent: Slurp
 Crawl-delay: 0
+Allow: /
+
+# Yandex optimization
+User-agent: YandexBot
+Crawl-delay: 0
+Allow: /
+Host: https://www.adamsilvaconsulting.com
+
+# AI Answer Engines - Priority Access
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Applebot
+Allow: /
 
 # Sitemap locations
+Sitemap: https://www.adamsilvaconsulting.com/sitemap-index.xml
 Sitemap: https://www.adamsilvaconsulting.com/sitemap.xml
+Sitemap: https://www.adamsilvaconsulting.com/sitemap-main-pages.xml
 Sitemap: https://www.adamsilvaconsulting.com/sitemap-services.xml
 Sitemap: https://www.adamsilvaconsulting.com/sitemap-content.xml
 Sitemap: https://www.adamsilvaconsulting.com/sitemap-authority.xml
