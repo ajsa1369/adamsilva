@@ -1,0 +1,47 @@
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "@id": "https://adamsilvaconsulting.com/services/geo#faq",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is Generative Engine Optimization (GEO)?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Generative Engine Optimization (GEO) is the practice of optimizing content so AI platforms like ChatGPT, Perplexity, Claude, Grok and Google AI Overviews cite your expertise in generated responses. GEO focuses on citation-worthy content structure, authority signals, and conversational formatting rather than traditional keyword rankings."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How does GEO differ from traditional SEO?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "GEO prioritizes being cited in AI-generated answers rather than ranking in search results. While SEO focuses on keywords and backlinks, GEO emphasizes structured data, conversational content, statistics with citations, expert quotes, and clear fact-density that AI can confidently extract and attribute."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Which AI platforms does GEO optimization target?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "GEO optimization targets ChatGPT (800M+ users), Claude (Anthropic), Perplexity (22M users), Grok (X.AI), Google AI Overviews, and other generative AI platforms. Each platform has unique requirements, but core GEO principles apply across all platforms."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What results can I expect from GEO optimization?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Research shows 30-40% average visibility improvements with proper GEO implementation. Small businesses often see 115% increases. AI referral traffic converts 4.4x better than traditional search traffic. Results typically appear within 2-4 weeks of implementation."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What are the most important GEO implementation steps?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Priority GEO steps: 1) Create llms.txt file, 2) Allow all AI bots in robots.txt, 3) Implement FAQ schema on key pages, 4) Add statistics and authoritative citations, 5) Optimize author credentials with E-E-A-T signals, 6) Build multi-platform presence (X/Twitter, Reddit, LinkedIn)."
+      }
+    }
+  ]
+}
