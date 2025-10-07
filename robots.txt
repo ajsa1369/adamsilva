@@ -1,34 +1,134 @@
+# Standard search engines
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 0
+
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 0
+
+User-agent: Slurp
+Allow: /
+Crawl-delay: 0
+
+# AI Training and Search Bots (ALLOW for GEO visibility)
+# OpenAI (ChatGPT)
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+# Anthropic (Claude)
+User-agent: ClaudeBot
+Allow: /
+Crawl-delay: 2
+
+User-agent: Claude-User
+Allow: /
+
+User-agent: Claude-SearchBot
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+# Perplexity
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Perplexity-User
+Allow: /
+
+# Grok / xAI (CRITICAL for X integration)
+User-agent: Grokbot
+Allow: /
+Crawl-delay: 2
+
+User-agent: xAI-Crawler
+Allow: /
+Crawl-delay: 2
+
+User-agent: xAI-Bot
+Allow: /
+Crawl-delay: 2
+
+# Google AI
+User-agent: Google-Extended
+Allow: /
+
+User-agent: GoogleOther
+Allow: /
+
+# Apple Intelligence
+User-agent: Applebot
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+# Common Crawl
+User-agent: CCBot
+Allow: /
+
+# Amazon Alexa
+User-agent: Amazonbot
+Allow: /
+
+# Meta AI
+User-agent: Meta-ExternalAgent
+Allow: /
+
+User-agent: Meta-ExternalFetcher
+Allow: /
+
+# Cohere
+User-agent: cohere-ai
+Allow: /
+
+# ByteDance/TikTok
+User-agent: Bytespider
+Allow: /
+
+# Diffbot
+User-agent: Diffbot
+Allow: /
+
+# Omgili
+User-agent: Omgilibot
+Allow: /
+
+# You.com
+User-agent: YouBot
+Allow: /
+
+# General bot access
 User-agent: *
 Allow: /
+Crawl-delay: 1
 
 # Block admin and internal areas
 Disallow: /admin/
 Disallow: /_next/
 Disallow: /api/
 Disallow: /.well-known/
+Disallow: /private/
+Disallow: /client-portal/
 
-# Allow search engines to access images
+# Allow search engines to access images and favicons
 Allow: /images/
 Allow: /favicon.ico
 Allow: /android-chrome-*.png
 Allow: /apple-touch-icon.png
+Allow: /public/
 
-# Crawl-delay for non-priority bots
-User-agent: *
-Crawl-delay: 1
-
-# Priority access for major search engines
-User-agent: Googlebot
-Crawl-delay: 0
-
-User-agent: Bingbot
-Crawl-delay: 0
-
-User-agent: Slurp
-Crawl-delay: 0
-
-# Sitemap locations
+# Sitemap locations (updated Oct 7, 2025)
+Sitemap: https://www.adamsilvaconsulting.com/sitemap-index.xml
 Sitemap: https://www.adamsilvaconsulting.com/sitemap.xml
+Sitemap: https://www.adamsilvaconsulting.com/sitemap-main-pages.xml
 Sitemap: https://www.adamsilvaconsulting.com/sitemap-services.xml
 Sitemap: https://www.adamsilvaconsulting.com/sitemap-content.xml
 Sitemap: https://www.adamsilvaconsulting.com/sitemap-authority.xml
