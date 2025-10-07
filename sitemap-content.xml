@@ -1,66 +1,63 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <!-- Insights Hub -->
   <url>
     <loc>https://www.adamsilvaconsulting.com/insights</loc>
-    <lastmod>2025-09-24T02:23:22+00:00</lastmod>
+    <lastmod>2025-10-07T19:15:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
-  
-  <!-- Latest Blog Posts -->
   <url>
-    <loc>https://www.adamsilvaconsulting.com/insights/the-ai-authority-imperative-gartners-50-traffic-decline-prediction</loc>
-    <lastmod>2025-09-18T12:00:00+00:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <loc>https://www.adamsilvaconsulting.com/resources</loc>
+    <lastmod>2025-10-07T19:15:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.adamsilvaconsulting.com/insights/zero-click-searches-the-new-reality-of-information-discovery</loc>
-    <lastmod>2025-09-15T12:00:00+00:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <loc>https://www.adamsilvaconsulting.com/guides</loc>
+    <lastmod>2025-10-07T19:15:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.adamsilvaconsulting.com/insights/the-integrated-service-ecosystem-strategic-flywheel-analysis</loc>
-    <lastmod>2025-09-12T12:00:00+00:00</lastmod>
+    <loc>https://www.adamsilvaconsulting.com/tools</loc>
+    <lastmod>2025-10-07T19:15:00+00:00</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.adamsilvaconsulting.com/insights/e-e-a-t-evolution-building-authority-in-the-generative-ai-era</loc>
-    <lastmod>2025-09-10T12:00:00+00:00</lastmod>
+    <loc>https://www.adamsilvaconsulting.com/faq</loc>
+    <lastmod>2025-10-07T19:15:00+00:00</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.adamsilvaconsulting.com/insights/marketing-pain-points-2025-resource-crunch-to-ai-solution</loc>
-    <lastmod>2025-09-08T12:00:00+00:00</lastmod>
+    <loc>https://www.adamsilvaconsulting.com/glossary</loc>
+    <lastmod>2025-10-07T19:15:00+00:00</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://www.adamsilvaconsulting.com/insights/aeo-vs-geo-understanding-the-new-search-landscape</loc>
-    <lastmod>2025-09-05T12:00:00+00:00</lastmod>
+    <loc>https://www.adamsilvaconsulting.com/case-studies/tech-startup</loc>
+    <lastmod>2025-10-07T19:15:00+00:00</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.adamsilvaconsulting.com/insights/ai-content-operations-scaling-quality-with-automation</loc>
-    <lastmod>2025-09-03T12:00:00+00:00</lastmod>
+    <loc>https://www.adamsilvaconsulting.com/case-studies/ecommerce</loc>
+    <lastmod>2025-10-07T19:15:00+00:00</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.adamsilvaconsulting.com/insights/topical-authority-the-ultimate-competitive-moat</loc>
-    <lastmod>2025-09-01T12:00:00+00:00</lastmod>
+    <loc>https://www.adamsilvaconsulting.com/case-studies/saas</loc>
+    <lastmod>2025-10-07T19:15:00+00:00</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.adamsilvaconsulting.com/insights/csr-as-ai-trust-signal-beyond-traditional-marketing</loc>
-    <lastmod>2025-08-28T12:00:00+00:00</lastmod>
+    <loc>https://www.adamsilvaconsulting.com/case-studies/enterprise</loc>
+    <lastmod>2025-10-07T19:15:00+00:00</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.7</priority>
   </url>
 </urlset>
