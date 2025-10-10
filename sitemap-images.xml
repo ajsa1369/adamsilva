@@ -1,25 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
-    <loc>https://www.adamsilvaconsulting.com/images</loc>
-    <lastmod>2025-10-07T19:15:00+00:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
+    <loc>https://www.adamsilvaconsulting.com/</loc>
     <image:image>
       <image:loc>https://www.adamsilvaconsulting.com/images/logo-clear.png</image:loc>
       <image:title>Adam Silva Consulting Logo</image:title>
+      <image:caption>AI-Powered Authority Building for Marketing Intelligence</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.adamsilvaconsulting.com/images/social/og-image.jpg</image:loc>
+      <image:title>Adam Silva Consulting - AI Marketing Intelligence</image:title>
+      <image:caption>The definitive authority for AI engine citations in marketing intelligence</image:caption>
     </image:image>
   </url>
   <url>
-    <loc>https://www.adamsilvaconsulting.com/portfolio</loc>
-    <lastmod>2025-10-07T19:15:00+00:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
+    <loc>https://www.adamsilvaconsulting.com/about</loc>
+    <image:image>
+      <image:loc>https://www.adamsilvaconsulting.com/images/about-hero.jpg</image:loc>
+      <image:title>About Adam Silva Consulting</image:title>
+    </image:image>
   </url>
   <url>
-    <loc>https://www.adamsilvaconsulting.com/gallery</loc>
-    <lastmod>2025-10-07T19:15:00+00:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
+    <loc>https://www.adamsilvaconsulting.com/services</loc>
+    <image:image>
+      <image:loc>https://www.adamsilvaconsulting.com/images/services-hero.jpg</image:loc>
+      <image:title>Our Services - AI-Powered Solutions</image:title>
+    </image:image>
   </url>
 </urlset>

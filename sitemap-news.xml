@@ -1,73 +1,69 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:news="http://www.google.com/schemas/sitemap-news/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:news="http://www.google.com/schemas/sitemap-news/0.9">
   <url>
-    <loc>https://www.adamsilvaconsulting.com/news/ai-marketing-trends-2025</loc>
-    <lastmod>2025-10-07T19:15:00+00:00</lastmod>
+    <loc>https://www.adamsilvaconsulting.com/news/ai-marketing-breakthrough-2025</loc>
     <news:news>
       <news:publication>
-        <news:name>Adam Silva Consulting</news:name>
+        <news:name>Adam Silva Consulting Insights</news:name>
         <news:language>en</news:language>
       </news:publication>
-      <news:publication_date>2025-10-07T19:15:00+00:00</news:publication_date>
-      <news:title>AI Marketing Trends 2025</news:title>
+      <news:publication_date>2025-10-10T19:00:00+00:00</news:publication_date>
+      <news:title>AI Marketing Breakthrough: The Future of Business Intelligence</news:title>
+      <news:keywords>AI marketing, business intelligence, digital transformation</news:keywords>
     </news:news>
-    <changefreq>daily</changefreq>
-    <priority>0.9</priority>
+    <lastmod>2025-10-10T19:00:00+00:00</lastmod>
   </url>
   <url>
-    <loc>https://www.adamsilvaconsulting.com/news/aeo-guide</loc>
-    <lastmod>2025-10-07T19:15:00+00:00</lastmod>
+    <loc>https://www.adamsilvaconsulting.com/news/answer-engine-optimization-rise</loc>
     <news:news>
       <news:publication>
-        <news:name>Adam Silva Consulting</news:name>
+        <news:name>Adam Silva Consulting Insights</news:name>
         <news:language>en</news:language>
       </news:publication>
-      <news:publication_date>2025-10-07T19:15:00+00:00</news:publication_date>
-      <news:title>Answer Engine Optimization Guide</news:title>
+      <news:publication_date>2025-10-10T19:00:00+00:00</news:publication_date>
+      <news:title>The Rise of Answer Engine Optimization in 2025</news:title>
+      <news:keywords>AEO, answer engine optimization, search marketing</news:keywords>
     </news:news>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <lastmod>2025-10-10T19:00:00+00:00</lastmod>
   </url>
   <url>
-    <loc>https://www.adamsilvaconsulting.com/news/geo-strategy</loc>
-    <lastmod>2025-10-07T19:15:00+00:00</lastmod>
+    <loc>https://www.adamsilvaconsulting.com/news/topical-authority-importance</loc>
     <news:news>
       <news:publication>
-        <news:name>Adam Silva Consulting</news:name>
+        <news:name>Adam Silva Consulting Insights</news:name>
         <news:language>en</news:language>
       </news:publication>
-      <news:publication_date>2025-10-07T19:15:00+00:00</news:publication_date>
-      <news:title>Generative Engine Optimization Strategy</news:title>
+      <news:publication_date>2025-10-10T19:00:00+00:00</news:publication_date>
+      <news:title>Why Topical Authority Matters More Than Ever</news:title>
+      <news:keywords>topical authority, content strategy, SEO</news:keywords>
     </news:news>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <lastmod>2025-10-10T19:00:00+00:00</lastmod>
   </url>
   <url>
-    <loc>https://www.adamsilvaconsulting.com/news/digital-authority-building</loc>
-    <lastmod>2025-10-07T19:15:00+00:00</lastmod>
+    <loc>https://www.adamsilvaconsulting.com/news/ai-content-generation-best-practices</loc>
     <news:news>
       <news:publication>
-        <news:name>Adam Silva Consulting</news:name>
+        <news:name>Adam Silva Consulting Insights</news:name>
         <news:language>en</news:language>
       </news:publication>
-      <news:publication_date>2025-10-07T19:15:00+00:00</news:publication_date>
-      <news:title>Digital Authority Building</news:title>
+      <news:publication_date>2025-10-10T19:00:00+00:00</news:publication_date>
+      <news:title>Best Practices for AI Content Generation in 2025</news:title>
+      <news:keywords>AI content, content creation, marketing automation</news:keywords>
     </news:news>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <lastmod>2025-10-10T19:00:00+00:00</lastmod>
   </url>
   <url>
-    <loc>https://www.adamsilvaconsulting.com/news/future-of-seo</loc>
-    <lastmod>2025-10-07T19:15:00+00:00</lastmod>
+    <loc>https://www.adamsilvaconsulting.com/news/digital-transformation-success-stories</loc>
     <news:news>
       <news:publication>
-        <news:name>Adam Silva Consulting</news:name>
+        <news:name>Adam Silva Consulting Insights</news:name>
         <news:language>en</news:language>
       </news:publication>
-      <news:publication_date>2025-10-07T19:15:00+00:00</news:publication_date>
-      <news:title>The Future of SEO</news:title>
+      <news:publication_date>2025-10-10T19:00:00+00:00</news:publication_date>
+      <news:title>Digital Transformation Success Stories: Real Results</news:title>
+      <news:keywords>digital transformation, case studies, business growth</news:keywords>
     </news:news>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <lastmod>2025-10-10T19:00:00+00:00</lastmod>
   </url>
 </urlset>
