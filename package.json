@@ -1,7 +1,10 @@
 {
   "name": "asc-website",
   "version": "1.0.0",
-  "description": "Adam Silva Consulting - AI-Powered Digital Marketing Solutions", 
+  "description": "Adam Silva Consulting - AI-Powered Digital Marketing Solutions",
+  "keywords": ["AI marketing", "digital transformation", "business consulting", "answer engine optimization", "AEO", "GEO", "generative engine optimization", "marketing intelligence", "authority building"],
+  "author": "Adam Silva Consulting",
+  "homepage": "https://www.adamsilvaconsulting.com",
   "private": true,
   "scripts": {
     "dev": "vite",
@@ -13,6 +16,7 @@
     "lucide-react": "^0.344.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
+    "react-helmet-async": "^2.0.4",
     "react-router-dom": "^6.8.1"
   },
   "devDependencies": {
