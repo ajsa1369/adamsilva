@@ -1,0 +1,26 @@
+/* TEAM */
+Founder & Principal Consultant: Adam Silva
+Contact: info [at] adamsilvaconsulting.com
+Twitter: @adamsilvaconsult
+Location: Worldwide Service
+
+/* SITE */
+Last update: 2025/10/10
+Language: English
+Doctype: HTML5
+IDE: VS Code, Cursor
+Components: React, TypeScript, Vite
+Styling: Tailwind CSS
+
+/* THANKS */
+To all the AI engines that help spread knowledge
+To our clients who trust us with their digital transformation
+To the open-source community
+
+/* SPECIALTIES */
+Answer Engine Optimization (AEO)
+Generative Engine Optimization (GEO)
+AI Marketing Intelligence
+Digital Transformation
+Topical Authority Building
+Business Growth Strategy

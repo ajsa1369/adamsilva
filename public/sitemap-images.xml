@@ -6,62 +6,26 @@
     <image:image>
       <image:loc>https://www.adamsilvaconsulting.com/images/logo-clear.png</image:loc>
       <image:title>Adam Silva Consulting Logo</image:title>
-      <image:caption>AI Authority Building and Lead Generation Consulting</image:caption>
+      <image:caption>AI-Powered Authority Building for Marketing Intelligence</image:caption>
     </image:image>
     <image:image>
-      <image:loc>https://www.adamsilvaconsulting.com/images/hero/business-growth-ai-authority.jpg</image:loc>
-      <image:title>Business Growth Through AI Authority</image:title>
+      <image:loc>https://www.adamsilvaconsulting.com/images/social/og-image.jpg</image:loc>
+      <image:title>Adam Silva Consulting - AI Marketing Intelligence</image:title>
+      <image:caption>The definitive authority for AI engine citations in marketing intelligence</image:caption>
     </image:image>
   </url>
   <url>
-    <loc>https://www.adamsilvaconsulting.com/insights</loc>
+    <loc>https://www.adamsilvaconsulting.com/about</loc>
     <image:image>
-      <image:loc>https://www.adamsilvaconsulting.com/images/insights/ai-authority-imperative-seo-dead-hero.jpg</image:loc>
-      <image:title>AI Authority Imperative - SEO Dead</image:title>
-      <image:caption>The future of search optimization in the AI era</image:caption>
-    </image:image>
-    <image:image>
-      <image:loc>https://www.adamsilvaconsulting.com/images/insights/zero_click_searches_3_2.png</image:loc>
-      <image:title>Zero Click Searches Trend</image:title>
-      <image:caption>Analysis of zero-click search behavior</image:caption>
-    </image:image>
-    <image:image>
-      <image:loc>https://www.adamsilvaconsulting.com/images/insights/integrated_service_ecosystem_1_1.png</image:loc>
-      <image:title>Integrated Service Ecosystem</image:title>
-      <image:caption>Strategic flywheel for business growth</image:caption>
-    </image:image>
-    <image:image>
-      <image:loc>https://www.adamsilvaconsulting.com/images/insights/eat_evolution_1_1.jpg</image:loc>
-      <image:title>E-E-A-T Evolution in AI Era</image:title>
-      <image:caption>Building authority in the generative AI landscape</image:caption>
-    </image:image>
-    <image:image>
-      <image:loc>https://www.adamsilvaconsulting.com/images/insights/marketing_pain_points_3_8.png</image:loc>
-      <image:title>Marketing Pain Points 2025</image:title>
-      <image:caption>Resource challenges and AI solutions</image:caption>
-    </image:image>
-    <image:image>
-      <image:loc>https://www.adamsilvaconsulting.com/images/insights/aeo_vs_geo_1_6.jpg</image:loc>
-      <image:title>AEO vs GEO Comparison</image:title>
-      <image:caption>Understanding the new search landscape</image:caption>
+      <image:loc>https://www.adamsilvaconsulting.com/images/about-hero.jpg</image:loc>
+      <image:title>About Adam Silva Consulting</image:title>
     </image:image>
   </url>
   <url>
     <loc>https://www.adamsilvaconsulting.com/services</loc>
     <image:image>
-      <image:loc>https://www.adamsilvaconsulting.com/images/ai-engine-optimization-dashboard.png</image:loc>
-      <image:title>AI Engine Optimization Dashboard</image:title>
-      <image:caption>Comprehensive analytics and optimization tools</image:caption>
-    </image:image>
-    <image:image>
-      <image:loc>https://www.adamsilvaconsulting.com/images/technical-framework-architecture.png</image:loc>
-      <image:title>Technical Framework Architecture</image:title>
-      <image:caption>Systematic approach to technical SEO</image:caption>
-    </image:image>
-    <image:image>
-      <image:loc>https://www.adamsilvaconsulting.com/images/topical-authority-building-process.png</image:loc>
-      <image:title>Topical Authority Building Process</image:title>
-      <image:caption>Strategic framework for authority development</image:caption>
+      <image:loc>https://www.adamsilvaconsulting.com/images/services-hero.jpg</image:loc>
+      <image:title>Our Services - AI-Powered Solutions</image:title>
     </image:image>
   </url>
 </urlset>
