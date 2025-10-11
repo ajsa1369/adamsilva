@@ -5,6 +5,7 @@ export { default as SEOHead } from './SEOHead';
 export { default as StructuredData } from './StructuredData';
 export { default as BreadcrumbsNav } from './BreadcrumbsNav';
 export { default as FAQSection } from './FAQSection';
+export { ReviewsSection, sampleReviews, sampleAggregateRating } from './ReviewsSection';
 
 // Re-export types
 export type { SEOData, Breadcrumb, FAQItem } from '../../utils/seo';
