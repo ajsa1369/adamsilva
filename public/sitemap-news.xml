@@ -2,67 +2,93 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:news="http://www.google.com/schemas/sitemap-news/0.9">
   <url>
-    <loc>https://www.adamsilvaconsulting.com/news/ai-marketing-breakthrough-2025</loc>
+    <loc>https://www.adamsilvaconsulting.com/insights/ai-marketing-trends-2025</loc>
     <news:news>
       <news:publication>
         <news:name>Adam Silva Consulting Insights</news:name>
         <news:language>en</news:language>
       </news:publication>
       <news:publication_date>2025-10-10T19:00:00+00:00</news:publication_date>
-      <news:title>AI Marketing Breakthrough: The Future of Business Intelligence</news:title>
-      <news:keywords>AI marketing, business intelligence, digital transformation</news:keywords>
+      <news:title>AI Marketing Trends 2025: What's Changing</news:title>
+      <news:keywords>AI marketing, digital marketing trends, 2025 predictions, marketing technology</news:keywords>
     </news:news>
     <lastmod>2025-10-10T19:00:00+00:00</lastmod>
   </url>
   <url>
-    <loc>https://www.adamsilvaconsulting.com/news/answer-engine-optimization-rise</loc>
+    <loc>https://www.adamsilvaconsulting.com/insights/answer-engine-optimization-guide</loc>
     <news:news>
       <news:publication>
         <news:name>Adam Silva Consulting Insights</news:name>
         <news:language>en</news:language>
       </news:publication>
       <news:publication_date>2025-10-10T19:00:00+00:00</news:publication_date>
-      <news:title>The Rise of Answer Engine Optimization in 2025</news:title>
-      <news:keywords>AEO, answer engine optimization, search marketing</news:keywords>
+      <news:title>Complete Guide to Answer Engine Optimization (AEO)</news:title>
+      <news:keywords>AEO, answer engine optimization, search marketing, AI search</news:keywords>
     </news:news>
     <lastmod>2025-10-10T19:00:00+00:00</lastmod>
   </url>
   <url>
-    <loc>https://www.adamsilvaconsulting.com/news/topical-authority-importance</loc>
+    <loc>https://www.adamsilvaconsulting.com/insights/building-topical-authority</loc>
     <news:news>
       <news:publication>
         <news:name>Adam Silva Consulting Insights</news:name>
         <news:language>en</news:language>
       </news:publication>
       <news:publication_date>2025-10-10T19:00:00+00:00</news:publication_date>
-      <news:title>Why Topical Authority Matters More Than Ever</news:title>
-      <news:keywords>topical authority, content strategy, SEO</news:keywords>
+      <news:title>Building Topical Authority: The Modern SEO Strategy</news:title>
+      <news:keywords>topical authority, content strategy, SEO, expertise</news:keywords>
     </news:news>
     <lastmod>2025-10-10T19:00:00+00:00</lastmod>
   </url>
   <url>
-    <loc>https://www.adamsilvaconsulting.com/news/ai-content-generation-best-practices</loc>
+    <loc>https://www.adamsilvaconsulting.com/insights/digital-transformation-strategies</loc>
     <news:news>
       <news:publication>
         <news:name>Adam Silva Consulting Insights</news:name>
         <news:language>en</news:language>
       </news:publication>
       <news:publication_date>2025-10-10T19:00:00+00:00</news:publication_date>
-      <news:title>Best Practices for AI Content Generation in 2025</news:title>
-      <news:keywords>AI content, content creation, marketing automation</news:keywords>
+      <news:title>Digital Transformation Strategies for Modern Business</news:title>
+      <news:keywords>digital transformation, business strategy, technology adoption</news:keywords>
     </news:news>
     <lastmod>2025-10-10T19:00:00+00:00</lastmod>
   </url>
   <url>
-    <loc>https://www.adamsilvaconsulting.com/news/digital-transformation-success-stories</loc>
+    <loc>https://www.adamsilvaconsulting.com/insights/ai-content-creation-best-practices</loc>
     <news:news>
       <news:publication>
         <news:name>Adam Silva Consulting Insights</news:name>
         <news:language>en</news:language>
       </news:publication>
       <news:publication_date>2025-10-10T19:00:00+00:00</news:publication_date>
-      <news:title>Digital Transformation Success Stories: Real Results</news:title>
-      <news:keywords>digital transformation, case studies, business growth</news:keywords>
+      <news:title>AI Content Creation: Best Practices for 2025</news:title>
+      <news:keywords>AI content, content creation, marketing automation, generative AI</news:keywords>
+    </news:news>
+    <lastmod>2025-10-10T19:00:00+00:00</lastmod>
+  </url>
+  <url>
+    <loc>https://www.adamsilvaconsulting.com/insights/seo-vs-aeo</loc>
+    <news:news>
+      <news:publication>
+        <news:name>Adam Silva Consulting Insights</news:name>
+        <news:language>en</news:language>
+      </news:publication>
+      <news:publication_date>2025-10-10T19:00:00+00:00</news:publication_date>
+      <news:title>SEO vs AEO: Understanding the New Search Paradigm</news:title>
+      <news:keywords>SEO, AEO, search optimization, AI search engines</news:keywords>
+    </news:news>
+    <lastmod>2025-10-10T19:00:00+00:00</lastmod>
+  </url>
+  <url>
+    <loc>https://www.adamsilvaconsulting.com/insights/generative-ai-marketing</loc>
+    <news:news>
+      <news:publication>
+        <news:name>Adam Silva Consulting Insights</news:name>
+        <news:language>en</news:language>
+      </news:publication>
+      <news:publication_date>2025-10-10T19:00:00+00:00</news:publication_date>
+      <news:title>Generative AI in Marketing: Opportunities and Challenges</news:title>
+      <news:keywords>generative AI, AI marketing, ChatGPT, marketing strategy</news:keywords>
     </news:news>
     <lastmod>2025-10-10T19:00:00+00:00</lastmod>
   </url>
