@@ -214,9 +214,7 @@ Sitemap: https://www.adamsilvaconsulting.com/sitemap-services.xml
 Sitemap: https://www.adamsilvaconsulting.com/sitemap-content.xml
 Sitemap: https://www.adamsilvaconsulting.com/sitemap-authority.xml
 Sitemap: https://www.adamsilvaconsulting.com/sitemap-images.xml
-# Sitemap: https://www.adamsilvaconsulting.com/sitemap-news.xml
-# NOTE: sitemap-news.xml temporarily disabled until news pages are created
-# Uncomment above line after creating actual /news/ pages
+Sitemap: https://www.adamsilvaconsulting.com/sitemap-news.xml
 
 # ========================================
 # AI ENGINE SPECIFIC FILES
