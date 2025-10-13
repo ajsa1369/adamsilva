@@ -10,6 +10,8 @@ export default defineConfig({
       '@': path.resolve(__dirname, './src'),
     },
   },
+  // Explicitly set public directory
+  publicDir: 'public',
   build: {
     // Optimize for production
     minify: 'terser',
@@ -30,6 +32,8 @@ export default defineConfig({
     },
     // Improve chunk size warnings threshold
     chunkSizeWarningLimit: 1000,
+    // Ensure public assets are copied
+    copyPublicDir: true,
   },
   // Performance optimizations
   server: {
