@@ -1,6 +1,6 @@
 # Adam Silva Consulting - Comprehensive Robot.txt
 # Optimized for SEO, AEO, and GEO
-# Last Updated: October 10, 2025
+# Last Updated: October 13, 2025
 
 # ========================================
 # TRADITIONAL SEARCH ENGINES
@@ -214,7 +214,9 @@ Sitemap: https://www.adamsilvaconsulting.com/sitemap-services.xml
 Sitemap: https://www.adamsilvaconsulting.com/sitemap-content.xml
 Sitemap: https://www.adamsilvaconsulting.com/sitemap-authority.xml
 Sitemap: https://www.adamsilvaconsulting.com/sitemap-images.xml
-Sitemap: https://www.adamsilvaconsulting.com/sitemap-news.xml
+# Sitemap: https://www.adamsilvaconsulting.com/sitemap-news.xml
+# NOTE: sitemap-news.xml temporarily disabled until news pages are created
+# Uncomment above line after creating actual /news/ pages
 
 # ========================================
 # AI ENGINE SPECIFIC FILES
