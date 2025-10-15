@@ -51,7 +51,7 @@
       ]
     },
     {
-      "source": "/(robots.txt|sitemap*.xml|llms-full.txt|ai.txt|humans.txt)",
+      "source": "/(robots.txt|sitemap*.xml|llms-full.txt|llms.txt|ai.txt|humans.txt)",
       "headers": [
         {
           "key": "Cache-Control",
@@ -84,8 +84,6 @@
   "trailingSlash": false,
   
   "cleanUrls": true,
-  
-  "regions": ["all"],
   
   "functions": {
     "src/pages/**/*.tsx": {
