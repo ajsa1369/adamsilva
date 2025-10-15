@@ -2,26 +2,49 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight, Calendar, Clock, Share2 } from 'lucide-react';
 import ArticleSchema from '../../components/seo/ArticleSchema';
+import SEOHead from '../../components/SEO/SEOHead';
+import { getOGImage, getMetaDescription } from '../../utils/pageMetadata';
 
 export const InsightsPage: React.FC = () => {
   return (
     <main className="min-h-screen bg-black text-gray-100">
+      {/* SEO Head - ADDED! */}
+      <SEOHead 
+        title="The AI Authority Imperative: Gartner's 50% Traffic Decline Prediction"
+        description={getMetaDescription('aiAuthorityImperative')}
+        keywords={[
+          'AI authority building',
+          'Gartner traffic decline prediction', 
+          'search engine optimization',
+          'AI citations',
+          'digital marketing transformation',
+          'Answer Engine Optimization',
+          'Generative Engine Optimization',
+          'marketing intelligence',
+          'zero-click searches',
+          'organic traffic decline'
+        ]}
+        canonicalUrl="https://www.adamsilvaconsulting.com/insights/the-ai-authority-imperative"
+        ogImage={getOGImage('aiAuthorityImperative')}
+        ogType="article"
+      />
+
       {/* Article Schema */}
       <ArticleSchema 
         headline="The AI Authority Imperative: Gartner's 50% Traffic Decline Prediction"
         description="Gartner's projection of 50% organic traffic decline marks the definitive end of click-based optimization. This comprehensive analysis explores why the strategic objective has irrevocably shifted from ranking for keywords to being cited for authority."
         url="/insights/the-ai-authority-imperative-gartners-50-traffic-decline-prediction"
         datePublished="2025-09-18T00:00:00Z"
-        dateModified="2025-09-18T00:00:00Z"
+        dateModified="2025-10-15T00:00:00Z"
         keywords={[
-          "AI authority building",
-          "Gartner traffic decline prediction", 
-          "search engine optimization",
-          "AI citations",
-          "digital marketing transformation",
-          "Answer Engine Optimization",
-          "Generative Engine Optimization",
-          "marketing intelligence"
+          'AI authority building',
+          'Gartner traffic decline prediction', 
+          'search engine optimization',
+          'AI citations',
+          'digital marketing transformation',
+          'Answer Engine Optimization',
+          'Generative Engine Optimization',
+          'marketing intelligence'
         ]}
         wordCount={2800}
         articleSection="Strategic Analysis"
@@ -167,7 +190,7 @@ export const InsightsPage: React.FC = () => {
             The businesses that thrive in the AI era will be those that recognize this transition as an opportunity, not a threat. While competitors struggle with declining traffic from obsolete strategies, early AI authority adopters will capture increasing market share through AI citations.
           </p>
 
-          {/* Updated Track Record Section - FIXED */}
+          {/* Updated Track Record Section */}
           <div className="bg-gradient-to-r from-blue-600 to-purple-600 p-8 rounded-lg mb-8">
             <h3 className="text-2xl font-bold text-white mb-6">Why Adam Silva Consulting Leads This Transformation</h3>
             <div className="space-y-4">
@@ -204,7 +227,7 @@ export const InsightsPage: React.FC = () => {
             The strategic objective has irrevocably shifted from ranking for keywords to being cited for authority. Businesses that embrace this reality now will not only survive the AI transformation—they will dominate it.
           </p>
 
-          {/* Call to Action Section - FIXED */}
+          {/* Call to Action Section */}
           <div className="bg-black border border-gray-700 p-8 rounded-lg text-center mb-12">
             <h3 className="text-3xl font-bold text-white mb-4">Don't Wait for the Cliff</h3>
             <p className="text-gray-300 mb-8 text-lg">
