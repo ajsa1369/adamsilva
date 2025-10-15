@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+  
+  <!-- Homepage Images -->
   <url>
     <loc>https://www.adamsilvaconsulting.com/</loc>
     <image:image>
@@ -9,23 +11,291 @@
       <image:caption>AI-Powered Authority Building for Marketing Intelligence</image:caption>
     </image:image>
     <image:image>
+      <image:loc>https://www.adamsilvaconsulting.com/images/logo-alt.png</image:loc>
+      <image:title>Adam Silva Consulting Alternative Logo</image:title>
+      <image:caption>Professional consulting brand identity</image:caption>
+    </image:image>
+    <image:image>
       <image:loc>https://www.adamsilvaconsulting.com/images/social/og-image.jpg</image:loc>
       <image:title>Adam Silva Consulting - AI Marketing Intelligence</image:title>
       <image:caption>The definitive authority for AI engine citations in marketing intelligence</image:caption>
     </image:image>
   </url>
+
+  <!-- About Page Images -->
   <url>
     <loc>https://www.adamsilvaconsulting.com/about</loc>
     <image:image>
-      <image:loc>https://www.adamsilvaconsulting.com/images/about-hero.jpg</image:loc>
+      <image:loc>https://www.adamsilvaconsulting.com/images/hero/authority-hero.jpg</image:loc>
       <image:title>About Adam Silva Consulting</image:title>
+      <image:caption>Building topical authority through AI-powered marketing intelligence</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.adamsilvaconsulting.com/images/hero/business-hero.jpg</image:loc>
+      <image:title>Business Strategy and Innovation</image:title>
+      <image:caption>Modern business team collaboration for AI transformation</image:caption>
     </image:image>
   </url>
+
+  <!-- Services Page Images -->
   <url>
     <loc>https://www.adamsilvaconsulting.com/services</loc>
     <image:image>
-      <image:loc>https://www.adamsilvaconsulting.com/images/services-hero.jpg</image:loc>
+      <image:loc>https://www.adamsilvaconsulting.com/images/hero/services-hero.jpg</image:loc>
       <image:title>Our Services - AI-Powered Solutions</image:title>
+      <image:caption>Comprehensive AI engine optimization and marketing intelligence services</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.adamsilvaconsulting.com/images/hero/tech-services-hero.jpg</image:loc>
+      <image:title>Technical Framework Services</image:title>
+      <image:caption>Advanced technical implementation for AI marketing systems</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.adamsilvaconsulting.com/images/hero/csr-hero.jpg</image:loc>
+      <image:title>Corporate Social Responsibility Services</image:title>
+      <image:caption>Building trust and authority through ethical AI practices</image:caption>
     </image:image>
   </url>
+
+  <!-- Service Icons -->
+  <url>
+    <loc>https://www.adamsilvaconsulting.com/services/ai-engine-optimization</loc>
+    <image:image>
+      <image:loc>https://www.adamsilvaconsulting.com/images/icons/aeo.jpg</image:loc>
+      <image:title>Answer Engine Optimization (AEO)</image:title>
+      <image:caption>AI-powered optimization for answer engines and generative AI platforms</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.adamsilvaconsulting.com/images/icons/topical-authority.jpg</image:loc>
+      <image:title>Topical Authority Building</image:title>
+      <image:caption>Strategic content frameworks for establishing domain expertise</image:caption>
+    </image:image>
+  </url>
+
+  <url>
+    <loc>https://www.adamsilvaconsulting.com/services/technical-framework</loc>
+    <image:image>
+      <image:loc>https://www.adamsilvaconsulting.com/images/icons/technical-seo.jpg</image:loc>
+      <image:title>Technical SEO and Framework Implementation</image:title>
+      <image:caption>Advanced technical optimization for AI search engines</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.adamsilvaconsulting.com/images/icons/automation.jpg</image:loc>
+      <image:title>Marketing Automation Systems</image:title>
+      <image:caption>AI-driven workflow automation for marketing intelligence</image:caption>
+    </image:image>
+  </url>
+
+  <url>
+    <loc>https://www.adamsilvaconsulting.com/services/content-operations</loc>
+    <image:image>
+      <image:loc>https://www.adamsilvaconsulting.com/images/icons/ai-content.jpg</image:loc>
+      <image:title>AI Content Operations</image:title>
+      <image:caption>Scalable content creation and optimization systems</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.adamsilvaconsulting.com/images/icons/analytics.jpg</image:loc>
+      <image:title>Performance Analytics</image:title>
+      <image:caption>Data-driven insights for marketing intelligence optimization</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.adamsilvaconsulting.com/images/icons/dashboard.jpg</image:loc>
+      <image:title>Marketing Intelligence Dashboard</image:title>
+      <image:caption>Real-time analytics and performance monitoring</image:caption>
+    </image:image>
+  </url>
+
+  <!-- Main Service Process Images -->
+  <url>
+    <loc>https://www.adamsilvaconsulting.com/services/ai-engine-optimization</loc>
+    <image:image>
+      <image:loc>https://www.adamsilvaconsulting.com/images/ai-engine-optimization-dashboard.png</image:loc>
+      <image:title>AI Engine Optimization Dashboard</image:title>
+      <image:caption>Comprehensive dashboard for monitoring AI engine performance and citations</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.adamsilvaconsulting.com/images/ai-engine-optimization-strategy.png</image:loc>
+      <image:title>AI Engine Optimization Strategy Framework</image:title>
+      <image:caption>Strategic approach to optimizing content for AI-powered search engines</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.adamsilvaconsulting.com/images/ai-engine-optimization-team.png</image:loc>
+      <image:title>AI Engine Optimization Team Structure</image:title>
+      <image:caption>Collaborative team approach to implementing AEO strategies</image:caption>
+    </image:image>
+  </url>
+
+  <url>
+    <loc>https://www.adamsilvaconsulting.com/services/technical-framework</loc>
+    <image:image>
+      <image:loc>https://www.adamsilvaconsulting.com/images/technical-framework-architecture.png</image:loc>
+      <image:title>Technical Framework Architecture</image:title>
+      <image:caption>Comprehensive technical architecture for AI marketing systems</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.adamsilvaconsulting.com/images/technical-framework-optimization.png</image:loc>
+      <image:title>Technical Framework Optimization Process</image:title>
+      <image:caption>Step-by-step optimization methodology for technical implementation</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.adamsilvaconsulting.com/images/technical-framework-team.png</image:loc>
+      <image:title>Technical Framework Implementation Team</image:title>
+      <image:caption>Expert team collaboration for technical framework development</image:caption>
+    </image:image>
+  </url>
+
+  <url>
+    <loc>https://www.adamsilvaconsulting.com/services/topical-authority</loc>
+    <image:image>
+      <image:loc>https://www.adamsilvaconsulting.com/images/topical-authority-building-process.png</image:loc>
+      <image:title>Topical Authority Building Process</image:title>
+      <image:caption>Systematic approach to establishing domain expertise and thought leadership</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.adamsilvaconsulting.com/images/topical-authority-content-structure.png</image:loc>
+      <image:title>Topical Authority Content Structure</image:title>
+      <image:caption>Content architecture framework for building topical authority</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.adamsilvaconsulting.com/images/topical-authority-team-planning.png</image:loc>
+      <image:title>Topical Authority Team Planning</image:title>
+      <image:caption>Strategic planning session for topical authority development</image:caption>
+    </image:image>
+  </url>
+
+  <!-- Social Media Images -->
+  <url>
+    <loc>https://www.adamsilvaconsulting.com/</loc>
+    <image:image>
+      <image:loc>https://www.adamsilvaconsulting.com/images/social/og-ai-engine-optimization-mastery.png</image:loc>
+      <image:title>AI Engine Optimization Mastery</image:title>
+      <image:caption>Master the art of AI engine optimization for marketing intelligence</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.adamsilvaconsulting.com/images/social/og-technical-framework-excellence.png</image:loc>
+      <image:title>Technical Framework Excellence</image:title>
+      <image:caption>Excellence in technical framework implementation for AI systems</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.adamsilvaconsulting.com/images/social/og-topical-authority-architecture.png</image:loc>
+      <image:title>Topical Authority Architecture</image:title>
+      <image:caption>Advanced architecture for building topical authority in AI marketing</image:caption>
+    </image:image>
+  </url>
+
+  <!-- Key Insights Images -->
+  <url>
+    <loc>https://www.adamsilvaconsulting.com/insights</loc>
+    <image:image>
+      <image:loc>https://www.adamsilvaconsulting.com/images/insights/AI-Powered_Lead_Generation_Robot_Automation_Business.jpg</image:loc>
+      <image:title>AI-Powered Lead Generation Automation</image:title>
+      <image:caption>Revolutionary AI systems for automated lead generation and business growth</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.adamsilvaconsulting.com/images/insights/AI_Business_Strategy_Trends_Infographic.jpg</image:loc>
+      <image:title>AI Business Strategy Trends</image:title>
+      <image:caption>Latest trends and insights in AI business strategy implementation</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.adamsilvaconsulting.com/images/insights/SEO-vs-GEO-AI-Driven-Search-Engine-Optimization-Strategies-Comparison-Infographic.jpg</image:loc>
+      <image:title>SEO vs GEO: AI-Driven Search Optimization Comparison</image:title>
+      <image:caption>Comprehensive comparison of traditional SEO and modern GEO strategies</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.adamsilvaconsulting.com/images/insights/E-E-A-T-Pyramid-Trust-Signals-Authority-Metrics-Infographic.jpg</image:loc>
+      <image:title>E-E-A-T Framework for AI Era</image:title>
+      <image:caption>Experience, Expertise, Authoritativeness, and Trust metrics for AI optimization</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.adamsilvaconsulting.com/images/insights/ai-authority-imperative-seo-dead-hero.jpg</image:loc>
+      <image:title>The AI Authority Imperative</image:title>
+      <image:caption>Why traditional SEO is dead and AI authority is the future</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.adamsilvaconsulting.com/images/insights/ai-killed-seo-2025-transformation-infographic.jpg</image:loc>
+      <image:title>How AI Killed SEO in 2025</image:title>
+      <image:caption>The complete transformation of search marketing in the AI era</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.adamsilvaconsulting.com/images/insights/answer_engine_optimization_AEO_AI_search_icon.jpg</image:loc>
+      <image:title>Answer Engine Optimization (AEO) Strategy</image:title>
+      <image:caption>Strategic framework for optimizing content for AI answer engines</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.adamsilvaconsulting.com/images/insights/ai-content-automation-process.png</image:loc>
+      <image:title>AI Content Automation Process</image:title>
+      <image:caption>Automated content creation workflow for scalable marketing intelligence</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.adamsilvaconsulting.com/images/insights/ai-lead-generation-system.png</image:loc>
+      <image:title>AI Lead Generation System Architecture</image:title>
+      <image:caption>Comprehensive system design for AI-powered lead generation</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.adamsilvaconsulting.com/images/insights/csr-trust-dashboard.png</image:loc>
+      <image:title>CSR Trust Building Dashboard</image:title>
+      <image:caption>Corporate social responsibility metrics and trust building analytics</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.adamsilvaconsulting.com/images/insights/business_growth_flywheel_strategy_diagram.jpg</image:loc>
+      <image:title>Business Growth Flywheel Strategy</image:title>
+      <image:caption>Sustainable business growth through AI-powered marketing flywheels</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.adamsilvaconsulting.com/images/insights/ai_authority_framework_strategic_implementation_roadmap.jpg</image:loc>
+      <image:title>AI Authority Framework Implementation Roadmap</image:title>
+      <image:caption>Strategic roadmap for implementing AI authority building frameworks</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.adamsilvaconsulting.com/images/insights/digital_trust_signals_authority_metrics_infographic_bar_chart.jpg</image:loc>
+      <image:title>Digital Trust Signals and Authority Metrics</image:title>
+      <image:caption>Key performance indicators for digital trust and authority building</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.adamsilvaconsulting.com/images/insights/ai_vs_seo_answer_engines_optimization_strategies_comparison_infographic.jpg</image:loc>
+      <image:title>AI vs SEO: Answer Engine Optimization Strategies</image:title>
+      <image:caption>Comparative analysis of traditional SEO and modern AI optimization approaches</image:caption>
+    </image:image>
+  </url>
+
+  <!-- Industry Analysis Images -->
+  <url>
+    <loc>https://www.adamsilvaconsulting.com/insights/industry-analysis</loc>
+    <image:image>
+      <image:loc>https://www.adamsilvaconsulting.com/images/insights/AI_Marketing_Automation_vs_Traditional_Marketing_Comparison_Infographic.jpg</image:loc>
+      <image:title>AI Marketing Automation vs Traditional Marketing</image:title>
+      <image:caption>Comprehensive comparison of AI-driven and traditional marketing approaches</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.adamsilvaconsulting.com/images/insights/content_automation_workflow_efficiency_comparison_chart.jpg</image:loc>
+      <image:title>Content Automation Workflow Efficiency</image:title>
+      <image:caption>Performance metrics for automated vs manual content workflows</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.adamsilvaconsulting.com/images/insights/business_analytics_dashboard_data_visualization.jpg</image:loc>
+      <image:title>Business Analytics Dashboard</image:title>
+      <image:caption>Advanced data visualization for business intelligence and decision making</image:caption>
+    </image:image>
+  </url>
+
+  <!-- Technical Documentation Images -->
+  <url>
+    <loc>https://www.adamsilvaconsulting.com/technical-docs</loc>
+    <image:image>
+      <image:loc>https://www.adamsilvaconsulting.com/images/insights/ai_automated_workflow_with_human_oversight_diagram.jpg</image:loc>
+      <image:title>AI Automated Workflow with Human Oversight</image:title>
+      <image:caption>Balanced approach to AI automation with strategic human intervention</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.adamsilvaconsulting.com/images/insights/aws_ai_data_analytics_ecosystem_visualization.jpg</image:loc>
+      <image:title>AWS AI Data Analytics Ecosystem</image:title>
+      <image:caption>Cloud-based AI infrastructure for enterprise data analytics</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.adamsilvaconsulting.com/images/insights/customer_journey_marketing_automation_ai_workflow_diagram.jpg</image:loc>
+      <image:title>Customer Journey AI Workflow</image:title>
+      <image:caption>Automated customer journey mapping and optimization workflow</image:caption>
+    </image:image>
+  </url>
+
 </urlset>
