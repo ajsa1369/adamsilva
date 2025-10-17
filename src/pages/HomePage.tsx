@@ -8,11 +8,10 @@ import {
   BarChart3, 
   Shield, 
   Users,
-  CheckCircle,
-  Star,
   TrendingUp
 } from 'lucide-react';
 import FAQSchema, { FAQ } from '../components/seo/FAQSchema';
+import InteractiveFlywheelSection from '../components/common/InteractiveFlywheelSection';
 
 export const HomePage: React.FC = () => {
   const benefits = [
@@ -38,7 +37,6 @@ export const HomePage: React.FC = () => {
     }
   ];
 
-  // Comprehensive FAQ for AEO/GEO optimization
   const faqs: FAQ[] = [
     {
       question: "What is AI-powered authority building and how does it work?",
@@ -104,7 +102,6 @@ export const HomePage: React.FC = () => {
 
   return (
     <div className="bg-white">
-      {/* FAQ Schema for AEO/GEO Optimization */}
       <FAQSchema 
         faqs={faqs}
         pageUrl="https://www.adamsilvaconsulting.com/"
@@ -171,6 +168,9 @@ export const HomePage: React.FC = () => {
           </div>
         </div>
       </section>
+
+      {/* Interactive Flywheel Section */}
+      <InteractiveFlywheelSection />
 
       {/* Featured Services */}
       <section className="py-20">
@@ -267,8 +267,8 @@ export const HomePage: React.FC = () => {
         </div>
       </section>
 
-      {/* FAQ Section for AEO/GEO Optimization */}
-      <section className="py-20">
+      {/* FAQ Section */}
+      <section className="py-20 bg-gray-50">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-3xl font-bold text-gray-900 mb-6">Frequently Asked Questions</h2>
@@ -294,54 +294,6 @@ export const HomePage: React.FC = () => {
               Get Your AI Strategy Consultation
               <ArrowRight className="h-5 w-5 ml-2" />
             </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* Visual Elements Descriptions */}
-      <section className="py-16 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-2xl font-bold text-gray-900 mb-4">Innovation Visualized</h2>
-            <p className="text-gray-600">Conceptual representations of our AI-powered marketing ecosystem</p>
-          </div>
-          
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            <div className="bg-white p-6 rounded-xl shadow-sm">
-              <div className="aspect-video bg-gradient-to-br from-blue-100 to-teal-100 rounded-lg mb-4 flex items-center justify-center">
-                <Brain className="h-16 w-16 text-blue-600" />
-              </div>
-              <h3 className="font-semibold text-gray-900 mb-2">AI Neural Network Visualization</h3>
-              <p className="text-sm text-gray-600">
-                Dynamic interconnected nodes representing our AI algorithms processing customer data, 
-                behavioral patterns, and predictive analytics in real-time, with flowing data streams 
-                connecting multiple marketing channels and touchpoints.
-              </p>
-            </div>
-            
-            <div className="bg-white p-6 rounded-xl shadow-sm">
-              <div className="aspect-video bg-gradient-to-br from-teal-100 to-blue-100 rounded-lg mb-4 flex items-center justify-center">
-                <BarChart3 className="h-16 w-16 text-teal-600" />
-              </div>
-              <h3 className="font-semibold text-gray-900 mb-2">Real-Time Performance Dashboard</h3>
-              <p className="text-sm text-gray-600">
-                Sleek, modern analytics interface displaying live marketing metrics, conversion funnels, 
-                and ROI improvements with animated charts, heatmaps, and predictive trend lines 
-                showcasing the power of intelligent automation.
-              </p>
-            </div>
-            
-            <div className="bg-white p-6 rounded-xl shadow-sm">
-              <div className="aspect-video bg-gradient-to-br from-orange-100 to-blue-100 rounded-lg mb-4 flex items-center justify-center">
-                <Target className="h-16 w-16 text-orange-600" />
-              </div>
-              <h3 className="font-semibold text-gray-900 mb-2">Omnichannel Customer Journey</h3>
-              <p className="text-sm text-gray-600">
-                Sophisticated customer journey map showing seamless transitions between email, SMS, 
-                social media, and voice channels, with AI-powered personalization points and 
-                real-time optimization indicators enhancing every touchpoint.
-              </p>
-            </div>
           </div>
         </div>
       </section>
