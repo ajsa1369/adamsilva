@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Brain, Users, BarChart3, Target, Zap, Shield, TrendingUp, MessageSquare, Globe, Database, Cog, Sparkles } from 'lucide-react';
 
+// CACHE BUSTER: v2.0 - Force fresh deployment with all animations
 const InteractiveFlywheelSection: React.FC = () => {
   const [hoveredService, setHoveredService] = useState<string | null>(null);
   const [rotation, setRotation] = useState(0);
@@ -266,8 +267,7 @@ const InteractiveFlywheelSection: React.FC = () => {
                   style={{ animationDelay: `${index * 0.1}s` }}
                 />
               );
-            })}
-          </svg>
+            })}</svg>
 
           {/* Service Cards - Responsive */}
           {services.map((service, index) => {
