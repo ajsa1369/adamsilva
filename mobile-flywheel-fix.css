@@ -1,0 +1,124 @@
+/* ============================================
+   MOBILE FIX FOR AI AUTHORITY FLYWHEEL
+   Adam Silva Consulting
+   
+   This file fixes the mobile display issues with
+   the "Interactive Service Ecosystem" section
+   
+   Installation: Add this line to index.html <head>:
+   <link rel="stylesheet" href="/mobile-flywheel-fix.css">
+   
+   Created: October 16, 2025
+   ============================================ */
+
+/* ====================================
+   MOBILE DEVICES (768px and below)
+   ==================================== */
+
+@media (max-width: 768px) {
+  
+  /* Fix any section containing service ecosystem or flywheel */
+  section:has([class*="flywheel"]),
+  section:has([class*="ecosystem"]),
+  section:has([class*="authority"]) {
+    padding: 30px 20px !important;
+    overflow: visible !important;
+  }
+  
+  /* Stack all absolute positioned service cards vertically */
+  [class*="service"][class*="card"],
+  [class*="service"][class*="item"],
+  [class*="service"][class*="box"],
+  div[class*="absolute"]:has([class*="service"]) {
+    position: relative !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 12px 0 !important;
+    padding: 16px !important;
+    transform: none !important;
+    top: auto !important;
+    left: auto !important;
+    right: auto !important;
+    bottom: auto !important;
+  }
+  
+  /* Central flywheel circle */
+  [class*="flywheel"][class*="center"],
+  [class*="authority"][class*="circle"],
+  [class*="hub"],
+  div[class*="absolute"]:has(h3:contains("AI Authority")) {
+    position: relative !important;
+    width: 140px !important;
+    height: 140px !important;
+    margin: 20px auto 30px !important;
+    transform: none !important;
+    top: auto !important;
+    left: auto !important;
+  }
+  
+  /* Hide connecting lines and decorations */
+  svg[class*="connection"],
+  svg[class*="line"],
+  [class*="connector"],
+  path[class*="connection"] {
+    display: none !important;
+  }
+  
+  /* Service card responsive sizing */
+  [class*="service"] h3,
+  [class*="service"] h4 {
+    font-size: 16px !important;
+    line-height: 1.4 !important;
+    margin-bottom: 8px !important;
+  }
+  
+  [class*="service"] p {
+    font-size: 13px !important;
+    line-height: 1.5 !important;
+  }
+  
+  /* Category badges */
+  [class*="badge"],
+  [class*="tag"],
+  [class*="category"] span {
+    font-size: 10px !important;
+    padding: 4px 8px !important;
+  }
+  
+  /* Icons */
+  [class*="icon"],
+  [class*="service"] img,
+  [class*="service"] svg {
+    width: 32px !important;
+    height: 32px !important;
+  }
+}
+
+/* Extra small devices */
+@media (max-width: 480px) {
+  [class*="flywheel"][class*="center"],
+  [class*="authority"][class*="circle"] {
+    width: 110px !important;
+    height: 110px !important;
+    font-size: 14px !important;
+  }
+  
+  [class*="service"][class*="card"] {
+    padding: 12px !important;
+  }
+  
+  [class*="service"] h3,
+  [class*="service"] h4 {
+    font-size: 14px !important;
+  }
+}
+
+/* Tablet optimization */
+@media (min-width: 769px) and (max-width: 1024px) {
+  /* Grid layout for tablets */
+  [class*="service"][class*="container"] {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 20px !important;
+  }
+}
