@@ -11,10 +11,10 @@ jobs:
     
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       
       - name: Setup Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: '20'
           cache: 'npm'
@@ -26,24 +26,21 @@ jobs:
         run: npm run build
       
       - name: Upload build artifacts
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: website-dist
           path: dist/
           retention-days: 90
       
-      - name: Create build info
+      - name: Create build summary
         run: |
-          echo "Build completed at $(date)" > dist/build-info.txt
-          echo "Commit: ${{ github.sha }}" >> dist/build-info.txt
-          
-      - name: Comment on commit with download link
-        uses: actions/github-script@v6
-        with:
-          script: |
-            github.rest.repos.createCommitComment({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              commit_sha: context.sha,
-              body: '✅ Build complete! Download the compiled files from the [Actions tab](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}) and upload to Supabase Storage.'
-            })
+          echo "## ✅ Build Successful!" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### 📦 Next Steps:" >> $GITHUB_STEP_SUMMARY
+          echo "1. Download the 'website-dist' artifact below" >> $GITHUB_STEP_SUMMARY
+          echo "2. Unzip the downloaded file" >> $GITHUB_STEP_SUMMARY
+          echo "3. Upload contents to Supabase Storage" >> $GITHUB_STEP_SUMMARY
+          echo "4. Visit https://www.adamsilvaconsulting.com/" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "Build completed at: $(date)" >> $GITHUB_STEP_SUMMARY
+          echo "Commit: ${{ github.sha }}" >> $GITHUB_STEP_SUMMARY
