@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Brain, Users, BarChart3, Target, Zap, Shield, TrendingUp, MessageSquare, Globe, Database, Cog, Sparkles } from 'lucide-react';
 
-// CACHE BUSTER: v2.0 - Force fresh deployment with all animations
+// Desktop-optimized sizing for spectacular display
 const InteractiveFlywheelSection: React.FC = () => {
   const [hoveredService, setHoveredService] = useState<string | null>(null);
   const [rotation, setRotation] = useState(0);
@@ -21,112 +21,113 @@ const InteractiveFlywheelSection: React.FC = () => {
     return () => clearInterval(interval);
   }, []);
   
+  // Increased radius for better desktop display
   const services = [
     {
       id: 'tracking',
       title: 'Intelligent Master Tracking',
-      icon: <Database className="w-5 h-5" />,
+      icon: <Database className="w-6 h-6 md:w-7 md:h-7" />,
       description: 'Unified customer data platform',
-      position: { angle: 0, radius: 240 },
+      position: { angle: 0, radius: 340 },
       relatedServices: ['analytics', 'automation', 'identity'],
       color: 'from-blue-500 to-cyan-500'
     },
     {
       id: 'communication',
       title: 'Omnichannel Communication',
-      icon: <MessageSquare className="w-5 h-5" />,
+      icon: <MessageSquare className="w-6 h-6 md:w-7 md:h-7" />,
       description: 'Multi-channel engagement',
-      position: { angle: 30, radius: 240 },
+      position: { angle: 30, radius: 340 },
       relatedServices: ['website', 'campaign', 'tracking'],
       color: 'from-purple-500 to-pink-500'
     },
     {
       id: 'website',
       title: 'AI Website & Landing Pages',
-      icon: <Globe className="w-5 h-5" />,
+      icon: <Globe className="w-6 h-6 md:w-7 md:h-7" />,
       description: 'Intelligent web experiences',
-      position: { angle: 60, radius: 240 },
+      position: { angle: 60, radius: 340 },
       relatedServices: ['communication', 'analytics', 'testing'],
       color: 'from-green-500 to-emerald-500'
     },
     {
       id: 'campaign',
       title: 'Campaign Management',
-      icon: <Target className="w-5 h-5" />,
+      icon: <Target className="w-6 h-6 md:w-7 md:h-7" />,
       description: 'Orchestrated marketing',
-      position: { angle: 90, radius: 240 },
+      position: { angle: 90, radius: 340 },
       relatedServices: ['communication', 'analytics', 'automation'],
       color: 'from-orange-500 to-red-500'
     },
     {
       id: 'analytics',
       title: 'Predictive Analytics',
-      icon: <BarChart3 className="w-5 h-5" />,
+      icon: <BarChart3 className="w-6 h-6 md:w-7 md:h-7" />,
       description: 'AI-powered insights',
-      position: { angle: 120, radius: 240 },
+      position: { angle: 120, radius: 340 },
       relatedServices: ['tracking', 'campaign', 'testing'],
       color: 'from-indigo-500 to-purple-500'
     },
     {
       id: 'automation',
       title: 'Marketing Automation',
-      icon: <Zap className="w-5 h-5" />,
+      icon: <Zap className="w-6 h-6 md:w-7 md:h-7" />,
       description: 'Intelligent workflows',
-      position: { angle: 150, radius: 240 },
+      position: { angle: 150, radius: 340 },
       relatedServices: ['campaign', 'identity', 'tracking'],
       color: 'from-yellow-500 to-orange-500'
     },
     {
       id: 'testing',
       title: 'A/B Testing & Optimization',
-      icon: <TrendingUp className="w-5 h-5" />,
+      icon: <TrendingUp className="w-6 h-6 md:w-7 md:h-7" />,
       description: 'Continuous improvement',
-      position: { angle: 180, radius: 240 },
+      position: { angle: 180, radius: 340 },
       relatedServices: ['website', 'analytics', 'campaign'],
       color: 'from-pink-500 to-rose-500'
     },
     {
       id: 'identity',
       title: 'Identity Resolution',
-      icon: <Users className="w-5 h-5" />,
+      icon: <Users className="w-6 h-6 md:w-7 md:h-7" />,
       description: 'Unified customer view',
-      position: { angle: 210, radius: 240 },
+      position: { angle: 210, radius: 340 },
       relatedServices: ['tracking', 'automation', 'communication'],
       color: 'from-teal-500 to-cyan-500'
     },
     {
       id: 'compliance',
       title: 'Compliance Management',
-      icon: <Shield className="w-5 h-5" />,
+      icon: <Shield className="w-6 h-6 md:w-7 md:h-7" />,
       description: 'Automated protection',
-      position: { angle: 240, radius: 240 },
+      position: { angle: 240, radius: 340 },
       relatedServices: ['tracking', 'communication', 'identity'],
       color: 'from-red-500 to-pink-500'
     },
     {
       id: 'integration',
       title: 'System Integration',
-      icon: <Cog className="w-5 h-5" />,
+      icon: <Cog className="w-6 h-6 md:w-7 md:h-7" />,
       description: 'Seamless connectivity',
-      position: { angle: 270, radius: 240 },
+      position: { angle: 270, radius: 340 },
       relatedServices: ['tracking', 'automation', 'compliance'],
       color: 'from-violet-500 to-purple-500'
     },
     {
       id: 'intelligence',
       title: 'Marketing Intelligence',
-      icon: <Brain className="w-5 h-5" />,
+      icon: <Brain className="w-6 h-6 md:w-7 md:h-7" />,
       description: 'Strategic insights',
-      position: { angle: 300, radius: 240 },
+      position: { angle: 300, radius: 340 },
       relatedServices: ['analytics', 'campaign', 'testing'],
       color: 'from-blue-500 to-indigo-500'
     },
     {
       id: 'personalization',
       title: 'AI Personalization',
-      icon: <Sparkles className="w-5 h-5" />,
+      icon: <Sparkles className="w-6 h-6 md:w-7 md:h-7" />,
       description: 'Hyper-targeted experiences',
-      position: { angle: 330, radius: 240 },
+      position: { angle: 330, radius: 340 },
       relatedServices: ['communication', 'website', 'identity'],
       color: 'from-amber-500 to-yellow-500'
     }
@@ -148,7 +149,7 @@ const InteractiveFlywheelSection: React.FC = () => {
   };
 
   return (
-    <section className="relative py-20 md:py-32 bg-gradient-to-br from-gray-900 via-blue-900 to-purple-900 overflow-hidden">
+    <section className="relative py-20 md:py-32 lg:py-40 bg-gradient-to-br from-gray-900 via-blue-900 to-purple-900 overflow-hidden">
       {/* Animated Background */}
       <div className="absolute inset-0 opacity-30">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(59,130,246,0.3),transparent_50%)] animate-pulse"></div>
@@ -183,26 +184,26 @@ const InteractiveFlywheelSection: React.FC = () => {
           </p>
         </div>
 
-        {/* Flywheel Container - Responsive sizing */}
-        <div className="relative w-full mx-auto" style={{ height: 'clamp(600px, 80vw, 750px)', maxWidth: '100%' }}>
-          {/* Orbital rings - Responsive */}
+        {/* Flywheel Container - Optimized for desktop */}
+        <div className="relative w-full mx-auto" style={{ height: '900px', maxWidth: '100%' }}>
+          {/* Orbital rings - Larger for desktop */}
           <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 pointer-events-none">
             <div className="absolute rounded-full border border-blue-500/20 animate-spin-slow" 
-                 style={{ width: 'min(90vw, 550px)', height: 'min(90vw, 550px)', marginLeft: 'min(-45vw, -275px)', marginTop: 'min(-45vw, -275px)' }} />
+                 style={{ width: '800px', height: '800px', marginLeft: '-400px', marginTop: '-400px' }} />
             <div className="absolute rounded-full border border-purple-500/20 animate-spin-slower" 
-                 style={{ width: 'min(75vw, 450px)', height: 'min(75vw, 450px)', marginLeft: 'min(-37.5vw, -225px)', marginTop: 'min(-37.5vw, -225px)' }} />
+                 style={{ width: '650px', height: '650px', marginLeft: '-325px', marginTop: '-325px' }} />
             <div className="absolute rounded-full border border-cyan-500/20 animate-spin-reverse" 
-                 style={{ width: 'min(60vw, 350px)', height: 'min(60vw, 350px)', marginLeft: 'min(-30vw, -175px)', marginTop: 'min(-30vw, -175px)' }} />
+                 style={{ width: '500px', height: '500px', marginLeft: '-250px', marginTop: '-250px' }} />
           </div>
 
-          {/* Central Hub - Responsive */}
+          {/* Central Hub - Larger */}
           <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-20">
             <div 
               className="relative bg-gradient-to-br from-blue-600 via-purple-600 to-teal-600 rounded-full flex items-center justify-center shadow-2xl border-4 border-white/20 transition-transform duration-300"
               style={{ 
                 transform: `scale(${pulseScale})`,
-                width: 'clamp(140px, 20vw, 220px)',
-                height: 'clamp(140px, 20vw, 220px)'
+                width: '200px',
+                height: '200px'
               }}
             >
               {/* Glow effect */}
@@ -210,15 +211,15 @@ const InteractiveFlywheelSection: React.FC = () => {
               
               {/* Rotating ring */}
               <div 
-                className="absolute inset-0 rounded-full border-2 md:border-4 border-dashed border-white/30"
+                className="absolute inset-0 rounded-full border-4 border-dashed border-white/30"
                 style={{ transform: `rotate(${rotation}deg)` }}
               />
               
               {/* Content */}
               <div className="relative text-center z-10 px-2">
-                <Brain className="w-12 h-12 md:w-16 md:h-16 mx-auto mb-2 md:mb-3 text-white drop-shadow-lg animate-float" />
-                <div className="font-bold text-base md:text-xl text-white drop-shadow-lg">AI Authority</div>
-                <div className="text-xs md:text-base text-blue-100 drop-shadow">Flywheel</div>
+                <Brain className="w-16 h-16 mx-auto mb-3 text-white drop-shadow-lg animate-float" />
+                <div className="font-bold text-xl text-white drop-shadow-lg">AI Authority</div>
+                <div className="text-base text-blue-100 drop-shadow">Flywheel</div>
               </div>
             </div>
           </div>
@@ -267,9 +268,10 @@ const InteractiveFlywheelSection: React.FC = () => {
                   style={{ animationDelay: `${index * 0.1}s` }}
                 />
               );
-            })}</svg>
+            })}
+          </svg>
 
-          {/* Service Cards - Responsive */}
+          {/* Service Cards - Larger for desktop */}
           {services.map((service, index) => {
             const position = getPosition(service.position.angle, service.position.radius);
             const isHighlighted = isRelated(service.id);
@@ -280,7 +282,7 @@ const InteractiveFlywheelSection: React.FC = () => {
                 key={service.id}
                 className={`absolute transform -translate-x-1/2 -translate-y-1/2 transition-all duration-500 ease-out ${
                   isHighlighted || !hoveredService ? 'scale-100 opacity-100 z-20' : 'scale-75 opacity-30 z-0 blur-sm'
-                } ${isHovered ? 'scale-110 md:scale-125 z-30' : ''}`}
+                } ${isHovered ? 'scale-110 z-30' : ''}`}
                 style={{
                   left: `calc(50% + ${position.x}px)`,
                   top: `calc(50% + ${position.y}px)`,
@@ -292,7 +294,7 @@ const InteractiveFlywheelSection: React.FC = () => {
                 onTouchStart={() => setHoveredService(service.id)}
               >
                 <div 
-                  className={`relative bg-gradient-to-br from-gray-900/95 to-gray-800/95 backdrop-blur-xl rounded-xl md:rounded-2xl shadow-2xl border-2 p-3 md:p-5 w-40 md:w-52 cursor-pointer transition-all duration-500 overflow-hidden group ${
+                  className={`relative bg-gradient-to-br from-gray-900/95 to-gray-800/95 backdrop-blur-xl rounded-2xl shadow-2xl border-2 p-5 w-56 cursor-pointer transition-all duration-500 overflow-hidden group ${
                     isHovered 
                       ? 'border-white shadow-[0_0_30px_rgba(59,130,246,0.6)]' 
                       : isHighlighted 
@@ -312,23 +314,23 @@ const InteractiveFlywheelSection: React.FC = () => {
                       : isHighlighted 
                         ? 'from-teal-500 to-cyan-500' 
                         : 'from-gray-700 to-gray-600'
-                  } text-white p-3 rounded-lg md:rounded-xl mb-3 transition-all duration-500 transform group-hover:scale-110 group-hover:rotate-3`}>
+                  } text-white p-4 rounded-xl mb-4 transition-all duration-500 transform group-hover:scale-110 group-hover:rotate-3`}>
                     <div className="transform group-hover:scale-110 transition-transform duration-300">
                       {service.icon}
                     </div>
                   </div>
 
-                  <h3 className="font-bold text-xs md:text-sm text-white mb-1 md:mb-2 leading-tight group-hover:text-blue-300 transition-colors duration-300">
+                  <h3 className="font-bold text-sm text-white mb-2 leading-tight group-hover:text-blue-300 transition-colors duration-300">
                     {service.title}
                   </h3>
-                  <p className="text-[10px] md:text-xs text-gray-300 group-hover:text-gray-200 transition-colors duration-300">
+                  <p className="text-xs text-gray-300 group-hover:text-gray-200 transition-colors duration-300">
                     {service.description}
                   </p>
                   
                   {/* Connection indicator */}
                   {isHighlighted && !isHovered && (
-                    <div className="mt-2 text-[10px] md:text-xs text-teal-400 font-bold flex items-center gap-1 animate-pulse">
-                      <div className="w-1.5 h-1.5 rounded-full bg-teal-400 animate-ping"></div>
+                    <div className="mt-3 text-xs text-teal-400 font-bold flex items-center gap-1 animate-pulse">
+                      <div className="w-2 h-2 rounded-full bg-teal-400 animate-ping"></div>
                       Connected
                     </div>
                   )}
@@ -336,7 +338,7 @@ const InteractiveFlywheelSection: React.FC = () => {
                   {/* Particle effect on hover */}
                   {isHovered && (
                     <>
-                      {[...Array(6)].map((_, i) => (
+                      {[...Array(8)].map((_, i) => (
                         <div
                           key={i}
                           className="absolute w-1 h-1 bg-white rounded-full animate-particle"
@@ -356,8 +358,8 @@ const InteractiveFlywheelSection: React.FC = () => {
         </div>
 
         {/* Status Text */}
-        <div className="text-center mt-10 md:mt-16 animate-fade-in-delay-2 px-4">
-          <p className="text-blue-200 text-sm md:text-lg font-medium">
+        <div className="text-center mt-16 animate-fade-in-delay-2 px-4">
+          <p className="text-blue-200 text-lg font-medium">
             {hoveredService 
               ? `${services.find(s => s.id === hoveredService)?.title} integrates with ${services.find(s => s.id === hoveredService)?.relatedServices.length} services`
               : 'Explore the interconnected ecosystem - hover over any service'}
@@ -442,11 +444,13 @@ const InteractiveFlywheelSection: React.FC = () => {
         }
         
         .animate-particle:nth-child(1) { --angle: 0deg; }
-        .animate-particle:nth-child(2) { --angle: 60deg; }
-        .animate-particle:nth-child(3) { --angle: 120deg; }
-        .animate-particle:nth-child(4) { --angle: 180deg; }
-        .animate-particle:nth-child(5) { --angle: 240deg; }
-        .animate-particle:nth-child(6) { --angle: 300deg; }
+        .animate-particle:nth-child(2) { --angle: 45deg; }
+        .animate-particle:nth-child(3) { --angle: 90deg; }
+        .animate-particle:nth-child(4) { --angle: 135deg; }
+        .animate-particle:nth-child(5) { --angle: 180deg; }
+        .animate-particle:nth-child(6) { --angle: 225deg; }
+        .animate-particle:nth-child(7) { --angle: 270deg; }
+        .animate-particle:nth-child(8) { --angle: 315deg; }
         
         .animate-fade-in {
           animation: fade-in 1s ease-out;
@@ -463,6 +467,11 @@ const InteractiveFlywheelSection: React.FC = () => {
         /* Prevent overflow */
         body {
           overflow-x: hidden;
+        }
+        
+        /* Responsive adjustments for smaller screens */
+        @media (max-width: 1024px) {
+          /* Mobile responsive code would go here */
         }
       `}</style>
     </section>
