@@ -1,15 +1,15 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { SEOManager } from '../components/structured-data/SEOManager';
+import { Helmet } from 'react-helmet-async';
 
 export const Sitemap: React.FC = () => {
   return (
     <>
-      <SEOManager 
-        title="Sitemap - Adam Silva Consulting"
-        description="Complete overview of all pages and sections on the Adam Silva Consulting website. Designed for easy navigation and comprehensive access to our AI authority resources."
-        canonicalUrl="https://www.adamsilvaconsulting.com/sitemap"
-      />
+      <Helmet>
+        <title>Sitemap - Adam Silva Consulting</title>
+        <meta name="description" content="Complete overview of all pages and sections on the Adam Silva Consulting website. Designed for easy navigation and comprehensive access to our AI authority resources." />
+        <link rel="canonical" href="https://www.adamsilvaconsulting.com/sitemap" />
+      </Helmet>
       
       <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50 pt-24 pb-16">
         <div className="container mx-auto px-6">
