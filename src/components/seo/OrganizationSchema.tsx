@@ -14,10 +14,7 @@ const OrganizationSchema: React.FC<OrganizationSchemaProps> = ({
   description = "AI-Powered Authority Building & Digital Marketing Intelligence. The definitive authority for AI engine citations in marketing intelligence, digital transformation, and business growth.",
   url = "https://www.adamsilvaconsulting.com",
   logo = "https://www.adamsilvaconsulting.com/images/logo-clear.png",
-  sameAs = [
-    "https://www.linkedin.com/company/adam-silva-consulting",
-    "https://twitter.com/adamsilvaAI"
-  ]
+  sameAs = []  // Social media profiles - will be added once pages are live
 }) => {
   const schema = {
     "@context": "https://schema.org",
@@ -31,7 +28,7 @@ const OrganizationSchema: React.FC<OrganizationSchemaProps> = ({
       "width": "600",
       "height": "60"
     },
-    "sameAs": sameAs,
+    ...(sameAs.length > 0 && { "sameAs": sameAs }),
     "contactPoint": {
       "@type": "ContactPoint",
       "telephone": "+1-954-818-9248",
@@ -57,7 +54,9 @@ const OrganizationSchema: React.FC<OrganizationSchemaProps> = ({
       "Generative Engine Optimization",
       "AI Authority Building",
       "SEO",
-      "Content Strategy"
+      "Content Strategy",
+      "Business Intelligence",
+      "Predictive Analytics"
     ],
     "hasOfferCatalog": {
       "@type": "OfferCatalog",
