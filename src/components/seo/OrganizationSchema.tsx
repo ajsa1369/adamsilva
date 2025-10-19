@@ -34,14 +34,15 @@ const OrganizationSchema: React.FC<OrganizationSchemaProps> = ({
     "sameAs": sameAs,
     "contactPoint": {
       "@type": "ContactPoint",
-      "telephone": "+1-555-0123",
+      "telephone": "+1-954-818-9248",
       "contactType": "customer service",
       "areaServed": "US",
       "availableLanguage": ["en"]
     },
     "address": {
       "@type": "PostalAddress",
-      "addressLocality": "United States",
+      "addressLocality": "Port Saint Lucie",
+      "addressRegion": "FL",
       "addressCountry": "US"
     },
     "founder": {
