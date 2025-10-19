@@ -1,0 +1,5 @@
+DEPLOYMENT: Force rebuild from current main (Sitemap.tsx already fixed)
+Timestamp: 2025-10-19 18:00 UTC
+Working state verified: e5e32a2 code is in main
+Sitemap.tsx uses Helmet (correct)
+No SEOManager import (correct)
