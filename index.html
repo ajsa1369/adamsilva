@@ -308,8 +308,8 @@
 
       gtag('config', 'G-7NEYMM8B1R');
     </script>
-    <script type="module" crossorigin src="/assets/index-Bc4yI0ui.js"></script>
-    <link rel="stylesheet" crossorigin href="/assets/index-CCHhwSPw.css">
+    
+    <!-- REMOVED HARDCODED SCRIPT - Vite will inject the correct bundle during build -->
   </head>
   <body>
     <!-- Loading Screen -->
@@ -377,6 +377,7 @@
       });
     </script>
     
-    <!-- React Application Script -->
+    <!-- React Application Script - Vite will inject this during build -->
+    <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
