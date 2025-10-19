@@ -11,7 +11,6 @@ import {
   TrendingUp
 } from 'lucide-react';
 import FAQSchema, { FAQ } from '../components/seo/FAQSchema';
-import OrganizationSchema from '../components/seo/OrganizationSchema';
 import InteractiveFlywheelSection from '../components/common/InteractiveFlywheelSection';
 
 export const HomePage: React.FC = () => {
@@ -103,8 +102,6 @@ export const HomePage: React.FC = () => {
 
   return (
     <div className="bg-white">
-      {/* Schema Markup */}
-      <OrganizationSchema />
       <FAQSchema 
         faqs={faqs}
         pageUrl="https://www.adamsilvaconsulting.com/"
@@ -133,7 +130,7 @@ export const HomePage: React.FC = () => {
                 <ArrowRight className="h-5 w-5 group-hover:translate-x-1 transition-transform duration-200" />
               </Link>
               <Link 
-                to="/services/omnichannel-platforms"
+                to="/services/omnichannel-communication"
                 className="text-gray-700 px-8 py-4 rounded-lg font-medium text-lg border-2 border-gray-200 hover:border-blue-300 hover:text-blue-600 transition-all duration-200"
               >
                 Explore Our Services
@@ -209,7 +206,7 @@ export const HomePage: React.FC = () => {
 
           <div className="text-center">
             <Link 
-              to="/services/omnichannel-platforms"
+              to="/services/omnichannel-communication"
               className="inline-flex items-center bg-gray-900 text-white px-8 py-3 rounded-lg font-medium hover:bg-gray-800 transition-colors duration-200"
             >
               View All 11 Services
@@ -261,7 +258,7 @@ export const HomePage: React.FC = () => {
               Schedule Your Consultation
             </Link>
             <Link 
-              to="/services/omnichannel-platforms"
+              to="/services/omnichannel-communication"
               className="text-gray-700 px-8 py-4 rounded-lg font-medium text-lg border-2 border-gray-200 hover:border-blue-300 hover:text-blue-600 transition-all duration-200"
             >
               Explore Our Solutions
