@@ -1,3 +1,4 @@
+// Test deployment trigger - Sunday evening cleanup
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight, Calendar, Clock, Share2 } from 'lucide-react';
