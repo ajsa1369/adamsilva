@@ -11,6 +11,7 @@ import {
   TrendingUp
 } from 'lucide-react';
 import FAQSchema, { FAQ } from '../components/seo/FAQSchema';
+import OrganizationSchema from '../components/seo/OrganizationSchema';
 import InteractiveFlywheelSection from '../components/common/InteractiveFlywheelSection';
 
 export const HomePage: React.FC = () => {
@@ -102,6 +103,10 @@ export const HomePage: React.FC = () => {
 
   return (
     <div className="bg-white">
+      {/* SEO Schema - Organization for rich search results */}
+      <OrganizationSchema />
+      
+      {/* FAQ Schema for featured snippets */}
       <FAQSchema 
         faqs={faqs}
         pageUrl="https://www.adamsilvaconsulting.com/"
