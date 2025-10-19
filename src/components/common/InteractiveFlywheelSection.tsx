@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Brain, Users, BarChart3, Target, Zap, Shield, TrendingUp, MessageSquare, Globe, Database, Cog, Sparkles } from 'lucide-react';
 
+// BUILD_ID: 20251019_DESKTOP_OPTIMIZED_V2 - Force new bundle hash
 // Desktop-optimized sizing for spectacular display
 const InteractiveFlywheelSection: React.FC = () => {
   const [hoveredService, setHoveredService] = useState<string | null>(null);
