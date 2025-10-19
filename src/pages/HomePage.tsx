@@ -11,7 +11,6 @@ import {
   TrendingUp
 } from 'lucide-react';
 import FAQSchema, { FAQ } from '../components/seo/FAQSchema';
-import InteractiveFlywheelSection from '../components/common/InteractiveFlywheelSection';
 
 export const HomePage: React.FC = () => {
   const benefits = [
@@ -83,13 +82,13 @@ export const HomePage: React.FC = () => {
       icon: <Brain className="h-8 w-8" />,
       title: "AI Website & Landing Pages",
       description: "Generate high-converting pages instantly with automated A/B testing and competitor design cloning",
-      path: "/services/website-landing-pages"
+      path: "/services/ai-websites-landing-pages"
     },
     {
       icon: <BarChart3 className="h-8 w-8" />,
       title: "Intelligent Campaign Management",
       description: "Orchestrate complex marketing funnels with real-time optimization and AI-driven performance insights",
-      path: "/services/campaign-management"
+      path: "/services/marketing-intelligence"
     }
   ];
 
@@ -130,7 +129,7 @@ export const HomePage: React.FC = () => {
                 <ArrowRight className="h-5 w-5 group-hover:translate-x-1 transition-transform duration-200" />
               </Link>
               <Link 
-                to="/services/omnichannel-communication"
+                to="/services/ai-websites-landing-pages"
                 className="text-gray-700 px-8 py-4 rounded-lg font-medium text-lg border-2 border-gray-200 hover:border-blue-300 hover:text-blue-600 transition-all duration-200"
               >
                 Explore Our Services
@@ -169,9 +168,6 @@ export const HomePage: React.FC = () => {
         </div>
       </section>
 
-      {/* Interactive Flywheel Section */}
-      <InteractiveFlywheelSection />
-
       {/* Featured Services */}
       <section className="py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -180,7 +176,7 @@ export const HomePage: React.FC = () => {
               Comprehensive AI-Powered Solutions
             </h2>
             <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-              Our integrated suite of eleven specialized services work synergistically to create a holistic marketing ecosystem 
+              Our integrated suite of specialized services work synergistically to create a holistic marketing ecosystem 
               that delivers exponential results through intelligent automation and predictive insights.
             </p>
           </div>
@@ -202,16 +198,6 @@ export const HomePage: React.FC = () => {
                 </Link>
               </div>
             ))}
-          </div>
-
-          <div className="text-center">
-            <Link 
-              to="/services/omnichannel-communication"
-              className="inline-flex items-center bg-gray-900 text-white px-8 py-3 rounded-lg font-medium hover:bg-gray-800 transition-colors duration-200"
-            >
-              View All 11 Services
-              <ArrowRight className="h-5 w-5 ml-2" />
-            </Link>
           </div>
         </div>
       </section>
@@ -258,7 +244,7 @@ export const HomePage: React.FC = () => {
               Schedule Your Consultation
             </Link>
             <Link 
-              to="/services/omnichannel-communication"
+              to="/services/ai-websites-landing-pages"
               className="text-gray-700 px-8 py-4 rounded-lg font-medium text-lg border-2 border-gray-200 hover:border-blue-300 hover:text-blue-600 transition-all duration-200"
             >
               Explore Our Solutions
