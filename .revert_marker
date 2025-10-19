@@ -1,0 +1,3 @@
+REVERT: Back to working state from commit 5278f5ccb632332391e7badb14b75d291a0744e7 (Oct 18)
+Reverting all changes from Oct 19 to isolate what broke the site.
+Will re-add features one by one to identify the issue.
