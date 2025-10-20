@@ -112,6 +112,17 @@ export const Header: React.FC = () => {
 
             <Link 
               to="/contact" 
+              className={`font-medium transition-colors duration-200 ${
+                location.pathname === '/contact' 
+                  ? 'text-blue-600' 
+                  : 'text-gray-700 hover:text-blue-600'
+              }`}
+            >
+              Contact
+            </Link>
+
+            <Link 
+              to="/contact" 
               className="bg-gradient-to-r from-blue-600 to-teal-600 text-white px-6 py-2 rounded-lg font-medium hover:from-blue-700 hover:to-teal-700 transition-all duration-200 shadow-md hover:shadow-lg"
             >
               Get Started
@@ -177,6 +188,14 @@ export const Header: React.FC = () => {
                 className="block px-4 py-2 text-gray-700 hover:text-blue-600 font-medium"
               >
                 Insights
+              </Link>
+
+              <Link 
+                to="/contact" 
+                onClick={() => setIsMenuOpen(false)}
+                className="block px-4 py-2 text-gray-700 hover:text-blue-600 font-medium"
+              >
+                Contact
               </Link>
               
               <div className="px-4 pt-4">
