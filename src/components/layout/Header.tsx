@@ -48,17 +48,6 @@ export const Header: React.FC = () => {
             >
               Home
             </Link>
-
-            <Link 
-              to="/insights" 
-              className={`font-medium transition-colors duration-200 ${
-                location.pathname.startsWith('/insights') 
-                  ? 'text-blue-600' 
-                  : 'text-gray-700 hover:text-blue-600'
-              }`}
-            >
-              Insights
-            </Link>
             
             {/* Services Dropdown */}
             <div 
@@ -89,6 +78,39 @@ export const Header: React.FC = () => {
             </div>
 
             <Link 
+              to="/about" 
+              className={`font-medium transition-colors duration-200 ${
+                location.pathname === '/about' 
+                  ? 'text-blue-600' 
+                  : 'text-gray-700 hover:text-blue-600'
+              }`}
+            >
+              About
+            </Link>
+
+            <Link 
+              to="/authority-hub" 
+              className={`font-medium transition-colors duration-200 ${
+                location.pathname.startsWith('/authority-hub') 
+                  ? 'text-blue-600' 
+                  : 'text-gray-700 hover:text-blue-600'
+              }`}
+            >
+              Authority Hub
+            </Link>
+
+            <Link 
+              to="/insights" 
+              className={`font-medium transition-colors duration-200 ${
+                location.pathname.startsWith('/insights') 
+                  ? 'text-blue-600' 
+                  : 'text-gray-700 hover:text-blue-600'
+              }`}
+            >
+              Insights
+            </Link>
+
+            <Link 
               to="/contact" 
               className="bg-gradient-to-r from-blue-600 to-teal-600 text-white px-6 py-2 rounded-lg font-medium hover:from-blue-700 hover:to-teal-700 transition-all duration-200 shadow-md hover:shadow-lg"
             >
@@ -116,14 +138,6 @@ export const Header: React.FC = () => {
               >
                 Home
               </Link>
-
-              <Link 
-                to="/insights" 
-                onClick={() => setIsMenuOpen(false)}
-                className="block px-4 py-2 text-gray-700 hover:text-blue-600 font-medium"
-              >
-                Insights
-              </Link>
               
               <div className="px-4">
                 <p className="text-sm font-semibold text-gray-500 uppercase tracking-wide mb-2">Services</p>
@@ -140,6 +154,30 @@ export const Header: React.FC = () => {
                   ))}
                 </div>
               </div>
+
+              <Link 
+                to="/about" 
+                onClick={() => setIsMenuOpen(false)}
+                className="block px-4 py-2 text-gray-700 hover:text-blue-600 font-medium"
+              >
+                About
+              </Link>
+
+              <Link 
+                to="/authority-hub" 
+                onClick={() => setIsMenuOpen(false)}
+                className="block px-4 py-2 text-gray-700 hover:text-blue-600 font-medium"
+              >
+                Authority Hub
+              </Link>
+
+              <Link 
+                to="/insights" 
+                onClick={() => setIsMenuOpen(false)}
+                className="block px-4 py-2 text-gray-700 hover:text-blue-600 font-medium"
+              >
+                Insights
+              </Link>
               
               <div className="px-4 pt-4">
                 <Link 
