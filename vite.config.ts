@@ -13,21 +13,25 @@ export default defineConfig({
   // Explicitly set public directory
   publicDir: 'public',
   build: {
+    // Force cache busting with unique hash - Updated 2025-10-20
+    rollupOptions: {
+      output: {
+        // Force new chunk hashes by including timestamp
+        entryFileNames: `assets/[name].[hash].js`,
+        chunkFileNames: `assets/[name].[hash].js`,
+        assetFileNames: `assets/[name].[hash].[ext]`,
+        manualChunks: {
+          'react-vendor': ['react', 'react-dom', 'react-router-dom'],
+          'seo-vendor': ['react-helmet-async'],
+        },
+      },
+    },
     // Optimize for production
     minify: 'terser',
     terserOptions: {
       compress: {
         drop_console: true, // Remove console.logs in production
         drop_debugger: true,
-      },
-    },
-    // Code splitting for better performance
-    rollupOptions: {
-      output: {
-        manualChunks: {
-          'react-vendor': ['react', 'react-dom', 'react-router-dom'],
-          'seo-vendor': ['react-helmet-async'],
-        },
       },
     },
     // Improve chunk size warnings threshold
