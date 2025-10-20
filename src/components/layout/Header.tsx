@@ -1,3 +1,4 @@
+// Updated: 2025-10-20 - Added Insights navigation item
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, X, Brain, ChevronDown } from 'lucide-react';
