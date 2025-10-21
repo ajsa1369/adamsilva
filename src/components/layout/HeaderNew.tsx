@@ -5,6 +5,7 @@ import { Menu, X, Brain, ChevronDown } from 'lucide-react';
 export const Header: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isServicesOpen, setIsServicesOpen] = useState(false);
+  const [isAuthorityHubOpen, setIsAuthorityHubOpen] = useState(false);
   const location = useLocation();
 
   const services = [
@@ -55,8 +56,20 @@ export const Header: React.FC = () => {
             </div>
 
             <Link to="/about" className={`font-medium transition-colors duration-200 ${location.pathname === '/about' ? 'text-blue-600' : 'text-gray-700 hover:text-blue-600'}`}>About</Link>
-            <Link to="/authority-hub" className={`font-medium transition-colors duration-200 ${location.pathname.startsWith('/authority-hub') ? 'text-blue-600' : 'text-gray-700 hover:text-blue-600'}`}>Authority Hub</Link>
-            <Link to="/insights" className={`font-medium transition-colors duration-200 ${location.pathname.startsWith('/insights') ? 'text-blue-600' : 'text-gray-700 hover:text-blue-600'}`}>Insights</Link>
+            
+            <div className="relative" onMouseEnter={() => setIsAuthorityHubOpen(true)} onMouseLeave={() => setIsAuthorityHubOpen(false)}>
+              <button className="flex items-center space-x-1 font-medium text-gray-700 hover:text-blue-600 transition-colors duration-200">
+                <span>Authority Hub</span>
+                <ChevronDown className={`h-4 w-4 transition-transform duration-200 ${isAuthorityHubOpen ? 'rotate-180' : ''}`} />
+              </button>
+              {isAuthorityHubOpen && (
+                <div className="absolute top-full left-0 mt-2 w-64 bg-white rounded-lg shadow-lg border border-gray-100 py-2 z-50">
+                  <Link to="/authority-hub" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-blue-600 transition-colors duration-150">Authority Hub Home</Link>
+                  <Link to="/insights" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-blue-600 transition-colors duration-150 font-medium">📚 Insights & Articles</Link>
+                </div>
+              )}
+            </div>
+
             <Link to="/contact" className={`font-medium transition-colors duration-200 ${location.pathname === '/contact' ? 'text-blue-600' : 'text-gray-700 hover:text-blue-600'}`}>Contact</Link>
             <Link to="/contact" className="bg-gradient-to-r from-blue-600 to-teal-600 text-white px-6 py-2 rounded-lg font-medium hover:from-blue-700 hover:to-teal-700 transition-all duration-200 shadow-md hover:shadow-lg">Get Started</Link>
           </div>
@@ -79,8 +92,13 @@ export const Header: React.FC = () => {
                 </div>
               </div>
               <Link to="/about" onClick={() => setIsMenuOpen(false)} className="block px-4 py-2 text-gray-700 hover:text-blue-600 font-medium">About</Link>
-              <Link to="/authority-hub" onClick={() => setIsMenuOpen(false)} className="block px-4 py-2 text-gray-700 hover:text-blue-600 font-medium">Authority Hub</Link>
-              <Link to="/insights" onClick={() => setIsMenuOpen(false)} className="block px-4 py-2 text-gray-700 hover:text-blue-600 font-medium">Insights</Link>
+              <div className="px-4">
+                <p className="text-sm font-semibold text-gray-500 uppercase tracking-wide mb-2">Authority Hub</p>
+                <div className="space-y-2">
+                  <Link to="/authority-hub" onClick={() => setIsMenuOpen(false)} className="block py-1 text-sm text-gray-600 hover:text-blue-600">Authority Hub Home</Link>
+                  <Link to="/insights" onClick={() => setIsMenuOpen(false)} className="block py-1 text-sm text-gray-700 hover:text-blue-600 font-medium">📚 Insights & Articles</Link>
+                </div>
+              </div>
               <Link to="/contact" onClick={() => setIsMenuOpen(false)} className="block px-4 py-2 text-gray-700 hover:text-blue-600 font-medium">Contact</Link>
               <div className="px-4 pt-4">
                 <Link to="/contact" onClick={() => setIsMenuOpen(false)} className="block bg-gradient-to-r from-blue-600 to-teal-600 text-white px-6 py-3 rounded-lg font-medium text-center hover:from-blue-700 hover:to-teal-700 transition-all duration-200">Get Started</Link>
