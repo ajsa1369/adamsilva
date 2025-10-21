@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import { Header } from './components/layout/Header';
 import { Footer } from './components/layout/Footer';
 import { HomePage } from './pages/HomePage';
@@ -19,12 +19,10 @@ import { InsightsIndex } from './pages/insights/InsightsIndex';
 import { InsightsPage } from './pages/insights/InsightsPage';
 import { Sitemap } from './pages/Sitemap';
 import { ScrollToTop } from './components/common/ScrollToTop';
-// FORCE REBUILD - import to invalidate Vite cache
-import './components/ForceRebuild';
 
 function App() {
   return (
-    <Router>
+    <>
       <ScrollToTop />
       <Header />
       <Routes>
@@ -46,7 +44,7 @@ function App() {
         <Route path="/sitemap" element={<Sitemap />} />
       </Routes>
       <Footer />
-    </Router>
+    </>
   );
 }
 
