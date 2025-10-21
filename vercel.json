@@ -2,6 +2,13 @@
   "buildCommand": "npm run build",
   "outputDirectory": "dist",
   "framework": null,
+  "installCommand": "npm install",
+  
+  "build": {
+    "env": {
+      "DISABLE_VERCEL_BUILD_CACHE": "1"
+    }
+  },
   
   "routes": [
     {
