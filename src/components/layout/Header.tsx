@@ -25,7 +25,7 @@ export const Header: React.FC = () => {
   const isActive = (path: string) => location.pathname === path || location.pathname.startsWith(path + '/');
 
   return (
-    <header className="bg-white shadow-sm border-b border-gray-100 sticky top-0 z-50" data-build-timestamp="20251021-014750">
+    <header className="bg-white shadow-sm border-b border-gray-100 sticky top-0 z-50">
       <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           <Link to="/" className="flex items-center space-x-2 group">
@@ -41,7 +41,7 @@ export const Header: React.FC = () => {
           {/* Desktop Navigation */}
           <div className="hidden lg:flex items-center space-x-6">
             <Link to="/" className={`font-medium transition-colors ${isActive('/') && location.pathname === '/' ? 'text-blue-600' : 'text-gray-700 hover:text-blue-600'}`}>
-              Home
+              HOME TEST
             </Link>
             
             {/* Services Dropdown */}
@@ -84,7 +84,7 @@ export const Header: React.FC = () => {
             </div>
 
             {/* INSIGHTS AS STANDALONE LINK */}
-            <Link to="/insights" title="Read our insights" className={`font-medium transition-colors ${isActive('/insights') ? 'text-blue-600' : 'text-gray-700 hover:text-blue-600'}`}>
+            <Link to="/insights" className={`font-medium transition-colors ${isActive('/insights') ? 'text-blue-600' : 'text-gray-700 hover:text-blue-600'}`}>
               📚 Insights
             </Link>
 
@@ -108,7 +108,7 @@ export const Header: React.FC = () => {
           <div className="lg:hidden border-t border-gray-100 py-4">
             <div className="space-y-3">
               <Link to="/" onClick={() => setIsMenuOpen(false)} className="block px-4 py-2 text-gray-700 hover:text-blue-600 font-medium">
-                Home
+                HOME TEST
               </Link>
               
               <div className="px-4">
