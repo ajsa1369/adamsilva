@@ -8,6 +8,9 @@ export const Header: React.FC = () => {
   const [isAuthorityOpen, setIsAuthorityOpen] = useState(false);
   const location = useLocation();
 
+  // FORCE BUNDLE CHANGE - This console.log will appear in production bundle
+  console.log('Header loaded - Build timestamp: 1761009867');
+
   const services = [
     { name: 'Omnichannel Communication', path: '/services/omnichannel-communication' },
     { name: 'AI Website & Landing Pages', path: '/services/website-landing-pages' },
