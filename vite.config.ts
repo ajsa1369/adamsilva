@@ -2,7 +2,7 @@ import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import path from 'path';
 
-// https://vitejs.dev/config/
+// FORCE REBUILD - Disable all caching
 export default defineConfig({
   plugins: [react()],
   resolve: {
@@ -10,36 +10,30 @@ export default defineConfig({
       '@': path.resolve(__dirname, './src'),
     },
   },
-  // Explicitly set public directory
   publicDir: 'public',
   build: {
-    // Force cache busting with unique hash - Updated 2025-10-20
+    minify: 'terser',
+    terserOptions: {
+      compress: {
+        drop_console: false, // KEEP console logs for debugging
+        drop_debugger: true,
+      },
+    },
     rollupOptions: {
       output: {
-        // Force new chunk hashes by including timestamp
-        entryFileNames: `assets/[name].[hash].js`,
-        chunkFileNames: `assets/[name].[hash].js`,
-        assetFileNames: `assets/[name].[hash].[ext]`,
         manualChunks: {
           'react-vendor': ['react', 'react-dom', 'react-router-dom'],
           'seo-vendor': ['react-helmet-async'],
         },
+        // FORCE NEW HASH EVERY BUILD
+        entryFileNames: `assets/[name]-[hash]-${Date.now()}.js`,
+        chunkFileNames: `assets/[name]-[hash]-${Date.now()}.js`,
+        assetFileNames: `assets/[name]-[hash]-${Date.now()}[extname]`
       },
     },
-    // Optimize for production
-    minify: 'terser',
-    terserOptions: {
-      compress: {
-        drop_console: true, // Remove console.logs in production
-        drop_debugger: true,
-      },
-    },
-    // Improve chunk size warnings threshold
     chunkSizeWarningLimit: 1000,
-    // Ensure public assets are copied
     copyPublicDir: true,
   },
-  // Performance optimizations
   server: {
     port: 5173,
     strictPort: false,
@@ -48,4 +42,6 @@ export default defineConfig({
     port: 4173,
     strictPort: false,
   },
+  // DISABLE ALL CACHING
+  cacheDir: '.vite-temp',
 });
