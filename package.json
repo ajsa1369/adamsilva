@@ -8,6 +8,7 @@
   "private": true,
   "scripts": {
     "dev": "vite",
+    "prebuild": "rm -rf dist",
     "build": "vite build",
     "start": "vite preview",
     "preview": "vite preview"
