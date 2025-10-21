@@ -8,9 +8,6 @@ export const Header: React.FC = () => {
   const [isAuthorityOpen, setIsAuthorityOpen] = useState(false);
   const location = useLocation();
 
-  // FORCE BUNDLE CHANGE - This console.log will appear in production bundle
-  console.log('Header loaded - Build timestamp: 1761009867');
-
   const services = [
     { name: 'Omnichannel Communication', path: '/services/omnichannel-communication' },
     { name: 'AI Website & Landing Pages', path: '/services/website-landing-pages' },
@@ -28,7 +25,7 @@ export const Header: React.FC = () => {
   const isActive = (path: string) => location.pathname === path || location.pathname.startsWith(path + '/');
 
   return (
-    <header className="bg-white shadow-sm border-b border-gray-100 sticky top-0 z-50">
+    <header className="bg-white shadow-sm border-b border-gray-100 sticky top-0 z-50" data-build-timestamp="20251021-014750">
       <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           <Link to="/" className="flex items-center space-x-2 group">
@@ -41,7 +38,7 @@ export const Header: React.FC = () => {
             </div>
           </Link>
 
-          {/* Desktop Navigation - EXPLICIT AND SIMPLE */}
+          {/* Desktop Navigation */}
           <div className="hidden lg:flex items-center space-x-6">
             <Link to="/" className={`font-medium transition-colors ${isActive('/') && location.pathname === '/' ? 'text-blue-600' : 'text-gray-700 hover:text-blue-600'}`}>
               Home
@@ -86,8 +83,8 @@ export const Header: React.FC = () => {
               )}
             </div>
 
-            {/* INSIGHTS AS STANDALONE LINK - HIGHLY VISIBLE */}
-            <Link to="/insights" className={`font-medium transition-colors ${isActive('/insights') ? 'text-blue-600' : 'text-gray-700 hover:text-blue-600'}`}>
+            {/* INSIGHTS AS STANDALONE LINK */}
+            <Link to="/insights" title="Read our insights" className={`font-medium transition-colors ${isActive('/insights') ? 'text-blue-600' : 'text-gray-700 hover:text-blue-600'}`}>
               📚 Insights
             </Link>
 
