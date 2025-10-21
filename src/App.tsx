@@ -19,6 +19,8 @@ import { InsightsIndex } from './pages/insights/InsightsIndex';
 import { InsightsPage } from './pages/insights/InsightsPage';
 import { Sitemap } from './pages/Sitemap';
 import { ScrollToTop } from './components/common/ScrollToTop';
+// FORCE REBUILD - import to invalidate Vite cache
+import './components/ForceRebuild';
 
 function App() {
   return (
