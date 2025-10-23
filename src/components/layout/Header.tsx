@@ -42,7 +42,7 @@ export const Header: React.FC = () => {
           {/* Desktop Navigation */}
           <div className="hidden lg:flex items-center space-x-6">
             <Link to="/" className={`font-medium transition-colors ${isActive('/') && location.pathname === '/' ? 'text-blue-600' : 'text-gray-700 hover:text-blue-600'}`}>
-              HOME TEST
+              Home {BUILD_V && ''}
             </Link>
             
             {/* Services Dropdown */}
