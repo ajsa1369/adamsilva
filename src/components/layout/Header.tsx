@@ -109,7 +109,7 @@ export const Header: React.FC = () => {
           <div className="lg:hidden border-t border-gray-100 py-4">
             <div className="space-y-3">
               <Link to="/" onClick={() => setIsMenuOpen(false)} className="block px-4 py-2 text-gray-700 hover:text-blue-600 font-medium">
-                HOME
+                HOME 🏠
               </Link>
               
               <div className="px-4">
