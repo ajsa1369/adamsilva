@@ -17,7 +17,7 @@ export default defineConfig({
     rollupOptions: {
       output: {
         // Force new chunk hashes by including timestamp
-        entryFileNames: `assets/[name].[hash].js`,
+        entryFileNames: `assets/[name]-[hash]-${Date.now()}.js`,
         chunkFileNames: `assets/[name].[hash].js`,
         assetFileNames: `assets/[name].[hash].[ext]`,
         manualChunks: {
