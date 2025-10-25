@@ -42,7 +42,7 @@ export const Header: React.FC = () => {
           {/* Desktop Navigation */}
           <div className="hidden lg:flex items-center space-x-6">
             <Link to="/" className={`font-medium transition-colors ${isActive('/') && location.pathname === '/' ? 'text-blue-600' : 'text-gray-700 hover:text-blue-600'}`}>
-              Home 🏠
+              Home
             </Link>
             
             {/* Services Dropdown */}
@@ -78,7 +78,7 @@ export const Header: React.FC = () => {
                     Authority Hub Home
                   </Link>
                   <Link to="/insights" className="block px-4 py-2 text-sm font-semibold text-blue-600 hover:bg-blue-50 transition-colors">
-                    📚 Insights & Articles
+                    Insights
                   </Link>
                 </div>
               )}
@@ -86,7 +86,7 @@ export const Header: React.FC = () => {
 
             {/* INSIGHTS AS STANDALONE LINK */}
             <Link to="/insights" className={`font-medium transition-colors ${isActive('/insights') ? 'text-blue-600' : 'text-gray-700 hover:text-blue-600'}`}>
-              📚 Insights
+              Insights
             </Link>
 
             <Link to="/contact" className={`font-medium transition-colors ${isActive('/contact') ? 'text-blue-600' : 'text-gray-700 hover:text-blue-600'}`}>
@@ -109,7 +109,7 @@ export const Header: React.FC = () => {
           <div className="lg:hidden border-t border-gray-100 py-4">
             <div className="space-y-3">
               <Link to="/" onClick={() => setIsMenuOpen(false)} className="block px-4 py-2 text-gray-700 hover:text-blue-600 font-medium">
-                HOME 🏠
+                HOME
               </Link>
               
               <div className="px-4">
@@ -134,14 +134,14 @@ export const Header: React.FC = () => {
                     Authority Hub Home
                   </Link>
                   <Link to="/insights" onClick={() => setIsMenuOpen(false)} className="block py-1.5 text-sm font-semibold text-blue-600 hover:text-blue-700">
-                    📚 Insights & Articles
+                    Insights
                   </Link>
                 </div>
               </div>
 
               {/* INSIGHTS STANDALONE IN MOBILE TOO */}
               <Link to="/insights" onClick={() => setIsMenuOpen(false)} className="block px-4 py-2 text-blue-600 hover:text-blue-700 font-semibold">
-                📚 Insights & Articles
+                Insights
               </Link>
 
               <Link to="/contact" onClick={() => setIsMenuOpen(false)} className="block px-4 py-2 text-gray-700 hover:text-blue-600 font-medium">
