@@ -1,5 +1,5 @@
 import React from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Header } from './components/layout/Header';
 import { Footer } from './components/layout/Footer';
 import { HomePage } from './pages/HomePage';
@@ -15,8 +15,6 @@ import { SecurityCompliancePage } from './pages/services/SecurityCompliancePage'
 import { AnalyticsPage } from './pages/services/AnalyticsPage';
 import { IntentTargetingPage } from './pages/services/IntentTargetingPage';
 import { CompetitorMonitoringPage } from './pages/services/CompetitorMonitoringPage';
-import { InsightsIndex } from './pages/insights/InsightsIndex';
-import { InsightsPage } from './pages/insights/InsightsPage';
 import { Sitemap } from './pages/Sitemap';
 import { ScrollToTop } from './components/common/ScrollToTop';
 
@@ -25,24 +23,24 @@ function App() {
     <>
       <ScrollToTop />
       <Header />
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/contact" element={<Contact />} />
-        <Route path="/insights" element={<InsightsIndex />} />
-        <Route path="/insights/the-ai-authority-imperative-gartners-50-traffic-decline-prediction" element={<InsightsPage />} />
-        <Route path="/services/omnichannel-platforms" element={<OmnichannelPage />} />
-        <Route path="/services/website-landing-pages" element={<WebsiteLandingPage />} />
-        <Route path="/services/campaign-management" element={<CampaignManagementPage />} />
-        <Route path="/services/seo-ppc" element={<SEOPPCPage />} />
-        <Route path="/services/content-creation" element={<ContentCreationPage />} />
-        <Route path="/services/lead-management" element={<LeadManagementPage />} />
-        <Route path="/services/outreach" element={<OutreachPage />} />
-        <Route path="/services/security-compliance" element={<SecurityCompliancePage />} />
-        <Route path="/services/analytics" element={<AnalyticsPage />} />
-        <Route path="/services/intent-targeting" element={<IntentTargetingPage />} />
-        <Route path="/services/competitor-monitoring" element={<CompetitorMonitoringPage />} />
-        <Route path="/sitemap" element={<Sitemap />} />
-      </Routes>
+      <Router>
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/services/omnichannel-platforms" element={<OmnichannelPage />} />
+          <Route path="/services/website-landing-pages" element={<WebsiteLandingPage />} />
+          <Route path="/services/campaign-management" element={<CampaignManagementPage />} />
+          <Route path="/services/seo-ppc" element={<SEOPPCPage />} />
+          <Route path="/services/content-creation" element={<ContentCreationPage />} />
+          <Route path="/services/lead-management" element={<LeadManagementPage />} />
+          <Route path="/services/outreach" element={<OutreachPage />} />
+          <Route path="/services/security-compliance" element={<SecurityCompliancePage />} />
+          <Route path="/services/analytics" element={<AnalyticsPage />} />
+          <Route path="/services/intent-targeting" element={<IntentTargetingPage />} />
+          <Route path="/services/competitor-monitoring" element={<CompetitorMonitoringPage />} />
+          <Route path="/sitemap" element={<Sitemap />} />
+        </Routes>
+      </Router>
       <Footer />
     </>
   );
