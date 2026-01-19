@@ -1,154 +1,57 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-        xmlns:news="http://www.google.com/schemas/sitemap-news/0.9">
+<?xml version='1.0' encoding='utf-8'?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://www.adamsilvaconsulting.com/insights/ai-marketing-trends-2025</loc>
-    <news:news>
-      <news:publication>
-        <news:name>Adam Silva Consulting Insights</news:name>
-        <news:language>en</news:language>
-      </news:publication>
-      <news:publication_date>2025-10-14T12:00:00+00:00</news:publication_date>
-      <news:title>AI Marketing Trends 2025: What's Changing</news:title>
-      <news:keywords>AI marketing, digital marketing trends, 2025 predictions, marketing technology</news:keywords>
-    </news:news>
-    <lastmod>2025-10-14T12:00:00+00:00</lastmod>
+    <loc>https://www.adamsilvaconsulting.com/insights/</loc>
+    <lastmod>2026-01-19</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>1.0</priority>
+    <priority>0.85</priority>
   </url>
   <url>
-    <loc>https://www.adamsilvaconsulting.com/insights/answer-engine-optimization-guide</loc>
-    <news:news>
-      <news:publication>
-        <news:name>Adam Silva Consulting Insights</news:name>
-        <news:language>en</news:language>
-      </news:publication>
-      <news:publication_date>2025-10-14T11:00:00+00:00</news:publication_date>
-      <news:title>Complete Guide to Answer Engine Optimization (AEO)</news:title>
-      <news:keywords>AEO, answer engine optimization, search marketing, AI search</news:keywords>
-    </news:news>
-    <lastmod>2025-10-14T11:00:00+00:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>1.0</priority>
+    <loc>https://www.adamsilvaconsulting.com/insights/marketing-pain-points-2025-resource-crunch-to-ai-solution</loc>
+    <lastmod>2026-01-19</lastmod>
+    <changefreq>never</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.adamsilvaconsulting.com/insights/ai-content-operations-scaling-quality-with-automation</loc>
+    <lastmod>2026-01-19</lastmod>
+    <changefreq>never</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.adamsilvaconsulting.com/insights/aeo-vs-geo-understanding-the-new-search-landscape</loc>
+    <lastmod>2026-01-19</lastmod>
+    <changefreq>never</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.adamsilvaconsulting.com/insights/the-integrated-service-ecosystem-strategic-flywheel-analysis</loc>
+    <lastmod>2026-01-19</lastmod>
+    <changefreq>never</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.adamsilvaconsulting.com/insights/zero-click-searches-the-new-reality-of-information-discovery</loc>
+    <lastmod>2026-01-19</lastmod>
+    <changefreq>never</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.adamsilvaconsulting.com/insights/building-topical-authority</loc>
-    <news:news>
-      <news:publication>
-        <news:name>Adam Silva Consulting Insights</news:name>
-        <news:language>en</news:language>
-      </news:publication>
-      <news:publication_date>2025-10-14T10:00:00+00:00</news:publication_date>
-      <news:title>Building Topical Authority: The Modern SEO Strategy</news:title>
-      <news:keywords>topical authority, content strategy, SEO, expertise</news:keywords>
-    </news:news>
-    <lastmod>2025-10-14T10:00:00+00:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://www.adamsilvaconsulting.com/insights/digital-transformation-strategies</loc>
-    <news:news>
-      <news:publication>
-        <news:name>Adam Silva Consulting Insights</news:name>
-        <news:language>en</news:language>
-      </news:publication>
-      <news:publication_date>2025-10-14T09:00:00+00:00</news:publication_date>
-      <news:title>Digital Transformation Strategies for Modern Business</news:title>
-      <news:keywords>digital transformation, business strategy, technology adoption</news:keywords>
-    </news:news>
-    <lastmod>2025-10-14T09:00:00+00:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://www.adamsilvaconsulting.com/insights/ai-content-creation-best-practices</loc>
-    <news:news>
-      <news:publication>
-        <news:name>Adam Silva Consulting Insights</news:name>
-        <news:language>en</news:language>
-      </news:publication>
-      <news:publication_date>2025-10-14T08:00:00+00:00</news:publication_date>
-      <news:title>AI Content Creation: Best Practices for 2025</news:title>
-      <news:keywords>AI content, content creation, marketing automation, generative AI</news:keywords>
-    </news:news>
-    <lastmod>2025-10-14T08:00:00+00:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://www.adamsilvaconsulting.com/insights/seo-vs-aeo</loc>
-    <news:news>
-      <news:publication>
-        <news:name>Adam Silva Consulting Insights</news:name>
-        <news:language>en</news:language>
-      </news:publication>
-      <news:publication_date>2025-10-14T07:00:00+00:00</news:publication_date>
-      <news:title>SEO vs AEO: Understanding the New Search Paradigm</news:title>
-      <news:keywords>SEO, AEO, search optimization, AI search engines</news:keywords>
-    </news:news>
-    <lastmod>2025-10-14T07:00:00+00:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>1.0</priority>
-  </url>
-  <url>
-    <loc>https://www.adamsilvaconsulting.com/insights/generative-ai-marketing</loc>
-    <news:news>
-      <news:publication>
-        <news:name>Adam Silva Consulting Insights</news:name>
-        <news:language>en</news:language>
-      </news:publication>
-      <news:publication_date>2025-10-14T06:00:00+00:00</news:publication_date>
-      <news:title>Generative AI in Marketing: Opportunities and Challenges</news:title>
-      <news:keywords>generative AI, AI marketing, ChatGPT, marketing strategy</news:keywords>
-    </news:news>
-    <lastmod>2025-10-14T06:00:00+00:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://www.adamsilvaconsulting.com/insights/marketing-automation-roi</loc>
-    <news:news>
-      <news:publication>
-        <news:name>Adam Silva Consulting Insights</news:name>
-        <news:language>en</news:language>
-      </news:publication>
-      <news:publication_date>2025-10-14T05:00:00+00:00</news:publication_date>
-      <news:title>Marketing Automation ROI: Measuring Success</news:title>
-      <news:keywords>marketing automation, ROI, metrics, analytics</news:keywords>
-    </news:news>
-    <lastmod>2025-10-14T05:00:00+00:00</lastmod>
-    <changefreq>weekly</changefreq>
+    <lastmod>2026-01-19</lastmod>
+    <changefreq>never</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.adamsilvaconsulting.com/insights/business-growth-metrics</loc>
-    <news:news>
-      <news:publication>
-        <news:name>Adam Silva Consulting Insights</news:name>
-        <news:language>en</news:language>
-      </news:publication>
-      <news:publication_date>2025-10-14T04:00:00+00:00</news:publication_date>
-      <news:title>Essential Business Growth Metrics to Track</news:title>
-      <news:keywords>business metrics, KPIs, growth tracking, analytics</news:keywords>
-    </news:news>
-    <lastmod>2025-10-14T04:00:00+00:00</lastmod>
-    <changefreq>weekly</changefreq>
+    <loc>https://www.adamsilvaconsulting.com/insights/the-ai-authority-imperative-gartner-50-percent-traffic-decline-prediction</loc>
+    <lastmod>2026-01-19</lastmod>
+    <changefreq>never</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.adamsilvaconsulting.com/insights/authority-building-strategies</loc>
-    <news:news>
-      <news:publication>
-        <news:name>Adam Silva Consulting Insights</news:name>
-        <news:language>en</news:language>
-      </news:publication>
-      <news:publication_date>2025-10-14T03:00:00+00:00</news:publication_date>
-      <news:title>Authority Building Strategies for the AI Era</news:title>
-      <news:keywords>authority building, thought leadership, brand positioning, AI era</news:keywords>
-    </news:news>
-    <lastmod>2025-10-14T03:00:00+00:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
+    <loc>https://www.adamsilvaconsulting.com/insights/e-e-a-t-in-the-age-of-generative-ai-building-unshakeable-authority</loc>
+    <lastmod>2026-01-19</lastmod>
+    <changefreq>never</changefreq>
+    <priority>0.8</priority>
   </url>
 </urlset>
