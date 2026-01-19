@@ -1,63 +1,57 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://www.adamsilvaconsulting.com/insights/ai-marketing-trends-2025</loc>
-    <lastmod>2025-10-10T19:00:00+00:00</lastmod>
+    <loc>https://www.adamsilvaconsulting.com/insights/</loc>
+    <lastmod>2026-01-19</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
+    <priority>0.85</priority>
   </url>
   <url>
-    <loc>https://www.adamsilvaconsulting.com/insights/answer-engine-optimization-guide</loc>
-    <lastmod>2025-10-10T19:00:00+00:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
+    <loc>https://www.adamsilvaconsulting.com/insights/marketing-pain-points-2025-resource-crunch-to-ai-solution</loc>
+    <lastmod>2026-01-19</lastmod>
+    <changefreq>never</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.adamsilvaconsulting.com/insights/ai-content-operations-scaling-quality-with-automation</loc>
+    <lastmod>2026-01-19</lastmod>
+    <changefreq>never</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.adamsilvaconsulting.com/insights/aeo-vs-geo-understanding-the-new-search-landscape</loc>
+    <lastmod>2026-01-19</lastmod>
+    <changefreq>never</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.adamsilvaconsulting.com/insights/the-integrated-service-ecosystem-strategic-flywheel-analysis</loc>
+    <lastmod>2026-01-19</lastmod>
+    <changefreq>never</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.adamsilvaconsulting.com/insights/zero-click-searches-the-new-reality-of-information-discovery</loc>
+    <lastmod>2026-01-19</lastmod>
+    <changefreq>never</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.adamsilvaconsulting.com/insights/building-topical-authority</loc>
-    <lastmod>2025-10-10T19:00:00+00:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
+    <lastmod>2026-01-19</lastmod>
+    <changefreq>never</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.adamsilvaconsulting.com/insights/digital-transformation-strategies</loc>
-    <lastmod>2025-10-10T19:00:00+00:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
+    <loc>https://www.adamsilvaconsulting.com/insights/the-ai-authority-imperative-gartner-50-percent-traffic-decline-prediction</loc>
+    <lastmod>2026-01-19</lastmod>
+    <changefreq>never</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.adamsilvaconsulting.com/insights/ai-content-creation-best-practices</loc>
-    <lastmod>2025-10-10T19:00:00+00:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://www.adamsilvaconsulting.com/insights/marketing-automation-roi</loc>
-    <lastmod>2025-10-10T19:00:00+00:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.adamsilvaconsulting.com/insights/business-growth-metrics</loc>
-    <lastmod>2025-10-10T19:00:00+00:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.adamsilvaconsulting.com/insights/seo-vs-aeo</loc>
-    <lastmod>2025-10-10T19:00:00+00:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.adamsilvaconsulting.com/insights/generative-ai-marketing</loc>
-    <lastmod>2025-10-10T19:00:00+00:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.adamsilvaconsulting.com/insights/authority-building-strategies</loc>
-    <lastmod>2025-10-10T19:00:00+00:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
+    <loc>https://www.adamsilvaconsulting.com/insights/e-e-a-t-in-the-age-of-generative-ai-building-unshakeable-authority</loc>
+    <lastmod>2026-01-19</lastmod>
+    <changefreq>never</changefreq>
+    <priority>0.8</priority>
   </url>
 </urlset>
