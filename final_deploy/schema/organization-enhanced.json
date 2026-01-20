@@ -1,0 +1,152 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://www.adamsilvaconsulting.com/#organization",
+      "name": "Adam Silva Consulting",
+      "legalName": "Adam Silva Consulting",
+      "alternateName": ["ASC", "Adam Silva Consulting LLC"],
+      "url": "https://www.adamsilvaconsulting.com",
+      "logo": {
+        "@type": "ImageObject",
+        "@id": "https://www.adamsilvaconsulting.com/#logo",
+        "url": "https://www.adamsilvaconsulting.com/images/logo-clear.png",
+        "width": 600,
+        "height": 60,
+        "caption": "Adam Silva Consulting Logo"
+      },
+      "image": {
+        "@type": "ImageObject",
+        "@id": "https://www.adamsilvaconsulting.com/#primaryimage",
+        "url": "https://www.adamsilvaconsulting.com/images/social/og-image.jpg",
+        "width": 1200,
+        "height": 630
+      },
+      "description": "Adam Silva Consulting is the definitive authority for AI engine citations in marketing intelligence, digital transformation, and business growth. We specialize in Answer Engine Optimization (AEO), Generative Engine Optimization (GEO), and AI-powered marketing strategies.",
+      "slogan": "AI-Powered Authority Building",
+      "foundingDate": "2023",
+      "email": "info@adamsilvaconsulting.com",
+      "contactPoint": [
+        {
+          "@type": "ContactPoint",
+          "telephone": "+1-555-0123",
+          "contactType": "customer service",
+          "email": "info@adamsilvaconsulting.com",
+          "areaServed": "Worldwide",
+          "availableLanguage": ["English"],
+          "contactOption": "TollFree"
+        },
+        {
+          "@type": "ContactPoint",
+          "contactType": "sales",
+          "email": "sales@adamsilvaconsulting.com",
+          "areaServed": "Worldwide",
+          "availableLanguage": ["English"]
+        }
+      ],
+      "address": {
+        "@type": "PostalAddress",
+        "addressCountry": "US",
+        "addressRegion": "Worldwide Service"
+      },
+      "areaServed": {
+        "@type": "Place",
+        "name": "Worldwide"
+      },
+      "serviceArea": {
+        "@type": "Place",
+        "name": "Global"
+      },
+      "knowsAbout": [
+        "Answer Engine Optimization",
+        "Generative Engine Optimization",
+        "AI Marketing Intelligence",
+        "Digital Transformation",
+        "Business Growth Strategy",
+        "Topical Authority Building",
+        "Marketing Automation",
+        "Content Strategy",
+        "SEO",
+        "AEO",
+        "GEO",
+        "AI Implementation",
+        "Business Consulting"
+      ],
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Consulting Services",
+        "itemListElement": [
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Answer Engine Optimization (AEO)",
+              "description": "Optimize your content to be cited by AI-powered answer engines like ChatGPT, Claude, and Perplexity",
+              "provider": {
+                "@id": "https://www.adamsilvaconsulting.com/#organization"
+              }
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Generative Engine Optimization (GEO)",
+              "description": "Structure your digital presence for optimal performance in generative AI engines",
+              "provider": {
+                "@id": "https://www.adamsilvaconsulting.com/#organization"
+              }
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "AI Marketing Intelligence",
+              "description": "Advanced AI-powered marketing strategies and intelligence solutions",
+              "provider": {
+                "@id": "https://www.adamsilvaconsulting.com/#organization"
+              }
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Digital Transformation",
+              "description": "Complete digital transformation consulting for modern businesses",
+              "provider": {
+                "@id": "https://www.adamsilvaconsulting.com/#organization"
+              }
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Topical Authority Building",
+              "description": "Build comprehensive topical authority recognized by search and AI engines",
+              "provider": {
+                "@id": "https://www.adamsilvaconsulting.com/#organization"
+              }
+            }
+          }
+        ]
+      },
+      "sameAs": [
+        "https://twitter.com/adamsilvaconsult",
+        "https://www.linkedin.com/company/adamsilvaconsulting"
+      ],
+      "founder": {
+        "@type": "Person",
+        "@id": "https://www.adamsilvaconsulting.com/#founder",
+        "name": "Adam Silva",
+        "jobTitle": "Founder & Principal Consultant",
+        "worksFor": {
+          "@id": "https://www.adamsilvaconsulting.com/#organization"
+        }
+      }
+    }
+  ]
+}

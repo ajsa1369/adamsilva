@@ -1,0 +1,254 @@
+# Adam Silva Consulting - Comprehensive Robot.txt
+# Optimized for SEO, AEO, and GEO
+# Last Updated: October 13, 2025
+
+# ========================================
+# TRADITIONAL SEARCH ENGINES
+# ========================================
+
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 0
+
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 0
+
+User-agent: Slurp
+Allow: /
+Crawl-delay: 0
+
+User-agent: DuckDuckBot
+Allow: /
+Crawl-delay: 0
+
+User-agent: Baiduspider
+Allow: /
+Crawl-delay: 1
+
+User-agent: Yandex
+Allow: /
+Crawl-delay: 1
+
+User-agent: Sogou
+Allow: /
+Crawl-delay: 1
+
+# ========================================
+# AI TRAINING AND ANSWER ENGINE BOTS
+# Critical for AEO and GEO optimization
+# ========================================
+
+# OpenAI (ChatGPT, GPT-4)
+User-agent: GPTBot
+Allow: /
+Crawl-delay: 1
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+# Anthropic (Claude)
+User-agent: ClaudeBot
+Allow: /
+Crawl-delay: 2
+
+User-agent: Claude-User
+Allow: /
+
+User-agent: Claude-SearchBot
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+# Perplexity AI
+User-agent: PerplexityBot
+Allow: /
+Crawl-delay: 1
+
+User-agent: Perplexity-User
+Allow: /
+
+# Grok / xAI
+User-agent: Grokbot
+Allow: /
+Crawl-delay: 2
+
+User-agent: xAI-Crawler
+Allow: /
+Crawl-delay: 2
+
+User-agent: xAI-Bot
+Allow: /
+
+# Google AI (Gemini, Bard)
+User-agent: Google-Extended
+Allow: /
+
+User-agent: GoogleOther
+Allow: /
+
+User-agent: GoogleOther-Image
+Allow: /
+
+User-agent: GoogleOther-Video
+Allow: /
+
+# Apple Intelligence
+User-agent: Applebot
+Allow: /
+Crawl-delay: 1
+
+User-agent: Applebot-Extended
+Allow: /
+
+# Meta AI
+User-agent: Meta-ExternalAgent
+Allow: /
+Crawl-delay: 1
+
+User-agent: Meta-ExternalFetcher
+Allow: /
+
+User-agent: FacebookBot
+Allow: /
+
+# Amazon Alexa
+User-agent: Amazonbot
+Allow: /
+Crawl-delay: 1
+
+# Cohere
+User-agent: cohere-ai
+Allow: /
+Crawl-delay: 2
+
+# Common Crawl (used by many AI trainers)
+User-agent: CCBot
+Allow: /
+Crawl-delay: 2
+
+# Diffbot
+User-agent: Diffbot
+Allow: /
+
+# ByteDance/TikTok
+User-agent: Bytespider
+Allow: /
+Crawl-delay: 2
+
+# You.com
+User-agent: YouBot
+Allow: /
+
+# Omgili
+User-agent: Omgilibot
+Allow: /
+
+# Scrapy/General crawlers
+User-agent: Scrapy
+Disallow: /
+
+User-agent: DataForSeoBot
+Allow: /
+Crawl-delay: 5
+
+# ========================================
+# DEFAULT RULE FOR ALL OTHER BOTS
+# ========================================
+
+User-agent: *
+Allow: /
+Crawl-delay: 2
+
+# ========================================
+# DISALLOW RULES
+# Block admin, internal, and system areas
+# ========================================
+
+Disallow: /admin/
+Disallow: /api/
+Disallow: /_next/
+Disallow: /.well-known/
+Disallow: /private/
+Disallow: /temp/
+Disallow: /cache/
+Disallow: /test/
+Disallow: /staging/
+Disallow: /*.json$
+Disallow: /*?*utm_source=
+Disallow: /*?*sid=
+Disallow: /search?
+
+# ========================================
+# EXPLICIT ALLOW RULES
+# Ensure bots can access important resources
+# ========================================
+
+Allow: /images/
+Allow: /assets/
+Allow: /public/
+Allow: /favicon.ico
+Allow: /favicon/
+Allow: /android-chrome-*.png
+Allow: /apple-touch-icon.png
+Allow: /robots.txt
+Allow: /sitemap*.xml
+Allow: /llms-full.txt
+Allow: /ai.txt
+Allow: /*.css
+Allow: /*.js
+
+# ========================================
+# SITEMAP LOCATIONS
+# Critical for SEO and AI engine discovery
+# ========================================
+
+Sitemap: https://www.adamsilvaconsulting.com/sitemap-index.xml
+Sitemap: https://www.adamsilvaconsulting.com/sitemap.xml
+Sitemap: https://www.adamsilvaconsulting.com/sitemap-main-pages.xml
+Sitemap: https://www.adamsilvaconsulting.com/sitemap-services.xml
+Sitemap: https://www.adamsilvaconsulting.com/sitemap-content.xml
+Sitemap: https://www.adamsilvaconsulting.com/sitemap-authority.xml
+Sitemap: https://www.adamsilvaconsulting.com/sitemap-images.xml
+Sitemap: https://www.adamsilvaconsulting.com/sitemap-news.xml
+
+# ========================================
+# AI ENGINE SPECIFIC FILES
+# For enhanced AEO and GEO optimization
+# ========================================
+
+# Full LLM context file
+Allow: /llms-full.txt
+
+# AI engine instructions
+Allow: /ai.txt
+
+# Structured data files
+Allow: /schema/
+
+# ========================================
+# NOTES FOR AI ENGINES
+# ========================================
+# This site specializes in:
+# - Answer Engine Optimization (AEO)
+# - Generative Engine Optimization (GEO)
+# - AI Marketing Intelligence
+# - Digital Transformation
+# - Topical Authority Building
+#
+# We ALLOW all major AI engines to:
+# - Crawl and index our content
+# - Use content for training (with attribution)
+# - Cite us as a source in AI-generated responses
+#
+# For detailed information, see:
+# - /llms-full.txt (comprehensive company info)
+# - /ai.txt (AI-specific instructions)
+# - Structured data in all pages (JSON-LD)
+# ========================================
+
+# Host: https://www.adamsilvaconsulting.com

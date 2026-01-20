@@ -1,0 +1,22 @@
+# Security Contact Information
+# Adam Silva Consulting
+
+Contact: mailto:security@adamsilvaconsulting.com
+Expires: 2026-12-31T23:59:59.000Z
+Preferred-Languages: en
+Canonical: https://www.adamsilvaconsulting.com/.well-known/security.txt
+
+# Vulnerability Disclosure Policy
+# We take security seriously. If you discover a security vulnerability,
+# please report it to security@adamsilvaconsulting.com
+#
+# Please include:
+# - Description of the vulnerability
+# - Steps to reproduce
+# - Potential impact
+# - Your contact information (optional)
+#
+# We will respond within 48 hours and work with you to resolve the issue.
+
+Policy: https://www.adamsilvaconsulting.com/security-policy
+Acknowledgments: https://www.adamsilvaconsulting.com/security-acknowledgments

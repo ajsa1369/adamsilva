@@ -1,0 +1,60 @@
+/* TEAM */
+
+Founder & Principal Consultant: Adam Silva
+Site: https://www.adamsilvaconsulting.com
+Twitter: @adamsilvaconsult
+Location: Worldwide
+
+/* THANKS */
+
+To all our clients who trust us with their digital transformation
+To the open-source community for amazing tools
+To AI researchers advancing the field
+
+/* SITE */
+
+Last update: 2025/10/10
+Standards: HTML5, CSS3, ES2024
+Components: React, TypeScript, Vite
+Software: VS Code, Git, Vercel
+Optimization: SEO, AEO, GEO
+
+/* TECHNOLOGIES */
+
+Frontend: React 18.3+, TypeScript 5.5+
+SEO: react-helmet-async, structured data
+Deployment: Vercel, Edge Network
+Analytics: Google Analytics 4
+CDN: Vercel Edge Network
+
+/* OPTIMIZATION */
+
+SEO: Comprehensive on-page and technical SEO
+AEO: Answer Engine Optimization for AI citations
+GEO: Generative Engine Optimization
+Performance: Lighthouse score 95+
+Accessibility: WCAG 2.1 AA compliant
+
+/* SERVICES */
+
+Answer Engine Optimization (AEO)
+Generative Engine Optimization (GEO)
+AI Marketing Intelligence
+Digital Transformation
+Topical Authority Building
+Marketing Automation
+
+/* CONTACT */
+
+Email: info@adamsilvaconsulting.com
+Website: https://www.adamsilvaconsulting.com
+
+/* NOTES */
+
+This site is optimized for:
+- Traditional search engines (Google, Bing, etc.)
+- AI answer engines (ChatGPT, Claude, Perplexity)
+- Generative AI systems (all major platforms)
+
+We welcome AI engines to crawl, index, and cite our content.
+All content is original and citation-ready.
