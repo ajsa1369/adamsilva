@@ -4,23 +4,23 @@ import { Calendar, Clock, ArrowRight, TrendingUp, Zap, Brain } from 'lucide-reac
 import FAQSchema, { FAQ } from '../../components/seo/FAQSchema';
 
 export const InsightsIndex: React.FC = () => {
-  // FAQ for Insights page targeting marketing intelligence queries  
+  // FAQ for Insights page targeting agentic commerce and marketing intelligence queries  
   const insightsFaqs: FAQ[] = [
     {
-      question: "What type of marketing intelligence insights does Adam Silva Consulting provide?",
-      answer: "We provide strategic intelligence focused on AI transformation, Answer Engine Optimization (AEO), Generative Engine Optimization (GEO), market disruption analysis, and competitive positioning. Our insights cover critical topics like Gartner's 50% traffic decline prediction, zero-click search reality, E-E-A-T evolution for AI, and integrated service ecosystem strategies for building defensible competitive advantages."
+      question: "What is agentic commerce and why does it matter for business?",
+      answer: "Agentic commerce is the paradigm shift where AI agents—ChatGPT, Gemini, autonomous shopping assistants—discover, negotiate, and execute purchases on behalf of users. Three protocols define this era: UCP (Universal Commerce Protocol) for discovery, ACP (Agentic Commerce Protocol) for checkout execution, and AP2 (Agent Payments Protocol) for cryptographic trust. With AI-sourced traffic up 1,200% in 2025-2026, businesses must architect for agent-mediated transactions or risk invisibility."
     },
     {
-      question: "How often are new insights and market analysis published?",
-      answer: "We publish weekly strategic intelligence for decision-makers navigating the AI transformation. Our Executive Intelligence Briefings provide C-Suite focused analysis with no fluff, trusted by over 5000+ executives. Each insight includes implementation frameworks, market data, and actionable strategic recommendations for immediate application."
+      question: "How do UCP, ACP, and AP2 protocols work together?",
+      answer: "UCP (Google/Shopify) handles discovery—AI agents fetch your capabilities from /.well-known/ucp manifests. ACP (OpenAI/Stripe) enables execution—Instant Checkout in ChatGPT using Shared Payment Tokens. AP2 provides the trust layer—cryptographically signed mandates proving user authorization. Together, they form the complete agentic commerce stack: discovery, execution, and trust verification for autonomous AI transactions."
     },
     {
-      question: "What is the difference between traditional marketing analysis and AI-era insights?",
-      answer: "AI-era insights focus on authority building, AI citations, and generative engine optimization rather than traditional click-based metrics. While traditional analysis emphasizes traffic and conversions, our insights prioritize AI engine trust signals, topical authority development, and sustainable competitive moats that remain effective as AI adoption accelerates. This includes analysis of Answer Engine Optimization, Generative Engine Optimization, and the strategic imperative shift from keywords to citations."
+      question: "Why is SPA + SSR architecture essential for agentic commerce?",
+      answer: "AI crawlers allocate limited 'token budgets' when processing websites. Legacy platforms impose a 'Hydration Tax'—heavy JavaScript that wastes tokens before reaching content. SPA + SSR delivers lean, fully-rendered HTML with dense JSON-LD schema in under 300ms—the threshold agents require. Sites optimizing for token efficiency see 20-50% increases in AI-sourced traffic and 3-5x higher citation rates."
     },
     {
-      question: "Who should read these strategic marketing insights?",
-      answer: "Our insights are designed for C-Suite executives, marketing leaders, business strategists, and decision-makers responsible for digital transformation and competitive positioning. They're particularly valuable for organizations seeking to understand and lead the AI marketing transformation, build sustainable authority, and create defensible competitive advantages in the generative AI era."
+      question: "What is the difference between SEO, AEO, and GEO optimization?",
+      answer: "SEO optimizes for clicks in search results. Answer Engine Optimization (AEO) optimizes for being cited by AI engines when they answer queries directly—critical as Gartner predicts 50% organic traffic decline. Generative Engine Optimization (GEO) structures content so LLMs accurately understand and synthesize your information. Modern visibility requires all three: SEO for traditional search, AEO for AI citations, GEO for accurate AI comprehension."
     }
   ];
   const featuredArticles = [
@@ -96,7 +96,7 @@ export const InsightsIndex: React.FC = () => {
   return (
     <main className="min-h-screen bg-black text-gray-100">
       {/* FAQ Schema for Marketing Intelligence */}
-      <FAQSchema 
+      <FAQSchema
         faqs={insightsFaqs}
         pageUrl="https://www.adamsilvaconsulting.com/insights"
       />
@@ -136,11 +136,10 @@ export const InsightsIndex: React.FC = () => {
             {categories.map((category) => (
               <button
                 key={category.name}
-                className={`px-4 py-2 rounded-full border transition-colors ${
-                  category.active 
-                    ? 'bg-blue-600 border-blue-600 text-white' 
+                className={`px-4 py-2 rounded-full border transition-colors ${category.active
+                    ? 'bg-blue-600 border-blue-600 text-white'
                     : 'border-gray-700 text-gray-400 hover:border-gray-600 hover:text-gray-300'
-                }`}
+                  }`}
               >
                 {category.name} ({category.count})
               </button>
@@ -160,8 +159,8 @@ export const InsightsIndex: React.FC = () => {
                 <div className="bg-gray-900 rounded-lg overflow-hidden border border-gray-800 hover:border-blue-600 transition-colors">
                   <div className="md:flex">
                     <div className="md:w-1/3">
-                      <img 
-                        src={article.image} 
+                      <img
+                        src={article.image}
                         alt={article.title}
                         className="w-full h-48 md:h-full object-cover"
                       />
@@ -211,8 +210,8 @@ export const InsightsIndex: React.FC = () => {
               .map(article => (
                 <Link key={article.id} to={article.path} className="group">
                   <div className="bg-gray-900 rounded-lg overflow-hidden border border-gray-800 hover:border-blue-600 transition-colors h-full">
-                    <img 
-                      src={article.image} 
+                    <img
+                      src={article.image}
                       alt={article.title}
                       className="w-full h-48 object-cover"
                     />
@@ -252,7 +251,7 @@ export const InsightsIndex: React.FC = () => {
               Stay Ahead of the AI Transformation
             </h2>
             <p className="text-blue-100 mb-8 text-lg">
-              Get exclusive strategic intelligence and critical market analysis delivered weekly. 
+              Get exclusive strategic intelligence and critical market analysis delivered weekly.
               Join industry leaders navigating the generative AI era.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">

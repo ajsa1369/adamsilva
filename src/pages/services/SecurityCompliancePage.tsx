@@ -1,11 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { 
-  Shield, 
-  Lock, 
-  FileCheck, 
-  Eye, 
-  ArrowRight, 
+import {
+  Shield,
+  Lock,
+  FileCheck,
+  Eye,
+  ArrowRight,
   CheckCircle,
   AlertTriangle,
   Database,
@@ -16,33 +16,33 @@ export const SecurityCompliancePage: React.FC = () => {
   const benefits = [
     {
       icon: <Shield className="h-6 w-6" />,
-      title: "Robust Risk Mitigation",
-      description: "Prevent identity theft, financial harm, and data breaches while avoiding substantial penalties from non-compliance"
+      title: "AP2 Mandate Infrastructure",
+      description: "Implement cryptographically-signed mandates that provide verifiable proof of user authorization for AI agent transactions"
     },
     {
       icon: <UserCheck className="h-6 w-6" />,
-      title: "Enhanced Customer Trust", 
-      description: "Demonstrate commitment to data protection, fostering loyalty and transparency that builds lasting relationships"
+      title: "Non-Repudiable Trust",
+      description: "ECDSA signatures and Verifiable Credentials create tamper-proof audit trails proving user intent for agentic commerce"
     },
     {
       icon: <Eye className="h-6 w-6" />,
-      title: "Operational Efficiency",
-      description: "Automate complex compliance tasks, reducing manual effort by 85% while minimizing human error risks"
+      title: "PCI Scope Isolation",
+      description: "Role-based architecture keeps agents and merchants out of PCI scope through tokenized payment credentials"
     },
     {
       icon: <FileCheck className="h-6 w-6" />,
-      title: "Comprehensive Compliance",
-      description: "Ensure adherence to GDPR, CCPA, HIPAA, and TCPA regulations across all communication channels automatically"
+      title: "Protocol Compliance",
+      description: "Full UCP, ACP, and AP2 compliance alongside GDPR, CCPA, and TCPA for comprehensive regulatory coverage"
     }
   ];
 
   const features = [
-    "Automatic PII/PHI redaction across all data types and formats",
-    "Real-time TCPA consent tracking and automated renewal reminders", 
-    "GDPR and CCPA compliance monitoring with automated data mapping",
-    "Comprehensive audit trails with tamper-proof logging systems",
-    "Role-based access controls with multi-factor authentication",
-    "Automated regulatory change monitoring and compliance updates"
+    "AP2 Intent Mandate implementation for human-not-present authorization",
+    "Cart Mandate signing with cryptographic proof of exact items and prices",
+    "Payment Mandate generation with AI agent presence signals for issuers",
+    "Verifiable Credentials (VCs) infrastructure with ECDSA P-256 signatures",
+    "Trusted Execution Environment (TEE) integration for secure key management",
+    "Comprehensive audit trails with tamper-proof mandate logging systems"
   ];
 
   return (
@@ -58,10 +58,10 @@ export const SecurityCompliancePage: React.FC = () => {
               Security & Compliance
             </h1>
             <p className="text-xl text-gray-600 mb-8 leading-relaxed">
-              Operate with unwavering confidence through automatic data redaction (PII/PHI), rigorous regulatory checks 
+              Operate with unwavering confidence through automatic data redaction (PII/PHI), rigorous regulatory checks
               (TCPA, GDPR), comprehensive audit trails, and secure access controls that protect your business and customers.
             </p>
-            <Link 
+            <Link
               to="/contact"
               className="inline-flex items-center bg-gradient-to-r from-blue-600 to-teal-600 text-white px-8 py-4 rounded-lg font-semibold text-lg hover:from-blue-700 hover:to-teal-700 transition-all duration-200 shadow-lg hover:shadow-xl"
             >
@@ -78,21 +78,21 @@ export const SecurityCompliancePage: React.FC = () => {
           <h2 className="text-3xl font-bold text-gray-900 mb-6">Building Trust in a Regulated Digital World</h2>
           <div className="prose prose-lg text-gray-600">
             <p className="mb-6">
-              In today's increasingly regulated digital environment, non-compliance carries severe consequences, including 
-              hefty fines, significant legal repercussions, and irreversible damage to brand reputation. The protection of 
-              sensitive information, particularly Personally Identifiable Information (PII) and Protected Health Information (PHI), 
+              In today's increasingly regulated digital environment, non-compliance carries severe consequences, including
+              hefty fines, significant legal repercussions, and irreversible damage to brand reputation. The protection of
+              sensitive information, particularly Personally Identifiable Information (PII) and Protected Health Information (PHI),
               is not merely a best practice but a paramount necessity for business survival and customer trust.
             </p>
             <p className="mb-6">
-              Adam Silva Consulting's AI-powered security and compliance platform automatically detects and removes or obscures 
-              confidential information from vast volumes of diverse data types, including videos, audio recordings, images, and 
-              documents. This comprehensive approach ensures strict compliance with global data protection standards such as 
+              Adam Silva Consulting's AI-powered security and compliance platform automatically detects and removes or obscures
+              confidential information from vast volumes of diverse data types, including videos, audio recordings, images, and
+              documents. This comprehensive approach ensures strict compliance with global data protection standards such as
               GDPR, CCPA, and HIPAA, thereby minimizing critical risks of data leaks and regulatory violations.
             </p>
             <p>
-              Our intelligent system tracks consent, sends automated reminders for consent renewal, and flags opt-out requests 
-              in real-time, ensuring continuous adherence to TCPA regulations. Through tamper-proof audit trails and secure 
-              access controls, businesses can operate confidently knowing their data handling practices meet the highest 
+              Our intelligent system tracks consent, sends automated reminders for consent renewal, and flags opt-out requests
+              in real-time, ensuring continuous adherence to TCPA regulations. Through tamper-proof audit trails and secure
+              access controls, businesses can operate confidently knowing their data handling practices meet the highest
               standards of security and regulatory compliance.
             </p>
           </div>
@@ -105,7 +105,7 @@ export const SecurityCompliancePage: React.FC = () => {
           <div className="max-w-4xl mx-auto text-center mb-16">
             <h2 className="text-3xl font-bold text-gray-900 mb-6">AI-Powered Security & Compliance Systems</h2>
             <p className="text-lg text-gray-600">
-              Our advanced AI mechanisms automatically protect sensitive data, ensure regulatory compliance, 
+              Our advanced AI mechanisms automatically protect sensitive data, ensure regulatory compliance,
               and maintain comprehensive security controls that adapt to evolving regulatory requirements.
             </p>
           </div>
@@ -121,15 +121,15 @@ export const SecurityCompliancePage: React.FC = () => {
                   </li>
                 ))}
               </ul>
-              
+
               <div className="mt-8 p-6 bg-blue-50 rounded-lg border border-blue-200">
                 <h4 className="font-semibold text-gray-900 mb-2">Proactive Protection</h4>
                 <p className="text-gray-700 text-sm">
-                  Our <a href="https://www.callcabinet.com/compliance-redaction-for-phi-pii-and-pci-dss/" 
-                  target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:text-blue-700">
-                  AI-powered redaction systems</a> automatically protect PII/PHI across all data types, 
-                  while <a href="https://www.csgi.com/insights/the-tcpa-trust-factor-what-the-new-rules-mean-for-customer-communications/" 
-                  target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:text-blue-700">TCPA compliance automation</a> 
+                  Our <a href="https://www.callcabinet.com/compliance-redaction-for-phi-pii-and-pci-dss/"
+                    target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:text-blue-700">
+                    AI-powered redaction systems</a> automatically protect PII/PHI across all data types,
+                  while <a href="https://www.csgi.com/insights/the-tcpa-trust-factor-what-the-new-rules-mean-for-customer-communications/"
+                    target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:text-blue-700">TCPA compliance automation</a>
                   ensures continuous adherence to evolving regulatory requirements.
                 </p>
               </div>
@@ -141,8 +141,8 @@ export const SecurityCompliancePage: React.FC = () => {
               </div>
               <h4 className="font-semibold text-gray-900 mb-3">AI Security Command Center</h4>
               <p className="text-gray-600 text-sm leading-relaxed">
-                Comprehensive security dashboard displaying AI monitoring data flows, automatically redacting sensitive 
-                information, tracking consent status across all channels, and maintaining real-time compliance status 
+                Comprehensive security dashboard displaying AI monitoring data flows, automatically redacting sensitive
+                information, tracking consent status across all channels, and maintaining real-time compliance status
                 with detailed audit trails and automated regulatory reporting capabilities.
               </p>
             </div>
@@ -156,7 +156,7 @@ export const SecurityCompliancePage: React.FC = () => {
           <div className="text-center mb-16">
             <h2 className="text-3xl font-bold text-gray-900 mb-6">Comprehensive Regulatory Coverage</h2>
             <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-              Our AI-powered platform ensures complete compliance across all major data protection and privacy regulations, 
+              Our AI-powered platform ensures complete compliance across all major data protection and privacy regulations,
               automatically adapting to regulatory changes and maintaining continuous protection.
             </p>
           </div>
@@ -203,7 +203,7 @@ export const SecurityCompliancePage: React.FC = () => {
           <div className="text-center mb-16">
             <h2 className="text-3xl font-bold text-gray-900 mb-6">Measurable Security Benefits</h2>
             <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-              Transform your security posture with AI-driven compliance that delivers risk mitigation, operational efficiency, 
+              Transform your security posture with AI-driven compliance that delivers risk mitigation, operational efficiency,
               and customer trust through intelligent automation and proactive protection.
             </p>
           </div>
@@ -224,16 +224,16 @@ export const SecurityCompliancePage: React.FC = () => {
             <div className="max-w-3xl mx-auto text-center">
               <h3 className="text-2xl font-semibold text-gray-900 mb-4">Adaptive Compliance in Dynamic Regulatory Environment</h3>
               <p className="text-gray-700 leading-relaxed mb-6">
-                The sheer volume and variety of data, coupled with constantly evolving regulatory requirements, make compliance 
-                a continuously moving target. Our <a href="https://www.madisonlogic.com/blog/intent-data-security/" 
-                target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:text-blue-700">
-                AI-powered security solutions</a> centralize data management, automate complex compliance checks, 
+                The sheer volume and variety of data, coupled with constantly evolving regulatory requirements, make compliance
+                a continuously moving target. Our <a href="https://www.madisonlogic.com/blog/intent-data-security/"
+                  target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:text-blue-700">
+                  AI-powered security solutions</a> centralize data management, automate complex compliance checks,
                 and generate immutable audit trails that adapt to new regulations without extensive re-engineering.
               </p>
               <p className="text-gray-700 leading-relaxed">
-                This approach transforms compliance from a burdensome obligation into a distinct competitive advantage, 
-                freeing up valuable resources for core business activities while ensuring confident, agile operations 
-                within a complex legal environment. Businesses can focus on growth knowing their data practices exceed 
+                This approach transforms compliance from a burdensome obligation into a distinct competitive advantage,
+                freeing up valuable resources for core business activities while ensuring confident, agile operations
+                within a complex legal environment. Businesses can focus on growth knowing their data practices exceed
                 regulatory requirements and customer expectations.
               </p>
             </div>
@@ -247,7 +247,7 @@ export const SecurityCompliancePage: React.FC = () => {
           <div className="text-center mb-12">
             <h2 className="text-2xl font-bold text-gray-900 mb-4">Security Excellence Visualized</h2>
           </div>
-          
+
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             <div className="bg-white p-6 rounded-xl shadow-sm">
               <div className="aspect-video bg-gradient-to-br from-blue-100 to-teal-100 rounded-lg mb-4 flex items-center justify-center">
@@ -255,32 +255,32 @@ export const SecurityCompliancePage: React.FC = () => {
               </div>
               <h3 className="font-semibold text-gray-900 mb-2">Real-Time Threat Detection</h3>
               <p className="text-sm text-gray-600">
-                Advanced monitoring interface displaying AI scanning data flows in real-time, automatically identifying 
-                and flagging potential PII/PHI exposure, consent violations, and security threats with immediate 
+                Advanced monitoring interface displaying AI scanning data flows in real-time, automatically identifying
+                and flagging potential PII/PHI exposure, consent violations, and security threats with immediate
                 remediation recommendations and automated response protocols.
               </p>
             </div>
-            
+
             <div className="bg-white p-6 rounded-xl shadow-sm">
               <div className="aspect-video bg-gradient-to-br from-teal-100 to-blue-100 rounded-lg mb-4 flex items-center justify-center">
                 <FileCheck className="h-16 w-16 text-teal-600" />
               </div>
               <h3 className="font-semibold text-gray-900 mb-2">Compliance Dashboard</h3>
               <p className="text-sm text-gray-600">
-                Comprehensive compliance overview showing real-time status across GDPR, TCPA, HIPAA, and CCPA requirements, 
-                with automated reporting, audit trail summaries, and predictive compliance risk assessments for 
+                Comprehensive compliance overview showing real-time status across GDPR, TCPA, HIPAA, and CCPA requirements,
+                with automated reporting, audit trail summaries, and predictive compliance risk assessments for
                 proactive regulatory management and continuous improvement.
               </p>
             </div>
-            
+
             <div className="bg-white p-6 rounded-xl shadow-sm">
               <div className="aspect-video bg-gradient-to-br from-orange-100 to-blue-100 rounded-lg mb-4 flex items-center justify-center">
                 <Lock className="h-16 w-16 text-orange-600" />
               </div>
               <h3 className="font-semibold text-gray-900 mb-2">Data Protection Visualization</h3>
               <p className="text-sm text-gray-600">
-                Interactive data flow diagram showing AI-powered redaction processes across multiple data types, 
-                encryption protocols, access control enforcement, and consent management workflows with 
+                Interactive data flow diagram showing AI-powered redaction processes across multiple data types,
+                encryption protocols, access control enforcement, and consent management workflows with
                 real-time security status indicators and automated protection verification.
               </p>
             </div>
@@ -295,17 +295,17 @@ export const SecurityCompliancePage: React.FC = () => {
             Ready to Secure Your Business Operations?
           </h2>
           <p className="text-xl opacity-90 mb-8 leading-relaxed">
-            Transform your security and compliance posture with AI-powered protection that delivers automatic data redaction, 
+            Transform your security and compliance posture with AI-powered protection that delivers automatic data redaction,
             regulatory compliance, and comprehensive audit trails. Operate with confidence in today's regulated environment.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link 
+            <Link
               to="/contact"
               className="bg-white text-blue-600 px-8 py-4 rounded-lg font-semibold text-lg hover:bg-gray-50 transition-colors duration-200"
             >
               Secure Your Data Now
             </Link>
-            <Link 
+            <Link
               to="/services/analytics-reporting"
               className="border-2 border-white text-white px-8 py-4 rounded-lg font-medium text-lg hover:bg-white hover:text-blue-600 transition-all duration-200"
             >

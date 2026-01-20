@@ -3,40 +3,41 @@ import { FAQItem } from '../utils/seo';
 /**
  * Global FAQ data optimized for Answer Engine Optimization (AEO)
  * These FAQs are structured to be easily parsed by AI engines
+ * Updated January 2026 with UCP, ACP, and AP2 agentic commerce protocols
  */
 
 export const homepageFAQs: FAQItem[] = [
   {
-    question: "What is Answer Engine Optimization (AEO)?",
-    answer: "Answer Engine Optimization (AEO) is the practice of optimizing content to be cited by AI-powered answer engines like ChatGPT, Claude, Perplexity, and Google AI. Unlike traditional SEO which focuses on ranking in search results, AEO focuses on being the authoritative source that AI engines cite when answering user questions. At Adam Silva Consulting, we specialize in AEO strategies that ensure your business becomes the go-to source for AI-generated answers in your industry."
+    question: "What is the Universal Commerce Protocol (UCP)?",
+    answer: "The Universal Commerce Protocol (UCP) is Google's open standard launched in January 2026, co-developed with Shopify, Walmart, Target, Etsy, and 20+ ecosystem partners including Visa, Mastercard, Stripe, and PayPal. UCP establishes a common language for AI agents to discover merchant capabilities, negotiate transactions, and execute purchases. By publishing a machine-readable manifest at /.well-known/ucp, merchants gain access to every UCP-compatible agent surface including Google AI Mode, Gemini, and ChatGPT without building custom integrations."
   },
   {
-    question: "What is Generative Engine Optimization (GEO)?",
-    answer: "Generative Engine Optimization (GEO) is the optimization of content and digital presence for generative AI engines that create custom, contextual responses. GEO involves structuring your information architecture, content, and metadata so that AI models can easily extract, understand, and synthesize your content when generating responses. This includes optimizing for citation accuracy, context preservation, and topical authority signals that AI engines use to determine source credibility."
+    question: "What is the Agentic Commerce Protocol (ACP)?",
+    answer: "The Agentic Commerce Protocol (ACP), developed by OpenAI and Stripe, enables 'Instant Checkout' in AI interfaces like ChatGPT. ACP uses Shared Payment Tokens (SPT)—single-use, time-bound tokens that allow agents to complete purchases on behalf of users without exposing raw payment credentials. While merchants remain the Merchant of Record and retain customer relationships, AI agents manage the checkout UI. ACP is optimized for speed-to-market with a centralized architecture tightly integrated with Stripe."
+  },
+  {
+    question: "What is AP2 (Agent Payments Protocol)?",
+    answer: "AP2 (Agent Payments Protocol) is Google's cryptographically-signed mandate system that provides verifiable proof of user authorization for agent-initiated payments. It uses three mandate types: Intent Mandates (capturing user instructions like 'buy running shoes under $120'), Cart Mandates (locking exact items and prices), and Payment Mandates (sent to payment networks with AI agent presence signals). AP2 uses ECDSA signatures and Verifiable Credentials to create tamper-proof audit trails, addressing the critical trust question: 'How do we prove the user approved this?'"
   },
   {
     question: "How is AEO different from traditional SEO?",
-    answer: "Traditional SEO optimizes for visibility in search engine results pages (SERPs) and focuses on keywords, backlinks, and technical optimization. AEO optimizes for being cited as a source by AI engines and focuses on content structure, authority signals, and answer-worthy content. Modern digital marketing requires both: SEO for traditional search visibility, AEO for AI engine citations, and GEO for generative AI responses. At Adam Silva Consulting, we integrate all three approaches for comprehensive digital authority."
+    answer: "Traditional SEO optimizes for clicks in search engine results pages (SERPs). Answer Engine Optimization (AEO) optimizes for being cited by AI engines when they answer queries directly. AEO requires heavy schema markup, structured data, FAQ schemas, and content optimized for AI comprehension—not just keyword density. As Gartner predicts a 50% decline in organic traffic due to AI answering queries without sending users to websites, AEO is critical for visibility in the agent-mediated discovery era."
   },
   {
-    question: "Who should invest in AEO and GEO services?",
-    answer: "Businesses that want to be recognized as authorities in their industry should invest in AEO and GEO. This includes B2B companies, professional services firms, technology companies, consultants, and thought leaders who want to be cited by AI engines like ChatGPT, Claude, and Perplexity. If your customers or prospects are asking AI engines questions related to your expertise, you need AEO to ensure your business is cited in those responses."
+    question: "Why is SPA + SSR architecture essential for agentic commerce?",
+    answer: "AI crawlers allocate limited 'token budgets' when processing websites. Legacy platforms like Shopify and Wix impose a 'Hydration Tax'—heavy JavaScript bundles that waste tokens before reaching actual content. SPA + SSR (Single Page Application with Server-Side Rendering) delivers lean, fully-rendered HTML with dense JSON-LD schema, achieving sub-300ms render-to-first-fact times that agents prioritize. Sites optimizing for token efficiency see 20-50% increases in AI-sourced traffic and 3-5x higher AI citation rates."
   },
   {
     question: "What results can I expect from Adam Silva Consulting?",
-    answer: "Clients of Adam Silva Consulting typically see increased citations in AI engine responses, improved topical authority, better traditional search rankings, enhanced digital presence, and streamlined operations through AI implementation. Our data-driven approach ensures measurable results including tracking AI engine citations, monitoring authority metrics, and demonstrating ROI through increased qualified leads and industry recognition."
+    answer: "Clients of Adam Silva Consulting achieve agentic commerce readiness through UCP, ACP, and AP2 protocol implementation, increased AI engine citations, improved topical authority, and streamlined operations. We deliver measurable results: 20-50% increases in AI-sourced traffic, 3-5x higher agent citation rates, sub-300ms render times, and full protocol compliance within 12-16 weeks. Our approach ensures clients are visible, trusted, and transactable by AI agents across Google AI Mode, Gemini, ChatGPT, and emerging surfaces."
   },
   {
-    question: "How long does it take to see results from AEO?",
-    answer: "Initial AEO results typically appear within 2-3 months as AI engines begin recognizing your enhanced authority signals and structured content. Full optimization with consistent AI engine citations usually takes 4-6 months. However, AEO is an ongoing process as AI engines continuously update their knowledge bases. Adam Silva Consulting provides continuous optimization to maintain and improve your AI engine visibility over time."
+    question: "How long does agentic commerce implementation take?",
+    answer: "A complete agentic commerce implementation typically takes 12-16 weeks across four phases: Phase 1 (Weeks 1-6) covers SSR/Edge deployment and heavy schema implementation; Phase 2 (Weeks 7-10) implements UCP manifest publishing and ACP checkout adapters; Phase 3 (Weeks 11-13) handles AP2 mandate signing, certification, and security testing; Phase 4 (Weeks 14+) establishes ongoing operations, authority building, and protocol monitoring. Early benefits like improved AI citations often appear within the first month."
   },
   {
-    question: "What industries do you serve?",
-    answer: "Adam Silva Consulting serves a wide range of industries including Technology and SaaS, Professional Services, Management Consulting, Digital Marketing Agencies, B2B Services, Enterprise Software, and businesses undergoing digital transformation. Our AEO and GEO strategies are particularly effective for knowledge-intensive industries where thought leadership and expertise are key differentiators."
-  },
-  {
-    question: "Do you offer training on AEO and GEO?",
-    answer: "Yes, Adam Silva Consulting offers comprehensive training programs on Answer Engine Optimization, Generative Engine Optimization, and AI Marketing Intelligence. Our training covers AEO fundamentals, GEO strategies, content optimization for AI engines, measuring AI engine citations, and building topical authority. Training can be delivered for in-house teams or executives looking to understand the AEO/GEO landscape."
+    question: "What industries benefit most from agentic commerce?",
+    answer: "All commerce businesses benefit from agentic commerce readiness, but early adopters gaining the most advantage include e-commerce retailers, B2B services, technology companies, professional services, and any business where AI-assisted discovery is growing. With traffic from generative AI sources up 1,200% in 2025-2026, businesses that implement UCP/ACP/AP2 protocols now gain a 3-6 year competitive advantage over those waiting for legacy platforms to catch up."
   }
 ];
 
