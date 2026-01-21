@@ -65,27 +65,8 @@ export const Header: React.FC = () => {
               About
             </Link>
             
-            {/* Authority Hub Dropdown WITH INSIGHTS */}
-            <div className="relative" onMouseEnter={() => setIsAuthorityOpen(true)} onMouseLeave={() => setIsAuthorityOpen(false)}>
-              <button className={`flex items-center space-x-1 font-medium transition-colors ${isActive('/authority-hub') || isActive('/insights') ? 'text-blue-600' : 'text-gray-700 hover:text-blue-600'}`}>
-                <span>Authority Hub</span>
-                <ChevronDown className={`h-4 w-4 transition-transform ${isAuthorityOpen ? 'rotate-180' : ''}`} />
-              </button>
-              {isAuthorityOpen && (
-                <div className="absolute top-full left-0 mt-2 w-64 bg-white rounded-lg shadow-lg border border-gray-100 py-2 z-50">
-                  <Link to="/authority-hub" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-blue-600 transition-colors">
-                    Authority Hub Home
-                  </Link>
-                  <Link to="/insights" className="block px-4 py-2 text-sm font-semibold text-blue-600 hover:bg-blue-50 transition-colors">
-                    📚 Insights & Articles
-                  </Link>
-                </div>
-              )}
-            </div>
-
-            {/* INSIGHTS AS STANDALONE LINK */}
-            <Link to="/insights" title="Read our insights" className={`font-medium transition-colors ${isActive('/insights') ? 'text-blue-600' : 'text-gray-700 hover:text-blue-600'}`}>
-              📚 Insights
+            <Link to="/insights" className={`font-medium transition-colors ${isActive('/insights') ? 'text-blue-600' : 'text-gray-700 hover:text-blue-600'}`}>
+              Insights
             </Link>
 
             <Link to="/contact" className={`font-medium transition-colors ${isActive('/contact') ? 'text-blue-600' : 'text-gray-700 hover:text-blue-600'}`}>
@@ -126,21 +107,8 @@ export const Header: React.FC = () => {
                 About
               </Link>
 
-              <div className="px-4">
-                <p className="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-2">Authority Hub</p>
-                <div className="space-y-1">
-                  <Link to="/authority-hub" onClick={() => setIsMenuOpen(false)} className="block py-1.5 text-sm text-gray-600 hover:text-blue-600">
-                    Authority Hub Home
-                  </Link>
-                  <Link to="/insights" onClick={() => setIsMenuOpen(false)} className="block py-1.5 text-sm font-semibold text-blue-600 hover:text-blue-700">
-                    📚 Insights & Articles
-                  </Link>
-                </div>
-              </div>
-
-              {/* INSIGHTS STANDALONE IN MOBILE TOO */}
-              <Link to="/insights" onClick={() => setIsMenuOpen(false)} className="block px-4 py-2 text-blue-600 hover:text-blue-700 font-semibold">
-                📚 Insights & Articles
+              <Link to="/insights" onClick={() => setIsMenuOpen(false)} className="block px-4 py-2 text-gray-700 hover:text-blue-600 font-medium">
+                Insights
               </Link>
 
               <Link to="/contact" onClick={() => setIsMenuOpen(false)} className="block px-4 py-2 text-gray-700 hover:text-blue-600 font-medium">
