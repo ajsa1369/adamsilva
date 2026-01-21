@@ -25,6 +25,18 @@ export const InsightsIndex: React.FC = () => {
   ];
   const featuredArticles = [
     {
+      id: 'agentic-commerce-protocols',
+      title: 'The Agentic Commerce Protocols: UCP, ACP, and AP2',
+      excerpt: 'Complete technical guide to the three foundational protocols powering AI-mediated commerce.',
+      category: 'Technical Deep Dive',
+      categoryColor: 'blue',
+      date: 'January 15, 2026',
+      readTime: '22 min read',
+      image: '/images/insights/ai_ready_business_strategy_steps_infographic.jpg',
+      path: '/insights/the-agentic-commerce-protocols-ucp-acp-ap2',
+      featured: true
+    },
+    {
       id: 'ai-authority-imperative',
       title: 'The AI Authority Imperative: Gartner\'s 50% Traffic Decline Prediction',
       excerpt: 'Gartner\'s projection of 50% organic traffic decline marks the definitive end of click-based optimization.',
@@ -34,7 +46,7 @@ export const InsightsIndex: React.FC = () => {
       readTime: '16 min read',
       image: '/images/insights/ai_ready_business_strategy_steps_infographic.jpg',
       path: '/insights/the-ai-authority-imperative-gartners-50-traffic-decline-prediction',
-      featured: true
+      featured: false
     },
     {
       id: 'zero-click-searches',
@@ -75,11 +87,12 @@ export const InsightsIndex: React.FC = () => {
   ];
 
   const categories = [
-    { name: 'All', count: 12, active: true },
+    { name: 'All', count: 13, active: true },
     { name: 'Strategic Framework', count: 4, active: false },
     { name: 'Market Intelligence', count: 3, active: false },
     { name: 'Authority Building', count: 3, active: false },
-    { name: 'AI Transformation', count: 2, active: false }
+    { name: 'AI Transformation', count: 2, active: false },
+    { name: 'Technical Deep Dive', count: 1, active: false }
   ];
 
   const getCategoryColor = (color: string) => {

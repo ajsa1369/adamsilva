@@ -18,6 +18,7 @@ export const OG_IMAGES = {
   
   // Insights - Specific Articles
   aiAuthorityImperative: '/images/insights/ai_ready_business_strategy_steps_infographic.jpg',
+  agenticCommerceProtocols: '/images/insights/ai_ready_business_strategy_steps_infographic.jpg',
   zeroClickSearches: '/images/og/article-zero-click-searches.jpg',
   integratedEcosystem: '/images/og/article-integrated-ecosystem.jpg',
   eeatEvolution: '/images/og/article-eeat-evolution.jpg',
@@ -50,6 +51,8 @@ export const META_DESCRIPTIONS = {
   insightsIndex: "Strategic intelligence on AI marketing, Answer Engine Optimization, digital transformation, and authority building. Expert analysis and actionable frameworks for business leaders navigating the AI era.",
   
   aiAuthorityImperative: "Gartner's projection of 50% organic traffic decline marks the definitive end of click-based optimization. Comprehensive analysis of why the strategic objective has irrevocably shifted from ranking for keywords to being cited for authority.",
+  
+  agenticCommerceProtocols: "Complete technical guide to UCP, ACP, and AP2—the three foundational protocols powering AI-mediated commerce. Understanding these protocols is essential for businesses that want to remain visible and transactable in the agentic economy.",
   
   // Contact
   contact: "Schedule a strategic consultation to discuss AI authority building, Answer Engine Optimization, digital transformation, or business growth strategies. Transform your business into an AI-cited industry leader.",
