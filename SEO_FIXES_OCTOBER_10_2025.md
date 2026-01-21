@@ -77,7 +77,7 @@ git add *.xml
 git commit -m "Update sitemap dates to October 10, 2025"
 git push origin main
 
-# Then redeploy to production (Vercel/Netlify)
+# Then redeploy to production (Vercel)
 ```
 
 #### 3. Request Re-Indexing in Google Search Console

@@ -1,5 +1,6 @@
-# Netlify redirects for API routes
-/api/contact /.netlify/functions/contact-form 200
+# Vercel-compatible redirects for API routes
+# Vercel serves serverless functions from `/api/*`, map directly
+/api/contact /api/contact 200
 
-# SPA fallback
+# SPA fallback (kept for static hosts; Vercel uses `vercel.json`)
 /* /index.html 200

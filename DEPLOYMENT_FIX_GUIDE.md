@@ -17,8 +17,7 @@ The website was incorrectly configured as a Next.js application on Vercel, but i
 - Added proper cache headers
 
 ### 3. Removed _redirects file
-- This file is for Netlify, not Vercel
-- Vercel uses `vercel.json` for routing configuration
+- This file was originally used for Netlify; Vercel uses `vercel.json` for routing configuration
 
 ## Deployment Steps
 

@@ -363,6 +363,6 @@ Once connected to GitHub:
 
 **Package Version**: 1.0.0  
 **Last Updated**: September 23, 2025  
-**Compatibility**: Vercel, Netlify, GitHub Pages  
+**Compatibility**: Vercel, GitHub Pages  
 **License**: MIT (for code) / Commercial (for content)  
 **Maintainer**: MiniMax Agent

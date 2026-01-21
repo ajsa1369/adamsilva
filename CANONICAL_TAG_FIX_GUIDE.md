@@ -374,9 +374,9 @@ npm run build
 ```
 
 ### Issue: Changes not showing on production
-**Solution**: Clear CDN cache (Vercel/Netlify)
+**Solution**: Clear CDN cache (Vercel)
 - Vercel: Redeploy or use "Clear Cache and Redeploy"
-- Netlify: Trigger new deploy
+-- If using Netlify previously: trigger a new deploy
 
 ### Issue: Google still sees old canonical
 **Solution**: Wait 2-3 days, then request re-indexing

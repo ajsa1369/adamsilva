@@ -174,7 +174,7 @@ git commit -m "Fix: Update all canonical tags to point to correct URLs"
 git push origin main
 ```
 
-Your hosting (Vercel/Netlify) will auto-deploy.
+Your hosting (Vercel) will auto-deploy.
 
 #### Step 9: Verify on Live Site
 Once deployed, check these URLs:
@@ -276,7 +276,7 @@ In Google Search Console:
 ### Issue: "Changes not showing on live site"
 **Solution**:
 1. Clear build cache: `rm -rf dist/ && npm run build`
-2. Force redeploy on Vercel/Netlify
+2. Force redeploy on Vercel
 3. Clear CDN cache if applicable
 
 ### Issue: "Canonical still wrong in page source"
@@ -328,7 +328,7 @@ We've created these guides for you:
 Before you start, verify:
 - [ ] You have access to the codebase
 - [ ] You can run `npm install` successfully
-- [ ] You have Vercel/Netlify deploy access
+- [ ] You have Vercel deploy access
 - [ ] You have Google Search Console access
 - [ ] You have 2-3 hours to implement today
 
