@@ -26,7 +26,7 @@ export const Footer: React.FC = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           <div className="lg:col-span-1">
             <Link to="/" className="flex items-center space-x-2 mb-4">
-              <div className="p-2 bg-gradient-to-r from-blue-600 to-teal-600 rounded-lg">
+              <div className="p-2 bg-gradient-to-r from-primary to-secondary rounded-lg">
                 <Brain className="h-6 w-6 text-white" />
               </div>
               <div>
@@ -35,13 +35,13 @@ export const Footer: React.FC = () => {
               </div>
             </Link>
             <p className="text-gray-300 mb-6 leading-relaxed">
-              Empowering businesses with intelligent, data-driven AI marketing solutions for customer engagement and sustainable growth.
+              Global Infrastructure for Agentic Commerce.
             </p>
             <div className="flex space-x-4">
-              <a href="https://linkedin.com/company/adamsilva-consulting" target="_blank" rel="noopener noreferrer" className="p-2 bg-gray-800 rounded-lg hover:bg-blue-600 transition-colors duration-200">
+              <a href="https://linkedin.com/company/adamsilva-consulting" target="_blank" rel="noopener noreferrer" className="p-2 bg-gray-800 rounded-lg hover:bg-primary transition-colors duration-200">
                 <Linkedin className="h-5 w-5" />
               </a>
-              <a href="https://twitter.com/adamsilva_ai" target="_blank" rel="noopener noreferrer" className="p-2 bg-gray-800 rounded-lg hover:bg-blue-400 transition-colors duration-200">
+              <a href="https://twitter.com/adamsilva_ai" target="_blank" rel="noopener noreferrer" className="p-2 bg-gray-800 rounded-lg hover:bg-secondary transition-colors duration-200">
                 <Twitter className="h-5 w-5" />
               </a>
             </div>
@@ -84,15 +84,15 @@ export const Footer: React.FC = () => {
             </ul>
             <div className="space-y-3">
               <div className="flex items-center space-x-3">
-                <Mail className="h-5 w-5 text-blue-400" />
+                <Mail className="h-5 w-5 text-primary" />
                 <a href="mailto:info@adamsilvaconsulting.com" className="text-gray-300 hover:text-white transition-colors duration-200 text-sm">info@adamsilvaconsulting.com</a>
               </div>
               <div className="flex items-center space-x-3">
-                <Phone className="h-5 w-5 text-blue-400" />
+                <Phone className="h-5 w-5 text-primary" />
                 <a href="tel:+1-954-818-9248" className="text-gray-300 hover:text-white transition-colors duration-200 text-sm">+1 (954) 818-9248</a>
               </div>
               <div className="flex items-start space-x-3">
-                <MapPin className="h-5 w-5 text-blue-400 mt-0.5" />
+                <MapPin className="h-5 w-5 text-primary mt-0.5" />
                 <span className="text-gray-300 text-sm">Global Remote Services<br />Headquarters: Coral Springs, FL</span>
               </div>
             </div>

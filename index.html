@@ -30,50 +30,19 @@
         overflow-x: hidden;
       }
       
-      /* Loading animation */
-      .loading-screen {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: linear-gradient(135deg, #000000 0%, #111111 50%, #1e40af 100%);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        z-index: 9999;
-      }
-      
-      .loading-spinner {
-        width: 40px;
-        height: 40px;
-        border: 3px solid #262626;
-        border-top: 3px solid #3b82f6;
-        border-radius: 50%;
-        animation: spin 1s linear infinite;
-      }
-      
-      @keyframes spin {
-        0% { transform: rotate(0deg); }
-        100% { transform: rotate(360deg); }
-      }
-      
-      .fade-out {
-        opacity: 0;
-        transition: opacity 0.5s ease-out;
-      }
     </style>
     
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
     
-    <!-- Mobile Flywheel Fix - IMPORTANT -->
-    <link rel="stylesheet" href="/mobile-flywheel-fix.css" />
+    <!-- RSS and JSON Feed -->
+    <link rel="alternate" type="application/rss+xml" title="RSS" href="/feed.xml" />
+    <link rel="alternate" type="application/json" title="JSON Feed" href="/feed.json" />
     
     <!-- Primary Meta Tags -->
-    <title>Adam Silva Consulting | AI-Powered Authority Building</title>
-    <meta name="title" content="Adam Silva Consulting | AI-Powered Authority Building" />
-    <meta name="description" content="The definitive authority for AI engine citations in marketing intelligence, digital transformation, and business growth. Comprehensive AI-powered solutions for the generative AI era." />
+    <title>Adam Silva Consulting | Global Infrastructure for Agentic Commerce</title>
+    <meta name="title" content="Adam Silva Consulting | Global Infrastructure for Agentic Commerce" />
+    <meta name="description" content="Global Infrastructure for Agentic Commerce. The definitive authority for AI engine citations in marketing intelligence, digital transformation, and business growth." />
     <meta name="keywords" content="AI marketing, answer engine optimization, AEO, GEO, generative engine optimization, topical authority, AI content creation, marketing automation" />
     <meta name="robots" content="index, follow" />
     <meta name="author" content="Adam Silva Consulting" />
@@ -83,8 +52,8 @@
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://www.adamsilvaconsulting.com/" />
-    <meta property="og:title" content="Adam Silva Consulting | AI-Powered Authority Building" />
-    <meta property="og:description" content="The definitive authority for AI engine citations in marketing intelligence, digital transformation, and business growth." />
+    <meta property="og:title" content="Adam Silva Consulting | Global Infrastructure for Agentic Commerce" />
+    <meta property="og:description" content="Global Infrastructure for Agentic Commerce. The definitive authority for AI engine citations in marketing intelligence, digital transformation, and business growth." />
     <meta property="og:image" content="https://www.adamsilvaconsulting.com/images/social/og-image.jpg" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
@@ -95,8 +64,8 @@
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image" />
     <meta property="twitter:url" content="https://www.adamsilvaconsulting.com/" />
-    <meta property="twitter:title" content="Adam Silva Consulting | AI-Powered Authority Building" />
-    <meta property="twitter:description" content="The definitive authority for AI engine citations in marketing intelligence, digital transformation, and business growth." />
+    <meta property="twitter:title" content="Adam Silva Consulting | Global Infrastructure for Agentic Commerce" />
+    <meta property="twitter:description" content="Global Infrastructure for Agentic Commerce. The definitive authority for AI engine citations in marketing intelligence, digital transformation, and business growth." />
     <meta property="twitter:image" content="https://www.adamsilvaconsulting.com/images/social/og-image.jpg" />
     <meta property="twitter:image:alt" content="Adam Silva Consulting - AI-Powered Marketing Intelligence and Digital Authority" />
     <meta property="twitter:creator" content="@adamsilvaconsult" />
@@ -116,7 +85,7 @@
           "image": "https://www.adamsilvaconsulting.com/images/social/og-image.jpg",
           "description": "The definitive authority for AI engine citations in marketing intelligence, digital transformation, and business growth. Specializing in national and international consulting services.",
           "foundingDate": "2023",
-          "slogan": "AI-Powered Authority Building",
+          "slogan": "Global Infrastructure for Agentic Commerce",
           "email": "info@adamsilvaconsulting.com",
           "contactPoint": {
             "@type": "ContactPoint",
@@ -239,7 +208,7 @@
           "@type": "WebPage",
           "@id": "https://www.adamsilvaconsulting.com/#webpage",
           "url": "https://www.adamsilvaconsulting.com",
-          "name": "Adam Silva Consulting | AI-Powered Authority Building",
+          "name": "Adam Silva Consulting | Global Infrastructure for Agentic Commerce",
           "isPartOf": {
             "@id": "https://www.adamsilvaconsulting.com/#website"
           },
@@ -288,8 +257,8 @@
     
     <!-- Performance Optimizations -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="theme-color" content="#1e40af" />
-    <meta name="msapplication-TileColor" content="#1e40af" />
+    <meta name="theme-color" content="#07070A" />
+    <meta name="msapplication-TileColor" content="#07070A" />
     
     <!-- Additional favicon hints for search engines -->
     <meta name="application-name" content="Adam Silva Consulting" />
@@ -312,11 +281,6 @@
     <link rel="stylesheet" crossorigin href="/assets/index-CCHhwSPw.css">
   </head>
   <body>
-    <!-- Loading Screen -->
-    <div id="loading-screen" class="loading-screen">
-      <div class="loading-spinner"></div>
-    </div>
-    
     <!-- React App Root -->
     <div id="root"></div>
     
@@ -331,28 +295,6 @@
           }
         });
       }
-      
-      // Hide loading screen when page is fully loaded
-      window.addEventListener('load', function() {
-        const loadingScreen = document.getElementById('loading-screen');
-        if (loadingScreen) {
-          loadingScreen.classList.add('fade-out');
-          setTimeout(() => {
-            loadingScreen.style.display = 'none';
-          }, 500);
-        }
-      });
-      
-      // Fallback: Hide loading screen after 3 seconds maximum
-      setTimeout(function() {
-        const loadingScreen = document.getElementById('loading-screen');
-        if (loadingScreen && !loadingScreen.classList.contains('fade-out')) {
-          loadingScreen.classList.add('fade-out');
-          setTimeout(() => {
-            loadingScreen.style.display = 'none';
-          }, 500);
-        }
-      }, 3000);
       
       // Ensure canonical tag is correct - remove any incorrect ones
       document.addEventListener('DOMContentLoaded', function() {

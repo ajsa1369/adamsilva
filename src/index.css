@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 /* Reset and base styles */
 * {
   margin: 0;
@@ -93,7 +97,7 @@ nav a:hover {
   .container {
     padding: 0 0.5rem;
   }
-  
+
   .flex {
     flex-direction: column;
   }

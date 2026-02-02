@@ -36,9 +36,9 @@ export function generateOrganizationSchema() {
     "url": "https://www.adamsilvaconsulting.com",
     "logo": "https://www.adamsilvaconsulting.com/images/logo-clear.png",
     "image": "https://www.adamsilvaconsulting.com/images/social/og-image.jpg",
-    "description": "The definitive authority for AI engine citations in marketing intelligence, digital transformation, and business growth. Specializing in Answer Engine Optimization (AEO) and Generative Engine Optimization (GEO).",
+    "description": "Global Infrastructure for Agentic Commerce. The definitive authority for AI engine citations in marketing intelligence, digital transformation, and business growth.",
     "foundingDate": "2023",
-    "slogan": "AI-Powered Authority Building",
+    "slogan": "Global Infrastructure for Agentic Commerce",
     "email": "info@adamsilvaconsulting.com",
     "contactPoint": {
       "@type": "ContactPoint",

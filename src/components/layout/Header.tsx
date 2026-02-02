@@ -29,7 +29,7 @@ export const Header: React.FC = () => {
       <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           <Link to="/" className="flex items-center space-x-2 group">
-            <div className="p-2 bg-gradient-to-r from-blue-600 to-teal-600 rounded-lg group-hover:from-blue-700 group-hover:to-teal-700 transition-all duration-200">
+            <div className="p-2 bg-gradient-to-r from-primary to-secondary rounded-lg group-hover:from-[#00D4B8] group-hover:to-[#9F8FE6] transition-all duration-200">
               <Brain className="h-6 w-6 text-white" />
             </div>
             <div className="hidden sm:block">
@@ -40,20 +40,20 @@ export const Header: React.FC = () => {
 
           {/* Desktop Navigation */}
           <div className="hidden lg:flex items-center space-x-6">
-            <Link to="/" className={`font-medium transition-colors ${isActive('/') && location.pathname === '/' ? 'text-blue-600' : 'text-gray-700 hover:text-blue-600'}`}>
+            <Link to="/" className={`font-medium transition-colors ${isActive('/') && location.pathname === '/' ? 'text-primary' : 'text-gray-700 hover:text-primary'}`}>
               Home
             </Link>
             
             {/* Services Dropdown */}
             <div className="relative" onMouseEnter={() => setIsServicesOpen(true)} onMouseLeave={() => setIsServicesOpen(false)}>
-              <button className="flex items-center space-x-1 font-medium text-gray-700 hover:text-blue-600 transition-colors">
+              <button className="flex items-center space-x-1 font-medium text-gray-700 hover:text-primary transition-colors">
                 <span>Services</span>
                 <ChevronDown className={`h-4 w-4 transition-transform ${isServicesOpen ? 'rotate-180' : ''}`} />
               </button>
               {isServicesOpen && (
                 <div className="absolute top-full left-0 mt-2 w-80 bg-white rounded-lg shadow-lg border border-gray-100 py-2 z-50">
                   {services.map((service) => (
-                    <Link key={service.path} to={service.path} className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-blue-600 transition-colors">
+                    <Link key={service.path} to={service.path} className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-primary transition-colors">
                       {service.name}
                     </Link>
                   ))}
@@ -61,19 +61,19 @@ export const Header: React.FC = () => {
               )}
             </div>
 
-            <Link to="/about" className={`font-medium transition-colors ${isActive('/about') ? 'text-blue-600' : 'text-gray-700 hover:text-blue-600'}`}>
+            <Link to="/about" className={`font-medium transition-colors ${isActive('/about') ? 'text-primary' : 'text-gray-700 hover:text-primary'}`}>
               About
             </Link>
             
-            <Link to="/insights" className={`font-medium transition-colors ${isActive('/insights') ? 'text-blue-600' : 'text-gray-700 hover:text-blue-600'}`}>
+            <Link to="/insights" className={`font-medium transition-colors ${isActive('/insights') ? 'text-primary' : 'text-gray-700 hover:text-primary'}`}>
               Insights
             </Link>
 
-            <Link to="/contact" className={`font-medium transition-colors ${isActive('/contact') ? 'text-blue-600' : 'text-gray-700 hover:text-blue-600'}`}>
+            <Link to="/contact" className={`font-medium transition-colors ${isActive('/contact') ? 'text-primary' : 'text-gray-700 hover:text-primary'}`}>
               Contact
             </Link>
 
-            <Link to="/contact" className="bg-gradient-to-r from-blue-600 to-teal-600 text-white px-6 py-2 rounded-lg font-medium hover:from-blue-700 hover:to-teal-700 transition-all shadow-md hover:shadow-lg">
+            <Link to="/contact" className="bg-gradient-to-r from-primary to-secondary text-white px-6 py-2 rounded-lg font-medium hover:from-[#00D4B8] hover:to-[#9F8FE6] transition-all shadow-md hover:shadow-lg">
               Get Started
             </Link>
           </div>
@@ -88,7 +88,7 @@ export const Header: React.FC = () => {
         {isMenuOpen && (
           <div className="lg:hidden border-t border-gray-100 py-4">
             <div className="space-y-3">
-              <Link to="/" onClick={() => setIsMenuOpen(false)} className="block px-4 py-2 text-gray-700 hover:text-blue-600 font-medium">
+              <Link to="/" onClick={() => setIsMenuOpen(false)} className="block px-4 py-2 text-gray-700 hover:text-primary font-medium">
                 Home
               </Link>
               
@@ -96,27 +96,27 @@ export const Header: React.FC = () => {
                 <p className="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-2">Services</p>
                 <div className="space-y-1">
                   {services.map((service) => (
-                    <Link key={service.path} to={service.path} onClick={() => setIsMenuOpen(false)} className="block py-1.5 text-sm text-gray-600 hover:text-blue-600">
+                    <Link key={service.path} to={service.path} onClick={() => setIsMenuOpen(false)} className="block py-1.5 text-sm text-gray-600 hover:text-primary">
                       {service.name}
                     </Link>
                   ))}
                 </div>
               </div>
 
-              <Link to="/about" onClick={() => setIsMenuOpen(false)} className="block px-4 py-2 text-gray-700 hover:text-blue-600 font-medium">
+              <Link to="/about" onClick={() => setIsMenuOpen(false)} className="block px-4 py-2 text-gray-700 hover:text-primary font-medium">
                 About
               </Link>
 
-              <Link to="/insights" onClick={() => setIsMenuOpen(false)} className="block px-4 py-2 text-gray-700 hover:text-blue-600 font-medium">
+              <Link to="/insights" onClick={() => setIsMenuOpen(false)} className="block px-4 py-2 text-gray-700 hover:text-primary font-medium">
                 Insights
               </Link>
 
-              <Link to="/contact" onClick={() => setIsMenuOpen(false)} className="block px-4 py-2 text-gray-700 hover:text-blue-600 font-medium">
+              <Link to="/contact" onClick={() => setIsMenuOpen(false)} className="block px-4 py-2 text-gray-700 hover:text-primary font-medium">
                 Contact
               </Link>
               
               <div className="px-4 pt-2">
-                <Link to="/contact" onClick={() => setIsMenuOpen(false)} className="block bg-gradient-to-r from-blue-600 to-teal-600 text-white px-6 py-3 rounded-lg font-medium text-center hover:from-blue-700 hover:to-teal-700 transition-all">
+                <Link to="/contact" onClick={() => setIsMenuOpen(false)} className="block bg-gradient-to-r from-primary to-secondary text-white px-6 py-3 rounded-lg font-medium text-center hover:from-[#00D4B8] hover:to-[#9F8FE6] transition-all">
                   Get Started
                 </Link>
               </div>

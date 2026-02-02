@@ -150,12 +150,12 @@ const InteractiveFlywheelSection: React.FC = () => {
   };
 
   return (
-    <section className="relative py-20 md:py-32 lg:py-40 bg-gradient-to-br from-gray-900 via-blue-900 to-purple-900 overflow-hidden">
+    <section className="relative py-20 md:py-32 lg:py-40 bg-gradient-to-br from-base via-[#0A0A14] to-[#0F0A1A] overflow-hidden">
       {/* Animated Background */}
       <div className="absolute inset-0 opacity-30">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(59,130,246,0.3),transparent_50%)] animate-pulse"></div>
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_20%,rgba(139,92,246,0.3),transparent_50%)] animate-pulse" style={{ animationDelay: '1s' }}></div>
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_80%,rgba(14,165,233,0.3),transparent_50%)] animate-pulse" style={{ animationDelay: '2s' }}></div>
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(0,245,212,0.3),transparent_50%)] animate-pulse"></div>
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_20%,rgba(185,167,255,0.3),transparent_50%)] animate-pulse" style={{ animationDelay: '1s' }}></div>
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_80%,rgba(0,245,212,0.2),transparent_50%)] animate-pulse" style={{ animationDelay: '2s' }}></div>
       </div>
 
       {/* Floating particles */}
@@ -180,7 +180,7 @@ const InteractiveFlywheelSection: React.FC = () => {
           <h2 className="text-3xl md:text-5xl font-bold text-white mb-4 md:mb-6 animate-fade-in">
             Interactive Service Ecosystem
           </h2>
-          <p className="text-base md:text-xl text-blue-200 max-w-3xl mx-auto animate-fade-in-delay px-4">
+          <p className="text-base md:text-xl text-secondary max-w-3xl mx-auto animate-fade-in-delay px-4">
             Hover over any service to see the powerful connections in our AI-driven marketing ecosystem
           </p>
         </div>
@@ -189,18 +189,18 @@ const InteractiveFlywheelSection: React.FC = () => {
         <div className="relative w-full mx-auto" style={{ height: '900px', maxWidth: '100%' }}>
           {/* Orbital rings - Larger for desktop */}
           <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 pointer-events-none">
-            <div className="absolute rounded-full border border-blue-500/20 animate-spin-slow" 
+            <div className="absolute rounded-full border border-primary/20 animate-spin-slow" 
                  style={{ width: '800px', height: '800px', marginLeft: '-400px', marginTop: '-400px' }} />
-            <div className="absolute rounded-full border border-purple-500/20 animate-spin-slower" 
+            <div className="absolute rounded-full border border-secondary/20 animate-spin-slower" 
                  style={{ width: '650px', height: '650px', marginLeft: '-325px', marginTop: '-325px' }} />
-            <div className="absolute rounded-full border border-cyan-500/20 animate-spin-reverse" 
+            <div className="absolute rounded-full border border-primary/30 animate-spin-reverse" 
                  style={{ width: '500px', height: '500px', marginLeft: '-250px', marginTop: '-250px' }} />
           </div>
 
           {/* Central Hub - Larger */}
           <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-20">
             <div 
-              className="relative bg-gradient-to-br from-blue-600 via-purple-600 to-teal-600 rounded-full flex items-center justify-center shadow-2xl border-4 border-white/20 transition-transform duration-300"
+              className="relative bg-gradient-to-br from-primary via-secondary to-primary rounded-full flex items-center justify-center shadow-2xl border-4 border-white/20 transition-transform duration-300"
               style={{ 
                 transform: `scale(${pulseScale})`,
                 width: '200px',
@@ -208,7 +208,7 @@ const InteractiveFlywheelSection: React.FC = () => {
               }}
             >
               {/* Glow effect */}
-              <div className="absolute inset-0 rounded-full bg-gradient-to-br from-blue-400 to-purple-400 opacity-50 blur-2xl animate-pulse"></div>
+              <div className="absolute inset-0 rounded-full bg-gradient-to-br from-primary to-secondary opacity-50 blur-2xl animate-pulse"></div>
               
               {/* Rotating ring */}
               <div 
@@ -232,9 +232,9 @@ const InteractiveFlywheelSection: React.FC = () => {
           >
             <defs>
               <linearGradient id="line-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stopColor="#3b82f6" stopOpacity="0.8" />
-                <stop offset="50%" stopColor="#8b5cf6" stopOpacity="0.8" />
-                <stop offset="100%" stopColor="#14b8a6" stopOpacity="0.8" />
+                <stop offset="0%" stopColor="#00F5D4" stopOpacity="0.8" />
+                <stop offset="50%" stopColor="#B9A7FF" stopOpacity="0.8" />
+                <stop offset="100%" stopColor="#00F5D4" stopOpacity="0.8" />
               </linearGradient>
               <filter id="glow">
                 <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
@@ -297,10 +297,10 @@ const InteractiveFlywheelSection: React.FC = () => {
                 <div 
                   className={`relative bg-gradient-to-br from-gray-900/95 to-gray-800/95 backdrop-blur-xl rounded-2xl shadow-2xl border-2 p-5 w-56 cursor-pointer transition-all duration-500 overflow-hidden group ${
                     isHovered 
-                      ? 'border-white shadow-[0_0_30px_rgba(59,130,246,0.6)]' 
-                      : isHighlighted 
-                        ? 'border-teal-400 shadow-[0_0_20px_rgba(20,184,166,0.4)]' 
-                        : 'border-gray-700 hover:border-blue-500/50'
+                      ? 'border-white shadow-[0_0_30px_rgba(0,245,212,0.6)]'
+                      : isHighlighted
+                        ? 'border-primary shadow-[0_0_20px_rgba(0,245,212,0.4)]'
+                        : 'border-gray-700 hover:border-primary/50'
                   }`}
                 >
                   {/* Animated background gradient */}
@@ -312,8 +312,8 @@ const InteractiveFlywheelSection: React.FC = () => {
                   <div className={`relative bg-gradient-to-br ${
                     isHovered 
                       ? service.color
-                      : isHighlighted 
-                        ? 'from-teal-500 to-cyan-500' 
+                      : isHighlighted
+                        ? 'from-primary to-secondary'
                         : 'from-gray-700 to-gray-600'
                   } text-white p-4 rounded-xl mb-4 transition-all duration-500 transform group-hover:scale-110 group-hover:rotate-3`}>
                     <div className="transform group-hover:scale-110 transition-transform duration-300">
@@ -321,7 +321,7 @@ const InteractiveFlywheelSection: React.FC = () => {
                     </div>
                   </div>
 
-                  <h3 className="font-bold text-sm text-white mb-2 leading-tight group-hover:text-blue-300 transition-colors duration-300">
+                  <h3 className="font-bold text-sm text-white mb-2 leading-tight group-hover:text-primary transition-colors duration-300">
                     {service.title}
                   </h3>
                   <p className="text-xs text-gray-300 group-hover:text-gray-200 transition-colors duration-300">
@@ -330,8 +330,8 @@ const InteractiveFlywheelSection: React.FC = () => {
                   
                   {/* Connection indicator */}
                   {isHighlighted && !isHovered && (
-                    <div className="mt-3 text-xs text-teal-400 font-bold flex items-center gap-1 animate-pulse">
-                      <div className="w-2 h-2 rounded-full bg-teal-400 animate-ping"></div>
+                    <div className="mt-3 text-xs text-primary font-bold flex items-center gap-1 animate-pulse">
+                      <div className="w-2 h-2 rounded-full bg-primary animate-ping"></div>
                       Connected
                     </div>
                   )}
@@ -360,7 +360,7 @@ const InteractiveFlywheelSection: React.FC = () => {
 
         {/* Status Text */}
         <div className="text-center mt-16 animate-fade-in-delay-2 px-4">
-          <p className="text-blue-200 text-lg font-medium">
+          <p className="text-secondary text-lg font-medium">
             {hoveredService 
               ? `${services.find(s => s.id === hoveredService)?.title} integrates with ${services.find(s => s.id === hoveredService)?.relatedServices.length} services`
               : 'Explore the interconnected ecosystem - hover over any service'}
