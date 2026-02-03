@@ -1,8 +1,9 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import { Header } from './components/layout/Header';
 import { Footer } from './components/layout/Footer';
 import { HomePage } from './pages/HomePage';
+import { AboutPage } from './pages/AboutPage';
 import { Contact } from './pages/Contact';
 import { OmnichannelPage } from './pages/services/OmnichannelPage';
 import { WebsiteLandingPage } from './pages/services/WebsiteLandingPage';
@@ -20,16 +21,15 @@ import { InsightsPage } from './pages/insights/InsightsPage';
 import { AgenticCommerceProtocolsPage } from './pages/insights/AgenticCommerceProtocolsPage';
 import { Sitemap } from './pages/Sitemap';
 import { ScrollToTop } from './components/common/ScrollToTop';
-// FORCE REBUILD - import to invalidate Vite cache
-import './components/ForceRebuild';
 
 function App() {
   return (
-    <Router>
+    <>
       <ScrollToTop />
       <Header />
       <Routes>
         <Route path="/" element={<HomePage />} />
+        <Route path="/about" element={<AboutPage />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/insights" element={<InsightsIndex />} />
         <Route path="/insights/the-ai-authority-imperative-gartners-50-traffic-decline-prediction" element={<InsightsPage />} />
@@ -48,7 +48,7 @@ function App() {
         <Route path="/sitemap" element={<Sitemap />} />
       </Routes>
       <Footer />
-    </Router>
+    </>
   );
 }
 

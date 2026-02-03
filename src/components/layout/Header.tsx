@@ -9,15 +9,15 @@ export const Header: React.FC = () => {
   const location = useLocation();
 
   const services = [
-    { name: 'Omnichannel Communication', path: '/services/omnichannel-communication' },
+    { name: 'Omnichannel Platforms', path: '/services/omnichannel-platforms' },
     { name: 'AI Website & Landing Pages', path: '/services/website-landing-pages' },
     { name: 'Campaign Management', path: '/services/campaign-management' },
     { name: 'SEO & PPC Superpowers', path: '/services/seo-ppc' },
     { name: 'Content & Media Creation', path: '/services/content-creation' },
     { name: 'Lead Management & Targeting', path: '/services/lead-management' },
-    { name: 'Outreach & Partnerships', path: '/services/outreach-partnerships' },
+    { name: 'Outreach & Partnerships', path: '/services/outreach' },
     { name: 'Security & Compliance', path: '/services/security-compliance' },
-    { name: 'Analytics & Reporting', path: '/services/analytics-reporting' },
+    { name: 'Analytics & Reporting', path: '/services/analytics' },
     { name: 'Intent Graph Targeting', path: '/services/intent-targeting' },
     { name: 'Competitor Monitoring', path: '/services/competitor-monitoring' }
   ];

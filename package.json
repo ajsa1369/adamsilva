@@ -1,6 +1,7 @@
 {
   "name": "asc-website",
   "version": "1.0.0",
+  "type": "module",
   "description": "Adam Silva Consulting - Global Infrastructure for Agentic Commerce",
   "keywords": [
     "AI marketing",
