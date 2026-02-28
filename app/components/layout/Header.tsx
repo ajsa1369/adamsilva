@@ -75,7 +75,7 @@ export function Header() {
             alt="Adam Silva Consulting"
             width={160}
             height={40}
-            className="h-9 w-auto"
+            className="h-9 w-auto nav-logo"
             priority
           />
         </Link>
@@ -107,13 +107,9 @@ export function Header() {
                   </button>
 
                   {openDropdown === item.href && item.children && (
-                    <div className="absolute top-full left-0 mt-2 w-60 rounded-xl overflow-hidden z-50"
-                      style={{
-                        background: 'rgba(6, 13, 31, 0.95)',
-                        backdropFilter: 'blur(20px)',
-                        border: '1px solid rgba(255,255,255,0.08)',
-                        boxShadow: '0 20px 60px rgba(0,0,0,0.5), 0 0 0 1px rgba(14,165,233,0.1)',
-                      }}
+                    <div
+                      className="nav-dropdown-panel absolute top-full left-0 mt-2 w-60 rounded-xl overflow-hidden z-50"
+                      style={{ backdropFilter: 'blur(20px)' }}
                     >
                       <div className="p-1.5">
                         {item.children.map((child) => (
@@ -190,12 +186,8 @@ export function Header() {
       {/* Mobile Menu */}
       {mobileOpen && (
         <div
-          className="lg:hidden"
-          style={{
-            background: 'rgba(6, 13, 31, 0.97)',
-            backdropFilter: 'blur(20px)',
-            borderTop: '1px solid rgba(255,255,255,0.06)',
-          }}
+          className="nav-mobile-panel lg:hidden"
+          style={{ backdropFilter: 'blur(20px)' }}
         >
           <div className="container py-4 flex flex-col gap-0.5">
             {NAV_ITEMS.map((item) => (

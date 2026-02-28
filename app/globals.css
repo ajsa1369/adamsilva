@@ -584,7 +584,48 @@ body {
 }
 
 [data-theme="light"] .nav-glass {
-  background: rgba(248, 250, 255, 0.85);
+  background: rgba(248, 250, 255, 0.92);
+}
+
+/* ===== LOGO — theme-aware filter ===== */
+/* Logo uses dark navy + blue: invisible on dark bg by default */
+/* Dark mode (default): invert to white */
+.nav-logo {
+  filter: brightness(0) invert(1);
+}
+/* Light mode: no filter, original dark colors */
+[data-theme="light"] .nav-logo {
+  filter: none;
+}
+
+/* ===== NAV DROPDOWN PANEL ===== */
+.nav-dropdown-panel {
+  background: rgba(6, 13, 31, 0.97);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(14, 165, 233, 0.08);
+}
+
+[data-theme="light"] .nav-dropdown-panel {
+  background: rgba(255, 255, 255, 0.98);
+  border: 1px solid rgba(0, 0, 0, 0.09);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.12), 0 0 0 1px rgba(14, 165, 233, 0.08);
+}
+
+/* Dropdown item hover in light mode */
+[data-theme="light"] .nav-dropdown-panel a:hover {
+  background: rgba(0, 0, 0, 0.04) !important;
+  color: var(--color-text) !important;
+}
+
+/* ===== NAV MOBILE PANEL ===== */
+.nav-mobile-panel {
+  background: rgba(6, 13, 31, 0.98);
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+[data-theme="light"] .nav-mobile-panel {
+  background: rgba(255, 255, 255, 0.98);
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
 }
 
 /* ===== HIGHLIGHT LINE (for code) ===== */

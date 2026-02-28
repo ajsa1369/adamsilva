@@ -94,6 +94,162 @@ export default async function HomePage() {
       <HeroSection />
       <ThreeProtocolStack />
 
+      {/* AI Commerce Demo Section */}
+      <section
+        className="section"
+        aria-labelledby="commerce-demo-heading"
+        style={{ paddingTop: '4rem', paddingBottom: '4rem' }}
+      >
+        <div className="container">
+          <div className="mb-10">
+            <div className="enterprise-eyebrow">
+              <span
+                className="text-[11px] font-bold uppercase tracking-[0.16em]"
+                style={{ fontFamily: 'var(--font-mono)', color: 'var(--color-accent)' }}
+              >
+                How It Works
+              </span>
+            </div>
+            <h2
+              id="commerce-demo-heading"
+              style={{
+                fontFamily: 'var(--font-display)',
+                fontWeight: 700,
+                fontSize: 'clamp(1.625rem, 3vw, 2.25rem)',
+                color: 'var(--color-text)',
+                letterSpacing: '-0.02em',
+                lineHeight: 1.15,
+                marginBottom: '0.75rem',
+              }}
+            >
+              From AI Discovery to Completed Purchase
+            </h2>
+            <p style={{ color: 'var(--color-muted)', maxWidth: '520px', fontSize: '0.9375rem' }}>
+              When an AI agent shops for your customer, this is the exact sequence our protocol stack enables.
+            </p>
+          </div>
+
+          {/* Step-by-step flow */}
+          <div className="grid md:grid-cols-4 gap-0 relative">
+            {/* Connecting line (desktop only) */}
+            <div
+              aria-hidden="true"
+              className="hidden md:block absolute top-[2.25rem] left-[12.5%] right-[12.5%] h-px"
+              style={{ background: 'linear-gradient(90deg, #0ea5e9, #a855f7, #10b981, #f59e0b)' }}
+            />
+
+            {[
+              {
+                step: '01',
+                title: 'AI Agent Searches',
+                body: 'ChatGPT, Perplexity, or Google AI Mode gets a shopping intent from your customer.',
+                color: '#0ea5e9',
+                icon: '🤖',
+              },
+              {
+                step: '02',
+                title: 'UCP Discovery',
+                body: 'The agent reads your /.well-known/ucp manifest — your full catalog, pricing, and capabilities.',
+                color: '#a855f7',
+                icon: '📡',
+              },
+              {
+                step: '03',
+                title: 'ACP Checkout',
+                body: 'The agent initiates purchase via Stripe Payment Token. No human login. No cart abandonment.',
+                color: '#10b981',
+                icon: '⚡',
+              },
+              {
+                step: '04',
+                title: 'AP2 Verified',
+                body: 'Cryptographic mandate confirms the transaction. Audit trail created. Revenue secured.',
+                color: '#f59e0b',
+                icon: '✓',
+              },
+            ].map((item, i) => (
+              <div key={item.step} className="relative flex flex-col items-center text-center px-4">
+                {/* Step circle */}
+                <div
+                  className="w-[3.5rem] h-[3.5rem] rounded-full flex items-center justify-center text-xl font-bold mb-4 relative z-10"
+                  style={{
+                    background: `rgba(${item.color === '#0ea5e9' ? '14,165,233' : item.color === '#a855f7' ? '168,85,247' : item.color === '#10b981' ? '16,185,129' : '245,158,11'},0.12)`,
+                    border: `2px solid ${item.color}`,
+                    color: item.color,
+                  }}
+                >
+                  {item.icon}
+                </div>
+
+                {/* Step number */}
+                <div
+                  className="mb-1.5"
+                  style={{
+                    fontFamily: 'var(--font-mono)',
+                    fontSize: '9px',
+                    fontWeight: 700,
+                    letterSpacing: '0.1em',
+                    color: item.color,
+                  }}
+                >
+                  STEP {item.step}
+                </div>
+
+                {/* Title */}
+                <h3
+                  className="mb-2"
+                  style={{
+                    fontFamily: 'var(--font-display)',
+                    fontWeight: 700,
+                    fontSize: '1rem',
+                    color: 'var(--color-text)',
+                  }}
+                >
+                  {item.title}
+                </h3>
+
+                {/* Body */}
+                <p
+                  style={{
+                    fontSize: '0.8125rem',
+                    color: 'var(--color-muted)',
+                    lineHeight: 1.6,
+                    fontFamily: 'var(--font-sans)',
+                  }}
+                >
+                  {item.body}
+                </p>
+              </div>
+            ))}
+          </div>
+
+          {/* Result bar */}
+          <div
+            className="mt-10 rounded-lg px-6 py-4 flex flex-wrap items-center justify-between gap-4"
+            style={{
+              background: 'rgba(14,165,233,0.05)',
+              border: '1px solid rgba(14,165,233,0.15)',
+            }}
+          >
+            <div>
+              <span
+                className="text-xs font-bold uppercase tracking-wider mr-3"
+                style={{ fontFamily: 'var(--font-mono)', color: 'var(--color-accent)' }}
+              >
+                Result:
+              </span>
+              <span style={{ fontSize: '0.9375rem', color: 'var(--color-text)', fontWeight: 600 }}>
+                Your business transacts with AI agents 24/7 — no website visit, no human required.
+              </span>
+            </div>
+            <Link href="/protocols" className="btn-secondary text-sm flex-shrink-0">
+              See the Full Protocol Stack
+              <ArrowRight size={13} />
+            </Link>
+          </div>
+        </div>
+      </section>
+
       {/* Protocol Explorer section */}
       <section className="section" aria-labelledby="protocol-explorer-heading">
         <div className="container">
@@ -115,13 +271,32 @@ export default async function HomePage() {
       {/* Authority Flywheel section */}
       <section className="section bg-[var(--color-surface)]" aria-labelledby="flywheel-heading">
         <div className="container">
-          <div className="text-center max-w-2xl mx-auto mb-12">
-            <span className="badge mb-4">The Strategy</span>
-            <h2 id="flywheel-heading" className="text-3xl lg:text-4xl font-bold text-[var(--color-text)] mb-4">
-              The Authority Flywheel
+          <div className="mb-12">
+            <div className="enterprise-eyebrow">
+              <span
+                className="text-[11px] font-bold uppercase tracking-[0.16em]"
+                style={{ fontFamily: 'var(--font-mono)', color: 'var(--color-accent)' }}
+              >
+                The Revenue Flywheel
+              </span>
+            </div>
+            <h2
+              id="flywheel-heading"
+              className="mb-3"
+              style={{
+                fontFamily: 'var(--font-display)',
+                fontWeight: 700,
+                fontSize: 'clamp(1.75rem, 3.5vw, 2.5rem)',
+                color: 'var(--color-text)',
+                letterSpacing: '-0.02em',
+                lineHeight: 1.15,
+              }}
+            >
+              6 Pillars. One Compounding Revenue Engine.
             </h2>
-            <p className="text-[var(--color-muted)]">
-              A 4-step compounding cycle that builds permanent agent citation dominance. Once spinning, it&apos;s nearly impossible to stop.
+            <p style={{ color: 'var(--color-muted)', maxWidth: '580px', fontSize: '1rem', lineHeight: 1.7 }}>
+              Every service feeds the next — protocols power visibility, visibility builds authority,
+              authority drives leads, and agents close them. Click any pillar to see how it compounds.
             </p>
           </div>
           <AuthorityFlywheel />
