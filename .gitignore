@@ -895,3 +895,11 @@
 # uploads/
 # downloads/
 
+
+# ==============================================================================
+# ASCv2 — Next.js source lib/ must NOT be gitignored
+# The **/lib/ pattern above is for Python build artifacts.
+# Override it for this project's root-level lib/ directory.
+# ==============================================================================
+!/lib/
+!/lib/**
