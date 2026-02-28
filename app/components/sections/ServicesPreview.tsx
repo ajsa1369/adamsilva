@@ -15,12 +15,21 @@ export function ServicesPreview() {
       <div className="container">
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-10">
           <div>
-            <span className="badge mb-3">Services</span>
-            <h2 id="services-heading" className="text-3xl lg:text-4xl font-bold text-[var(--color-text)]">
+            <div className="badge mb-4">Services</div>
+            <h2
+              id="services-heading"
+              style={{
+                fontFamily: 'var(--font-display)',
+                fontWeight: 700,
+                fontSize: 'clamp(1.75rem, 3.5vw, 2.5rem)',
+                color: 'var(--color-text)',
+                letterSpacing: '-0.02em',
+              }}
+            >
               Agentic Commerce Services
             </h2>
-            <p className="text-[var(--color-muted)] mt-2 max-w-lg">
-              From $100 AI readiness checks to full protocol stack implementation — every service is designed to make your business AI-agent-ready.
+            <p className="mt-2 max-w-lg text-sm" style={{ color: 'var(--color-muted)' }}>
+              From $100 AI readiness checks to full protocol stack implementation — every service makes your business AI-agent-ready.
             </p>
           </div>
           <Link href="/services" className="btn-secondary text-sm shrink-0">
@@ -36,25 +45,50 @@ export function ServicesPreview() {
               <Link
                 key={service.id}
                 href={`/services/${service.id}`}
-                className="card p-6 group flex flex-col"
+                className="card group flex flex-col"
+                style={{ padding: '1.5rem' }}
               >
-                <div className="flex items-start justify-between mb-4">
-                  <div className="w-10 h-10 rounded-xl bg-[var(--color-accent)]/10 flex items-center justify-center">
-                    <Icon size={18} className="text-[var(--color-accent)]" />
+                <div className="flex items-start justify-between mb-5">
+                  <div
+                    className="w-11 h-11 rounded-xl flex items-center justify-center"
+                    style={{
+                      background: 'rgba(14,165,233,0.1)',
+                      border: '1px solid rgba(14,165,233,0.15)',
+                    }}
+                  >
+                    <Icon size={18} style={{ color: 'var(--color-accent)' }} />
                   </div>
-                  <span className="text-sm font-bold text-[var(--color-accent)]">
+                  <span
+                    className="text-sm font-bold px-2.5 py-1 rounded-lg"
+                    style={{
+                      fontFamily: 'var(--font-mono)',
+                      background: 'rgba(14,165,233,0.08)',
+                      color: 'var(--color-accent)',
+                      border: '1px solid rgba(14,165,233,0.12)',
+                    }}
+                  >
                     {service.priceDisplay === 'Custom' ? 'Custom' : service.priceDisplay}
                   </span>
                 </div>
-                <h3 className="font-bold text-[var(--color-text)] mb-2 group-hover:text-[var(--color-accent)] transition-colors">
+
+                <h3
+                  className="font-bold mb-2 group-hover:text-[var(--color-accent)] transition-colors"
+                  style={{ fontFamily: 'var(--font-display)', color: 'var(--color-text)', fontSize: '1rem' }}
+                >
                   {service.name}
                 </h3>
-                <p className="text-sm text-[var(--color-muted)] leading-relaxed flex-1 mb-4">
+                <p
+                  className="text-sm leading-relaxed flex-1 mb-5"
+                  style={{ color: 'var(--color-muted)' }}
+                >
                   {service.tagline}
                 </p>
-                <div className="flex items-center gap-1 text-xs font-semibold text-[var(--color-accent)]">
+                <div
+                  className="flex items-center gap-1.5 text-xs font-semibold group-hover:gap-2.5 transition-all"
+                  style={{ color: 'var(--color-accent)', fontFamily: 'var(--font-sans)' }}
+                >
                   View details
-                  <ArrowRight size={12} className="group-hover:translate-x-1 transition-transform" />
+                  <ArrowRight size={12} />
                 </div>
               </Link>
             )
@@ -64,7 +98,7 @@ export function ServicesPreview() {
         <div className="text-center mt-8">
           <Link href="/services" className="btn-primary">
             View All Services
-            <ArrowRight size={16} />
+            <ArrowRight size={15} />
           </Link>
         </div>
       </div>

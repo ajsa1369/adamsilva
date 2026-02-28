@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
+import { Syne, DM_Sans, JetBrains_Mono } from 'next/font/google'
 import './globals.css'
 import { Header } from './components/layout/Header'
 import { Footer } from './components/layout/Footer'
@@ -7,10 +7,25 @@ import { JsonLd } from './components/seo/JsonLd'
 import { organizationSchema, websiteSchema } from '@/lib/schemas/organization'
 import { logoImageSchema } from '@/lib/schemas/image'
 
-const inter = Inter({
+const syne = Syne({
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-display',
+  weight: ['400', '500', '600', '700', '800'],
+})
+
+const dmSans = DM_Sans({
   subsets: ['latin'],
   display: 'swap',
   variable: '--font-sans',
+  weight: ['300', '400', '500', '600', '700'],
+})
+
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-mono',
+  weight: ['400', '500', '600', '700'],
 })
 
 const SITE_URL = 'https://www.adamsilvaconsulting.com'
@@ -83,10 +98,6 @@ export const metadata: Metadata = {
       'application/rss+xml': `${SITE_URL}/feed.xml`,
     },
   },
-  verification: {
-    google: '',
-    yandex: '',
-  },
 }
 
 const rootSchema = {
@@ -111,11 +122,13 @@ export default function RootLayout({
         <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
         <link rel="manifest" href="/site.webmanifest" />
-        <meta name="theme-color" content="#1e40af" />
+        <meta name="theme-color" content="#060d1f" />
         <link rel="alternate" type="application/rss+xml" title="Adam Silva Consulting Insights" href="/feed.xml" />
         <JsonLd data={rootSchema} />
       </head>
-      <body className={`${inter.variable} font-sans antialiased`}>
+      <body className={`${syne.variable} ${dmSans.variable} ${jetbrainsMono.variable} antialiased`}
+        style={{ fontFamily: 'var(--font-sans)' }}
+      >
         {/* Theme init script — prevents flash */}
         <script
           dangerouslySetInnerHTML={{

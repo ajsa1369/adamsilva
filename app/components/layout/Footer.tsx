@@ -1,5 +1,6 @@
 import Link from 'next/link'
-import { ArrowRight, Linkedin, Twitter, Rss } from 'lucide-react'
+import Image from 'next/image'
+import { ArrowRight, Linkedin, Twitter, Rss, Zap } from 'lucide-react'
 
 const FOOTER_LINKS = {
   Services: [
@@ -19,7 +20,7 @@ const FOOTER_LINKS = {
     { label: 'Agent Payments (AP2)', href: '/protocols/ap2' },
   ],
   Resources: [
-    { label: 'Insights & Blog', href: '/insights' },
+    { label: 'Insights', href: '/insights' },
     { label: 'Case Studies', href: '/case-studies' },
     { label: 'Research', href: '/resources' },
     { label: 'Glossary', href: '/glossary' },
@@ -32,30 +33,56 @@ const FOOTER_LINKS = {
 
 export function Footer() {
   return (
-    <footer className="bg-[var(--color-surface)] border-t border-[var(--color-border)]">
+    <footer style={{ background: 'var(--color-surface)', borderTop: '1px solid var(--color-border)' }}>
+
       {/* Newsletter CTA */}
-      <div className="border-b border-[var(--color-border)]">
+      <div style={{ borderBottom: '1px solid var(--color-border)' }}>
         <div className="container py-12">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-6">
-            <div>
-              <h2 className="text-xl font-bold text-[var(--color-text)] mb-1">
+          <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8">
+            <div className="max-w-md">
+              <div className="badge mb-3">
+                <Zap size={10} />
                 Agentic Commerce Weekly
+              </div>
+              <h2
+                className="text-xl font-bold mb-2"
+                style={{ fontFamily: 'var(--font-display)', color: 'var(--color-text)' }}
+              >
+                Stay ahead of the protocol curve
               </h2>
-              <p className="text-[var(--color-muted)] text-sm">
-                Protocol updates, implementation guides, and AI commerce insights — every week.
+              <p className="text-sm" style={{ color: 'var(--color-muted)' }}>
+                UCP, ACP, and AP2 updates, implementation guides, and AI commerce intelligence — every week.
               </p>
             </div>
-            <form className="flex gap-2 w-full md:w-auto" action="/api/newsletter" method="POST">
+            <form
+              className="flex gap-2 w-full lg:w-auto"
+              action="/api/newsletter"
+              method="POST"
+            >
               <input
                 type="email"
                 name="email"
                 placeholder="your@email.com"
                 required
-                className="flex-1 md:w-64 px-4 py-2.5 bg-[var(--color-base)] border border-[var(--color-border)] rounded-lg text-sm text-[var(--color-text)] placeholder:text-[var(--color-muted-2)] focus:outline-none focus:border-[var(--color-accent)] transition-colors"
+                className="flex-1 lg:w-64 px-4 py-2.5 rounded-lg text-sm focus:outline-none transition-all"
+                style={{
+                  background: 'var(--color-surface-2)',
+                  border: '1px solid var(--color-border)',
+                  color: 'var(--color-text)',
+                  fontFamily: 'var(--font-sans)',
+                }}
+                onFocus={(e) => {
+                  e.target.style.borderColor = 'rgba(14,165,233,0.4)'
+                  e.target.style.boxShadow = '0 0 0 3px rgba(14,165,233,0.08)'
+                }}
+                onBlur={(e) => {
+                  e.target.style.borderColor = 'var(--color-border)'
+                  e.target.style.boxShadow = 'none'
+                }}
               />
               <button type="submit" className="btn-primary text-sm py-2.5 px-4 whitespace-nowrap">
                 Subscribe
-                <ArrowRight size={14} />
+                <ArrowRight size={13} />
               </button>
             </form>
           </div>
@@ -63,61 +90,68 @@ export function Footer() {
       </div>
 
       {/* Main Footer */}
-      <div className="container py-12">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 lg:gap-12">
+      <div className="container py-14">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-10 lg:gap-14">
+
           {/* Brand */}
           <div className="col-span-2 md:col-span-1">
             <Link href="/" aria-label="Adam Silva Consulting — Home">
-              <img
+              <Image
                 src="/images/logo-clear.png"
-                alt="Adam Silva Consulting logo"
+                alt="Adam Silva Consulting"
                 width={140}
                 height={36}
-                className="h-8 w-auto mb-4"
+                className="h-8 w-auto mb-5"
               />
             </Link>
-            <p className="text-[var(--color-muted-2)] text-sm leading-relaxed mb-4">
+            <p className="text-sm leading-relaxed mb-5" style={{ color: 'var(--color-muted-2)' }}>
               Global Infrastructure for Agentic Commerce — the definitive authority for UCP, ACP, and AP2 protocol implementation.
             </p>
-            <div className="flex items-center gap-3">
-              <a
-                href="https://www.linkedin.com/company/adam-silva-consulting"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="LinkedIn"
-                className="p-2 rounded-lg text-[var(--color-muted-2)] hover:text-[var(--color-accent)] hover:bg-[var(--color-surface-2)] transition-colors"
-              >
-                <Linkedin size={16} />
-              </a>
-              <a
-                href="https://twitter.com/adamsilvacons"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Twitter"
-                className="p-2 rounded-lg text-[var(--color-muted-2)] hover:text-[var(--color-accent)] hover:bg-[var(--color-surface-2)] transition-colors"
-              >
-                <Twitter size={16} />
-              </a>
-              <a
-                href="/feed.xml"
-                aria-label="RSS Feed"
-                className="p-2 rounded-lg text-[var(--color-muted-2)] hover:text-[var(--color-accent)] hover:bg-[var(--color-surface-2)] transition-colors"
-              >
-                <Rss size={16} />
-              </a>
+            <div className="flex items-center gap-1">
+              {[
+                { href: 'https://www.linkedin.com/company/adam-silva-consulting', label: 'LinkedIn', icon: Linkedin },
+                { href: 'https://twitter.com/adamsilvacons', label: 'Twitter', icon: Twitter },
+                { href: '/feed.xml', label: 'RSS Feed', icon: Rss },
+              ].map(({ href, label, icon: Icon }) => (
+                <a
+                  key={label}
+                  href={href}
+                  target={href.startsWith('http') ? '_blank' : undefined}
+                  rel={href.startsWith('http') ? 'noopener noreferrer' : undefined}
+                  aria-label={label}
+                  className="p-2 rounded-lg transition-all duration-150"
+                  style={{ color: 'var(--color-muted-2)' }}
+                  onMouseEnter={(e) => {
+                    ;(e.currentTarget as HTMLAnchorElement).style.color = 'var(--color-accent)'
+                    ;(e.currentTarget as HTMLAnchorElement).style.background = 'rgba(14,165,233,0.08)'
+                  }}
+                  onMouseLeave={(e) => {
+                    ;(e.currentTarget as HTMLAnchorElement).style.color = 'var(--color-muted-2)'
+                    ;(e.currentTarget as HTMLAnchorElement).style.background = 'transparent'
+                  }}
+                >
+                  <Icon size={15} />
+                </a>
+              ))}
             </div>
           </div>
 
           {/* Links */}
           {Object.entries(FOOTER_LINKS).map(([title, links]) => (
             <div key={title}>
-              <h3 className="text-[var(--color-text)] font-semibold text-sm mb-4">{title}</h3>
+              <h3
+                className="text-xs font-bold uppercase tracking-widest mb-5"
+                style={{ fontFamily: 'var(--font-mono)', color: 'var(--color-muted-2)' }}
+              >
+                {title}
+              </h3>
               <ul className="space-y-2.5">
                 {links.map((link) => (
                   <li key={link.href}>
                     <Link
                       href={link.href}
-                      className="text-[var(--color-muted-2)] hover:text-[var(--color-accent)] text-sm transition-colors"
+                      className="text-sm transition-colors duration-150 hover:text-[var(--color-accent)]"
+                      style={{ color: 'var(--color-muted-2)', fontFamily: 'var(--font-sans)' }}
                     >
                       {link.label}
                     </Link>
@@ -129,26 +163,29 @@ export function Footer() {
         </div>
 
         {/* Bottom */}
-        <div className="border-t border-[var(--color-border)] mt-12 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="text-[var(--color-muted-2)] text-sm">
+        <div
+          className="mt-14 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4"
+          style={{ borderTop: '1px solid var(--color-border)' }}
+        >
+          <p className="text-xs" style={{ color: 'var(--color-muted-2)', fontFamily: 'var(--font-sans)' }}>
             © {new Date().getFullYear()} Adam Silva Consulting. All rights reserved.
           </p>
-          <div className="flex items-center gap-4 text-sm">
-            <Link href="/glossary" className="text-[var(--color-muted-2)] hover:text-[var(--color-accent)] transition-colors">
-              Glossary
-            </Link>
-            <span className="text-[var(--color-border)]">|</span>
-            <Link href="/sitemap" className="text-[var(--color-muted-2)] hover:text-[var(--color-accent)] transition-colors">
-              Sitemap
-            </Link>
-            <span className="text-[var(--color-border)]">|</span>
-            <a
-              href="/.well-known/ucp/manifest.json"
-              className="text-[var(--color-muted-2)] hover:text-[var(--color-accent)] transition-colors"
-              title="UCP Manifest — AI Agent Discovery"
-            >
-              UCP Manifest
-            </a>
+          <div className="flex items-center gap-5 text-xs" style={{ fontFamily: 'var(--font-sans)' }}>
+            {[
+              { label: 'Glossary', href: '/glossary' },
+              { label: 'Sitemap', href: '/sitemap' },
+              { label: 'UCP Manifest', href: '/.well-known/ucp/manifest.json', title: 'AI Agent Discovery' },
+            ].map(({ label, href, title }) => (
+              <a
+                key={label}
+                href={href}
+                title={title}
+                className="transition-colors hover:text-[var(--color-accent)]"
+                style={{ color: 'var(--color-muted-2)' }}
+              >
+                {label}
+              </a>
+            ))}
           </div>
         </div>
       </div>
