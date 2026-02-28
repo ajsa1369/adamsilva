@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
+import { transporter } from '@/lib/mailer'
 
 export async function POST(request: NextRequest) {
   try {
@@ -57,32 +58,25 @@ export async function POST(request: NextRequest) {
       }
     }
 
-    // Send email notification via Resend (if configured)
-    const resendKey = process.env.RESEND_API_KEY
-    if (resendKey) {
+    // Send email notification via SMTP
+    if (process.env.SMTP_HOST) {
       try {
-        await fetch('https://api.resend.com/emails', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${resendKey}`,
-          },
-          body: JSON.stringify({
-            from: 'noreply@adamsilvaconsulting.com',
-            to: ['info@adamsilvaconsulting.com'],
-            subject: `New Contact: ${name} — ${service || 'General Inquiry'}`,
-            html: `
-              <h2>New Contact Form Submission</h2>
-              <p><strong>Name:</strong> ${name}</p>
-              <p><strong>Email:</strong> ${email}</p>
-              <p><strong>Company:</strong> ${company || 'Not provided'}</p>
-              <p><strong>Service:</strong> ${service || 'Not specified'}</p>
-              <p><strong>Message:</strong></p>
-              <p>${message.replace(/\n/g, '<br>')}</p>
-              <hr>
-              <small>IP: ${ip} | ${new Date().toISOString()}</small>
-            `,
-          }),
+        await transporter.sendMail({
+          from: `"Adam Silva Consulting" <${process.env.SMTP_USER}>`,
+          to: process.env.SMTP_USER,
+          replyTo: email,
+          subject: `New Contact: ${name} — ${service || 'General Inquiry'}`,
+          html: `
+            <h2>New Contact Form Submission</h2>
+            <p><strong>Name:</strong> ${name}</p>
+            <p><strong>Email:</strong> ${email}</p>
+            <p><strong>Company:</strong> ${company || 'Not provided'}</p>
+            <p><strong>Service:</strong> ${service || 'Not specified'}</p>
+            <p><strong>Message:</strong></p>
+            <p>${message.replace(/\n/g, '<br>')}</p>
+            <hr>
+            <small>IP: ${ip} | ${new Date().toISOString()}</small>
+          `,
         })
       } catch (err) {
         console.error('Email send error:', err)
