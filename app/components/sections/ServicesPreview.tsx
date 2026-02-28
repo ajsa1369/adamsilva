@@ -26,14 +26,14 @@ export function ServicesPreview() {
                 letterSpacing: '-0.02em',
               }}
             >
-              Agentic Commerce Services
+              Full-Stack AI Agency Services
             </h2>
             <p className="mt-2 max-w-lg text-sm" style={{ color: 'var(--color-muted)' }}>
-              From $100 AI readiness checks to full protocol stack implementation — every service makes your business AI-agent-ready.
+              From AI agents that answer every call to protocol stacks that let AI buy from you — every service compounds your revenue.
             </p>
           </div>
           <Link href="/services" className="btn-secondary text-sm shrink-0">
-            All 10 Services
+            All 15 Services
             <ArrowRight size={14} />
           </Link>
         </div>

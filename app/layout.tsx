@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { Syne, DM_Sans, JetBrains_Mono } from 'next/font/google'
+import { Roboto, Roboto_Condensed, JetBrains_Mono } from 'next/font/google'
 import './globals.css'
 import { Header } from './components/layout/Header'
 import { Footer } from './components/layout/Footer'
@@ -7,18 +7,18 @@ import { JsonLd } from './components/seo/JsonLd'
 import { organizationSchema, websiteSchema } from '@/lib/schemas/organization'
 import { logoImageSchema } from '@/lib/schemas/image'
 
-const syne = Syne({
+const robotoCondensed = Roboto_Condensed({
   subsets: ['latin'],
   display: 'swap',
   variable: '--font-display',
-  weight: ['400', '500', '600', '700', '800'],
+  weight: ['600', '700'],
 })
 
-const dmSans = DM_Sans({
+const roboto = Roboto({
   subsets: ['latin'],
   display: 'swap',
   variable: '--font-sans',
-  weight: ['300', '400', '500', '600', '700'],
+  weight: ['300', '400', '500', '700'],
 })
 
 const jetbrainsMono = JetBrains_Mono({
@@ -33,12 +33,16 @@ const SITE_URL = 'https://www.adamsilvaconsulting.com'
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: 'Adam Silva Consulting — Global Infrastructure for Agentic Commerce',
+    default: 'Adam Silva Consulting — Full-Stack AI Agency & Agentic Commerce',
     template: '%s | Adam Silva Consulting',
   },
   description:
-    'The definitive authority for UCP, ACP, and AP2 agentic commerce protocol implementation. We help enterprises build the AI-ready infrastructure for agentic transactions, answer engine optimization, and generative engine optimization.',
+    'Full-stack AI agency — custom AI agents, workflow automation, lead generation, advertising, agentic commerce protocols (UCP/ACP/AP2), and AEO/GEO optimization. We build your entire AI revenue infrastructure.',
   keywords: [
+    'AI agency',
+    'custom AI agents',
+    'workflow automation',
+    'lead generation',
     'agentic commerce',
     'UCP',
     'Universal Commerce Protocol',
@@ -72,15 +76,15 @@ export const metadata: Metadata = {
     locale: 'en_US',
     url: SITE_URL,
     siteName: 'Adam Silva Consulting',
-    title: 'Adam Silva Consulting — Global Infrastructure for Agentic Commerce',
+    title: 'Adam Silva Consulting — Full-Stack AI Agency & Agentic Commerce',
     description:
-      'The definitive authority for UCP, ACP, and AP2 agentic commerce protocol implementation.',
+      'Custom AI agents, workflow automation, lead generation, advertising, and agentic commerce protocols. The full-stack AI agency.',
     images: [
       {
         url: `${SITE_URL}/images/adam-silva-consulting-agentic-commerce-hero.png`,
         width: 1200,
         height: 630,
-        alt: 'Adam Silva Consulting — Global Infrastructure for Agentic Commerce',
+        alt: 'Adam Silva Consulting — Full-Stack AI Agency',
       },
     ],
   },
@@ -88,8 +92,8 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     site: '@adamsilvacons',
     creator: '@adamsilvacons',
-    title: 'Adam Silva Consulting — Global Infrastructure for Agentic Commerce',
-    description: 'The definitive authority for UCP, ACP, and AP2 agentic commerce protocol implementation.',
+    title: 'Adam Silva Consulting — Full-Stack AI Agency & Agentic Commerce',
+    description: 'Custom AI agents, workflow automation, lead generation, and agentic commerce protocols.',
     images: [`${SITE_URL}/images/adam-silva-consulting-agentic-commerce-hero.png`],
   },
   alternates: {
@@ -126,7 +130,7 @@ export default function RootLayout({
         <link rel="alternate" type="application/rss+xml" title="Adam Silva Consulting Insights" href="/feed.xml" />
         <JsonLd data={rootSchema} />
       </head>
-      <body className={`${syne.variable} ${dmSans.variable} ${jetbrainsMono.variable} antialiased`}
+      <body className={`${robotoCondensed.variable} ${roboto.variable} ${jetbrainsMono.variable} antialiased`}
         style={{ fontFamily: 'var(--font-sans)' }}
       >
         {/* Theme init script — prevents flash */}
