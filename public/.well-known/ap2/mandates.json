@@ -1,0 +1,51 @@
+{
+  "ap2_version": "1.0",
+  "organization": {
+    "id": "https://www.adamsilvaconsulting.com/#organization",
+    "name": "Adam Silva Consulting",
+    "url": "https://www.adamsilvaconsulting.com"
+  },
+  "mandate_types": [
+    {
+      "type": "intent",
+      "name": "Intent Mandate",
+      "description": "Authorizes an AI agent to browse, compare, and evaluate services on the user's behalf without completing a transaction.",
+      "scope": ["browse", "compare", "evaluate", "request_quote"],
+      "max_duration_seconds": 3600,
+      "credential_formats": ["jwt_vc", "ldp_vc"],
+      "revocable": true
+    },
+    {
+      "type": "cart",
+      "name": "Cart Mandate",
+      "description": "Authorizes an AI agent to execute a specific, pre-approved transaction on the user's behalf.",
+      "scope": ["purchase", "confirm_order"],
+      "max_amount_usd": 10000,
+      "requires_confirmation": true,
+      "credential_formats": ["jwt_vc", "ldp_vc"],
+      "revocable": true
+    }
+  ],
+  "payment_protocols": [
+    {
+      "protocol": "stripe",
+      "endpoint": "https://www.adamsilvaconsulting.com/api/acp/checkout",
+      "supported_tokens": ["spt"]
+    },
+    {
+      "protocol": "x402",
+      "description": "Cryptographic micropayment protocol for agent transactions",
+      "enabled": false
+    }
+  ],
+  "audit": {
+    "enabled": true,
+    "non_repudiation": true,
+    "log_retention_days": 365,
+    "audit_endpoint": "https://www.adamsilvaconsulting.com/api/audit"
+  },
+  "trust_registry": {
+    "url": "https://www.adamsilvaconsulting.com/.well-known/ap2/mandates.json",
+    "contact": "info@adamsilvaconsulting.com"
+  }
+}

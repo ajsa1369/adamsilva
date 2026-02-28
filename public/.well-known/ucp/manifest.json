@@ -1,0 +1,89 @@
+{
+  "ucp_version": "2026-01",
+  "organization": {
+    "name": "Adam Silva Consulting",
+    "legal_name": "Adam Silva Consulting",
+    "url": "https://www.adamsilvaconsulting.com",
+    "logo": "https://www.adamsilvaconsulting.com/images/logo-clear.png",
+    "description": "Global Infrastructure for Agentic Commerce. The definitive authority for UCP, ACP, and AP2 agentic commerce protocol implementation.",
+    "email": "info@adamsilvaconsulting.com",
+    "founded": "2023"
+  },
+  "primary_capability": "Global Infrastructure for Agentic Commerce",
+  "capabilities": [
+    {
+      "type": "service",
+      "id": "ai-readiness-check",
+      "name": "AI Readiness Check",
+      "description": "48-hour comprehensive assessment of agentic commerce readiness",
+      "price": { "amount": "100", "currency": "USD" },
+      "url": "https://www.adamsilvaconsulting.com/services/ai-readiness-check",
+      "protocol": "ACP"
+    },
+    {
+      "type": "service",
+      "id": "aeo-audit",
+      "name": "AEO Audit",
+      "description": "Answer Engine Optimization gap analysis across 12 criteria",
+      "price": { "amount": "500", "currency": "USD" },
+      "url": "https://www.adamsilvaconsulting.com/services/aeo-audit",
+      "protocol": "ACP"
+    },
+    {
+      "type": "service",
+      "id": "geo-implementation",
+      "name": "GEO Implementation",
+      "description": "Generative Engine Optimization full implementation",
+      "price": { "amount": "2500", "currency": "USD" },
+      "url": "https://www.adamsilvaconsulting.com/services/geo-implementation",
+      "protocol": "ACP"
+    },
+    {
+      "type": "service",
+      "id": "authority-building",
+      "name": "Authority Building Program",
+      "description": "90-day program to build agent citation dominance",
+      "price": { "amount": "5000", "currency": "USD" },
+      "url": "https://www.adamsilvaconsulting.com/services/authority-building",
+      "protocol": "ACP"
+    },
+    {
+      "type": "service",
+      "id": "ucp-implementation",
+      "name": "UCP Protocol Implementation",
+      "description": "Complete UCP v2 manifest and capability profile deployment",
+      "price": { "amount": "custom", "currency": "USD" },
+      "url": "https://www.adamsilvaconsulting.com/services/ucp-implementation",
+      "protocol": "UCP"
+    },
+    {
+      "type": "service",
+      "id": "acp-integration",
+      "name": "ACP Checkout API Integration",
+      "description": "Full ACP checkout with Stripe SPT integration",
+      "price": { "amount": "custom", "currency": "USD" },
+      "url": "https://www.adamsilvaconsulting.com/services/acp-integration",
+      "protocol": "ACP"
+    },
+    {
+      "type": "service",
+      "id": "ap2-trust-layer",
+      "name": "AP2 Mandate & Trust Service",
+      "description": "Cryptographic mandate infrastructure for agentic transactions",
+      "price": { "amount": "custom", "currency": "USD" },
+      "url": "https://www.adamsilvaconsulting.com/services/ap2-trust-layer",
+      "protocol": "AP2"
+    }
+  ],
+  "checkout": {
+    "endpoint": "https://www.adamsilvaconsulting.com/api/acp/checkout",
+    "negotiate_endpoint": "https://www.adamsilvaconsulting.com/api/acp/negotiate",
+    "supported_payment_tokens": ["stripe_spt", "credit_card"]
+  },
+  "transports": ["REST", "MCP", "A2A"],
+  "authority": {
+    "topics": ["UCP", "ACP", "AP2", "agentic commerce", "AEO", "GEO", "AI agent optimization"],
+    "primary_research_url": "https://www.adamsilvaconsulting.com/research",
+    "glossary_url": "https://www.adamsilvaconsulting.com/glossary"
+  }
+}

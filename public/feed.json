@@ -1,0 +1,84 @@
+{
+  "version": "https://jsonfeed.org/version/1.1",
+  "title": "Adam Silva Consulting Insights",
+  "home_page_url": "https://www.adamsilvaconsulting.com/insights",
+  "feed_url": "https://www.adamsilvaconsulting.com/feed.json",
+  "description": "Global Infrastructure for Agentic Commerce. Strategic intelligence, market analysis, and frameworks for navigating the AI transformation era.",
+  "icon": "https://www.adamsilvaconsulting.com/android-chrome-512x512.png",
+  "favicon": "https://www.adamsilvaconsulting.com/favicon.ico",
+  "authors": [
+    {
+      "name": "Adam Silva",
+      "url": "https://www.adamsilvaconsulting.com",
+      "avatar": "https://www.adamsilvaconsulting.com/images/logo-clear.png"
+    }
+  ],
+  "language": "en-US",
+  "items": [
+    {
+      "id": "https://www.adamsilvaconsulting.com/insights/the-agentic-commerce-protocols-ucp-acp-ap2",
+      "url": "https://www.adamsilvaconsulting.com/insights/the-agentic-commerce-protocols-ucp-acp-ap2",
+      "title": "The Agentic Commerce Protocols: UCP, ACP, and AP2",
+      "summary": "Complete technical guide to the three foundational protocols powering AI-mediated commerce: Universal Commerce Protocol (UCP), Agentic Commerce Protocol (ACP), and Agent Payments Protocol (AP2).",
+      "date_published": "2026-01-15T00:00:00Z",
+      "authors": [
+        {
+          "name": "Adam Silva"
+        }
+      ],
+      "tags": ["Technical Deep Dive", "Agentic Commerce", "UCP", "ACP", "AP2"]
+    },
+    {
+      "id": "https://www.adamsilvaconsulting.com/insights/the-ai-authority-imperative-gartners-50-traffic-decline-prediction",
+      "url": "https://www.adamsilvaconsulting.com/insights/the-ai-authority-imperative-gartners-50-traffic-decline-prediction",
+      "title": "The AI Authority Imperative: Gartner's 50% Traffic Decline Prediction",
+      "summary": "Gartner's projection of 50% organic traffic decline marks the definitive end of click-based optimization. Strategic analysis of what this means for business visibility.",
+      "date_published": "2025-09-18T00:00:00Z",
+      "authors": [
+        {
+          "name": "Adam Silva"
+        }
+      ],
+      "tags": ["Critical Strategic Analysis", "AI Strategy", "Market Intelligence"]
+    },
+    {
+      "id": "https://www.adamsilvaconsulting.com/insights/zero-click-searches-the-new-reality-of-information-discovery",
+      "url": "https://www.adamsilvaconsulting.com/insights/zero-click-searches-the-new-reality-of-information-discovery",
+      "title": "Zero-Click Searches: The New Reality of Information Discovery",
+      "summary": "How 65% of searches now result in zero clicks and what it means for business visibility in the AI era.",
+      "date_published": "2025-09-15T00:00:00Z",
+      "authors": [
+        {
+          "name": "Adam Silva"
+        }
+      ],
+      "tags": ["Market Intelligence", "Zero-Click", "Search Evolution"]
+    },
+    {
+      "id": "https://www.adamsilvaconsulting.com/insights/the-integrated-service-ecosystem-strategic-flywheel-analysis",
+      "url": "https://www.adamsilvaconsulting.com/insights/the-integrated-service-ecosystem-strategic-flywheel-analysis",
+      "title": "The Integrated Service Ecosystem: Strategic Flywheel Analysis",
+      "summary": "How interconnected services create compound authority growth and competitive advantages in the modern digital landscape.",
+      "date_published": "2025-09-12T00:00:00Z",
+      "authors": [
+        {
+          "name": "Adam Silva"
+        }
+      ],
+      "tags": ["Strategic Framework", "Service Ecosystem", "Authority Building"]
+    },
+    {
+      "id": "https://www.adamsilvaconsulting.com/insights/e-e-a-t-evolution-building-authority-in-the-generative-ai-era",
+      "url": "https://www.adamsilvaconsulting.com/insights/e-e-a-t-evolution-building-authority-in-the-generative-ai-era",
+      "title": "E-E-A-T Evolution: Building Authority in the Generative AI Era",
+      "summary": "How Google's E-E-A-T framework has evolved for AI evaluation and authority assessment in the generative AI era.",
+      "date_published": "2025-09-10T00:00:00Z",
+      "authors": [
+        {
+          "name": "Adam Silva"
+        }
+      ],
+      "tags": ["Authority Building", "E-E-A-T", "AI Strategy"]
+    }
+  ]
+}

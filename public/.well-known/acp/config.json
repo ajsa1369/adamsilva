@@ -1,0 +1,80 @@
+{
+  "acp_version": "1.0",
+  "merchant": {
+    "id": "adam-silva-consulting",
+    "name": "Adam Silva Consulting",
+    "url": "https://www.adamsilvaconsulting.com",
+    "category": "professional_services",
+    "subcategory": "marketing_consulting"
+  },
+  "checkout_configuration": {
+    "instant_checkout_enabled": true,
+    "guest_checkout_allowed": false,
+    "requires_shipping": false,
+    "digital_delivery": true,
+    "supported_currencies": ["USD"],
+    "tax_handling": "merchant_calculated"
+  },
+  "payment_methods": {
+    "stripe": {
+      "enabled": true,
+      "shared_payment_tokens": true,
+      "supported_types": ["card", "link"]
+    },
+    "paypal": {
+      "enabled": true,
+      "express_checkout": true
+    }
+  },
+  "agent_permissions": {
+    "can_view_catalog": true,
+    "can_request_quote": true,
+    "can_initiate_checkout": true,
+    "can_complete_purchase": false,
+    "requires_user_confirmation": true,
+    "max_transaction_amount": {
+      "amount": "10000",
+      "currency": "USD"
+    }
+  },
+  "negotiation": {
+    "enabled": true,
+    "endpoint": "/api/acp/negotiate",
+    "supported_actions": [
+      "get_service_details",
+      "request_quote",
+      "schedule_consultation",
+      "initiate_checkout"
+    ],
+    "response_format": "json",
+    "timeout_seconds": 30
+  },
+  "fulfillment": {
+    "type": "digital",
+    "delivery_methods": ["email", "portal_access"],
+    "estimated_delivery": "immediate",
+    "refund_policy": {
+      "refund_window_days": 30,
+      "conditions": "satisfaction_guaranteed"
+    }
+  },
+  "security": {
+    "tls_required": true,
+    "minimum_tls_version": "1.3",
+    "api_authentication": "bearer_token",
+    "rate_limiting": {
+      "requests_per_minute": 60,
+      "requests_per_hour": 1000
+    }
+  },
+  "compliance": {
+    "gdpr": true,
+    "ccpa": true,
+    "pci_dss": "service_provider_level_3"
+  },
+  "contact": {
+    "technical": "api@adamsilvaconsulting.com",
+    "disputes": "info@adamsilvaconsulting.com"
+  },
+  "last_updated": "2026-02-02T00:00:00Z"
+}
