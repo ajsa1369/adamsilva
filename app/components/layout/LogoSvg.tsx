@@ -10,7 +10,7 @@ export function LogoSvg({ className = '', showTagline = true }: LogoSvgProps) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      viewBox={`0 0 950 ${showTagline ? 240 : 185}`}
+      viewBox={`0 0 950 ${showTagline ? 262 : 185}`}
       aria-label="Adam Silva Consulting"
       role="img"
       className={className}
@@ -146,11 +146,11 @@ export function LogoSvg({ className = '', showTagline = true }: LogoSvgProps) {
       </text>
       {showTagline && (
         <text
-          x="250" y="218"
-          fontSize="24"
+          x="250" y="242"
+          fontSize="42"
           fontWeight="500"
           fontFamily="var(--font-sans), 'Roboto', sans-serif"
-          letterSpacing="0.2"
+          letterSpacing="1"
           className="logo-text-reveal logo-txt3 logo-tagline"
         >
           Global Infrastructure for Agentic Commerce

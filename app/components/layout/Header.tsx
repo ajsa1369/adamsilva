@@ -66,13 +66,13 @@ export function Header() {
         scrolled ? 'nav-glass' : 'bg-transparent'
       }`}
     >
-      <nav className="container flex items-center justify-between h-16" aria-label="Main navigation">
+      <nav className="container flex items-center justify-between h-20" aria-label="Main navigation">
 
         {/* Logo */}
         <Link href="/" className="flex items-center flex-shrink-0" aria-label="Adam Silva Consulting — Home">
           <LogoSvg
-            showTagline={false}
-            className="h-10 w-auto"
+            showTagline={true}
+            className="h-16 w-auto"
           />
         </Link>
 
