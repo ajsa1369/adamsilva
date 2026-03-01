@@ -2,10 +2,10 @@
 
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import { usePathname } from 'next/navigation'
 import { Menu, X, ChevronDown, Zap } from 'lucide-react'
 import { ThemeToggle } from './ThemeToggle'
-import { LogoSvg } from './LogoSvg'
 
 const NAV_ITEMS = [
   {
@@ -66,13 +66,17 @@ export function Header() {
         scrolled ? 'nav-glass' : 'bg-transparent'
       }`}
     >
-      <nav className="container flex items-center justify-between h-20" aria-label="Main navigation">
+      <nav className="container flex items-center justify-between h-16" aria-label="Main navigation">
 
         {/* Logo */}
-        <Link href="/" className="flex items-center flex-shrink-0" aria-label="Adam Silva Consulting — Home">
-          <LogoSvg
-            showTagline={true}
-            className="h-16 w-auto"
+        <Link href="/" className="flex items-center gap-2.5 flex-shrink-0 group" aria-label="Adam Silva Consulting — Home">
+          <Image
+            src="/images/logo-clear.png"
+            alt="Adam Silva Consulting"
+            width={160}
+            height={40}
+            className="h-9 w-auto nav-logo"
+            priority
           />
         </Link>
 

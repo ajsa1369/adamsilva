@@ -587,13 +587,20 @@ body {
   background: rgba(248, 250, 255, 0.92);
 }
 
-/* ===== INLINE SVG LOGO — theme-aware fill colors ===== */
-/* Dark mode (default): primary text = white */
+/* ===== LOGO — theme-aware filter ===== */
+/* Dark mode (default): invert PNG logo to white */
+.nav-logo {
+  filter: brightness(0) invert(1);
+}
+/* Light mode: original dark colors */
+[data-theme="light"] .nav-logo {
+  filter: none;
+}
+
+/* SVG logo fill colors (LogoSvg component) */
 .logo-text-primary { fill: #ffffff; }
 .logo-text-blue    { fill: #5c95bd; }
 .logo-tagline      { fill: rgba(240, 246, 255, 0.55); }
-
-/* Light mode: primary text = original dark navy */
 [data-theme="light"] .logo-text-primary { fill: #0d243f; }
 [data-theme="light"] .logo-tagline      { fill: #475569; }
 
