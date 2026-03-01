@@ -587,16 +587,15 @@ body {
   background: rgba(248, 250, 255, 0.92);
 }
 
-/* ===== LOGO — theme-aware filter ===== */
-/* Logo uses dark navy + blue: invisible on dark bg by default */
-/* Dark mode (default): invert to white */
-.nav-logo {
-  filter: brightness(0) invert(1);
-}
-/* Light mode: no filter, original dark colors */
-[data-theme="light"] .nav-logo {
-  filter: none;
-}
+/* ===== INLINE SVG LOGO — theme-aware fill colors ===== */
+/* Dark mode (default): primary text = white */
+.logo-text-primary { fill: #ffffff; }
+.logo-text-blue    { fill: #5c95bd; }
+.logo-tagline      { fill: rgba(240, 246, 255, 0.55); }
+
+/* Light mode: primary text = original dark navy */
+[data-theme="light"] .logo-text-primary { fill: #0d243f; }
+[data-theme="light"] .logo-tagline      { fill: #475569; }
 
 /* ===== NAV DROPDOWN PANEL ===== */
 .nav-dropdown-panel {
