@@ -32,7 +32,11 @@ This roadmap builds the full commercial layer on top of the existing ASCv2 site.
   2. All 9 components (Button, Card, Badge, ChatBubble, ProposalCard, PricingTable, ComparisonTable, IntakeStep, PlatformWarning) render correctly in isolation with no TypeScript errors
   3. Each component toggles correctly between dark and light mode without layout shift
   4. All components display correctly on a 375px mobile viewport (no overflow, no broken grid)
-**Plans**: TBD
+**Plans**: 2 plans
+
+Plans:
+- [ ] 01-01-PLAN.md — Design tokens (lib/design-tokens.ts) + primitive components: Button, Card, Badge
+- [ ] 01-02-PLAN.md — Composite components: ChatBubble, ProposalCard, PricingTable, ComparisonTable, IntakeStep, PlatformWarning + barrel export
 
 ### Phase 2: Supabase Schema & Data Architecture
 **Goal**: The database is the source of truth for all commercial operations — every downstream phase can read and write its data without schema changes
@@ -148,7 +152,7 @@ Note: Phase 8 depends on Phase 3 (not Phase 7) — can begin after Phase 3 compl
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Design System & UI Foundation | 0/? | Not started | - |
+| 1. Design System & UI Foundation | 0/2 | Not started | - |
 | 2. Supabase Schema & Data Architecture | 0/? | Not started | - |
 | 3. Integration Catalog & Pricing Engine | 0/? | Not started | - |
 | 4. Agentic Intake Agent | 0/? | Not started | - |
@@ -161,3 +165,4 @@ Note: Phase 8 depends on Phase 3 (not Phase 7) — can begin after Phase 3 compl
 
 ---
 *Roadmap created: 2026-03-02 — Milestone v1.0 — 42 requirements across 10 phases*
+*Phase 1 planned: 2026-03-02 — 2 plans*
