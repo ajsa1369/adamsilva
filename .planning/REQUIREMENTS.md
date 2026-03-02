@@ -17,7 +17,7 @@ Requirements for ASC Commercial Platform v1.0. Each maps to roadmap phases.
 
 - [x] **DATA-01**: System can store and query integration catalog (name, tier, setup cost, monthly cost, category) in Supabase
 - [x] **DATA-02**: System can store package definitions (Bronze/Silver/Gold/Core/Legacy) with all slot counts and pricing in Supabase
-- [ ] **DATA-03**: System can persist generated proposals (tier, pricing breakdown, integration list, PDF URL, prospect email) in Supabase with RLS
+- [x] **DATA-03**: System can persist generated proposals (tier, pricing breakdown, integration list, PDF URL, prospect email) in Supabase with RLS
 - [x] **DATA-04**: System can store blog post metadata and authority map results per client in Supabase
 - [x] **DATA-05**: System can store chatbot session history per client and visitor in Supabase
 - [x] **DATA-06**: System can store press release drafts and distribution records in Supabase
@@ -127,7 +127,7 @@ Which phases cover which requirements. Populated during roadmap creation.
 | DS-03 | Phase 1 | Complete |
 | DATA-01 | Phase 2 | Complete |
 | DATA-02 | Phase 2 | Complete |
-| DATA-03 | Phase 2 | Pending |
+| DATA-03 | Phase 2 | Complete |
 | DATA-04 | Phase 2 | Complete |
 | DATA-05 | Phase 2 | Complete |
 | DATA-06 | Phase 2 | Complete |
