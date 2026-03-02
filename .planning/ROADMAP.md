@@ -10,7 +10,7 @@ This roadmap builds the full commercial layer on top of the existing ASCv2 site.
 - Integer phases (1–10): Planned milestone v1.0 work
 - Decimal phases (e.g., 4.1): Urgent insertions only
 
-- [ ] **Phase 1: Design System & UI Foundation** - Shared tokens + 9 reusable components (dark/light, mobile-first)
+- [x] **Phase 1: Design System & UI Foundation** - Shared tokens + 9 reusable components (dark/light, mobile-first)
 - [ ] **Phase 2: Supabase Schema & Data Architecture** - 7 new tables with RLS + seeded integration catalog + edge function scaffolding
 - [ ] **Phase 3: Integration Catalog & Pricing Engine** - TypeScript catalog lib + slot/overage calculator + tier recommender + unit tests
 - [ ] **Phase 4: Agentic Intake Agent** - Conversational /get-started flow → proposal generation → PDF → email → CRM → follow-up
@@ -36,7 +36,7 @@ This roadmap builds the full commercial layer on top of the existing ASCv2 site.
 
 Plans:
 - [x] 01-01-PLAN.md — Design tokens (lib/design-tokens.ts) + primitive components: Button, Card, Badge
-- [ ] 01-02-PLAN.md — Composite components: ChatBubble, ProposalCard, PricingTable, ComparisonTable, IntakeStep, PlatformWarning + barrel export
+- [x] 01-02-PLAN.md — Composite components: ChatBubble, ProposalCard, PricingTable, ComparisonTable, IntakeStep, PlatformWarning + barrel export
 
 ### Phase 2: Supabase Schema & Data Architecture
 **Goal**: The database is the source of truth for all commercial operations — every downstream phase can read and write its data without schema changes
@@ -48,7 +48,15 @@ Plans:
   3. The integrations_catalog table is seeded with all known Tier 1, Tier 2, and Tier 3 tools so that a lookup by tool name returns tier classification and pricing
   4. The packages table is seeded with Bronze, Silver, Gold, Core, and Legacy Add-On definitions including all slot counts and pricing
   5. Edge function scaffolds (generate-proposal, send-proposal-email, create-crm-deal) are deployed and return a non-error response when invoked
-**Plans**: TBD
+**Plans**: 6 plans
+
+Plans:
+- [ ] 02-01-PLAN.md — Migration files 004–007: integrations_catalog, packages, proposals, blog_posts tables + RLS
+- [ ] 02-02-PLAN.md — Migration files 008–010: authority_maps, chatbot_sessions, press_releases tables + RLS + FK patch
+- [ ] 02-03-PLAN.md — Seed migration files 011–012: 40+ integrations catalog rows + 6 package definitions
+- [ ] 02-04-PLAN.md — Edge function scaffolds: generate-proposal, send-proposal-email, create-crm-deal (Deno TS)
+- [ ] 02-05-PLAN.md — Apply all migrations to live Supabase + verify tables, RLS, seed data, FK constraint
+- [ ] 02-06-PLAN.md — Deploy edge functions to Supabase + verify 200 responses + human dashboard confirmation
 
 ### Phase 3: Integration Catalog & Pricing Engine
 **Goal**: The pricing engine is a reliable, tested TypeScript library that can classify any tool and calculate an accurate proposal cost without human input
@@ -152,8 +160,8 @@ Note: Phase 8 depends on Phase 3 (not Phase 7) — can begin after Phase 3 compl
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Design System & UI Foundation | 1/2 | In progress | - |
-| 2. Supabase Schema & Data Architecture | 0/? | Not started | - |
+| 1. Design System & UI Foundation | 2/2 | Complete | 2026-03-02 |
+| 2. Supabase Schema & Data Architecture | 4/6 | In Progress|  |
 | 3. Integration Catalog & Pricing Engine | 0/? | Not started | - |
 | 4. Agentic Intake Agent | 0/? | Not started | - |
 | 5. Topical Authority Map Agent | 0/? | Not started | - |
@@ -166,3 +174,4 @@ Note: Phase 8 depends on Phase 3 (not Phase 7) — can begin after Phase 3 compl
 ---
 *Roadmap created: 2026-03-02 — Milestone v1.0 — 42 requirements across 10 phases*
 *Phase 1 planned: 2026-03-02 — 2 plans*
+*Phase 2 planned: 2026-03-02 — 6 plans*

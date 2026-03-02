@@ -10,18 +10,18 @@ Requirements for ASC Commercial Platform v1.0. Each maps to roadmap phases.
 ### Design System (DS)
 
 - [x] **DS-01**: Developer can use shared design tokens (color, typography, spacing) from `lib/design-tokens.ts` to ensure visual consistency across all new components
-- [ ] **DS-02**: Developer can import and compose 9 reusable components: Button, Card, Badge, ChatBubble, ProposalCard, PricingTable, ComparisonTable, IntakeStep, PlatformWarning
+- [x] **DS-02**: Developer can import and compose 9 reusable components: Button, Card, Badge, ChatBubble, ProposalCard, PricingTable, ComparisonTable, IntakeStep, PlatformWarning
 - [x] **DS-03**: All components are light-mode-only and mobile-first at 375px (Tailwind v4, no dark mode)
 
 ### Data Layer (DATA)
 
-- [ ] **DATA-01**: System can store and query integration catalog (name, tier, setup cost, monthly cost, category) in Supabase
-- [ ] **DATA-02**: System can store package definitions (Bronze/Silver/Gold/Core/Legacy) with all slot counts and pricing in Supabase
+- [x] **DATA-01**: System can store and query integration catalog (name, tier, setup cost, monthly cost, category) in Supabase
+- [x] **DATA-02**: System can store package definitions (Bronze/Silver/Gold/Core/Legacy) with all slot counts and pricing in Supabase
 - [ ] **DATA-03**: System can persist generated proposals (tier, pricing breakdown, integration list, PDF URL, prospect email) in Supabase with RLS
-- [ ] **DATA-04**: System can store blog post metadata and authority map results per client in Supabase
-- [ ] **DATA-05**: System can store chatbot session history per client and visitor in Supabase
-- [ ] **DATA-06**: System can store press release drafts and distribution records in Supabase
-- [ ] **DATA-07**: All new tables have Row Level Security enabled
+- [x] **DATA-04**: System can store blog post metadata and authority map results per client in Supabase
+- [x] **DATA-05**: System can store chatbot session history per client and visitor in Supabase
+- [x] **DATA-06**: System can store press release drafts and distribution records in Supabase
+- [x] **DATA-07**: All new tables have Row Level Security enabled
 
 ### Pricing Engine (PRICE)
 
@@ -122,16 +122,16 @@ Which phases cover which requirements. Populated during roadmap creation.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| DS-01 | Phase 1 | Pending |
-| DS-02 | Phase 1 | Pending |
-| DS-03 | Phase 1 | Pending |
-| DATA-01 | Phase 2 | Pending |
-| DATA-02 | Phase 2 | Pending |
+| DS-01 | Phase 1 | Complete |
+| DS-02 | Phase 1 | Complete |
+| DS-03 | Phase 1 | Complete |
+| DATA-01 | Phase 2 | Complete |
+| DATA-02 | Phase 2 | Complete |
 | DATA-03 | Phase 2 | Pending |
-| DATA-04 | Phase 2 | Pending |
-| DATA-05 | Phase 2 | Pending |
-| DATA-06 | Phase 2 | Pending |
-| DATA-07 | Phase 2 | Pending |
+| DATA-04 | Phase 2 | Complete |
+| DATA-05 | Phase 2 | Complete |
+| DATA-06 | Phase 2 | Complete |
+| DATA-07 | Phase 2 | Complete |
 | PRICE-01 | Phase 3 | Pending |
 | PRICE-02 | Phase 3 | Pending |
 | PRICE-03 | Phase 3 | Pending |
