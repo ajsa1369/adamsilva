@@ -23,9 +23,9 @@ See: .planning/PROJECT.md (updated 2026-03-02)
 ## Current Position
 
 Phase: 2 of 10 (Supabase Schema & Data Architecture)
-Plan: 3 of 6 completed (02-03 done — seed data complete)
+Plan: 4 of 4 completed
 Status: In progress
-Last activity: 2026-03-02 — Completed 02-03 (integrations_catalog + packages seed data, 53 tools + 6 packages)
+Last activity: 2026-03-02 — Completed 02-01 through 02-04 (migrations + seeds + edge scaffolds)
 
 Progress: [██░░░░░░░░] 20%
 
@@ -33,19 +33,19 @@ Progress: [██░░░░░░░░] 20%
 
 **Velocity:**
 - Total plans completed: 6
-- Average duration: 3 min
-- Total execution time: 0.30 hours
+- Average duration: 2 min
+- Total execution time: 0.2 hours
 
 **By Phase:**
 
 | Phase | Plans | Total | Avg/Plan |
 |-------|-------|-------|----------|
-| 01-design-system-ui-foundation | 2/2 | 8 min | 4 min |
-| 02-supabase-schema-data-architecture | 4/6 | 10 min | 2.5 min |
+| 01-design-system-ui-foundation | 1/2 | 4 min | 4 min |
+| 02-supabase-schema-data-architecture | 4/6 | 2 min | 0.5 min |
 
 **Recent Trend:**
-- Last 5 plans: 01-01 (4 min), 02-01 (2 min), 02-02 (2 min), 02-03 (2 min), 02-04 (2 min)
-- Trend: SQL migration tasks completing quickly
+- Last 5 plans: 01-01 (4 min), 02-01 (1 min), 02-02 (2 min), 02-03 (2 min), 02-04 (2 min)
+- Trend: Migration tasks completing quickly
 
 ## Accumulated Context
 
@@ -57,23 +57,22 @@ Progress: [██░░░░░░░░] 20%
 - All /.well-known/ routes currently static (become dynamic in Phase 10)
 - lib/schemas/* — full JSON-LD schema library in place
 
-### Phase 1 Progress (01-01, 01-02 complete)
+### Phase 1 Progress (01-01 complete)
 - globals.css locked to light-mode-only (#f8faff base surface, all [data-theme="light"] blocks removed)
 - lib/design-tokens.ts created with brand palette (navy=#1B2E4B, blue=#4D8EC0, blueLight=#85C1DF)
 - components/ui/Button.tsx: 4 variants, 3 sizes, loading spinner, href-as-anchor
 - components/ui/Card.tsx: default/glass variants, 4 padding sizes, polymorphic as prop
 - components/ui/Badge.tsx: 14 variants (5 tier, 4 status, 3 protocol, 1 default/info)
 
-### Phase 2 Progress (02-01 through 02-04 complete — 02-05, 02-06 pending)
-- Migration 004: integrations_catalog table + RLS
-- Migration 005: packages table + RLS
-- Migration 006: proposals table + RLS (with jsonb integrations_detected + goals, status CHECK)
-- Migration 007: blog_posts table + RLS (client_id text, schema_json/images jsonb)
-- Migration 008: authority_maps table + RLS (UNIQUE client_id+month, topics_json jsonb)
-- Migration 009: chatbot_sessions table + RLS (channel/outcome CHECK constraints, messages jsonb)
-- Migration 010: press_releases table + RLS + FK patch blog_posts.authority_map_id → authority_maps.id
-- Migration 011: seed integrations_catalog with 53 tool rows across 8 categories/3 tiers (02-03)
-- Migration 012: seed packages table with 6 locked packages — Bronze/Silver/Gold/Core/Shopify Starter/Shopify Growth (02-03)
+### Phase 2 Progress (02-01 through 02-04 complete)
+- 004_integrations_catalog.sql: tier CHECK(1,2,3), setup_cost/monthly_cost NUMERIC(10,2), RLS
+- 005_packages.sql: slug UNIQUE, tier1/2/3_slots, features_json JSONB, is_legacy_only, RLS
+- 006_proposals.sql: integrations_detected/goals JSONB, status CHECK(6 values), RLS
+- 007_blog_posts.sql: client_id TEXT (no FK), schema_json/images JSONB, UNIQUE(client_id,slug), RLS
+- 008_authority_maps.sql: UNIQUE(client_id, month), topics_json JSONB, approved_at nullable, RLS
+- 009_chatbot_sessions.sql: channel CHECK(web/sms/voice/whatsapp), messages JSONB, outcome CHECK, appointment_booked bool, RLS
+- 010_press_releases.sql: wire_service CHECK(5), status CHECK(5), schema_json JSONB, RLS + idempotent FK patch fk_blog_posts_authority_map
+- supabase/migrations/ is now git-tracked (fixed .gitignore **/*.sql issue)
 
 ### Key Decisions
 - MODEL_PROVIDER env var (never hardcode LLM provider) — enforced in INTAKE-09
@@ -83,11 +82,14 @@ Progress: [██░░░░░░░░] 20%
 - Light mode only — deleted all [data-theme='light'] override blocks; @theme is permanent light defaults (01-01)
 - Design tokens are CSS variable references, not hex values — single source of truth stays in globals.css (01-01)
 - Button/Card/Badge delegate to existing globals.css utility classes — no duplicate CSS (01-01)
+- blog_posts.authority_map_id has no FK constraint — authority_maps created in migration 008 (Plan 02); FK added post-creation to avoid ordering dependency (02-01)
+- client_id in blog_posts is TEXT (not UUID FK) — no clients table yet, avoids premature FK dependency (02-01)
+- supabase/migrations/*.sql now git-tracked via !/supabase/ negation in .gitignore (same pattern as existing !/lib/ fix) (02-01)
 - Edge function scaffolds use deno.land/std@0.208.0 to match existing email-service for version consistency (02-04)
 - CRM_WEBHOOK_URL commented out in create-crm-deal scaffold to avoid undefined behavior until Phase 4 implements the body (02-04)
-- Tier 1 tools: setup_cost=750/monthly_cost=150 (pre-built), Tier 2: 1500/250 (custom-rest), Tier 3: 4000/500 (legacy/no-api) — locked in seed (02-03)
-- Core package base_monthly=0 (retainer negotiated separately); tier slots=99 represents unlimited in pricing engine (02-03)
-- Shopify Starter + Growth have is_legacy_only=true — excluded from headless client proposals (02-03)
+- month stored as TEXT ('YYYY-MM') not DATE in authority_maps — simpler string comparison for monthly queries (02-02)
+- channel and outcome use TEXT CHECK constraints not PostgreSQL ENUM — easier to extend without migration (02-02)
+- FK from blog_posts.authority_map_id deferred to migration 010 via idempotent DO block — prevents creation order dependency (02-02)
 
 ### Pending Todos
 None yet.
@@ -98,10 +100,9 @@ None yet.
 - MODEL_PROVIDER + ANTHROPIC_API_KEY / OPENAI_API_KEY not yet set — needed for Phase 4
 - Vercel preview URL for ASCv2 branch not yet confirmed
 - DNS: cms.adamsilvaconsulting.com A record not yet pointing to VPS
-- Migrations 004-012 written but NOT yet applied to Supabase — apply before Phase 3 pricing engine testing
 
 ## Session Continuity
 
-Last session: 2026-03-02T21:35:00Z
-Stopped at: Completed 02-03-PLAN.md — seed data written, ready for 02-04 or next phase
+Last session: 2026-03-02T21:33:05Z
+Stopped at: Completed 02-02-PLAN.md — authority_maps, chatbot_sessions, press_releases migrations done
 Resume file: None
