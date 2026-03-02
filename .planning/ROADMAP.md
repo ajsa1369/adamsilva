@@ -67,7 +67,12 @@ Plans:
   2. `lib/pricing/calculator.ts` returns a correct setup total and monthly total given any combination of integrations and package tier, including overage math when integration count exceeds slot count
   3. `lib/pricing/tier-selector.ts` returns the optimal tier recommendation given integration count, monthly lead volume, selected goals, platform type, and location count
   4. All unit tests pass: slot logic, overage calculation, tier recommendation edge cases (10+ integrations → Core, no tools → Bronze, enterprise stack → Core)
-**Plans**: TBD
+**Plans**: 3 plans
+
+Plans:
+- [ ] 03-01-PLAN.md — Types + Integration catalog: lib/pricing/types.ts + lib/integrations/catalog.ts (53-entry static catalog)
+- [ ] 03-02-PLAN.md — Pricing calculator + tier selector: lib/pricing/calculator.ts + lib/pricing/tier-selector.ts
+- [ ] 03-03-PLAN.md — Vitest setup + unit tests: vitest.config.ts + calculator.test.ts + tier-selector.test.ts (20+ test cases)
 
 ### Phase 4: Agentic Intake Agent
 **Goal**: A prospect who visits /get-started can complete the entire qualification and receive a personalized proposal — with no human involvement from ASC
@@ -162,7 +167,7 @@ Note: Phase 8 depends on Phase 3 (not Phase 7) — can begin after Phase 3 compl
 |-------|----------------|--------|-----------|
 | 1. Design System & UI Foundation | 2/2 | Complete | 2026-03-02 |
 | 2. Supabase Schema & Data Architecture | 4/6 | In Progress|  |
-| 3. Integration Catalog & Pricing Engine | 0/? | Not started | - |
+| 3. Integration Catalog & Pricing Engine | 0/3 | Not started | - |
 | 4. Agentic Intake Agent | 0/? | Not started | - |
 | 5. Topical Authority Map Agent | 0/? | Not started | - |
 | 6. Blog Post Production Pipeline | 0/? | Not started | - |
@@ -175,3 +180,4 @@ Note: Phase 8 depends on Phase 3 (not Phase 7) — can begin after Phase 3 compl
 *Roadmap created: 2026-03-02 — Milestone v1.0 — 42 requirements across 10 phases*
 *Phase 1 planned: 2026-03-02 — 2 plans*
 *Phase 2 planned: 2026-03-02 — 6 plans*
+*Phase 3 planned: 2026-03-02 — 3 plans*
