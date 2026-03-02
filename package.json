@@ -10,6 +10,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
+    "test": "vitest run",
+    "test:watch": "vitest",
     "remotion:preview": "remotion preview remotion/index.ts",
     "remotion:render": "remotion render remotion/index.ts BlogSummary"
   },
@@ -32,8 +34,10 @@
     "@types/node": "^22.13.9",
     "@types/react": "^18.3.18",
     "@types/react-dom": "^18.3.5",
+    "@vitest/coverage-v8": "^4.0.18",
     "autoprefixer": "^10.4.20",
     "tailwindcss": "^4.1.18",
-    "typescript": "^5.8.2"
+    "typescript": "^5.8.2",
+    "vitest": "^4.0.18"
   }
 }
