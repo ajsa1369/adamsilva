@@ -35,7 +35,7 @@ This roadmap builds the full commercial layer on top of the existing ASCv2 site.
 **Plans**: 2 plans
 
 Plans:
-- [ ] 01-01-PLAN.md — Design tokens (lib/design-tokens.ts) + primitive components: Button, Card, Badge
+- [x] 01-01-PLAN.md — Design tokens (lib/design-tokens.ts) + primitive components: Button, Card, Badge
 - [ ] 01-02-PLAN.md — Composite components: ChatBubble, ProposalCard, PricingTable, ComparisonTable, IntakeStep, PlatformWarning + barrel export
 
 ### Phase 2: Supabase Schema & Data Architecture
@@ -152,7 +152,7 @@ Note: Phase 8 depends on Phase 3 (not Phase 7) — can begin after Phase 3 compl
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Design System & UI Foundation | 0/2 | Not started | - |
+| 1. Design System & UI Foundation | 1/2 | In progress | - |
 | 2. Supabase Schema & Data Architecture | 0/? | Not started | - |
 | 3. Integration Catalog & Pricing Engine | 0/? | Not started | - |
 | 4. Agentic Intake Agent | 0/? | Not started | - |

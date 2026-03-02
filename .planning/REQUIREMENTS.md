@@ -9,9 +9,9 @@ Requirements for ASC Commercial Platform v1.0. Each maps to roadmap phases.
 
 ### Design System (DS)
 
-- [ ] **DS-01**: Developer can use shared design tokens (color, typography, spacing) from `lib/design-tokens.ts` to ensure visual consistency across all new components
+- [x] **DS-01**: Developer can use shared design tokens (color, typography, spacing) from `lib/design-tokens.ts` to ensure visual consistency across all new components
 - [ ] **DS-02**: Developer can import and compose 9 reusable components: Button, Card, Badge, ChatBubble, ProposalCard, PricingTable, ComparisonTable, IntakeStep, PlatformWarning
-- [ ] **DS-03**: All components are light-mode-only and mobile-first at 375px (Tailwind v4, no dark mode)
+- [x] **DS-03**: All components are light-mode-only and mobile-first at 375px (Tailwind v4, no dark mode)
 
 ### Data Layer (DATA)
 
