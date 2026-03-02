@@ -906,3 +906,11 @@
 # ==============================================================================
 !/lib/
 !/lib/**
+
+# ==============================================================================
+# ASCv2 — Supabase migrations must NOT be gitignored
+# The **/*.sql pattern above is for PostgreSQL dump files.
+# Override it for this project's supabase/migrations/ directory.
+# ==============================================================================
+!/supabase/
+!/supabase/**
