@@ -3,12 +3,12 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: unknown
-last_updated: "2026-03-02T22:09:45.330Z"
+last_updated: "2026-03-02T22:15:00Z"
 progress:
   total_phases: 3
-  completed_phases: 2
+  completed_phases: 3
   total_plans: 11
-  completed_plans: 10
+  completed_plans: 11
 ---
 
 # GSD State — ASC Commercial Platform
@@ -23,11 +23,11 @@ See: .planning/PROJECT.md (updated 2026-03-02)
 ## Current Position
 
 Phase: 3 of 10 (Integration Catalog & Pricing Engine)
-Plan: 2 of 3 completed
-Status: In progress
-Last activity: 2026-03-02 — Completed 03-02 (pricing calculator + tier recommendation engine)
+Plan: 3 of 3 completed — PHASE COMPLETE
+Status: Phase 3 complete
+Last activity: 2026-03-02 — Completed 03-03 (Vitest setup + 40 passing unit tests for pricing engine)
 
-Progress: [████░░░░░░] 30%
+Progress: [███████░░░] 33%
 
 ## Performance Metrics
 
@@ -42,7 +42,7 @@ Progress: [████░░░░░░] 30%
 |-------|-------|-------|----------|
 | 01-design-system-ui-foundation | 1/2 | 4 min | 4 min |
 | 02-supabase-schema-data-architecture | 4/6 | 2 min | 0.5 min |
-| 03-integration-catalog-pricing-engine | 1/3 | 1 min | 1 min |
+| 03-integration-catalog-pricing-engine | 3/3 | 5 min | 1.7 min |
 
 **Recent Trend:**
 - Last 5 plans: 02-01 (1 min), 02-02 (2 min), 02-03 (2 min), 02-04 (2 min), 03-01 (1 min), 03-02 (1 min)
@@ -65,12 +65,15 @@ Progress: [████░░░░░░] 30%
 - components/ui/Card.tsx: default/glass variants, 4 padding sizes, polymorphic as prop
 - components/ui/Badge.tsx: 14 variants (5 tier, 4 status, 3 protocol, 1 default/info)
 
-### Phase 3 Progress (03-01 and 03-02 complete)
+### Phase 3 Progress (03-01, 03-02, 03-03 complete — PHASE DONE)
 - lib/pricing/types.ts: 7 named TypeScript exports (IntegrationTier, CatalogEntry, IntegrationSelection, PackageDefinition, PricingResult, TierSelectorInput, TierRecommendation)
 - lib/integrations/catalog.ts: CATALOG (53 entries: 20 T1 / 21 T2 / 12 T3), lookupIntegration(), ENTERPRISE_TOOLS, LEGACY_PLATFORMS, PACKAGES (6 packages)
 - lib/pricing/calculator.ts: calculatePricing(packageSlug, integrations) → PricingResult, TIER_UNIT_COSTS export; Bronze + 4×T1 = $16,750/$3,650 confirmed
 - lib/pricing/tier-selector.ts: selectTier(input) → TierRecommendation; 6-step priority chain (legacy → ERP → 10+ → zero → overrides → slot-fit)
-- npx tsc --noEmit passes with zero errors
+- vitest.config.ts: Vitest configured with globals=true, node env, @/* alias; "test": "vitest run" in package.json
+- lib/pricing/__tests__/calculator.test.ts: 9 tests — slot logic, overages, mixed tier, Core unlimited, empty integrations, unknown slug
+- lib/pricing/__tests__/tier-selector.test.ts: 31 tests — all 4 LOCKED edge cases, ERP triggers, legacy platform routing, lead/location/tier overrides, slot-fit upgrades
+- All 40 tests pass; npx tsc --noEmit exits 0
 
 ### Phase 2 Progress (02-01 through 02-04 complete)
 - 004_integrations_catalog.sql: tier CHECK(1,2,3), setup_cost/monthly_cost NUMERIC(10,2), RLS
@@ -101,6 +104,9 @@ Progress: [████░░░░░░] 30%
 - CATALOG keys are lowercase-normalized slugs; PACKAGES exported from catalog.ts not types.ts; ENTERPRISE_TOOLS uses display-name variants for intake form matching (03-01)
 - Core package (slots=99) never generates overages in calculatePricing — unlimited slot guard routes all integrations to includedIntegrations (03-02)
 - Legacy platform check is strictly FIRST in selectTier — Shopify/Wix/Squarespace/WordPress always route to legacy path regardless of integration count or ERP presence (03-02)
+- Tests go directly to GREEN — no RED phase needed because source files existed from Plans 03-01/03-02; any future regression will be caught immediately (03-03)
+- vitest.config.ts uses path.resolve(__dirname, '.') so @/* maps to project root, consistent with tsconfig.json paths convention (03-03)
+- Test helper factories t1/t2/t3 and input() neutral-defaults pattern established for all future unit tests (03-03)
 
 ### Pending Todos
 None yet.
@@ -114,6 +120,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-02T22:08:48Z
-Stopped at: Completed 03-02-PLAN.md — pricing calculator + tier recommendation engine
+Last session: 2026-03-02T22:15:00Z
+Stopped at: Completed 03-03-PLAN.md — Vitest setup + 40 passing pricing engine unit tests (Phase 3 COMPLETE)
 Resume file: None

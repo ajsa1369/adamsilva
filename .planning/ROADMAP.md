@@ -12,7 +12,7 @@ This roadmap builds the full commercial layer on top of the existing ASCv2 site.
 
 - [x] **Phase 1: Design System & UI Foundation** - Shared tokens + 9 reusable components (dark/light, mobile-first)
 - [ ] **Phase 2: Supabase Schema & Data Architecture** - 7 new tables with RLS + seeded integration catalog + edge function scaffolding
-- [ ] **Phase 3: Integration Catalog & Pricing Engine** - TypeScript catalog lib + slot/overage calculator + tier recommender + unit tests
+- [x] **Phase 3: Integration Catalog & Pricing Engine** - TypeScript catalog lib + slot/overage calculator + tier recommender + unit tests (completed 2026-03-02)
 - [ ] **Phase 4: Agentic Intake Agent** - Conversational /get-started flow → proposal generation → PDF → email → CRM → follow-up
 - [ ] **Phase 5: Topical Authority Map Agent** - Monthly research pipeline → content calendar → client approval email (Vercel Cron)
 - [ ] **Phase 6: Blog Post Production Pipeline** - Image gen → Remotion video → heavy schema → Strapi publish → Vercel Cron schedule
@@ -167,7 +167,7 @@ Note: Phase 8 depends on Phase 3 (not Phase 7) — can begin after Phase 3 compl
 |-------|----------------|--------|-----------|
 | 1. Design System & UI Foundation | 2/2 | Complete | 2026-03-02 |
 | 2. Supabase Schema & Data Architecture | 4/6 | In Progress|  |
-| 3. Integration Catalog & Pricing Engine | 2/3 | In Progress|  |
+| 3. Integration Catalog & Pricing Engine | 3/3 | Complete   | 2026-03-02 |
 | 4. Agentic Intake Agent | 0/? | Not started | - |
 | 5. Topical Authority Map Agent | 0/? | Not started | - |
 | 6. Blog Post Production Pipeline | 0/? | Not started | - |
