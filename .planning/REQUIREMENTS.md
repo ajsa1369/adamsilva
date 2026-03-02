@@ -33,14 +33,14 @@ Requirements for ASC Commercial Platform v1.0. Each maps to roadmap phases.
 ### Intake Agent (INTAKE)
 
 - [ ] **INTAKE-01**: Prospect can start a conversational intake flow at `/get-started` and answer questions about their business, stack, and goals
-- [ ] **INTAKE-02**: Agent detects the prospect's website platform and routes to legacy warning path (Shopify/Wix/Squarespace/WordPress) or full package path (headless/custom)
-- [ ] **INTAKE-03**: Agent looks up each named tool against the integration catalog and classifies it (Tier 1/2/3)
-- [ ] **INTAKE-04**: Agent generates a complete proposal (tier recommendation, setup total, monthly total, integration line items) at end of conversation
-- [ ] **INTAKE-05**: Generated proposal is stored in Supabase proposals table
-- [ ] **INTAKE-06**: Prospect receives a PDF proposal via email automatically (Resend or existing email-service edge function)
-- [ ] **INTAKE-07**: A contact + deal is created in ASC's CRM via configurable webhook upon proposal generation
+- [x] **INTAKE-02**: Agent detects the prospect's website platform and routes to legacy warning path (Shopify/Wix/Squarespace/WordPress) or full package path (headless/custom)
+- [x] **INTAKE-03**: Agent looks up each named tool against the integration catalog and classifies it (Tier 1/2/3)
+- [x] **INTAKE-04**: Agent generates a complete proposal (tier recommendation, setup total, monthly total, integration line items) at end of conversation
+- [x] **INTAKE-05**: Generated proposal is stored in Supabase proposals table
+- [x] **INTAKE-06**: Prospect receives a PDF proposal via email automatically (Resend or existing email-service edge function)
+- [x] **INTAKE-07**: A contact + deal is created in ASC's CRM via configurable webhook upon proposal generation
 - [ ] **INTAKE-08**: A 48-hour follow-up sequence is triggered if no strategy call is booked after proposal delivery
-- [ ] **INTAKE-09**: LLM provider is never hardcoded — all AI calls use MODEL_PROVIDER environment variable
+- [x] **INTAKE-09**: LLM provider is never hardcoded — all AI calls use MODEL_PROVIDER environment variable
 
 ### Authority Map Agent (AUTHMAP)
 
@@ -137,14 +137,14 @@ Which phases cover which requirements. Populated during roadmap creation.
 | PRICE-03 | Phase 3 | Complete |
 | PRICE-04 | Phase 3 | Complete |
 | INTAKE-01 | Phase 4 | Pending |
-| INTAKE-02 | Phase 4 | Pending |
-| INTAKE-03 | Phase 4 | Pending |
-| INTAKE-04 | Phase 4 | Pending |
-| INTAKE-05 | Phase 4 | Pending |
-| INTAKE-06 | Phase 4 | Pending |
-| INTAKE-07 | Phase 4 | Pending |
+| INTAKE-02 | Phase 4 | Complete |
+| INTAKE-03 | Phase 4 | Complete |
+| INTAKE-04 | Phase 4 | Complete |
+| INTAKE-05 | Phase 4 | Complete |
+| INTAKE-06 | Phase 4 | Complete |
+| INTAKE-07 | Phase 4 | Complete |
 | INTAKE-08 | Phase 4 | Pending |
-| INTAKE-09 | Phase 4 | Pending |
+| INTAKE-09 | Phase 4 | Complete |
 | AUTHMAP-01 | Phase 5 | Pending |
 | AUTHMAP-02 | Phase 5 | Pending |
 | AUTHMAP-03 | Phase 5 | Pending |
