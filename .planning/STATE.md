@@ -3,12 +3,12 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: unknown
-last_updated: "2026-03-02T22:53:00Z"
+last_updated: "2026-03-02T22:59:55.646Z"
 progress:
-  total_phases: 10
+  total_phases: 4
   completed_phases: 3
   total_plans: 16
-  completed_plans: 12
+  completed_plans: 13
 ---
 
 # GSD State — ASC Commercial Platform
@@ -23,9 +23,9 @@ See: .planning/PROJECT.md (updated 2026-03-02)
 ## Current Position
 
 Phase: 4 of 10 (Agentic Intake Agent)
-Plan: 1 of 5 completed
+Plan: 4 of 5 completed
 Status: In progress
-Last activity: 2026-03-02 — Completed 04-01 (lib/intake foundation: types, model, tools)
+Last activity: 2026-03-02 — Completed 04-04 (generate-proposal + send-proposal-email edge functions)
 
 Progress: [████████░░] 40%
 
@@ -48,6 +48,7 @@ Progress: [████████░░] 40%
 **Recent Trend:**
 - Last 5 plans: 02-02 (2 min), 02-03 (2 min), 02-04 (2 min), 03-01 (1 min), 03-02 (1 min), 04-01 (5 min)
 - Trend: Type/catalog/algorithm tasks completing quickly; API version fixes add ~3 min
+| Phase 04-agentic-intake-agent P04 | 4 | 2 tasks | 2 files |
 
 ## Accumulated Context
 
@@ -86,12 +87,14 @@ Progress: [████████░░] 40%
 - 010_press_releases.sql: wire_service CHECK(5), status CHECK(5), schema_json JSONB, RLS + idempotent FK patch fk_blog_posts_authority_map
 - supabase/migrations/ is now git-tracked (fixed .gitignore **/*.sql issue)
 
-### Phase 4 Progress (04-01 complete)
+### Phase 4 Progress (04-01, 04-04 complete)
 - lib/intake/types.ts: ProspectData, ProposalLineItem, ProposalData — shared contracts for all Phase 4 plans
 - lib/intake/model.ts: getIntakeModel() — MODEL_PROVIDER routing (anthropic default / openai if set)
 - lib/intake/tools.ts: 5 tools (lookupIntegration, detectPlatformTier, calculateProposal, generateProposalPDF, saveToCRM), intakeTools barrel export
 - saveToCRMTool: single orchestration — generate-proposal → send-proposal-email → CRM webhook
 - ai@6 API: uses inputSchema (not parameters), execute receives (input, options) not destructured args
+- supabase/functions/generate-proposal/index.ts: full Deno implementation — validates 5 required fields, inserts 13 columns to proposals table via service role REST API, returns { success, proposal_id }
+- supabase/functions/send-proposal-email/index.ts: full Deno implementation — branded HTML email with pricing summary + PDF CTA + strategy call CTA via Resend, returns { success, email_id }
 
 ### Key Decisions
 - MODEL_PROVIDER env var (never hardcode LLM provider) — enforced in INTAKE-09
@@ -119,6 +122,9 @@ Progress: [████████░░] 40%
 - ai@6 uses LanguageModel (not LanguageModelV1) — model.ts imports LanguageModel type (04-01)
 - ai@6 execute() receives (input, options) not destructured params — all tools access input.fieldName (04-01)
 - saveToCRMTool is single orchestration point for proposal delivery — avoids onFinish missing-fields bug (04-01)
+- generate-proposal uses Prefer: return=representation to get proposal_id from insert without a second query (04-04)
+- JSONB columns (integrations_detected, goals) serialized via JSON.stringify before Supabase REST insert (04-04)
+- send-proposal-email branded HTML uses brand colors #1B2E4B + #4D8EC0 matching design tokens; proposal_delivery Resend tag for analytics (04-04)
 
 ### Pending Todos
 None yet.
@@ -132,6 +138,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-02T22:53:00Z
-Stopped at: Completed 04-01-PLAN.md — lib/intake foundation (types, model, tools) for agentic intake agent
+Last session: 2026-03-02T23:01:28Z
+Stopped at: Completed 04-04-PLAN.md — generate-proposal and send-proposal-email edge functions
 Resume file: None
