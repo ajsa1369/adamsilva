@@ -8,12 +8,17 @@
 
 import { createAnthropic } from '@ai-sdk/anthropic'
 import { createOpenAI } from '@ai-sdk/openai'
+import { createGoogleGenerativeAI } from '@ai-sdk/google'
 import type { LanguageModel } from 'ai'
 
 export function getIntakeModel(): LanguageModel {
-  const provider = process.env.MODEL_PROVIDER ?? 'anthropic'
+  const provider = process.env.MODEL_PROVIDER ?? 'google'
   if (provider === 'openai') {
     return createOpenAI()('gpt-4o')
   }
-  return createAnthropic()('claude-sonnet-4-5-20251001')
+  if (provider === 'anthropic') {
+    return createAnthropic()('claude-sonnet-4-5-20251001')
+  }
+  // Default: Google Gemini (free tier — gemini-2.0-flash)
+  return createGoogleGenerativeAI()('gemini-2.0-flash')
 }
