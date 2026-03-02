@@ -51,11 +51,31 @@ Existing variables to preserve:
 
 Design tokens MUST re-export these as typed constants, not redefine the font stack.
 
+### Mode (LOCKED — user directive: "do not do a dark mode")
+
+Light mode ONLY. No dark mode. No `data-theme` toggle. No `[data-theme="light"]` override block.
+
+The globals.css `@theme` block must be updated to use **light mode values as the default** (replace the dark navy/black background with light surface values). The existing `[data-theme="light"]` block will be removed — those values become the permanent defaults.
+
+New light-mode `@theme` defaults (replace dark-mode values):
+- `--color-base`: `#f8faff` (was `#060d1f`)
+- `--color-surface`: `#eef2ff` (was `#0a1628`)
+- `--color-surface-2`: `#e0e9ff` (was `#0e1e38`)
+- `--color-surface-3`: `#d0ddff` (was `#162440`)
+- `--color-primary`: `#1d4ed8` (was `#0ea5e9`)
+- `--color-accent`: `#2563eb` (was `#0ea5e9`)
+- `--color-accent-hover`: `#1d4ed8` (was `#38bdf8`)
+- `--color-text`: `#0a0f1e` (was `#f0f6ff`)
+- `--color-muted`: `#374151` (was `#94a3b8`)
+- `--color-muted-2`: `#6b7280` (was `#64748b`)
+- `--color-border`: `rgba(0,0,0,0.1)` (was `rgba(255,255,255,0.08)`)
+- `--color-border-hover`: `rgba(37,99,235,0.4)` (was `rgba(14,165,233,0.4)`)
+
 ### Tailwind v4 Approach
 
 - Use `@theme` block in globals.css for CSS variables (already done)
 - Components use Tailwind utility classes that reference CSS vars (e.g. `bg-[var(--color-surface)]`)
-- Dark/light mode via `data-theme="light"` attribute on `<html>` (existing pattern)
+- NO dark mode, NO `data-theme` toggle, NO `prefers-color-scheme` media query
 - NO arbitrary values unless unavoidable
 - Mobile-first (375px base, responsive up)
 
@@ -144,6 +164,7 @@ export const spacing = { ... } as const
 <deferred>
 ## Deferred Ideas
 
+- Dark mode / dark theme — user directive: light mode only
 - Storybook setup — too heavy for v1, defer to v2
 - Animation library (Framer Motion) — not needed for Phase 1 components
 - Icon library beyond what's already in the codebase — defer to per-phase needs

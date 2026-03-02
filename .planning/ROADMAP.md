@@ -30,7 +30,7 @@ This roadmap builds the full commercial layer on top of the existing ASCv2 site.
 **Success Criteria** (what must be TRUE):
   1. Developer can import design tokens from `lib/design-tokens.ts` and apply color, typography, and spacing values without hardcoding hex or pixel values anywhere
   2. All 9 components (Button, Card, Badge, ChatBubble, ProposalCard, PricingTable, ComparisonTable, IntakeStep, PlatformWarning) render correctly in isolation with no TypeScript errors
-  3. Each component toggles correctly between dark and light mode without layout shift
+  3. All components render correctly in light mode with no dark mode styles or selectors present
   4. All components display correctly on a 375px mobile viewport (no overflow, no broken grid)
 **Plans**: 2 plans
 
