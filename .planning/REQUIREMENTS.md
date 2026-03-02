@@ -26,8 +26,8 @@ Requirements for ASC Commercial Platform v1.0. Each maps to roadmap phases.
 ### Pricing Engine (PRICE)
 
 - [x] **PRICE-01**: System can classify any integration as Tier 1 ($750 setup / $150/mo), Tier 2 ($1,500 / $250/mo), or Tier 3 ($3,000–5,000 / $400–600/mo)
-- [ ] **PRICE-02**: System can calculate total setup + monthly cost given a list of integrations against any package tier (slot logic + overage math)
-- [ ] **PRICE-03**: System can recommend the optimal tier given: integration count, monthly lead volume, goals selected, platform type, and location count
+- [x] **PRICE-02**: System can calculate total setup + monthly cost given a list of integrations against any package tier (slot logic + overage math)
+- [x] **PRICE-03**: System can recommend the optimal tier given: integration count, monthly lead volume, goals selected, platform type, and location count
 - [ ] **PRICE-04**: Pricing engine is covered by unit tests (slot logic, overage, tier recommendation)
 
 ### Intake Agent (INTAKE)
@@ -133,8 +133,8 @@ Which phases cover which requirements. Populated during roadmap creation.
 | DATA-06 | Phase 2 | Complete |
 | DATA-07 | Phase 2 | Complete |
 | PRICE-01 | Phase 3 | Complete |
-| PRICE-02 | Phase 3 | Pending |
-| PRICE-03 | Phase 3 | Pending |
+| PRICE-02 | Phase 3 | Complete |
+| PRICE-03 | Phase 3 | Complete |
 | PRICE-04 | Phase 3 | Pending |
 | INTAKE-01 | Phase 4 | Pending |
 | INTAKE-02 | Phase 4 | Pending |
