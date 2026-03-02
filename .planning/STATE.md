@@ -3,12 +3,12 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: unknown
-last_updated: "2026-03-02T21:49:23.621Z"
+last_updated: "2026-03-02T22:06:00Z"
 progress:
-  total_phases: 2
+  total_phases: 3
   completed_phases: 2
-  total_plans: 8
-  completed_plans: 8
+  total_plans: 11
+  completed_plans: 10
 ---
 
 # GSD State — ASC Commercial Platform
@@ -18,16 +18,16 @@ progress:
 See: .planning/PROJECT.md (updated 2026-03-02)
 
 **Core value:** Every prospect gets an instant, accurate, branded proposal — no sales calls required to qualify.
-**Current focus:** Phase 2 — Supabase Schema & Data Architecture
+**Current focus:** Phase 3 — Integration Catalog & Pricing Engine
 
 ## Current Position
 
-Phase: 2 of 10 (Supabase Schema & Data Architecture)
-Plan: 4 of 4 completed
+Phase: 3 of 10 (Integration Catalog & Pricing Engine)
+Plan: 1 of 3 completed
 Status: In progress
-Last activity: 2026-03-02 — Completed 02-01 through 02-04 (migrations + seeds + edge scaffolds)
+Last activity: 2026-03-02 — Completed 03-01 (pricing types + 53-entry catalog)
 
-Progress: [██░░░░░░░░] 20%
+Progress: [███░░░░░░░] 27%
 
 ## Performance Metrics
 
@@ -42,10 +42,11 @@ Progress: [██░░░░░░░░] 20%
 |-------|-------|-------|----------|
 | 01-design-system-ui-foundation | 1/2 | 4 min | 4 min |
 | 02-supabase-schema-data-architecture | 4/6 | 2 min | 0.5 min |
+| 03-integration-catalog-pricing-engine | 1/3 | 1 min | 1 min |
 
 **Recent Trend:**
-- Last 5 plans: 01-01 (4 min), 02-01 (1 min), 02-02 (2 min), 02-03 (2 min), 02-04 (2 min)
-- Trend: Migration tasks completing quickly
+- Last 5 plans: 01-01 (4 min), 02-01 (1 min), 02-02 (2 min), 02-03 (2 min), 02-04 (2 min), 03-01 (1 min)
+- Trend: Type/catalog tasks completing quickly
 
 ## Accumulated Context
 
@@ -63,6 +64,11 @@ Progress: [██░░░░░░░░] 20%
 - components/ui/Button.tsx: 4 variants, 3 sizes, loading spinner, href-as-anchor
 - components/ui/Card.tsx: default/glass variants, 4 padding sizes, polymorphic as prop
 - components/ui/Badge.tsx: 14 variants (5 tier, 4 status, 3 protocol, 1 default/info)
+
+### Phase 3 Progress (03-01 complete)
+- lib/pricing/types.ts: 7 named TypeScript exports (IntegrationTier, CatalogEntry, IntegrationSelection, PackageDefinition, PricingResult, TierSelectorInput, TierRecommendation)
+- lib/integrations/catalog.ts: CATALOG (53 entries: 20 T1 / 21 T2 / 12 T3), lookupIntegration(), ENTERPRISE_TOOLS, LEGACY_PLATFORMS, PACKAGES (6 packages)
+- npx tsc --noEmit passes with zero errors
 
 ### Phase 2 Progress (02-01 through 02-04 complete)
 - 004_integrations_catalog.sql: tier CHECK(1,2,3), setup_cost/monthly_cost NUMERIC(10,2), RLS
@@ -90,6 +96,7 @@ Progress: [██░░░░░░░░] 20%
 - month stored as TEXT ('YYYY-MM') not DATE in authority_maps — simpler string comparison for monthly queries (02-02)
 - channel and outcome use TEXT CHECK constraints not PostgreSQL ENUM — easier to extend without migration (02-02)
 - FK from blog_posts.authority_map_id deferred to migration 010 via idempotent DO block — prevents creation order dependency (02-02)
+- CATALOG keys are lowercase-normalized slugs; PACKAGES exported from catalog.ts not types.ts; ENTERPRISE_TOOLS uses display-name variants for intake form matching (03-01)
 
 ### Pending Todos
 None yet.
@@ -103,6 +110,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-02T21:33:05Z
-Stopped at: Completed 02-02-PLAN.md — authority_maps, chatbot_sessions, press_releases migrations done
+Last session: 2026-03-02T22:06:00Z
+Stopped at: Completed 03-01-PLAN.md — pricing types + 53-entry static integration catalog
 Resume file: None
