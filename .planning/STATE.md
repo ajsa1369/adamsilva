@@ -3,12 +3,12 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: unknown
-last_updated: "2026-03-03T03:42:49.209Z"
+last_updated: "2026-03-03T04:29:34.923Z"
 progress:
-  total_phases: 6
+  total_phases: 7
   completed_phases: 6
-  total_plans: 22
-  completed_plans: 22
+  total_plans: 27
+  completed_plans: 23
 ---
 
 # GSD State — ASC Commercial Platform
@@ -18,16 +18,16 @@ progress:
 See: .planning/PROJECT.md (updated 2026-03-02)
 
 **Core value:** Every prospect gets an instant, accurate, branded proposal — no sales calls required to qualify.
-**Current focus:** Phase 6 — Blog Post Production Pipeline. COMPLETE — all 4 plans done.
+**Current focus:** Phase 7 — Press Release Engine. Plan 01 complete — types and migration.
 
 ## Current Position
 
-Phase: 6 of 10 (Blog Post Production Pipeline) — COMPLETE
-Plan: 4 of 4 completed
-Status: 06-04 complete — lib/insights/draft-generator.ts (AI 2000-word article generation), app/api/insights/publish/route.ts (daily cron with 36h throttle), vercel.json (4th cron entry), generate route content stub replaced with generateDraft()
-Last activity: 2026-03-03 — Completed 06-04 (draft-generator, publish cron, vercel.json update, generate route integration)
+Phase: 7 of 10 (Press Release Engine) — IN PROGRESS
+Plan: 1 of 5 completed
+Status: 07-01 complete — lib/press-release/types.ts (9 TypeScript interfaces), supabase/migrations/013_press_releases_phase7_columns.sql (Phase 7 columns + wire_service drop)
+Last activity: 2026-03-03 — Completed 07-01 (types.ts, migration 013)
 
-Progress: [████████████] 60%
+Progress: [█████████████] 65%
 
 ## Performance Metrics
 
@@ -51,6 +51,7 @@ Progress: [████████████] 60%
 | Phase 04-agentic-intake-agent P05 | 2 | 2 tasks | 4 files |
 | Phase 05-topical-authority-map-agent P02 | 3 | 2 tasks | 5 files |
 | Phase 06 P03 | 2 | 1 tasks | 2 files |
+| Phase 07 P01 | 5 | 2 tasks | 2 files |
 
 ## Accumulated Context
 
@@ -138,6 +139,10 @@ Progress: [████████████] 60%
 - generate/route.ts content field: stub replaced with await generateDraft(topic, authorName, siteUrl)
 
 ### Key Decisions
+- Migration named 013 not 011 — migrations 011/012 already used for seed data (integrations_catalog + packages) (07-01)
+- wire_service column dropped via DO block — Phase 7 uses wire_results JSONB array (WireSubmitResult[]) not single text value (07-01)
+- import type (never value import) from @/lib/insights/types — no runtime coupling between lib modules (07-01)
+- headline + body columns added to migration 013 — migration 010 used title/draft_text which don't map to PressReleasePost interface (07-01)
 - maxOutputTokens (not maxTokens) — ai@6 renamed this param; plan used v3/v4 name; auto-fixed Rule 1 (06-04)
 - resolveCta() regex keyword matching — 6 paths covering all ASC services; pure function, zero latency, deterministic (06-04)
 - PUBLISH_INTERVAL_MS = 36h hardcoded constant — not configurable; prevents SEO cadence mistakes (06-04)
@@ -217,6 +222,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-03T03:38:00Z
-Stopped at: Completed 06-04-PLAN.md — draft-generator.ts (AI 2000-word article), publish cron route (36h throttle), vercel.json (4th cron), generate route content stub replaced. Phase 6 COMPLETE (4/4 plans done).
+Last session: 2026-03-03T04:32:00Z
+Stopped at: Completed 07-01-PLAN.md — lib/press-release/types.ts (9 TypeScript interfaces), supabase/migrations/013_press_releases_phase7_columns.sql (Phase 7 columns + wire_service drop). Phase 7 Plan 1 of 5 complete.
 Resume file: None

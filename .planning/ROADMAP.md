@@ -139,7 +139,14 @@ Plans:
   2. Every generated press release includes a NewsArticle schema block and an AB 2013 / SB 942 AI transparency label — both present without manual addition
   3. A 60-second Remotion video sidecar with VideoObject JSON-LD is generated alongside the press release draft
   4. The press release can be submitted to at least one configured wire service (Business Wire, PR Newswire, EIN Presswire, or AccessWire) via the distribution integration
-**Plans**: TBD
+**Plans**: 5 plans
+
+Plans:
+- [ ] 07-01-PLAN.md — TypeScript contracts + Supabase migration 011: lib/press-release/types.ts, supabase/migrations/011_press_releases.sql
+- [ ] 07-02-PLAN.md — Draft generator + compliance module: lib/press-release/draft-generator.ts, lib/press-release/compliance.ts
+- [ ] 07-03-PLAN.md — Schema builder + media pipeline: lib/press-release/schema-builder.ts, lib/press-release/media-pipeline.ts
+- [ ] 07-04-PLAN.md — Researcher + 4 wire adapters + distributor: lib/press-release/researcher.ts, lib/press-release/wire-adapters/*.ts, lib/press-release/distributor.ts
+- [ ] 07-05-PLAN.md — API route orchestration + env vars: app/api/press-release/generate/route.ts, .env.example
 
 ### Phase 8: Site Chatbot Module
 **Goal**: ASC can deploy a fully functional, CRM-connected chatbot on any client site — including Shopify — via a single script tag, with multi-channel delivery tied to package tier
@@ -190,7 +197,7 @@ Note: Phase 8 depends on Phase 3 (not Phase 7) — can begin after Phase 3 compl
 | 4. Agentic Intake Agent | 5/5 | Complete    | 2026-03-03 |
 | 5. Topical Authority Map Agent | 2/2 | Complete   | 2026-03-03 |
 | 6. Blog Post Production Pipeline | 4/4 | Complete   | 2026-03-03 |
-| 7. Press Release Engine | 0/? | Not started | - |
+| 7. Press Release Engine | 1/5 | In Progress|  |
 | 8. Site Chatbot Module | 0/? | Not started | - |
 | 9. Package Pages & Marketing Site | 0/? | Not started | - |
 | 10. Vercel MCP Server & Protocol Stack | 0/? | Not started | - |
@@ -203,3 +210,4 @@ Note: Phase 8 depends on Phase 3 (not Phase 7) — can begin after Phase 3 compl
 *Phase 4 planned: 2026-03-02 — 5 plans*
 *Phase 5 planned: 2026-03-03 — 2 plans*
 *Phase 6 planned: 2026-03-03 — 2 plans*
+*Phase 7 planned: 2026-03-03 — 5 plans*

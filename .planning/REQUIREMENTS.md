@@ -60,8 +60,8 @@ Requirements for ASC Commercial Platform v1.0. Each maps to roadmap phases.
 
 ### Press Release Engine (PR)
 
-- [ ] **PR-01**: System can generate a 300–500 word press release draft in inverted pyramid format from a topic or news event input
-- [ ] **PR-02**: NewsArticle schema is applied at origin publication; AI transparency label (AB 2013 / SB 942) is included
+- [x] **PR-01**: System can generate a 300–500 word press release draft in inverted pyramid format from a topic or news event input
+- [x] **PR-02**: NewsArticle schema is applied at origin publication; AI transparency label (AB 2013 / SB 942) is included
 - [ ] **PR-03**: A 60-second Remotion video sidecar with VideoObject JSON-LD is generated alongside each press release
 - [ ] **PR-04**: Press release is distributed via configurable wire service (Business Wire, PR Newswire, EIN Presswire, or AccessWire)
 
@@ -155,8 +155,8 @@ Which phases cover which requirements. Populated during roadmap creation.
 | BLOG-04 | Phase 6 | Complete |
 | BLOG-05 | Phase 6 | Complete |
 | BLOG-06 | Phase 6 | Complete |
-| PR-01 | Phase 7 | Pending |
-| PR-02 | Phase 7 | Pending |
+| PR-01 | Phase 7 | Complete |
+| PR-02 | Phase 7 | Complete |
 | PR-03 | Phase 7 | Pending |
 | PR-04 | Phase 7 | Pending |
 | CHAT-01 | Phase 8 | Pending |
