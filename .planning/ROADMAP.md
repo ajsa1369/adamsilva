@@ -126,9 +126,9 @@ Plans:
 
 Plans:
 - [x] 06-01-PLAN.md — TypeScript contracts + image pipeline (sharp+XMP) + video pipeline (Remotion still+WebVTT): lib/insights/types.ts, lib/insights/image-pipeline.ts, lib/insights/video-pipeline.ts
-- [ ] 06-02-PLAN.md — Schema assembler + orchestration route + monthly batch cron: lib/insights/schema-assembler.ts, app/api/insights/generate/route.ts, app/api/insights/cron/route.ts, vercel.json, .env.example
-- [ ] 06-03-PLAN.md — Google video sitemap + robots.txt: app/video-sitemap.xml/route.ts
-- [ ] 06-04-PLAN.md — AI draft generator + 1.5-day publishing cron: lib/insights/draft-generator.ts, app/api/insights/publish/route.ts, vercel.json update
+- [x] 06-02-PLAN.md — Schema assembler + orchestration route + monthly batch cron: lib/insights/schema-assembler.ts, app/api/insights/generate/route.ts, app/api/insights/cron/route.ts, vercel.json, .env.example
+- [x] 06-03-PLAN.md — Google video sitemap + robots.txt: app/video-sitemap.xml/route.ts
+- [x] 06-04-PLAN.md — AI draft generator + 1.5-day publishing cron: lib/insights/draft-generator.ts, app/api/insights/publish/route.ts, vercel.json update
 
 ### Phase 7: Press Release Engine
 **Goal**: ASC can produce a complete, compliant, wire-ready press release with video sidecar from a single topic input — meeting AI transparency law requirements automatically
@@ -189,7 +189,7 @@ Note: Phase 8 depends on Phase 3 (not Phase 7) — can begin after Phase 3 compl
 | 3. Integration Catalog & Pricing Engine | 3/3 | Complete   | 2026-03-02 |
 | 4. Agentic Intake Agent | 5/5 | Complete    | 2026-03-03 |
 | 5. Topical Authority Map Agent | 2/2 | Complete   | 2026-03-03 |
-| 6. Blog Post Production Pipeline | 3/4 | In Progress|  |
+| 6. Blog Post Production Pipeline | 4/4 | Complete   | 2026-03-03 |
 | 7. Press Release Engine | 0/? | Not started | - |
 | 8. Site Chatbot Module | 0/? | Not started | - |
 | 9. Package Pages & Marketing Site | 0/? | Not started | - |
