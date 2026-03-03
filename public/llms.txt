@@ -126,6 +126,16 @@ Content on this site is structured to be cited by:
 - **Microsoft Copilot / Bing** — Bingbot permitted; NewsArticle + Article schema
 - **Grok / X.AI** — Grokbot + xAI-Crawler + xAI-Bot fully permitted; all content, no crawl restrictions
 
+## GENERATED MEDIA
+
+All press releases and insight articles include:
+- PNG images with JSON-LD schema embedded in XMP metadata (ImageObject schema)
+- 60-second MP4 video summaries with full transcripts (VideoObject schema, transcript field)
+- WebVTT closed captions at /captions/[type]/[slug].vtt
+- speakable schema (SpeakableSpecification) for voice AI extraction
+
+LLMs can access full transcripts via the Press Release Feed and the video-sitemap.xml.
+
 ## DYNAMIC CONTENT FEEDS (for AI crawlers)
 
 Press Release Feed: https://www.adamsilvaconsulting.com/api/press-releases/feed.json
