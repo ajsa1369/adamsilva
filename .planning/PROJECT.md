@@ -26,31 +26,34 @@ Every prospect gets an instant, accurate, branded proposal for exactly what they
 - ✓ Protocol hub pages: /hub/ucp, /hub/acp, /hub/ap2 — ASCv2
 - ✓ Tool pages: /tools/token-calculator, /tools/protocol-checker, /tools/aeo-score — ASCv2
 
+- ✓ Design system: tokens, 9 reusable components — v1.0 Phase 1
+- ✓ Supabase schema: 7 tables with RLS — v1.0 Phase 2
+- ✓ Integration catalog + pricing engine — v1.0 Phase 3
+- ✓ Agentic intake chatbot + proposal PDF + email + CRM — v1.0 Phase 4
+- ✓ Topical authority map agent — v1.0 Phase 5
+- ✓ Blog post production pipeline — v1.0 Phase 6
+- ✓ Press release engine — v1.0 Phase 7
+- ✓ Site chatbot module (10 CRM adapters, multi-channel) — v1.0 Phase 8
+- ✓ Package pages + ROI calculator + platform checker — v1.0 Phase 9
+
 ### Active
 
-<!-- Current scope — milestone v1.0: ASC Commercial Platform -->
+<!-- Current scope — milestone v2.0: Stripe Payment Integration -->
 
-- [ ] Design system: tokens, component library (Button, Card, Badge, ChatBubble, ProposalCard, PricingTable, ComparisonTable, IntakeStep, PlatformWarning)
-- [ ] Supabase schema: integrations_catalog, packages, proposals, blog_posts, authority_maps, chatbot_sessions, press_releases (all with RLS)
-- [ ] Integration catalog (all Tier 1/2/3 tools) seeded in Supabase + TypeScript lib
-- [ ] Pricing engine: slot logic, overage calculation, tier recommendation engine
-- [ ] Agentic intake chatbot at /get-started — prospect qualifies, stack detected, proposal generated and delivered
-- [ ] PDF proposal generation + email delivery via Resend
-- [ ] CRM webhook (configurable) + 48-hour follow-up sequence trigger
-- [ ] Topical authority map agent — monthly research pipeline → content calendar per client
-- [ ] Blog post production pipeline — image gen, Remotion video, heavy schema, Strapi publish
-- [ ] Press release engine — draft, NewsArticle schema, Remotion video sidecar, wire service distribution
-- [ ] Site chatbot module — embeddable widget, 10 CRM adapters, multi-channel (Web/SMS/Voice/WhatsApp)
-- [ ] Package comparison pages (/packages, /packages/[tier]), platform compatibility checker (/platform-check)
-- [ ] ROI calculator component
-- [ ] ASC MCP server (app/api/asc/[transport]) with 6 tools
-- [ ] Dynamic /.well-known/* routes via artifact generator
-- [ ] Vercel Cron for monthly authority map + blog schedule
+- [ ] Stripe Products/Prices for all 6 package tiers (setup + monthly)
+- [ ] Wire/ACH payment processing for setup fees ($8.5K–$125K+)
+- [ ] Stripe Subscriptions for monthly retainers ($2K–$12K/mo)
+- [ ] ACP protocol integration — real Stripe Checkout Sessions via /api/acp/checkout
+- [ ] UCP discovery update — advertise real payment methods in /.well-known/ucp
+- [ ] AP2 mandate service — wire transfer enforcement for large amounts
+- [ ] Stripe webhook handler (/api/stripe/webhook) for payment confirmations
+- [ ] Chargeback protection strategy (ACH preferred, wire for large, Stripe Radar)
+- [ ] All-sales-final policy enforcement (ToS, signed SOW before payment)
 
 ### Out of Scope
 
 - Real-time multi-user collaboration on proposals — ASC is a one-to-one proposal flow
-- Full e-commerce checkout on-site (proposals close via sales call/Stripe invoicing) — v2+
+- Full shopping cart e-commerce (ASC sells services, not products) — not applicable
 - Native mobile app — web-first, mobile later
 - WordPress/Shopify theme generator — not in service scope
 - Full Strapi admin customization beyond content types — VPS CMS is operational
@@ -88,18 +91,19 @@ Every prospect gets an instant, accurate, branded proposal for exactly what they
 | Legacy platform detection + warning | Honest positioning, upsell to migration path | — Pending |
 | PDFKit or React-PDF for proposals | In-process generation, no external service dep | — Pending |
 
-## Current Milestone: v1.0 — ASC Commercial Platform
+## Current Milestone: v2.0 — Stripe Payment Integration
 
-**Goal:** Build the full commercial layer on ASCv2 — intake agent, pricing engine, content pipelines, chatbot module, package pages, and protocol MCP server.
+**Goal:** Wire real payment processing into the ASC platform so prospects can pay setup fees (wire/ACH) and monthly retainers (Stripe Subscriptions) — with ACP/AP2 protocol integration for AI agent transactions.
 
 **Target features:**
-- Agentic intake chatbot with proposal generation (critical path)
-- Supabase commercial schema (7 new tables) + integration catalog
-- Pricing engine with tier recommendation logic
-- Blog post + press release production pipelines
-- Deployable site chatbot module (10 CRM adapters)
-- Package marketing pages + ROI calculator
-- ASC MCP server with 6 tools
+- Stripe Products/Prices for all 6 package tiers
+- Wire/ACH for setup fees ($8.5K–$125K+) — non-reversible
+- Stripe Subscriptions for monthly retainers ($2K–$12K/mo)
+- Real ACP checkout sessions (AI agents can initiate payment)
+- AP2 wire transfer mandate enforcement for large amounts
+- Webhook handler for payment lifecycle events
+- Chargeback mitigation: ACH preferred, wire for large, Stripe Radar + Chargeback Protection
+- All-sales-final enforcement (ToS + signed SOW gating)
 
 ---
-*Last updated: 2026-03-02 — Milestone v1.0 initialized*
+*Last updated: 2026-03-03 — Milestone v2.0 started*
