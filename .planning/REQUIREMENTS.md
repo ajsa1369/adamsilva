@@ -25,10 +25,10 @@ Requirements for Stripe Payment Integration milestone. Each maps to roadmap phas
 
 ### Webhook Infrastructure (HOOK)
 
-- [ ] **HOOK-01**: System handles Stripe webhooks at `/api/stripe/webhook` using `request.text()` for raw body and `stripe.webhooks.constructEvent()` for signature verification
-- [ ] **HOOK-02**: System logs every webhook event in a `stripe_events` Supabase table for idempotency — duplicate event IDs are silently skipped
+- [x] **HOOK-01**: System handles Stripe webhooks at `/api/stripe/webhook` using `request.text()` for raw body and `stripe.webhooks.constructEvent()` for signature verification
+- [x] **HOOK-02**: System logs every webhook event in a `stripe_events` Supabase table for idempotency — duplicate event IDs are silently skipped
 - [ ] **HOOK-03**: Webhook handler updates Supabase order/subscription status on key events: `payment_intent.succeeded`, `payment_intent.payment_failed`, `invoice.paid`, `invoice.payment_failed`, `customer.subscription.updated`, `customer.subscription.deleted`
-- [ ] **HOOK-04**: Webhook route uses `runtime = 'nodejs'` (not Edge) and does not parse request body as JSON
+- [x] **HOOK-04**: Webhook route uses `runtime = 'nodejs'` (not Edge) and does not parse request body as JSON
 
 ### Payment State Machine (STATE)
 
@@ -98,9 +98,9 @@ Which phases cover which requirements. Updated during roadmap creation.
 | STRIPE-02 | Phase 10 | Complete |
 | STRIPE-03 | Phase 10 | Complete |
 | STRIPE-04 | Phase 10 | Pending |
-| HOOK-01 | Phase 10 | Pending |
-| HOOK-02 | Phase 10 | Pending |
-| HOOK-04 | Phase 10 | Pending |
+| HOOK-01 | Phase 10 | Complete |
+| HOOK-02 | Phase 10 | Complete |
+| HOOK-04 | Phase 10 | Complete |
 | STATE-01 | Phase 11 | Pending |
 | STATE-02 | Phase 11 | Pending |
 | STATE-03 | Phase 11 | Pending |

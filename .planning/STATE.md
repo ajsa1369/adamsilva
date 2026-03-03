@@ -18,16 +18,16 @@ progress:
 See: .planning/PROJECT.md (updated 2026-03-03)
 
 **Core value:** Every prospect gets an instant, accurate, branded proposal — no sales calls required to qualify.
-**Current focus:** Milestone v2.0 — Stripe Payment Integration (Phase 10, Plan 2 next)
+**Current focus:** Milestone v2.0 — Stripe Payment Integration (Phase 10, Plan 3 complete — Phase 10 done)
 
 ## Current Position
 
 Phase: 10 of 13 (Stripe Foundation)
-Plan: 1 of 3 in current phase (completed)
-Status: In progress — 10-01 complete, ready for 10-02
-Last activity: 2026-03-03 — 10-01 executed (Stripe client, types, Supabase service client)
+Plan: 3 of 3 in current phase (completed — phase complete)
+Status: In progress — 10-03 complete, ready for Phase 11
+Last activity: 2026-03-03 — 10-03 executed (webhook endpoint + stripe_events migration)
 
-Progress: [█░░░░░░░░░] 8%
+Progress: [███░░░░░░░] 23%
 
 ## Performance Metrics
 
@@ -40,7 +40,7 @@ Progress: [█░░░░░░░░░] 8%
 
 | Phase | Plans | Total | Avg/Plan |
 |-------|-------|-------|----------|
-| 10 | 1/3 | 3 min | 3 min |
+| 10 | 3/3 | 11 min | 4 min |
 | 11 | 0/3 | — | — |
 | 12 | 0/4 | — | — |
 | 13 | 0/2 | — | — |
@@ -74,6 +74,10 @@ Progress: [█░░░░░░░░░] 8%
 - **10-01:** API version pinned to 2026-02-25.clover
 - [Phase 10-stripe-foundation]: getEnv() duplicated per module (not shared) — each stripe module is independently importable without pulling in the full SDK singleton
 - [Phase 10-stripe-foundation]: Core tier is explicitly null in StripePriceMap at type level — forces callers in Phase 12/13 to explicitly handle custom-quote flow
+- **10-03:** Log event to stripe_events BEFORE processing — ensures every attempted event is auditable even if handler crashes mid-flight
+- **10-03:** Return 200 with duplicate: true for already-seen event IDs — prevents Stripe infinite retry loop
+- **10-03:** 500 on DB errors (lookup or insert) — instructs Stripe to retry rather than silently drop events
+- **10-03:** Phase 11 handler cases are commented stubs in the switch — keeps clean phase boundary without dead code
 
 ### Pending Todos
 None.
@@ -88,5 +92,5 @@ None.
 ## Session Continuity
 
 Last session: 2026-03-03
-Stopped at: Completed 10-01-PLAN.md (Stripe client, types, Supabase service)
+Stopped at: Completed 10-03-PLAN.md (webhook endpoint + stripe_events migration — Phase 10 complete)
 Resume file: None
