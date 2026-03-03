@@ -12,6 +12,10 @@
     {
       "path": "/api/insights/cron",
       "schedule": "0 10 8-14 * 1"
+    },
+    {
+      "path": "/api/insights/publish",
+      "schedule": "0 6 * * *"
     }
   ]
 }

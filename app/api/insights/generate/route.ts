@@ -2,6 +2,7 @@ import { z } from 'zod'
 import { generateImages } from '@/lib/insights/image-pipeline'
 import { generateVideo } from '@/lib/insights/video-pipeline'
 import { assembleSchema } from '@/lib/insights/schema-assembler'
+import { generateDraft } from '@/lib/insights/draft-generator'
 import { SITE_URL } from '@/lib/schemas/organization'
 import type { ImagePipelineInput, VideoPipelineInput, SchemaAssemblerInput, Citation } from '@/lib/insights/types'
 import type { AuthorityMapTopic } from '@/lib/authority-map/types'
@@ -114,8 +115,11 @@ export async function POST(req: Request): Promise<Response> {
   const postUrl = parsed.data.postUrl ?? `${siteUrl}/insights/${slug}`
   const publishedAt = new Date().toISOString()
   const excerpt = `${topic.title}. An Answer-First deep-dive covering ${topic.targetQueries.slice(0, 2).join(' and ')}.`
-  const content = `[Draft placeholder for ${topic.title}. Full 2000-word content generation is a v2 feature.]`
   const imagesBaseUrl = process.env.INSIGHTS_IMAGES_BASE_URL ?? `${siteUrl}/images/insights`
+
+  // AI-generated 2000+ word article via generateDraft (uses getIntakeModel internally)
+  const draft = await generateDraft(topic, authorName, siteUrl)
+  const content = draft.content
 
   // Step 7: Video pipeline first — generates Remotion still frame (Image 1) + WebVTT CC
   const videoPipelineInput: VideoPipelineInput = {
