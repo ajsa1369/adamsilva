@@ -145,6 +145,10 @@ Progress: [██████████████████] 100%
 - generate/route.ts content field: stub replaced with await generateDraft(topic, authorName, siteUrl)
 
 ### Key Decisions
+- body goes inside DefaultChatTransport not useChat — ai@6 UseChatOptions has no body field; HttpChatTransportInitOptions accepts body?: Resolvable<object> (08-06)
+- iframe embed pattern (not web component) — works on Shopify without framework dependency, no CORS issues, no bundle needed on host page (08-06)
+- Inline hex in embed.js (#4D8EC0, #1B2E4B) — globals.css not loaded on external pages; CSS vars only in ChatWidget.tsx (08-06)
+- sessionId via useRef(crypto.randomUUID()) — stable for widget lifetime; passed in DefaultChatTransport body (08-06)
 - slugToTier() derives tier from clientId prefix convention (e.g., 'gold-acme-xyz' → gold tier) — no Supabase query in Phase 8; Phase 9+ replaces with client-tier mapping table (08-05)
 - stopWhen:stepCountIs(5) replaces maxSteps:5 in generateText() — ai@6 renamed/removed maxSteps; stopWhen is the correct api@6 parameter for step limiting (08-05)
 - SMS 160-char truncation via text.slice(0, 160) enforced server-side — SMS protocol limit; fallback message used if text is empty after truncation (08-05)
@@ -267,6 +271,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-03T06:45:48Z
-Stopped at: Completed 08-05-PLAN.md — channel-router (slugToTier prefix derivation), SMS/Voice/WhatsApp channel modules, 3 inbound webhook API routes with tier enforcement. Phase 8 Plan 5 complete.
+Last session: 2026-03-03T06:48:15Z
+Stopped at: Completed 08-06-PLAN.md (tasks 1-2) — ChatWidget.tsx, /chatbot-widget iframe route, public/chatbot-embed.js, .env.example Phase 8 block. Paused at checkpoint:human-verify for embed script end-to-end testing.
 Resume file: None
