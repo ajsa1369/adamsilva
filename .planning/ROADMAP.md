@@ -171,7 +171,7 @@ Note: v1.0 Phase 10 (Vercel MCP Server) was deferred — ACP/AP2 protocol work f
 **Plans**: 3 plans
 
 Plans:
-- [ ] 10-01-PLAN.md — Stripe SDK singleton, types, env validation, service Supabase client
+- [x] 10-01-PLAN.md — Stripe SDK singleton, types, env validation, service Supabase client
 - [ ] 10-02-PLAN.md — Stripe Products/Prices catalog (Dashboard setup + products.ts typed map)
 - [ ] 10-03-PLAN.md — Webhook endpoint, signature verification, stripe_events idempotency migration
 
@@ -249,7 +249,7 @@ Plans:
 | 7. Press Release | v1.0 | 5/5 | Complete | 2026-03-03 |
 | 8. Site Chatbot | v1.0 | 6/6 | Complete | 2026-03-03 |
 | 9. Package Pages | v1.0 | 3/3 | Complete | 2026-03-03 |
-| 10. Stripe Foundation | v2.0 | 0/3 | Planning complete | - |
+| 10. Stripe Foundation | v2.0 | 1/3 | In progress | - |
 | 11. Payment State Machine | v2.0 | 0/3 | Not started | - |
 | 12. Checkout + Defense + UI | v2.0 | 0/4 | Not started | - |
 | 13. Protocol Integration | v2.0 | 0/2 | Not started | - |
@@ -258,10 +258,10 @@ Plans:
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| STRIPE-01 | 10 | Pending |
+| STRIPE-01 | 10 | Complete (10-01) |
 | STRIPE-02 | 10 | Pending |
 | STRIPE-03 | 10 | Pending |
-| STRIPE-04 | 10 | Pending |
+| STRIPE-04 | 10 | Complete (10-01) |
 | HOOK-01 | 10 | Pending |
 | HOOK-02 | 10 | Pending |
 | HOOK-04 | 10 | Pending |

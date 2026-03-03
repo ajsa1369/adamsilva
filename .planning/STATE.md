@@ -2,13 +2,13 @@
 gsd_state_version: 1.0
 milestone: v2.0
 milestone_name: Stripe Payment Integration
-status: ready_to_plan
-last_updated: "2026-03-03T16:00:00.000Z"
+status: in_progress
+last_updated: "2026-03-03T19:48:00.000Z"
 progress:
   total_phases: 4
   completed_phases: 0
   total_plans: 12
-  completed_plans: 0
+  completed_plans: 1
 ---
 
 # GSD State — ASC Commercial Platform
@@ -18,29 +18,29 @@ progress:
 See: .planning/PROJECT.md (updated 2026-03-03)
 
 **Core value:** Every prospect gets an instant, accurate, branded proposal — no sales calls required to qualify.
-**Current focus:** Milestone v2.0 — Stripe Payment Integration (Phase 10 ready to plan)
+**Current focus:** Milestone v2.0 — Stripe Payment Integration (Phase 10, Plan 2 next)
 
 ## Current Position
 
 Phase: 10 of 13 (Stripe Foundation)
-Plan: 0 of 3 in current phase
-Status: Ready to plan
-Last activity: 2026-03-03 — v2.0 roadmap created (4 phases, 32 requirements mapped)
+Plan: 1 of 3 in current phase (completed)
+Status: In progress — 10-01 complete, ready for 10-02
+Last activity: 2026-03-03 — 10-01 executed (Stripe client, types, Supabase service client)
 
-Progress: [░░░░░░░░░░] 0%
+Progress: [█░░░░░░░░░] 8%
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 0 (v2.0) / 37 (v1.0)
-- Average duration: — (no v2.0 data yet)
-- Total execution time: — hours
+- Total plans completed: 1 (v2.0) / 37 (v1.0)
+- Average duration: 3 min (v2.0, 1 plan)
+- Total execution time: 3 min
 
 **By Phase:**
 
 | Phase | Plans | Total | Avg/Plan |
 |-------|-------|-------|----------|
-| 10 | 0/3 | — | — |
+| 10 | 1/3 | 3 min | 3 min |
 | 11 | 0/3 | — | — |
 | 12 | 0/4 | — | — |
 | 13 | 0/2 | — | — |
@@ -66,19 +66,25 @@ Progress: [░░░░░░░░░░] 0%
 
 ### Decisions
 
-Decisions logged in PROJECT.md Key Decisions table.
+- **10-01:** getRequiredEnv() helper used instead of Zod — Zod is overkill for 3 string env var checks
+- **10-01:** Stripe singleton at module level — fails at import time, not silently at first API call
+- **10-01:** service.ts uses @supabase/supabase-js directly (not @supabase/ssr) — webhook handlers have no cookie context
+- **10-01:** getWebhookSecret() is a function not a constant — webhook secret only needed in one route, not all Stripe operations
+- **10-01:** stripe@20.4.0 pinned exactly — prevents accidental drift to API-incompatible SDK version
+- **10-01:** API version pinned to 2026-02-25.clover
 
 ### Pending Todos
-None yet.
+None.
 
 ### Blockers/Concerns
-- Stripe account needs to be created/configured before Phase 10
-- Stripe API keys needed in .env.local
-- Stripe API version must be pinned (resolve 2025-01-27.acacia vs 2024-06-20 before Phase 10)
+- Stripe account needs to be created/configured with API keys
+- STRIPE_SECRET_KEY and STRIPE_WEBHOOK_SECRET needed in .env.local before 10-02/10-03 route handlers are deployed
+- SUPABASE_SERVICE_ROLE_KEY needed in .env.local for service client
 - Phase 13 needs /gsd:research-phase before planning (ACP-to-Stripe bridging is novel)
+- Stripe API version decision resolved: using 2026-02-25.clover (pinned in client.ts)
 
 ## Session Continuity
 
 Last session: 2026-03-03
-Stopped at: v2.0 roadmap created, ready to plan Phase 10
+Stopped at: Completed 10-01-PLAN.md (Stripe client, types, Supabase service)
 Resume file: None
