@@ -69,7 +69,7 @@ completed: 2026-03-03
 - **Duration:** 3 min
 - **Started:** 2026-03-03T06:44:39Z
 - **Completed:** 2026-03-03T06:48:15Z
-- **Tasks:** 2 of 2 (paused at checkpoint:human-verify)
+- **Tasks:** 3 of 3 (all complete — checkpoint:human-verify approved)
 - **Files modified:** 4
 
 ## Accomplishments
@@ -85,6 +85,9 @@ Each task was committed atomically:
 
 1. **Task 1: ChatWidget.tsx** - `3dc3dc4` (feat)
 2. **Task 2: iframe route + embed.js + .env.example** - `ee0d87e` (feat)
+3. **Task 3: Embed script end-to-end verification** - checkpoint:human-verify approved (no code changes — user confirmed code structure correct; "localhost refused to connect" expected because dev server was not running at test time)
+
+**Plan metadata:** `5a9d00a` (docs: complete embed script + ChatWidget plan)
 
 ## Files Created/Modified
 
@@ -123,28 +126,25 @@ None beyond the Rule 1 auto-fix above.
 
 ## User Setup Required
 
-Manual verification needed (checkpoint:human-verify paused here):
+Checkpoint:human-verify was approved. User confirmed code structure is correct. Full end-to-end test can be run with a live dev server:
 
-1. Create a test HTML file with:
-   ```html
-   <!DOCTYPE html><html><body>
-     <h1>Test page</h1>
-     <script src="http://localhost:3000/chatbot-embed.js"
-             data-client-id="silver-test"
-             data-site-url="http://localhost:3000"></script>
-   </body></html>
-   ```
-2. Run `npm run dev` and open the test HTML file in a browser
-3. Verify: blue floating button in bottom-right corner
-4. Click: iframe panel opens with chat widget
-5. Send message: response streams back
-6. Press Escape: panel closes
+```html
+<!DOCTYPE html><html><body>
+  <h1>Test page</h1>
+  <script src="http://localhost:3000/chatbot-embed.js"
+          data-client-id="silver-test"
+          data-site-url="http://localhost:3000"></script>
+</body></html>
+```
+
+Run `npm run dev` and open the test HTML file in a browser to verify full embed chain.
 
 ## Next Phase Readiness
 
 - Complete embed chain built: `embed.js` → `iframe` → `/chatbot-widget` → `ChatWidget` → `/api/chatbot/[clientId]`
 - CHAT-01 (script tag embed) and CHAT-04 (session persistence in API) requirements met
-- Plan 08-05 (channel router / SMS) is the remaining plan in Phase 8
+- Phase 8 is fully complete — all 6 plans done (08-01 through 08-06)
+- Phase 9 (client onboarding) can use the embed script as the chatbot delivery mechanism for client-specific widgets
 
 ---
 *Phase: 08-site-chatbot-module*
