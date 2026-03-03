@@ -3,12 +3,12 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: unknown
-last_updated: "2026-03-03T06:30:12.200Z"
+last_updated: "2026-03-03T06:28:38Z"
 progress:
   total_phases: 8
   completed_phases: 7
   total_plans: 33
-  completed_plans: 29
+  completed_plans: 30
 ---
 
 # GSD State — ASC Commercial Platform
@@ -18,14 +18,14 @@ progress:
 See: .planning/PROJECT.md (updated 2026-03-02)
 
 **Core value:** Every prospect gets an instant, accurate, branded proposal — no sales calls required to qualify.
-**Current focus:** Phase 8 — Site Chatbot Module. Plan 1 of 7 complete.
+**Current focus:** Phase 8 — Site Chatbot Module. Plan 2 of 6 complete.
 
 ## Current Position
 
 Phase: 8 of 10 (Site Chatbot Module) — IN PROGRESS
-Plan: 1 of 7 completed
-Status: 08-01 complete — lib/chatbot/types.ts (14 shared TypeScript contracts), lib/chatbot/model.ts (getChatModel, Gemini 2.5 Flash Lite), lib/chatbot/embedder.ts (embedText, VECTOR_DIMENSIONS=768), lib/chatbot/retriever.ts (retrieveContext, pgvector RAG)
-Last activity: 2026-03-03 — Completed 08-01 (chatbot foundation layer — types, model, embedder, retriever)
+Plan: 2 of 6 completed
+Status: 08-02 complete — supabase/migrations/014_chatbot_knowledge.sql (pgvector table + IVFFlat index + RLS + match_chatbot_knowledge RPC), app/api/chatbot/[clientId]/seed/route.ts (SHA-256 dedup knowledge seeding API)
+Last activity: 2026-03-03 — Completed 08-02 (pgvector knowledge base migration + knowledge seeding API)
 
 Progress: [█████████████████] 88%
 
@@ -142,6 +142,11 @@ Progress: [█████████████████] 88%
 - generate/route.ts content field: stub replaced with await generateDraft(topic, authorName, siteUrl)
 
 ### Key Decisions
+- vector(768) matches Google text-embedding-004 native output — same VECTOR_DIMENSIONS constant as embedder.ts; migration 014 uses vector(768) (08-02)
+- IVFFlat lists=100 for pgvector ANN — appropriate default for tables under 1M rows per pgvector docs (08-02)
+- RLS service_role_all on chatbot_knowledge — knowledge base never public-readable, service role only (08-02)
+- CHATBOT_SEED_SECRET optional auth on seed route — skipped if env var absent for dev; enforced in production (08-02)
+- SHA-256 dedup pre-check before embed() call — avoids wasteful Google AI API calls for already-known chunks (08-02)
 - getChatModel() uses gemini-2.5-flash-lite-preview-06-17 as Google default — lowest latency for real-time chat vs gemini-2.0-flash used by intake (08-01)
 - VECTOR_DIMENSIONS=768 — Google text-embedding-004 natively outputs 768 dimensions; exported constant ensures migration 014 alignment (08-01)
 - retrieveContext() graceful fallback — returns '' on missing env, embed error, or RPC error; chatbot operates without RAG (08-01)
