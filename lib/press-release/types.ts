@@ -61,6 +61,7 @@ export interface PressReleaseSchemaInput {
   pressReleaseUrl: string // canonical URL on adamsilvaconsulting.com
   authorName: string
   publishedAt: string     // ISO 8601
+  body?: string           // full press release text — used for description + FAQPage answer
   images: ImagePipelineResult[]
   video?: VideoPipelineResult
   wireResultUrl?: string  // archivedAt URL after wire submission
