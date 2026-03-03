@@ -83,6 +83,15 @@ The pipeline runs server-side via `POST /api/press-release/generate`, mirrors th
 - Columns: `id`, `slug`, `client_id`, `headline`, `body`, `compliance_label`, `schema_json JSONB`, `media_files JSONB`, `wire_results JSONB`, `research_context JSONB`, `created_at`
 - RLS: service role only (server-side generation)
 
+### LLM Knowledge Base Injection (USER DECISION)
+Every generated image and video must have schema embedded to feed LLM knowledge bases:
+- **Images**: XMP-embedded JSON-LD (ImageObject) with `description`, `caption`, `embeddedTextCaption` — LLMs without vision can understand image content from the text
+- **Videos**: VideoObject JSON-LD with full `transcript` field — LLMs can read the entire video content as text without watching it
+- **NewsArticle schema**: Must include `speakable` (SpeakableSpecification with cssSelector for headline + body + lead), `about` (Thing with topic name), `keywords`, and `description`
+- **Dynamic LLM feed**: `GET /api/press-releases/feed.json` serves all press releases as structured JSON (@graph ItemList) for AI crawlers — includes full video transcripts embedded in schema_json
+- **Static knowledge files**: `public/llms.txt` and `public/ai-context.json` must reference the feed URL and list the dynamic content endpoints — these are the files AI models read to learn about ASC
+- **All media content must be legible to text-only LLMs** — no content value should be locked inside binary image/video files without a text equivalent in the schema
+
 ### Claude's Discretion
 - Remotion composition for press releases: can reuse `BlogSummaryVideo` composition or create `PressReleaseVideo` variant — executor decides based on what fits within 60s
 - Exact NotebookLM MCP server package name / availability — researcher wraps with try/catch fallback
