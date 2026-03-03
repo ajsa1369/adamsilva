@@ -3,7 +3,7 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: unknown
-last_updated: "2026-03-03T03:17:07Z"
+last_updated: "2026-03-03T03:23:46Z"
 progress:
   total_phases: 10
   completed_phases: 5
@@ -18,14 +18,14 @@ progress:
 See: .planning/PROJECT.md (updated 2026-03-02)
 
 **Core value:** Every prospect gets an instant, accurate, branded proposal — no sales calls required to qualify.
-**Current focus:** Phase 6 — Blog Post Production Pipeline. Plan 1 of 4 complete.
+**Current focus:** Phase 6 — Blog Post Production Pipeline. Plan 2 of 4 complete.
 
 ## Current Position
 
 Phase: 6 of 10 (Blog Post Production Pipeline) — IN PROGRESS
-Plan: 1 of 4 completed
-Status: 06-01 complete — types.ts + image-pipeline.ts + video-pipeline.ts all done, zero TS errors
-Last activity: 2026-03-03 — Completed 06-01 (TypeScript contracts, sharp image pipeline, Remotion video pipeline)
+Plan: 2 of 4 completed
+Status: 06-02 complete — schema-assembler.ts + generate/route.ts + cron/route.ts + vercel.json + .env.example all done, zero TS errors
+Last activity: 2026-03-03 — Completed 06-02 (schema assembler, generate route, blog cron, vercel.json third cron entry)
 
 Progress: [██████████░] 55%
 
@@ -115,14 +115,24 @@ Progress: [██████████░] 55%
 - vercel.json: cron entry /api/intake/followup at 0 9 * * * (daily 9 AM UTC)
 - .env.local.example: documents 9 required Phase 4 env vars
 
-### Phase 6 Progress (06-01 complete)
+### Phase 6 Progress (06-01 + 06-02 complete)
 - lib/insights/types.ts: 9 TypeScript interfaces — Citation, ImagePipelineInput/Result, VideoPipelineInput/Result, CaptionTrack, SchemaAssemblerInput, InsightPost, BlogClientConfig
 - lib/insights/image-pipeline.ts: generateImages(input, stillFramePath?) — sharp PNG creation with XMP JSON-LD embedding, brand-navy stubs, deterministic filenames
 - lib/insights/video-pipeline.ts: generateVideo(input) — Remotion CLI spawn (render + still), WebVTT CC generation (5-sec cues), VideoObject JSON-LD with full transcript + hasPart caption
 - sharp installed as dependency (package.json updated)
 - WriteableMetadataWithXmp interface extends sharp WriteableMetadata — runtime supports xmp, TS types don't
+- lib/insights/schema-assembler.ts: assembleSchema() — interlinked @graph (BlogPosting + Person + ImageObject[] + VideoObject + FAQPage + BreadcrumbList + conditional HowTo); Article.citation[] min 3 peer papers
+- app/api/insights/generate/route.ts: POST — Zod validation → video → images → resolveCitations() → assembleSchema → Supabase insert (merge-duplicates) → Strapi publish (non-fatal)
+- app/api/insights/cron/route.ts: GET — CRON_SECRET auth → INSIGHTS_CLIENTS parse → Supabase authority_maps query (approved + current month) → sequential per-topic generate calls
+- vercel.json: 3 cron entries — intake/followup (daily), authority-map/cron (first Monday), insights/cron (second Monday 0 10 8-14 * 1)
+- .env.example: Phase 6 block — STRAPI_URL, STRAPI_API_TOKEN, INSIGHTS_CLIENTS, INSIGHTS_IMAGES_BASE_URL
 
 ### Key Decisions
+- object spread as (img.jsonLd as object) — ImagePipelineResult.jsonLd typed as object; cast is safe for spread in TypeScript strict mode (06-02)
+- resolveCitations() keyword matching — deterministic, zero latency, no external API; baseline citations guarantee min 3 always (06-02)
+- Strapi publish non-fatal — site operates fully from Supabase; STRAPI_API_TOKEN missing in dev should not halt pipeline (06-02)
+- Cron schedule 0 10 8-14 * 1 = second Monday of month at 10 AM UTC — days 8-14 is always second week, weekday=1 is Monday (06-02)
+- HowTo schema conditional on recommendedSchemaTypes.includes('HowTo') — not default; researcher explicitly flags it (06-02)
 - WriteableMetadataWithXmp extends sharp WriteableMetadata — runtime supports xmp Buffer but TS types lack field; local extension avoids any (06-01)
 - generateImages is async (sharp API is async) — plan showed both sync/async versions; async required for PNG writes (06-01)
 - Remotion render failures are graceful stubs — console.warn + continue; pipeline returns result shape regardless (06-01)
@@ -187,6 +197,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-03T03:17:07Z
-Stopped at: Completed 06-01-PLAN.md — TypeScript contracts (types.ts), sharp image pipeline with XMP JSON-LD embedding, Remotion video pipeline with WebVTT CC. Phase 6 plan 1/4 done.
+Last session: 2026-03-03T03:23:46Z
+Stopped at: Completed 06-02-PLAN.md — schema assembler (interlinked @graph), generate POST route (full pipeline orchestration), blog cron (second Monday of month), vercel.json + .env.example updated. Phase 6 plan 2/4 done.
 Resume file: None
