@@ -3,12 +3,12 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: unknown
-last_updated: "2026-03-03T03:23:46Z"
+last_updated: "2026-03-03T03:29:24.720Z"
 progress:
-  total_phases: 10
+  total_phases: 6
   completed_phases: 5
-  total_plans: 19
-  completed_plans: 19
+  total_plans: 22
+  completed_plans: 21
 ---
 
 # GSD State — ASC Commercial Platform
@@ -18,14 +18,14 @@ progress:
 See: .planning/PROJECT.md (updated 2026-03-02)
 
 **Core value:** Every prospect gets an instant, accurate, branded proposal — no sales calls required to qualify.
-**Current focus:** Phase 6 — Blog Post Production Pipeline. Plan 2 of 4 complete.
+**Current focus:** Phase 6 — Blog Post Production Pipeline. Plan 3 of 4 complete.
 
 ## Current Position
 
 Phase: 6 of 10 (Blog Post Production Pipeline) — IN PROGRESS
-Plan: 2 of 4 completed
-Status: 06-02 complete — schema-assembler.ts + generate/route.ts + cron/route.ts + vercel.json + .env.example all done, zero TS errors
-Last activity: 2026-03-03 — Completed 06-02 (schema assembler, generate route, blog cron, vercel.json third cron entry)
+Plan: 3 of 4 completed
+Status: 06-03 complete — app/video-sitemap.xml/route.ts (dynamic Google video sitemap) + public/robots.txt updated, zero TS errors
+Last activity: 2026-03-03 — Completed 06-03 (video sitemap route, parseDurationSeconds ISO→int, xmlEscape, findVideoObject, robots.txt updated)
 
 Progress: [██████████░] 55%
 
@@ -50,6 +50,7 @@ Progress: [██████████░] 55%
 - Trend: Phase 4 complete — intake agent, edge functions, PDF, cron all implemented
 | Phase 04-agentic-intake-agent P05 | 2 | 2 tasks | 4 files |
 | Phase 05-topical-authority-map-agent P02 | 3 | 2 tasks | 5 files |
+| Phase 06 P03 | 2 | 1 tasks | 2 files |
 
 ## Accumulated Context
 
@@ -115,7 +116,7 @@ Progress: [██████████░] 55%
 - vercel.json: cron entry /api/intake/followup at 0 9 * * * (daily 9 AM UTC)
 - .env.local.example: documents 9 required Phase 4 env vars
 
-### Phase 6 Progress (06-01 + 06-02 complete)
+### Phase 6 Progress (06-01 + 06-02 + 06-03 complete)
 - lib/insights/types.ts: 9 TypeScript interfaces — Citation, ImagePipelineInput/Result, VideoPipelineInput/Result, CaptionTrack, SchemaAssemblerInput, InsightPost, BlogClientConfig
 - lib/insights/image-pipeline.ts: generateImages(input, stillFramePath?) — sharp PNG creation with XMP JSON-LD embedding, brand-navy stubs, deterministic filenames
 - lib/insights/video-pipeline.ts: generateVideo(input) — Remotion CLI spawn (render + still), WebVTT CC generation (5-sec cues), VideoObject JSON-LD with full transcript + hasPart caption
@@ -126,8 +127,17 @@ Progress: [██████████░] 55%
 - app/api/insights/cron/route.ts: GET — CRON_SECRET auth → INSIGHTS_CLIENTS parse → Supabase authority_maps query (approved + current month) → sequential per-topic generate calls
 - vercel.json: 3 cron entries — intake/followup (daily), authority-map/cron (first Monday), insights/cron (second Monday 0 10 8-14 * 1)
 - .env.example: Phase 6 block — STRAPI_URL, STRAPI_API_TOKEN, INSIGHTS_CLIENTS, INSIGHTS_IMAGES_BASE_URL
+- app/video-sitemap.xml/route.ts: GET handler — Node.js runtime, queries Supabase blog_posts for VideoObject in schema_json, emits Google Video Sitemap XML with transcript + integer-second duration
+- parseDurationSeconds() converts ISO 8601 duration to integer seconds — Google video sitemap spec requires integer not ISO 8601
+- findVideoObject() searches schema_json array by @type — position-independent, resilient to schema ordering changes
+- public/robots.txt updated with Sitemap: .../video-sitemap.xml line
 
 ### Key Decisions
+- runtime='nodejs' not 'edge' — Supabase REST fetch + large JSON parse for video sitemap exceeds edge memory limits (06-03)
+- video:duration as integer seconds via parseDurationSeconds() — Google video sitemap XSD requires integer, not ISO 8601; parseDurationSeconds handles PT28S → 28 (06-03)
+- findVideoObject() searches by @type not array index — position-independent, resilient to future schema_json ordering changes in assembleSchema() (06-03)
+- description.slice(0, 2048) — Google video sitemap enforces 2048 char limit; silent truncation is correct behavior (06-03)
+- Skip posts where contentUrl is empty — video sitemap entry without video:content_loc is invalid per Google spec (06-03)
 - object spread as (img.jsonLd as object) — ImagePipelineResult.jsonLd typed as object; cast is safe for spread in TypeScript strict mode (06-02)
 - resolveCitations() keyword matching — deterministic, zero latency, no external API; baseline citations guarantee min 3 always (06-02)
 - Strapi publish non-fatal — site operates fully from Supabase; STRAPI_API_TOKEN missing in dev should not halt pipeline (06-02)
@@ -197,6 +207,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-03T03:23:46Z
-Stopped at: Completed 06-02-PLAN.md — schema assembler (interlinked @graph), generate POST route (full pipeline orchestration), blog cron (second Monday of month), vercel.json + .env.example updated. Phase 6 plan 2/4 done.
+Last session: 2026-03-03T03:28:29Z
+Stopped at: Completed 06-03-PLAN.md — video sitemap route (app/video-sitemap.xml/route.ts), robots.txt updated with video-sitemap.xml line. Phase 6 plan 3/4 done.
 Resume file: None
