@@ -7,11 +7,11 @@
 <domain>
 ## Phase Boundary
 
-Phase 5 builds the monthly content intelligence layer: a research pipeline that uses Gemini with Google Search grounding ("deep research") to identify topical authority gaps per client, generates a ranked JSON authority map, stores it in Supabase, and sends the client an approval email before content production begins.
+Phase 5 builds the monthly content intelligence layer: a research pipeline that uses **NotebookLM MCP (if configured) with Gemini + Google Search grounding as fallback** to identify topical authority gaps per client, generates a ranked JSON authority map, stores it in Supabase, and sends the client an approval email before content production begins.
 
 **Deliverables (from PRD Section 11 + Sub-module 2a):**
 - `lib/authority-map/types.ts` — AuthorityMapTopic, AuthorityMapResult, ClientConfig interfaces
-- `lib/authority-map/researcher.ts` — Gemini + Google Search grounding research pipeline
+- `lib/authority-map/researcher.ts` — Dual-mode research pipeline: NotebookLM MCP (if `NOTEBOOKLM_MCP_URL` set) with Gemini + Google Search as fallback
 - `app/api/authority-map/generate/route.ts` — POST endpoint: research → Supabase insert → approval email
 - `app/api/authority-map/approve/route.ts` — GET endpoint: client clicks link → updates approved_at in Supabase
 - `app/api/authority-map/cron/route.ts` — Vercel Cron handler: reads client list, calls generate for each
@@ -25,17 +25,66 @@ Phase 5 builds the monthly content intelligence layer: a research pipeline that 
 - Phase 2/4: `email-service` edge function with Resend (pattern used by send-proposal-email)
 - `SUPABASE_SERVICE_ROLE_KEY` documented in .env.example
 
-**PRD notes NotebookLM MCP — REPLACED by Google AI Studio Deep Research:**
-- PRD Section 11 Phase 5 specified "NotebookLM MCP" but that was explicitly deferred from Phase 4
-- User direction: use Google AI Studio deep research feature (Gemini + Google Search grounding)
-- `@ai-sdk/google` already has `google.tools.googleSearch()` (ProviderToolFactory) — no new package needed
+**Research provider strategy (LOCKED — user decision: both with fallback):**
+- Primary: NotebookLM MCP (if `NOTEBOOKLM_MCP_URL` env var is set)
+- Fallback: Gemini + Google Search grounding (always available via `@ai-sdk/google`)
+- `researcher.ts` checks `process.env.NOTEBOOKLM_MCP_URL` at runtime to select provider
+- `@ai-sdk/google` already installed — no new package needed for fallback
+- NotebookLM MCP client uses `experimental_createMCPClient` from `ai` with SSE transport
 
 </domain>
 
 <decisions>
 ## Implementation Decisions
 
-### Google AI Studio Deep Research Pattern (LOCKED — user directive)
+### Dual Research Provider Strategy (LOCKED — user decision)
+
+`researcher.ts` exports a single `generateAuthorityMap(input: ClientConfig)` function that selects the research provider at runtime:
+
+```typescript
+export async function generateAuthorityMap(input: ClientConfig): Promise<AuthorityMapTopic[]> {
+  if (process.env.NOTEBOOKLM_MCP_URL) {
+    return await generateWithNotebookLM(input)   // primary
+  }
+  return await generateWithGemini(input)         // fallback
+}
+```
+
+**Adding a new env var:** `NOTEBOOKLM_MCP_URL` — the HTTP(S) URL of the NotebookLM MCP server (SSE transport). If unset, Gemini + Google Search is used. Document in `.env.example` (commented out by default).
+
+### NotebookLM MCP Client Pattern (LOCKED)
+
+```typescript
+// lib/authority-map/researcher.ts — NotebookLM path
+import { experimental_createMCPClient } from 'ai'
+
+async function generateWithNotebookLM(input: ClientConfig): Promise<AuthorityMapTopic[]> {
+  const mcpClient = await experimental_createMCPClient({
+    transport: {
+      type: 'sse',
+      url: process.env.NOTEBOOKLM_MCP_URL!,
+    },
+  })
+  try {
+    const tools = await mcpClient.tools()
+    // Use generateText with the NotebookLM tools for deep research
+    const { text } = await generateText({
+      model: getIntakeModel(),          // reuse MODEL_PROVIDER routing from Phase 4
+      tools,
+      stopWhen: stepCountIs(15),
+      system: NOTEBOOKLM_SYSTEM_PROMPT,
+      prompt: buildResearchPrompt(input),
+    })
+    return parseTopicsFromResponse(text)
+  } finally {
+    await mcpClient.close()
+  }
+}
+```
+
+**Note:** `experimental_createMCPClient` from `ai` (ai@6). Uses SSE transport to connect to the NotebookLM MCP server URL. The `tools()` call fetches available NotebookLM tools. `getIntakeModel()` from `lib/intake/model.ts` — reuse existing MODEL_PROVIDER routing (do NOT reimport separately).
+
+### Google AI Studio Deep Research Pattern (LOCKED — fallback when NOTEBOOKLM_MCP_URL unset)
 
 Use `generateText` from `ai` with `@ai-sdk/google` and Google Search grounding for the research pipeline. This is the "deep research" capability.
 
