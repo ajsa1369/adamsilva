@@ -3,12 +3,12 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: in-progress
-last_updated: "2026-03-03T12:57:45.352Z"
+last_updated: "2026-03-03T13:05:08.000Z"
 progress:
   total_phases: 9
   completed_phases: 8
   total_plans: 37
-  completed_plans: 34
+  completed_plans: 36
 ---
 
 # GSD State — ASC Commercial Platform
@@ -18,16 +18,16 @@ progress:
 See: .planning/PROJECT.md (updated 2026-03-02)
 
 **Core value:** Every prospect gets an instant, accurate, branded proposal — no sales calls required to qualify.
-**Current focus:** Phase 9 — Package Pages & Marketing Site. Plan 01 complete, 3 remaining.
+**Current focus:** Phase 9 — Package Pages & Marketing Site. Plans 01-03 complete, 1 remaining.
 
 ## Current Position
 
 Phase: 9 of 10 (Package Pages & Marketing Site) — IN PROGRESS
-Plan: 1 of 4 completed
-Status: 09-01 complete — lib/data/packages.ts (6 tiers + 8 platform matrix) and components/ROICalculator.tsx (interactive ROI calculator). Ready for Plan 09-02.
-Last activity: 2026-03-03 — Plan 09-01 complete
+Plan: 3 of 4 completed
+Status: 09-03 complete — /platform-check interactive compliance checker page + PlatformCheckTool client component. Ready for Plan 09-04.
+Last activity: 2026-03-03 — Plan 09-03 complete
 
-Progress: [████████████████░░] 92%
+Progress: [█████████████████░] 97%
 
 ## Performance Metrics
 
@@ -59,6 +59,8 @@ Progress: [████████████████░░] 92%
 | Phase 08-site-chatbot-module P04 | 1 | 1 tasks | 1 files |
 | Phase 08-site-chatbot-module P05 | 2 | 2 tasks | 7 files |
 | Phase 09-package-pages-marketing-site P01 | 3 | 2 tasks | 2 files |
+| Phase 09-package-pages-marketing-site P02 | 6 | 2 tasks | 3 files |
+| Phase 09-package-pages-marketing-site P03 | 5 | 2 tasks | 2 files |
 
 ## Accumulated Context
 
@@ -148,6 +150,10 @@ Progress: [████████████████░░] 92%
 ### Key Decisions
 - No --color-navy CSS var; used --color-text + --color-accent from globals.css design tokens (09-01)
 - lib/data/packages.ts is fully independent from lib/integrations/catalog.ts — separate purposes, no cross-imports (09-01)
+- searchParams toggle (?view=setup/monthly) instead of client-side useState — keeps /packages as pure server component with export metadata (09-02)
+- gitignore **/packages/ negation via !/app/ + !/app/** — same pattern as existing lib/ and supabase/ fixes (09-02)
+- getBadgeVariant() maps shopify-starter/shopify-growth to 'legacy' Badge variant — not in Badge variant union type (09-02)
+- PlatformWarning without callback props (undefined) renders info-only without CTA buttons — server component compatibility (09-02)
 - ROI denominator uses setup cost per plan formula: ((annualRevenueLift - annualCost) / setupCost) * 100 (09-01)
 - body goes inside DefaultChatTransport not useChat — ai@6 UseChatOptions has no body field; HttpChatTransportInitOptions accepts body?: Resolvable<object> (08-06)
 - iframe embed pattern (not web component) — works on Shopify without framework dependency, no CORS issues, no bundle needed on host page (08-06)
@@ -262,11 +268,16 @@ Progress: [████████████████░░] 92%
 - followup_sent_at TIMESTAMPTZ column used for re-send prevention — status column never patched to 'followed_up' (not in CHECK constraint) (04-05)
 - CRON_SECRET auth is optional (if block) — allows local dev without secret, secured in Vercel production (04-05)
 
-### Phase 9 Progress (09-01 complete)
+### Phase 9 Progress (09-01, 09-02, 09-03 complete)
 - lib/data/packages.ts: PackagePageData interface + PACKAGES array (6 tiers: bronze, silver, gold, core, shopify-starter, shopify-growth) + ComplianceLevel type + PlatformEntry interface + PLATFORM_MATRIX array (8 platforms)
 - components/ROICalculator.tsx: 'use client' interactive calculator — 4 inputs (tier, leads/month, close rate, deal size) + 3 computed outputs (monthly lift, annual ROI %, payback months) + CTA to /get-started
 - All pricing matches PRD Section 5 exactly; all compliance values match PRD Section 9 exactly
 - PACKAGES and PLATFORM_MATRIX serve as single source of truth for all Phase 9 marketing pages
+- app/(marketing)/packages/page.tsx: Server component comparison page — PricingTable (4 main tiers), ComparisonTable (12 feature rows), ROICalculator, searchParams-based price toggle, ItemList+FAQPage JSON-LD, sticky mobile CTA
+- app/(marketing)/packages/[tier]/page.tsx: Dynamic tier detail page — generateStaticParams (6 slugs: bronze, silver, gold, core, shopify-starter, shopify-growth), generateMetadata per tier, hero pricing, What's Included, upgrade nudge ComparisonTable, PlatformWarning for isLegacy, FAQ, ROICalculator (non-core), Service+FAQPage+BreadcrumbList JSON-LD
+- .gitignore: Added !/app/ + !/app/** negation for **/packages/ rule (NuGet/C# pattern blocked marketing route)
+- app/(marketing)/platform-check/page.tsx: Server component with metadata, JSON-LD (SoftwareApplication + FAQPage + BreadcrumbList), renders PlatformCheckTool client component
+- components/PlatformCheckTool.tsx: 'use client' interactive compliance checker — platform dropdown (8 platforms from PLATFORM_MATRIX), 7-row ComparisonTable compliance matrix, legacy penalty breakdown, PlatformWarning for legacy platforms, recommended package card, migration path CTA, link to /tools/protocol-checker
 
 ### Pending Todos
 None yet.
@@ -281,6 +292,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-03T12:55:50Z
-Stopped at: Completed 09-01-PLAN.md (all 2 tasks) — lib/data/packages.ts + components/ROICalculator.tsx. Phase 9 Plan 01 complete.
+Last session: 2026-03-03T13:05:01Z
+Stopped at: Completed 09-02-PLAN.md (all 2 tasks) — /packages comparison page + /packages/[tier] detail pages. Phase 9 Plan 02 complete.
 Resume file: None
