@@ -2,13 +2,13 @@
 gsd_state_version: 1.0
 milestone: v2.0
 milestone_name: Stripe Payment Integration
-status: in_progress
-last_updated: "2026-03-03T19:48:00.000Z"
+status: unknown
+last_updated: "2026-03-03T19:53:06.938Z"
 progress:
-  total_phases: 4
-  completed_phases: 0
-  total_plans: 12
-  completed_plans: 1
+  total_phases: 10
+  completed_phases: 9
+  total_plans: 40
+  completed_plans: 39
 ---
 
 # GSD State — ASC Commercial Platform
@@ -72,6 +72,8 @@ Progress: [█░░░░░░░░░] 8%
 - **10-01:** getWebhookSecret() is a function not a constant — webhook secret only needed in one route, not all Stripe operations
 - **10-01:** stripe@20.4.0 pinned exactly — prevents accidental drift to API-incompatible SDK version
 - **10-01:** API version pinned to 2026-02-25.clover
+- [Phase 10-stripe-foundation]: getEnv() duplicated per module (not shared) — each stripe module is independently importable without pulling in the full SDK singleton
+- [Phase 10-stripe-foundation]: Core tier is explicitly null in StripePriceMap at type level — forces callers in Phase 12/13 to explicitly handle custom-quote flow
 
 ### Pending Todos
 None.

@@ -10,8 +10,8 @@ Requirements for Stripe Payment Integration milestone. Each maps to roadmap phas
 ### Stripe Foundation (STRIPE)
 
 - [x] **STRIPE-01**: System initializes a Stripe SDK singleton (`lib/stripe/client.ts`) with API version pinning and env var validation at import time
-- [ ] **STRIPE-02**: System has Stripe Products and Prices created for all 6 package tiers — each tier has a one-time setup Price and a recurring monthly Price
-- [ ] **STRIPE-03**: System stores Stripe Product/Price IDs in `lib/stripe/products.ts` as a typed map keyed by package slug (bronze, silver, gold, core, shopify-starter, shopify-growth)
+- [x] **STRIPE-02**: System has Stripe Products and Prices created for all 6 package tiers — each tier has a one-time setup Price and a recurring monthly Price
+- [x] **STRIPE-03**: System stores Stripe Product/Price IDs in `lib/stripe/products.ts` as a typed map keyed by package slug (bronze, silver, gold, core, shopify-starter, shopify-growth)
 - [x] **STRIPE-04**: System has a cookie-free Supabase service-role client (`lib/supabase/service.ts`) for use in webhook handlers and background processes
 
 ### Payment Processing (PAY)
@@ -95,8 +95,8 @@ Which phases cover which requirements. Updated during roadmap creation.
 | Requirement | Phase | Status |
 |-------------|-------|--------|
 | STRIPE-01 | Phase 10 | Pending |
-| STRIPE-02 | Phase 10 | Pending |
-| STRIPE-03 | Phase 10 | Pending |
+| STRIPE-02 | Phase 10 | Complete |
+| STRIPE-03 | Phase 10 | Complete |
 | STRIPE-04 | Phase 10 | Pending |
 | HOOK-01 | Phase 10 | Pending |
 | HOOK-02 | Phase 10 | Pending |
