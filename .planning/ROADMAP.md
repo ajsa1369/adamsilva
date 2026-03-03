@@ -180,7 +180,7 @@ Note: Phase 8 depends on Phase 3 (not Phase 7) — can begin after Phase 3 compl
 | 2. Supabase Schema & Data Architecture | 4/6 | In Progress|  |
 | 3. Integration Catalog & Pricing Engine | 3/3 | Complete   | 2026-03-02 |
 | 4. Agentic Intake Agent | 5/5 | Complete    | 2026-03-03 |
-| 5. Topical Authority Map Agent | 0/2 | Not started | - |
+| 5. Topical Authority Map Agent | 1/2 | In Progress|  |
 | 6. Blog Post Production Pipeline | 0/? | Not started | - |
 | 7. Press Release Engine | 0/? | Not started | - |
 | 8. Site Chatbot Module | 0/? | Not started | - |

@@ -3,12 +3,12 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: unknown
-last_updated: "2026-03-03T00:35:30.696Z"
+last_updated: "2026-03-03T01:04:28Z"
 progress:
-  total_phases: 4
+  total_phases: 10
   completed_phases: 4
-  total_plans: 16
-  completed_plans: 16
+  total_plans: 18
+  completed_plans: 17
 ---
 
 # GSD State — ASC Commercial Platform
@@ -18,16 +18,16 @@ progress:
 See: .planning/PROJECT.md (updated 2026-03-02)
 
 **Core value:** Every prospect gets an instant, accurate, branded proposal — no sales calls required to qualify.
-**Current focus:** Phase 4 — COMPLETE. Ready for Phase 5.
+**Current focus:** Phase 5 — Topical Authority Map Agent. Plan 01 complete.
 
 ## Current Position
 
-Phase: 4 of 10 (Agentic Intake Agent) — COMPLETE
-Plan: 5 of 5 completed
-Status: Phase 4 complete
-Last activity: 2026-03-02 — Completed 04-05 (PDF generation route, follow-up cron, vercel.json, .env.local.example)
+Phase: 5 of 10 (Topical Authority Map Agent) — IN PROGRESS
+Plan: 1 of 2 completed
+Status: Phase 5 plan 01 complete
+Last activity: 2026-03-03 — Completed 05-01 (types.ts contracts + researcher.ts dual-provider pipeline)
 
-Progress: [████████░░] 40%
+Progress: [████████░░] 45%
 
 ## Performance Metrics
 
@@ -87,6 +87,14 @@ Progress: [████████░░] 40%
 - 010_press_releases.sql: wire_service CHECK(5), status CHECK(5), schema_json JSONB, RLS + idempotent FK patch fk_blog_posts_authority_map
 - supabase/migrations/ is now git-tracked (fixed .gitignore **/*.sql issue)
 
+### Phase 5 Progress (05-01 complete)
+- lib/authority-map/types.ts: AuthorityMapTopic, AuthorityMapResult, ClientConfig — all typed interfaces, no any
+- lib/authority-map/researcher.ts: generateAuthorityMap(config) — dual-provider: NOTEBOOKLM_MCP_URL → NotebookLM MCP via @ai-sdk/mcp experimental_createMCPClient (SSE); else Gemini 2.0 Flash + google.tools.googleSearch({})
+- RESEARCHER_SYSTEM_PROMPT + NOTEBOOKLM_SYSTEM_PROMPT exported as named const strings
+- generateWithNotebookLM reuses getIntakeModel() from Phase 4 — MODEL_PROVIDER env var honored
+- @ai-sdk/mcp@1.0.23 installed — MCP client was extracted from ai main package in ai@6
+- parseTopicsFromResponse: strips markdown fences, parses JSON, throws descriptive error
+
 ### Phase 4 Progress (04-01, 04-03, 04-04, 04-05 complete — PHASE DONE)
 - lib/intake/types.ts: ProspectData, ProposalLineItem, ProposalData — shared contracts for all Phase 4 plans
 - lib/intake/model.ts: getIntakeModel() — MODEL_PROVIDER routing (anthropic default / openai if set)
@@ -102,6 +110,10 @@ Progress: [████████░░] 40%
 - .env.local.example: documents 9 required Phase 4 env vars
 
 ### Key Decisions
+- experimental_createMCPClient imported from @ai-sdk/mcp not ai — MCP client was extracted to separate package in ai@6 (05-01)
+- google.tools.googleSearch({}) requires empty options object — ProviderToolFactory signature requires ARGS arg even if all fields optional (05-01)
+- NOTEBOOKLM_SYSTEM_PROMPT is a separate named export from RESEARCHER_SYSTEM_PROMPT — identical content, distinct exports for clarity (05-01)
+- @ai-sdk/mcp@1.0.23 added to package.json for NotebookLM MCP SSE transport (05-01)
 - MODEL_PROVIDER env var (never hardcode LLM provider) — enforced in INTAKE-09
 - Vercel AI SDK for all streaming + tool-calling (intake + chatbot)
 - PDFKit or React-PDF for proposal generation (in-process, no external service)
@@ -153,6 +165,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-02T23:18:00Z
-Stopped at: Completed 04-05-PLAN.md — PDF generation route, follow-up cron, vercel.json, .env.local.example. Phase 4 complete.
+Last session: 2026-03-03T01:04:28Z
+Stopped at: Completed 05-01-PLAN.md — AuthorityMapTopic/AuthorityMapResult/ClientConfig types + generateAuthorityMap dual-provider pipeline (NotebookLM MCP + Gemini fallback).
 Resume file: None
