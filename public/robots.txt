@@ -217,6 +217,7 @@ Sitemap: https://www.adamsilvaconsulting.com/sitemap-content.xml
 Sitemap: https://www.adamsilvaconsulting.com/sitemap-authority.xml
 Sitemap: https://www.adamsilvaconsulting.com/sitemap-images.xml
 Sitemap: https://www.adamsilvaconsulting.com/sitemap-news.xml
+Sitemap: https://www.adamsilvaconsulting.com/video-sitemap.xml
 
 # ========================================
 # AI ENGINE SPECIFIC FILES
