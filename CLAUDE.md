@@ -35,7 +35,7 @@
 NEXT_PUBLIC_SUPABASE_URL=
 NEXT_PUBLIC_SUPABASE_ANON_KEY=
 SUPABASE_SERVICE_ROLE_KEY=
-NEXT_PUBLIC_STRAPI_URL=http://72.60.127.124:1337
+NEXT_PUBLIC_STRAPI_URL=https://cms.adamsilvaconsulting.com
 STRAPI_API_TOKEN=
 NEXT_PUBLIC_SITE_URL=https://www.adamsilvaconsulting.com
 RESEND_API_KEY=
@@ -43,7 +43,7 @@ RESEND_API_KEY=
 
 ## VPS
 - Host: 72.60.127.124 (Hostinger)
-- Strapi admin: http://72.60.127.124:1337/admin
+- Strapi admin: https://cms.adamsilvaconsulting.com/admin
 - Strapi path: /var/www/strapi/cms
 - PostgreSQL: strapi user, strapi_prod database
 

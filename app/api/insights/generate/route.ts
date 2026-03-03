@@ -199,7 +199,7 @@ export async function POST(req: Request): Promise<Response> {
   const postId = rows[0]?.id ?? null
 
   // Step 12: Strapi v5 publish (non-fatal — failure returns strapiId: null)
-  const strapiUrl = process.env.STRAPI_URL ?? 'http://72.60.127.124:1337'
+  const strapiUrl = process.env.STRAPI_URL ?? 'https://cms.adamsilvaconsulting.com'
   const strapiToken = process.env.STRAPI_API_TOKEN
   let strapiId: number | null = null
   let strapiError: string | undefined

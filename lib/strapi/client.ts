@@ -1,4 +1,4 @@
-const STRAPI_URL = process.env.NEXT_PUBLIC_STRAPI_URL || 'http://72.60.127.124:1337'
+const STRAPI_URL = process.env.NEXT_PUBLIC_STRAPI_URL || 'https://cms.adamsilvaconsulting.com'
 const STRAPI_TOKEN = process.env.STRAPI_API_TOKEN
 
 export class StrapiError extends Error {
