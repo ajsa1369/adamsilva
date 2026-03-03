@@ -8,6 +8,10 @@
     {
       "path": "/api/authority-map/cron",
       "schedule": "0 9 1-7 * 1"
+    },
+    {
+      "path": "/api/insights/cron",
+      "schedule": "0 10 8-14 * 1"
     }
   ]
 }
