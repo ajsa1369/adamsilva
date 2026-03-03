@@ -1,184 +1,137 @@
-# Requirements: Adam Silva Consulting — ASC Commercial Platform
+# Requirements: Adam Silva Consulting — v2.0 Stripe Payment Integration
 
-**Defined:** 2026-03-02
+**Defined:** 2026-03-03
 **Core Value:** Every prospect gets an instant, accurate, branded proposal — no sales calls required to qualify.
 
-## v1.0 Requirements
+## v2.0 Requirements
 
-Requirements for ASC Commercial Platform v1.0. Each maps to roadmap phases.
+Requirements for Stripe Payment Integration milestone. Each maps to roadmap phases.
 
-### Design System (DS)
+### Stripe Foundation (STRIPE)
 
-- [x] **DS-01**: Developer can use shared design tokens (color, typography, spacing) from `lib/design-tokens.ts` to ensure visual consistency across all new components
-- [x] **DS-02**: Developer can import and compose 9 reusable components: Button, Card, Badge, ChatBubble, ProposalCard, PricingTable, ComparisonTable, IntakeStep, PlatformWarning
-- [x] **DS-03**: All components are light-mode-only and mobile-first at 375px (Tailwind v4, no dark mode)
+- [ ] **STRIPE-01**: System initializes a Stripe SDK singleton (`lib/stripe/client.ts`) with API version pinning and env var validation at import time
+- [ ] **STRIPE-02**: System has Stripe Products and Prices created for all 6 package tiers — each tier has a one-time setup Price and a recurring monthly Price
+- [ ] **STRIPE-03**: System stores Stripe Product/Price IDs in `lib/stripe/products.ts` as a typed map keyed by package slug (bronze, silver, gold, core, shopify-starter, shopify-growth)
+- [ ] **STRIPE-04**: System has a cookie-free Supabase service-role client (`lib/supabase/service.ts`) for use in webhook handlers and background processes
 
-### Data Layer (DATA)
+### Payment Processing (PAY)
 
-- [x] **DATA-01**: System can store and query integration catalog (name, tier, setup cost, monthly cost, category) in Supabase
-- [x] **DATA-02**: System can store package definitions (Bronze/Silver/Gold/Core/Legacy) with all slot counts and pricing in Supabase
-- [x] **DATA-03**: System can persist generated proposals (tier, pricing breakdown, integration list, PDF URL, prospect email) in Supabase with RLS
-- [x] **DATA-04**: System can store blog post metadata and authority map results per client in Supabase
-- [x] **DATA-05**: System can store chatbot session history per client and visitor in Supabase
-- [x] **DATA-06**: System can store press release drafts and distribution records in Supabase
-- [x] **DATA-07**: All new tables have Row Level Security enabled
+- [ ] **PAY-01**: Prospect can pay setup fees via ACH bank transfer for amounts $8.5K–$48K using Stripe PaymentIntents with `us_bank_account` payment method
+- [ ] **PAY-02**: Prospect paying setup fees $25K+ is routed to wire transfer instructions instead of Stripe checkout — wire is non-reversible (AP2 mandate enforcement)
+- [ ] **PAY-03**: Prospect can start a Stripe Subscription for their monthly retainer ($2K–$12K/mo) after setup fee is confirmed
+- [ ] **PAY-04**: Card payments for any amount over $75 incur a 4% convenience fee surcharge — displayed clearly before checkout and itemized on the receipt
+- [ ] **PAY-05**: System creates a Stripe Customer record linked to the Supabase proposal when prospect accepts a proposal, storing `stripe_customer_id` in Supabase
+- [ ] **PAY-06**: System enforces payment method routing: ACH preferred for all amounts, wire required above $25K threshold, card accepted with 4% surcharge
 
-### Pricing Engine (PRICE)
+### Webhook Infrastructure (HOOK)
 
-- [x] **PRICE-01**: System can classify any integration as Tier 1 ($750 setup / $150/mo), Tier 2 ($1,500 / $250/mo), or Tier 3 ($3,000–5,000 / $400–600/mo)
-- [x] **PRICE-02**: System can calculate total setup + monthly cost given a list of integrations against any package tier (slot logic + overage math)
-- [x] **PRICE-03**: System can recommend the optimal tier given: integration count, monthly lead volume, goals selected, platform type, and location count
-- [x] **PRICE-04**: Pricing engine is covered by unit tests (slot logic, overage, tier recommendation)
+- [ ] **HOOK-01**: System handles Stripe webhooks at `/api/stripe/webhook` using `request.text()` for raw body and `stripe.webhooks.constructEvent()` for signature verification
+- [ ] **HOOK-02**: System logs every webhook event in a `stripe_events` Supabase table for idempotency — duplicate event IDs are silently skipped
+- [ ] **HOOK-03**: Webhook handler updates Supabase order/subscription status on key events: `payment_intent.succeeded`, `payment_intent.payment_failed`, `invoice.paid`, `invoice.payment_failed`, `customer.subscription.updated`, `customer.subscription.deleted`
+- [ ] **HOOK-04**: Webhook route uses `runtime = 'nodejs'` (not Edge) and does not parse request body as JSON
 
-### Intake Agent (INTAKE)
+### Payment State Machine (STATE)
 
-- [x] **INTAKE-01**: Prospect can start a conversational intake flow at `/get-started` and answer questions about their business, stack, and goals
-- [x] **INTAKE-02**: Agent detects the prospect's website platform and routes to legacy warning path (Shopify/Wix/Squarespace/WordPress) or full package path (headless/custom)
-- [x] **INTAKE-03**: Agent looks up each named tool against the integration catalog and classifies it (Tier 1/2/3)
-- [x] **INTAKE-04**: Agent generates a complete proposal (tier recommendation, setup total, monthly total, integration line items) at end of conversation
-- [x] **INTAKE-05**: Generated proposal is stored in Supabase proposals table
-- [x] **INTAKE-06**: Prospect receives a PDF proposal via email automatically (Resend or existing email-service edge function)
-- [x] **INTAKE-07**: A contact + deal is created in ASC's CRM via configurable webhook upon proposal generation
-- [ ] **INTAKE-08**: A 48-hour follow-up sequence is triggered if no strategy call is booked after proposal delivery
-- [x] **INTAKE-09**: LLM provider is never hardcoded — all AI calls use MODEL_PROVIDER environment variable
+- [ ] **STATE-01**: System tracks payment lifecycle in Supabase `orders` table with status enum: `pending`, `processing`, `confirmed`, `failed`, `refunded`, `wire_pending`
+- [ ] **STATE-02**: System tracks subscription lifecycle in Supabase `subscriptions` table with status enum: `active`, `past_due`, `canceled`, `paused`
+- [ ] **STATE-03**: Supabase `proposals` table gains `payment_status`, `stripe_customer_id`, and `stripe_payment_intent_id` columns — proposals are the canonical price source for checkout
+- [ ] **STATE-04**: System never triggers client onboarding until payment status reaches `confirmed` (ACH takes 4–7 business days to settle)
 
-### Authority Map Agent (AUTHMAP)
+### Chargeback Defense (DEFEND)
 
-- [x] **AUTHMAP-01**: System can generate a monthly topical authority map per client — research pipeline identifies content gaps and ranks topics by citation opportunity
-- [x] **AUTHMAP-02**: Authority map output (JSON) is stored in Supabase authority_maps table
-- [x] **AUTHMAP-03**: Authority map generation is triggered on the first Monday of each month via Vercel Cron
-- [x] **AUTHMAP-04**: Client receives an approval email with approve/modify link before content calendar is locked
+- [ ] **DEFEND-01**: Prospect must digitally sign a Statement of Work (SOW) before any payment session is created — SOW acceptance timestamp stored in Supabase
+- [ ] **DEFEND-02**: Prospect must acknowledge "All Sales Final — No Refunds for Services Rendered" Terms of Service at checkout — ToS acceptance stored with payment record
+- [ ] **DEFEND-03**: System enables Stripe Chargeback Protection on the Stripe account (dashboard configuration, documented in setup guide)
+- [ ] **DEFEND-04**: System enables Stripe Radar enhanced fraud detection (dashboard configuration, documented in setup guide)
 
-### Blog Pipeline (BLOG)
+### Protocol Integration (PROTO)
 
-- [x] **BLOG-01**: System can generate N blog post images per post with descriptive filenames and companion ImageObject JSON-LD for each
-- [x] **BLOG-02**: System can trigger a Remotion render for BlogSummaryVideo.tsx and generate VideoObject JSON-LD with full transcript
-- [x] **BLOG-03**: System can assemble interlinked JSON-LD schema for a post (Article + Person + FAQPage + HowTo + ImageObject[] + VideoObject, all linked via @id)
-- [x] **BLOG-04**: System can orchestrate the full blog pipeline (research → draft → images → video → schema → publish) via a single API route
-- [x] **BLOG-05**: Completed posts are published to Strapi v5 via REST API
-- [x] **BLOG-06**: Blog generation schedule per client is managed via Vercel Cron
+- [ ] **PROTO-01**: `/api/acp/checkout` creates real Stripe Checkout Sessions (or PaymentIntents for ACH) when called — replacing the current stub mock response
+- [ ] **PROTO-02**: ACP checkout endpoint validates agent bearer tokens before creating payment sessions — unauthenticated requests are rejected
+- [ ] **PROTO-03**: `/.well-known/ucp` is updated to advertise real payment methods (ACH, wire, card+surcharge) and supported currencies
+- [ ] **PROTO-04**: `/.well-known/ap2` returns wire transfer instructions (bank name, routing number, account number, reference format) for amounts above $25K threshold — enforcing AP2 mandate
+- [ ] **PROTO-05**: ACP checkout endpoint includes rate limiting middleware to prevent abuse by AI agents
 
-### Press Release Engine (PR)
+### Checkout UI (UI)
 
-- [x] **PR-01**: System can generate a 300–500 word press release draft in inverted pyramid format from a topic or news event input
-- [x] **PR-02**: NewsArticle schema is applied at origin publication; AI transparency label (AB 2013 / SB 942) is included
-- [x] **PR-03**: A 60-second Remotion video sidecar with VideoObject JSON-LD is generated alongside each press release
-- [x] **PR-04**: Press release is distributed via configurable wire service (Business Wire, PR Newswire, EIN Presswire, or AccessWire)
+- [ ] **UI-01**: Package detail pages (`/packages/[tier]`) gain a "Start Payment" CTA that initiates the SOW → checkout flow
+- [ ] **UI-02**: Checkout flow displays payment method options with clear pricing: ACH (standard price), card (+4% surcharge), or wire instructions (for $25K+)
+- [ ] **UI-03**: Payment success page (`/payment/success`) confirms payment receipt and displays next steps
+- [ ] **UI-04**: Payment canceled/failed page (`/payment/canceled`) offers retry options
+- [ ] **UI-05**: Stripe Customer Portal link for subscription management (update payment method, view invoices)
 
-### Chatbot Module (CHAT)
+## v2.1 Requirements
 
-- [x] **CHAT-01**: Developer can deploy an embeddable chatbot widget (`ChatWidget.tsx`) on any client site via a script tag (`public/chatbot-embed.js`)
-- [x] **CHAT-02**: Chatbot supports 5 tool actions: bookAppointment, calculateJobCost, createCRMLead, escalateToHuman, lookupOrderStatus
-- [x] **CHAT-03**: Chatbot connects to any of 10 Tier 1 CRMs via adapter pattern (HubSpot, Salesforce, Pipedrive, Zoho, GoHighLevel, Monday Sales, Freshsales, Close, Keap, ActiveCampaign)
-- [x] **CHAT-04**: Chatbot session history is stored in Supabase chatbot_sessions table
-- [x] **CHAT-05**: Chatbot supports multi-channel delivery: Web (all tiers), SMS via Twilio/Vonage (Silver+), Voice via Bland.ai/Vapi (Gold+), WhatsApp via 360dialog (Gold+)
+Deferred to next minor release.
 
-### Package Pages (PKG)
+### Advanced Wire Automation
+- **WIRE-01**: Automated wire confirmation via banking API webhook (currently manual reconciliation)
+- **WIRE-02**: Wire payment reminder emails for pending wire transfers
 
-- [x] **PKG-01**: Prospect can compare all package tiers side-by-side at `/packages`
-- [x] **PKG-02**: Prospect can view full details for each individual tier at `/packages/[tier]`
-- [x] **PKG-03**: Prospect can check their platform's protocol compliance at `/platform-check`
-- [x] **PKG-04**: Prospect can estimate ROI from a package via an interactive calculator component
-- [x] **PKG-05**: All new pages include heavy JSON-LD (Service, FAQPage, HowTo schema)
+### Subscription Enhancements
+- **SUB-01**: Subscription pause/resume capability from customer portal
+- **SUB-02**: Annual billing discount option (pay 10 months, get 12)
 
-### Protocol MCP Server (MCP)
-
-- [ ] **MCP-01**: AI agents can call ASC's MCP server at `app/api/asc/[transport]` to access 6 tools: generateAuthorityMap, createBlogPost, generateSchemaMarkup, runProtocolCheck, calculateProposal, generatePressRelease
-- [ ] **MCP-02**: `/.well-known/ucp`, `/.well-known/acp`, `/.well-known/ap2` routes are dynamically generated by an artifact generator (replacing static files)
-- [ ] **MCP-03**: ACP checkout adapter framework is scaffolded in `lib/protocols/acp-adapter.ts`
-- [ ] **MCP-04**: AP2 mandate service is scaffolded in `lib/protocols/ap2-mandate.ts`
-
-## v2 Requirements
-
-Deferred to future release.
-
-### Monitoring & Analytics
-- **MON-01**: Real-time dashboard showing proposal conversion rate, chatbot engagement, content performance
-- **MON-02**: AI mention tracking (ChatGPT, Gemini, Perplexity citations)
-- **MON-03**: Knowledge Panel update monitoring
-
-### Client Portal
-- **CLIENT-01**: Client can log in to view their authority maps, blog schedule, and proposal history
-- **CLIENT-02**: Client can approve/reject individual blog post drafts before publish
-- **CLIENT-03**: Client can configure their chatbot tools (pricing, services) without a developer
-
-### Multi-tenant
-- **MULTI-01**: Full multi-tenant data isolation for white-label reseller scenario
+### Reporting
+- **RPT-01**: Revenue dashboard showing MRR, setup fee pipeline, payment method breakdown
+- **RPT-02**: Chargeback/dispute tracking and alerting
 
 ## Out of Scope
 
 | Feature | Reason |
 |---------|--------|
-| Real-time multi-user proposal collaboration | One-to-one flow, not needed |
-| On-site e-commerce checkout | Proposals close via Stripe invoicing — v2+ |
-| Native mobile app | Web-first priority |
-| WordPress/Shopify theme generator | Not an ASC service |
-| Full Strapi admin customization | VPS CMS operational as-is |
-| Video hosting infrastructure | Use YouTube + client's existing host |
+| Shopping cart / multi-item checkout | ASC sells service packages, not individual items |
+| Stripe Treasury for wire processing | Wire instructions are manual for v2.0; automate in v2.1+ |
+| Crypto / Bitcoin payments | Not needed for B2B consulting services |
+| Stripe Connect / marketplace | ASC is a single-vendor business |
+| Multi-currency support | USD only for v2.0 |
+| Free trials on subscriptions | All sales final policy — no trials |
+| Refund automation | No refunds for services rendered — manual exception only |
 
 ## Traceability
 
-Which phases cover which requirements. Populated during roadmap creation.
+Which phases cover which requirements. Updated during roadmap creation.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| DS-01 | Phase 1 | Complete |
-| DS-02 | Phase 1 | Complete |
-| DS-03 | Phase 1 | Complete |
-| DATA-01 | Phase 2 | Complete |
-| DATA-02 | Phase 2 | Complete |
-| DATA-03 | Phase 2 | Complete |
-| DATA-04 | Phase 2 | Complete |
-| DATA-05 | Phase 2 | Complete |
-| DATA-06 | Phase 2 | Complete |
-| DATA-07 | Phase 2 | Complete |
-| PRICE-01 | Phase 3 | Complete |
-| PRICE-02 | Phase 3 | Complete |
-| PRICE-03 | Phase 3 | Complete |
-| PRICE-04 | Phase 3 | Complete |
-| INTAKE-01 | Phase 4 | Complete |
-| INTAKE-02 | Phase 4 | Complete |
-| INTAKE-03 | Phase 4 | Complete |
-| INTAKE-04 | Phase 4 | Complete |
-| INTAKE-05 | Phase 4 | Complete |
-| INTAKE-06 | Phase 4 | Complete |
-| INTAKE-07 | Phase 4 | Complete |
-| INTAKE-08 | Phase 4 | Pending |
-| INTAKE-09 | Phase 4 | Complete |
-| AUTHMAP-01 | Phase 5 | Complete |
-| AUTHMAP-02 | Phase 5 | Complete |
-| AUTHMAP-03 | Phase 5 | Complete |
-| AUTHMAP-04 | Phase 5 | Complete |
-| BLOG-01 | Phase 6 | Complete |
-| BLOG-02 | Phase 6 | Complete |
-| BLOG-03 | Phase 6 | Complete |
-| BLOG-04 | Phase 6 | Complete |
-| BLOG-05 | Phase 6 | Complete |
-| BLOG-06 | Phase 6 | Complete |
-| PR-01 | Phase 7 | Complete |
-| PR-02 | Phase 7 | Complete |
-| PR-03 | Phase 7 | Complete |
-| PR-04 | Phase 7 | Complete |
-| CHAT-01 | Phase 8 | Complete |
-| CHAT-02 | Phase 8 | Complete |
-| CHAT-03 | Phase 8 | Complete |
-| CHAT-04 | Phase 8 | Complete |
-| CHAT-05 | Phase 8 | Complete |
-| PKG-01 | Phase 9 | Complete |
-| PKG-02 | Phase 9 | Complete |
-| PKG-03 | Phase 9 | Complete |
-| PKG-04 | Phase 9 | Complete |
-| PKG-05 | Phase 9 | Complete |
-| MCP-01 | Phase 10 | Pending |
-| MCP-02 | Phase 10 | Pending |
-| MCP-03 | Phase 10 | Pending |
-| MCP-04 | Phase 10 | Pending |
+| STRIPE-01 | — | Pending |
+| STRIPE-02 | — | Pending |
+| STRIPE-03 | — | Pending |
+| STRIPE-04 | — | Pending |
+| PAY-01 | — | Pending |
+| PAY-02 | — | Pending |
+| PAY-03 | — | Pending |
+| PAY-04 | — | Pending |
+| PAY-05 | — | Pending |
+| PAY-06 | — | Pending |
+| HOOK-01 | — | Pending |
+| HOOK-02 | — | Pending |
+| HOOK-03 | — | Pending |
+| HOOK-04 | — | Pending |
+| STATE-01 | — | Pending |
+| STATE-02 | — | Pending |
+| STATE-03 | — | Pending |
+| STATE-04 | — | Pending |
+| DEFEND-01 | — | Pending |
+| DEFEND-02 | — | Pending |
+| DEFEND-03 | — | Pending |
+| DEFEND-04 | — | Pending |
+| PROTO-01 | — | Pending |
+| PROTO-02 | — | Pending |
+| PROTO-03 | — | Pending |
+| PROTO-04 | — | Pending |
+| PROTO-05 | — | Pending |
+| UI-01 | — | Pending |
+| UI-02 | — | Pending |
+| UI-03 | — | Pending |
+| UI-04 | — | Pending |
+| UI-05 | — | Pending |
 
 **Coverage:**
-- v1.0 requirements: 42 total
-- Mapped to phases: 42
-- Unmapped: 0 ✓
+- v2.0 requirements: 32 total
+- Mapped to phases: 0
+- Unmapped: 32 ⚠️
 
 ---
-*Requirements defined: 2026-03-02*
-*Last updated: 2026-03-02 after initial definition*
+*Requirements defined: 2026-03-03*
+*Last updated: 2026-03-03 after research synthesis*
