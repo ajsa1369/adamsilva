@@ -3,12 +3,12 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: unknown
-last_updated: "2026-03-03T04:47:26.105Z"
+last_updated: "2026-03-03T06:30:12.200Z"
 progress:
-  total_phases: 7
+  total_phases: 8
   completed_phases: 7
-  total_plans: 27
-  completed_plans: 27
+  total_plans: 33
+  completed_plans: 29
 ---
 
 # GSD State — ASC Commercial Platform
@@ -18,16 +18,16 @@ progress:
 See: .planning/PROJECT.md (updated 2026-03-02)
 
 **Core value:** Every prospect gets an instant, accurate, branded proposal — no sales calls required to qualify.
-**Current focus:** Phase 7 — Press Release Engine. COMPLETE — all 5 plans executed.
+**Current focus:** Phase 8 — Site Chatbot Module. Plan 1 of 7 complete.
 
 ## Current Position
 
-Phase: 7 of 10 (Press Release Engine) — COMPLETE
-Plan: 5 of 5 completed
-Status: 07-05 complete — app/api/press-release/generate/route.ts (7-stage pipeline), app/api/press-releases/feed.json/route.ts (LLM knowledge feed), .env.example Phase 7 block, public/llms.txt GENERATED MEDIA section
-Last activity: 2026-03-03 — Completed 07-05 (generate route, feed.json route, env vars, LLM discovery files)
+Phase: 8 of 10 (Site Chatbot Module) — IN PROGRESS
+Plan: 1 of 7 completed
+Status: 08-01 complete — lib/chatbot/types.ts (14 shared TypeScript contracts), lib/chatbot/model.ts (getChatModel, Gemini 2.5 Flash Lite), lib/chatbot/embedder.ts (embedText, VECTOR_DIMENSIONS=768), lib/chatbot/retriever.ts (retrieveContext, pgvector RAG)
+Last activity: 2026-03-03 — Completed 08-01 (chatbot foundation layer — types, model, embedder, retriever)
 
-Progress: [████████████████] 74%
+Progress: [█████████████████] 88%
 
 ## Performance Metrics
 
@@ -53,6 +53,8 @@ Progress: [████████████████] 74%
 | Phase 06 P03 | 2 | 1 tasks | 2 files |
 | Phase 07 P01 | 5 | 2 tasks | 2 files |
 | Phase 07-press-release-engine P05 | 3 | 4 tasks | 5 files |
+| Phase 08-site-chatbot-module P01 | 2 | 2 tasks | 4 files |
+| Phase 08-site-chatbot-module P02 | 2 | 2 tasks | 2 files |
 
 ## Accumulated Context
 
@@ -140,6 +142,10 @@ Progress: [████████████████] 74%
 - generate/route.ts content field: stub replaced with await generateDraft(topic, authorName, siteUrl)
 
 ### Key Decisions
+- getChatModel() uses gemini-2.5-flash-lite-preview-06-17 as Google default — lowest latency for real-time chat vs gemini-2.0-flash used by intake (08-01)
+- VECTOR_DIMENSIONS=768 — Google text-embedding-004 natively outputs 768 dimensions; exported constant ensures migration 014 alignment (08-01)
+- retrieveContext() graceful fallback — returns '' on missing env, embed error, or RPC error; chatbot operates without RAG (08-01)
+- OpenAI fallback gpt-4o-mini (not gpt-4o) + Anthropic fallback claude-haiku-4-5-20251001 — cost-optimized fast models for real-time chat (08-01)
 - Slug format {clientId}-{year}-{month}-{toSlug(headline)} — ensures uniqueness per client per month without requiring DB sequence (07-05)
 - Research stage .catch(() => undefined) — non-fatal; pipeline continues without context if MCP unavailable (07-05)
 - Supabase insert sets wire_results=[] initially; non-fatal PATCH updates after distribution — wire results in response even if PATCH fails (07-05)
@@ -242,6 +248,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-03T04:38:09Z
-Stopped at: Completed 07-05-PLAN.md — app/api/press-release/generate/route.ts (7-stage pipeline), app/api/press-releases/feed.json/route.ts (LLM knowledge feed), .env.example Phase 7 block, public/llms.txt GENERATED MEDIA section. Phase 7 COMPLETE (5/5 plans).
+Last session: 2026-03-03T06:28:30Z
+Stopped at: Completed 08-01-PLAN.md — lib/chatbot/types.ts (14 shared TypeScript contracts), lib/chatbot/model.ts (getChatModel, Gemini 2.5 Flash Lite), lib/chatbot/embedder.ts (embedText, VECTOR_DIMENSIONS=768), lib/chatbot/retriever.ts (retrieveContext, pgvector RAG). Phase 8 Plan 1 complete.
 Resume file: None

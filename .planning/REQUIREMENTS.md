@@ -67,9 +67,9 @@ Requirements for ASC Commercial Platform v1.0. Each maps to roadmap phases.
 
 ### Chatbot Module (CHAT)
 
-- [ ] **CHAT-01**: Developer can deploy an embeddable chatbot widget (`ChatWidget.tsx`) on any client site via a script tag (`public/chatbot-embed.js`)
-- [ ] **CHAT-02**: Chatbot supports 5 tool actions: bookAppointment, calculateJobCost, createCRMLead, escalateToHuman, lookupOrderStatus
-- [ ] **CHAT-03**: Chatbot connects to any of 10 Tier 1 CRMs via adapter pattern (HubSpot, Salesforce, Pipedrive, Zoho, GoHighLevel, Monday Sales, Freshsales, Close, Keap, ActiveCampaign)
+- [x] **CHAT-01**: Developer can deploy an embeddable chatbot widget (`ChatWidget.tsx`) on any client site via a script tag (`public/chatbot-embed.js`)
+- [x] **CHAT-02**: Chatbot supports 5 tool actions: bookAppointment, calculateJobCost, createCRMLead, escalateToHuman, lookupOrderStatus
+- [x] **CHAT-03**: Chatbot connects to any of 10 Tier 1 CRMs via adapter pattern (HubSpot, Salesforce, Pipedrive, Zoho, GoHighLevel, Monday Sales, Freshsales, Close, Keap, ActiveCampaign)
 - [ ] **CHAT-04**: Chatbot session history is stored in Supabase chatbot_sessions table
 - [ ] **CHAT-05**: Chatbot supports multi-channel delivery: Web (all tiers), SMS via Twilio/Vonage (Silver+), Voice via Bland.ai/Vapi (Gold+), WhatsApp via 360dialog (Gold+)
 
@@ -159,9 +159,9 @@ Which phases cover which requirements. Populated during roadmap creation.
 | PR-02 | Phase 7 | Complete |
 | PR-03 | Phase 7 | Complete |
 | PR-04 | Phase 7 | Complete |
-| CHAT-01 | Phase 8 | Pending |
-| CHAT-02 | Phase 8 | Pending |
-| CHAT-03 | Phase 8 | Pending |
+| CHAT-01 | Phase 8 | Complete |
+| CHAT-02 | Phase 8 | Complete |
+| CHAT-03 | Phase 8 | Complete |
 | CHAT-04 | Phase 8 | Pending |
 | CHAT-05 | Phase 8 | Pending |
 | PKG-01 | Phase 9 | Pending |

@@ -16,7 +16,7 @@ This roadmap builds the full commercial layer on top of the existing ASCv2 site.
 - [x] **Phase 4: Agentic Intake Agent** - Conversational /get-started flow → proposal generation → PDF → email → CRM → follow-up (completed 2026-03-02)
 - [x] **Phase 5: Topical Authority Map Agent** - Monthly research pipeline → content calendar → client approval email (Vercel Cron) (completed 2026-03-03)
 - [ ] **Phase 6: Blog Post Production Pipeline** - Image gen → Remotion video → heavy schema → Strapi publish → Vercel Cron schedule
-- [x] **Phase 7: Press Release Engine** - Draft generation → NewsArticle schema → 60s video sidecar → wire service distribution (completed 2026-03-03)
+- [x] **Phase 7: Press Release Engine** - Draft generation → NewsArticle schema → 60s video sidecar → wire service distribution (completed 2026-03-03)
 - [ ] **Phase 8: Site Chatbot Module** - Embeddable widget + 5 tools + 10 CRM adapters + multi-channel + Supabase sessions
 - [ ] **Phase 9: Package Pages & Marketing Site** - /packages, /packages/[tier], /platform-check, ROI calculator, JSON-LD
 - [ ] **Phase 10: Vercel MCP Server & Protocol Stack** - MCP server (6 tools) + dynamic /.well-known/* + ACP adapter + AP2 mandate
@@ -158,7 +158,15 @@ Plans:
   3. A chatbot connected to any of the 10 supported CRMs creates a contact and logs the interaction via the adapter pattern without code changes to the core widget
   4. Every chatbot session is persisted in the Supabase chatbot_sessions table with messages, channel, and outcome recorded
   5. A Gold-tier client's chatbot operates across Web, SMS (Twilio/Vonage), Voice (Bland.ai/Vapi), and WhatsApp (360dialog) — channel availability enforced by package tier
-**Plans**: TBD
+**Plans**: 6 plans
+
+Plans:
+- [ ] 08-01-PLAN.md — TypeScript contracts + getChatModel() + embedder + RAG retriever: lib/chatbot/types.ts, lib/chatbot/model.ts, lib/chatbot/embedder.ts, lib/chatbot/retriever.ts
+- [ ] 08-02-PLAN.md — Supabase pgvector migration + knowledge seeder: supabase/migrations/014_chatbot_knowledge.sql, app/api/chatbot/[clientId]/seed/route.ts
+- [ ] 08-03-PLAN.md — 5 tool definitions + 10 CRM adapters: lib/chatbot/tools.ts, lib/chatbot/crm-adapters/ (11 files)
+- [ ] 08-04-PLAN.md — Streaming chatbot API route + session persistence: app/api/chatbot/[clientId]/route.ts
+- [ ] 08-05-PLAN.md — Multi-channel delivery + tier enforcement: lib/chatbot/channel-router.ts, channels/*.ts, SMS/voice/WhatsApp routes
+- [ ] 08-06-PLAN.md — ChatWidget.tsx + embed script + chatbot-widget page: components/chatbot/ChatWidget.tsx, public/chatbot-embed.js, app/chatbot-widget/page.tsx
 
 ### Phase 9: Package Pages & Marketing Site
 **Goal**: A prospect who arrives at the ASC site can understand pricing, check their platform's compatibility, calculate their ROI, and reach the intake agent — all without talking to a human
@@ -198,7 +206,7 @@ Note: Phase 8 depends on Phase 3 (not Phase 7) — can begin after Phase 3 compl
 | 5. Topical Authority Map Agent | 2/2 | Complete   | 2026-03-03 |
 | 6. Blog Post Production Pipeline | 4/4 | Complete   | 2026-03-03 |
 | 7. Press Release Engine | 5/5 | Complete   | 2026-03-03 |
-| 8. Site Chatbot Module | 0/? | Not started | - |
+| 8. Site Chatbot Module | 2/6 | In Progress|  |
 | 9. Package Pages & Marketing Site | 0/? | Not started | - |
 | 10. Vercel MCP Server & Protocol Stack | 0/? | Not started | - |
 
@@ -211,3 +219,4 @@ Note: Phase 8 depends on Phase 3 (not Phase 7) — can begin after Phase 3 compl
 *Phase 5 planned: 2026-03-03 — 2 plans*
 *Phase 6 planned: 2026-03-03 — 2 plans*
 *Phase 7 planned: 2026-03-03 — 5 plans*
+*Phase 8 planned: 2026-03-03 — 6 plans*
