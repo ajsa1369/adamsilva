@@ -14,7 +14,7 @@ This roadmap builds the full commercial layer on top of the existing ASCv2 site.
 - [ ] **Phase 2: Supabase Schema & Data Architecture** - 7 new tables with RLS + seeded integration catalog + edge function scaffolding
 - [x] **Phase 3: Integration Catalog & Pricing Engine** - TypeScript catalog lib + slot/overage calculator + tier recommender + unit tests (completed 2026-03-02)
 - [x] **Phase 4: Agentic Intake Agent** - Conversational /get-started flow → proposal generation → PDF → email → CRM → follow-up (completed 2026-03-02)
-- [ ] **Phase 5: Topical Authority Map Agent** - Monthly research pipeline → content calendar → client approval email (Vercel Cron)
+- [x] **Phase 5: Topical Authority Map Agent** - Monthly research pipeline → content calendar → client approval email (Vercel Cron) (completed 2026-03-03)
 - [ ] **Phase 6: Blog Post Production Pipeline** - Image gen → Remotion video → heavy schema → Strapi publish → Vercel Cron schedule
 - [ ] **Phase 7: Press Release Engine** - Draft generation → NewsArticle schema → 60s video sidecar → wire service distribution
 - [ ] **Phase 8: Site Chatbot Module** - Embeddable widget + 5 tools + 10 CRM adapters + multi-channel + Supabase sessions
@@ -180,7 +180,7 @@ Note: Phase 8 depends on Phase 3 (not Phase 7) — can begin after Phase 3 compl
 | 2. Supabase Schema & Data Architecture | 4/6 | In Progress|  |
 | 3. Integration Catalog & Pricing Engine | 3/3 | Complete   | 2026-03-02 |
 | 4. Agentic Intake Agent | 5/5 | Complete    | 2026-03-03 |
-| 5. Topical Authority Map Agent | 1/2 | In Progress|  |
+| 5. Topical Authority Map Agent | 2/2 | Complete   | 2026-03-03 |
 | 6. Blog Post Production Pipeline | 0/? | Not started | - |
 | 7. Press Release Engine | 0/? | Not started | - |
 | 8. Site Chatbot Module | 0/? | Not started | - |

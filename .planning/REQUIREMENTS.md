@@ -45,9 +45,9 @@ Requirements for ASC Commercial Platform v1.0. Each maps to roadmap phases.
 ### Authority Map Agent (AUTHMAP)
 
 - [x] **AUTHMAP-01**: System can generate a monthly topical authority map per client — research pipeline identifies content gaps and ranks topics by citation opportunity
-- [ ] **AUTHMAP-02**: Authority map output (JSON) is stored in Supabase authority_maps table
-- [ ] **AUTHMAP-03**: Authority map generation is triggered on the first Monday of each month via Vercel Cron
-- [ ] **AUTHMAP-04**: Client receives an approval email with approve/modify link before content calendar is locked
+- [x] **AUTHMAP-02**: Authority map output (JSON) is stored in Supabase authority_maps table
+- [x] **AUTHMAP-03**: Authority map generation is triggered on the first Monday of each month via Vercel Cron
+- [x] **AUTHMAP-04**: Client receives an approval email with approve/modify link before content calendar is locked
 
 ### Blog Pipeline (BLOG)
 
@@ -146,9 +146,9 @@ Which phases cover which requirements. Populated during roadmap creation.
 | INTAKE-08 | Phase 4 | Pending |
 | INTAKE-09 | Phase 4 | Complete |
 | AUTHMAP-01 | Phase 5 | Complete |
-| AUTHMAP-02 | Phase 5 | Pending |
-| AUTHMAP-03 | Phase 5 | Pending |
-| AUTHMAP-04 | Phase 5 | Pending |
+| AUTHMAP-02 | Phase 5 | Complete |
+| AUTHMAP-03 | Phase 5 | Complete |
+| AUTHMAP-04 | Phase 5 | Complete |
 | BLOG-01 | Phase 6 | Pending |
 | BLOG-02 | Phase 6 | Pending |
 | BLOG-03 | Phase 6 | Pending |

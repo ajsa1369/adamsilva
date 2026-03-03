@@ -3,12 +3,12 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: unknown
-last_updated: "2026-03-03T01:04:28Z"
+last_updated: "2026-03-03T01:12:07.638Z"
 progress:
-  total_phases: 10
-  completed_phases: 4
+  total_phases: 5
+  completed_phases: 5
   total_plans: 18
-  completed_plans: 17
+  completed_plans: 18
 ---
 
 # GSD State — ASC Commercial Platform
@@ -18,16 +18,16 @@ progress:
 See: .planning/PROJECT.md (updated 2026-03-02)
 
 **Core value:** Every prospect gets an instant, accurate, branded proposal — no sales calls required to qualify.
-**Current focus:** Phase 5 — Topical Authority Map Agent. Plan 01 complete.
+**Current focus:** Phase 5 — Topical Authority Map Agent. PHASE COMPLETE (2/2 plans done).
 
 ## Current Position
 
-Phase: 5 of 10 (Topical Authority Map Agent) — IN PROGRESS
-Plan: 1 of 2 completed
-Status: Phase 5 plan 01 complete
-Last activity: 2026-03-03 — Completed 05-01 (types.ts contracts + researcher.ts dual-provider pipeline)
+Phase: 5 of 10 (Topical Authority Map Agent) — COMPLETE
+Plan: 2 of 2 completed
+Status: Phase 5 complete — authority map pipeline, API routes, cron schedule all done
+Last activity: 2026-03-03 — Completed 05-02 (generate/approve/cron routes + vercel.json + .env.example)
 
-Progress: [████████░░] 45%
+Progress: [█████████░] 50%
 
 ## Performance Metrics
 
@@ -49,6 +49,7 @@ Progress: [████████░░] 45%
 - Last 5 plans: 03-02 (1 min), 04-01 (5 min), 04-03, 04-04, 04-05 (8 min)
 - Trend: Phase 4 complete — intake agent, edge functions, PDF, cron all implemented
 | Phase 04-agentic-intake-agent P05 | 2 | 2 tasks | 4 files |
+| Phase 05-topical-authority-map-agent P02 | 3 | 2 tasks | 5 files |
 
 ## Accumulated Context
 
@@ -87,13 +88,18 @@ Progress: [████████░░] 45%
 - 010_press_releases.sql: wire_service CHECK(5), status CHECK(5), schema_json JSONB, RLS + idempotent FK patch fk_blog_posts_authority_map
 - supabase/migrations/ is now git-tracked (fixed .gitignore **/*.sql issue)
 
-### Phase 5 Progress (05-01 complete)
+### Phase 5 Progress (05-01 + 05-02 complete — PHASE DONE)
 - lib/authority-map/types.ts: AuthorityMapTopic, AuthorityMapResult, ClientConfig — all typed interfaces, no any
 - lib/authority-map/researcher.ts: generateAuthorityMap(config) — dual-provider: NOTEBOOKLM_MCP_URL → NotebookLM MCP via @ai-sdk/mcp experimental_createMCPClient (SSE); else Gemini 2.0 Flash + google.tools.googleSearch({})
 - RESEARCHER_SYSTEM_PROMPT + NOTEBOOKLM_SYSTEM_PROMPT exported as named const strings
 - generateWithNotebookLM reuses getIntakeModel() from Phase 4 — MODEL_PROVIDER env var honored
 - @ai-sdk/mcp@1.0.23 installed — MCP client was extracted from ai main package in ai@6
 - parseTopicsFromResponse: strips markdown fences, parses JSON, throws descriptive error
+- app/api/authority-map/generate/route.ts: POST — Zod validation → generateAuthorityMap → Supabase upsert (merge-duplicates) → branded Resend approval email (top-5 topics HTML table + Approve button)
+- app/api/authority-map/approve/route.ts: GET — fetch row → idempotent approved_at PATCH → HTML confirmation page
+- app/api/authority-map/cron/route.ts: GET — CRON_SECRET auth → AUTHORITY_MAP_CLIENTS JSON parse → sequential per-client researcher + Supabase + Resend loop → { processed, errors }
+- vercel.json: added /api/authority-map/cron at "0 9 1-7 * 1" (first Monday of month, 9 AM UTC) alongside existing daily followup cron
+- .env.example: Phase 5 block — AUTHORITY_MAP_CLIENTS (required JSON array), NOTEBOOKLM_MCP_URL (commented, optional)
 
 ### Phase 4 Progress (04-01, 04-03, 04-04, 04-05 complete — PHASE DONE)
 - lib/intake/types.ts: ProspectData, ProposalLineItem, ProposalData — shared contracts for all Phase 4 plans
@@ -110,6 +116,10 @@ Progress: [████████░░] 45%
 - .env.local.example: documents 9 required Phase 4 env vars
 
 ### Key Decisions
+- parsed.error.issues not .errors — Zod v3 ZodError uses .issues property; .errors does not exist on the type (05-02)
+- Cron route uses minimal email HTML (plain link), generate route has full branded template — keeps cron lean (05-02)
+- Approve route is idempotent — returns already-approved page without double-patching (05-02)
+- AUTHORITY_MAP_CLIENTS stored as JSON array string in single env var — avoids per-client env var proliferation (05-02)
 - experimental_createMCPClient imported from @ai-sdk/mcp not ai — MCP client was extracted to separate package in ai@6 (05-01)
 - google.tools.googleSearch({}) requires empty options object — ProviderToolFactory signature requires ARGS arg even if all fields optional (05-01)
 - NOTEBOOKLM_SYSTEM_PROMPT is a separate named export from RESEARCHER_SYSTEM_PROMPT — identical content, distinct exports for clarity (05-01)
@@ -165,6 +175,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-03T01:04:28Z
-Stopped at: Completed 05-01-PLAN.md — AuthorityMapTopic/AuthorityMapResult/ClientConfig types + generateAuthorityMap dual-provider pipeline (NotebookLM MCP + Gemini fallback).
+Last session: 2026-03-03T01:10:29Z
+Stopped at: Completed 05-02-PLAN.md — generate/approve/cron API routes + vercel.json first-Monday cron + .env.example Phase 5 docs. Phase 5 complete.
 Resume file: None
