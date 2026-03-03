@@ -151,7 +151,7 @@ Note: v1.0 Phase 10 (Vercel MCP Server) was deferred — ACP/AP2 protocol work f
 
 | Phase | Name | Est. Plans | Requirements | Status |
 |-------|------|------------|--------------|--------|
-| 10 | 3/3 | Complete   | 2026-03-03 | Planning complete |
+| 10 | 3/3 | Complete    | 2026-03-03 | Planning complete |
 | 11 | Payment State Machine | ~3 | STATE-01, STATE-02, STATE-03, STATE-04, PAY-05, HOOK-03 | Not started |
 | 12 | Checkout + Chargeback Defense + UI | ~4 | PAY-01, PAY-02, PAY-03, PAY-04, PAY-06, DEFEND-01, DEFEND-02, DEFEND-03, DEFEND-04, UI-01, UI-02, UI-03, UI-04, UI-05 | Not started |
 | 13 | Protocol Integration | ~2 | PROTO-01, PROTO-02, PROTO-03, PROTO-04, PROTO-05 | Not started |
