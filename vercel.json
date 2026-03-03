@@ -4,6 +4,10 @@
     {
       "path": "/api/intake/followup",
       "schedule": "0 9 * * *"
+    },
+    {
+      "path": "/api/authority-map/cron",
+      "schedule": "0 9 1-7 * 1"
     }
   ]
 }
