@@ -3,12 +3,12 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: unknown
-last_updated: "2026-03-03T04:29:34.923Z"
+last_updated: "2026-03-03T04:36:00Z"
 progress:
   total_phases: 7
   completed_phases: 6
   total_plans: 27
-  completed_plans: 23
+  completed_plans: 25
 ---
 
 # GSD State — ASC Commercial Platform
@@ -18,16 +18,16 @@ progress:
 See: .planning/PROJECT.md (updated 2026-03-02)
 
 **Core value:** Every prospect gets an instant, accurate, branded proposal — no sales calls required to qualify.
-**Current focus:** Phase 7 — Press Release Engine. Plan 01 complete — types and migration.
+**Current focus:** Phase 7 — Press Release Engine. Plan 04 complete — researcher + 4 wire adapters + distributor.
 
 ## Current Position
 
 Phase: 7 of 10 (Press Release Engine) — IN PROGRESS
-Plan: 1 of 5 completed
-Status: 07-01 complete — lib/press-release/types.ts (9 TypeScript interfaces), supabase/migrations/013_press_releases_phase7_columns.sql (Phase 7 columns + wire_service drop)
-Last activity: 2026-03-03 — Completed 07-01 (types.ts, migration 013)
+Plan: 4 of 5 completed
+Status: 07-04 complete — lib/press-release/researcher.ts (researchPressReleaseTopic MCP+AI fallback), 4 wire adapters (einpresswire/businesswire/prnewswire/accesswire), lib/press-release/distributor.ts (Promise.allSettled parallel orchestrator)
+Last activity: 2026-03-03 — Completed 07-04 (researcher.ts, 4 wire adapters, distributor.ts)
 
-Progress: [█████████████] 65%
+Progress: [██████████████] 68%
 
 ## Performance Metrics
 
@@ -139,6 +139,11 @@ Progress: [█████████████] 65%
 - generate/route.ts content field: stub replaced with await generateDraft(topic, authorName, siteUrl)
 
 ### Key Decisions
+- wordCount counts headline + lead + body only — boilerplate and mediaContact are standard fixed blocks, word budget applies only to variable content (07-02)
+- buildDateline() generates ATLANTA /EINPresswire/ format — default wire for all ASC drafts unless overridden downstream (07-02)
+- parseResponse() throws descriptive error on invalid JSON — fail-fast prevents silent garbage data reaching Supabase (07-02)
+- AI_TRANSPARENCY_HTML_COMMENT exported separately from AI_TRANSPARENCY_LABEL — HTML renderer needs comment token, API route needs label string; separate exports prevent coupling (07-02)
+- fullText joins sections with '\n' + blank '' entries — matches industry wire text submission format (07-02)
 - Migration named 013 not 011 — migrations 011/012 already used for seed data (integrations_catalog + packages) (07-01)
 - wire_service column dropped via DO block — Phase 7 uses wire_results JSONB array (WireSubmitResult[]) not single text value (07-01)
 - import type (never value import) from @/lib/insights/types — no runtime coupling between lib modules (07-01)
@@ -222,6 +227,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-03T04:32:00Z
-Stopped at: Completed 07-01-PLAN.md — lib/press-release/types.ts (9 TypeScript interfaces), supabase/migrations/013_press_releases_phase7_columns.sql (Phase 7 columns + wire_service drop). Phase 7 Plan 1 of 5 complete.
+Last session: 2026-03-03T04:43:00Z
+Stopped at: Completed 07-02-PLAN.md — lib/press-release/draft-generator.ts (generatePressReleaseDraft, PRESS_RELEASE_SYSTEM_PROMPT), lib/press-release/compliance.ts (injectCompliance, AI_TRANSPARENCY_LABEL, AI_TRANSPARENCY_HTML_COMMENT). Phase 7 Plan 2 of 5 complete.
 Resume file: None

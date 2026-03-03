@@ -197,7 +197,7 @@ Note: Phase 8 depends on Phase 3 (not Phase 7) — can begin after Phase 3 compl
 | 4. Agentic Intake Agent | 5/5 | Complete    | 2026-03-03 |
 | 5. Topical Authority Map Agent | 2/2 | Complete   | 2026-03-03 |
 | 6. Blog Post Production Pipeline | 4/4 | Complete   | 2026-03-03 |
-| 7. Press Release Engine | 1/5 | In Progress|  |
+| 7. Press Release Engine | 4/5 | In Progress|  |
 | 8. Site Chatbot Module | 0/? | Not started | - |
 | 9. Package Pages & Marketing Site | 0/? | Not started | - |
 | 10. Vercel MCP Server & Protocol Stack | 0/? | Not started | - |
