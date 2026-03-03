@@ -33,7 +33,8 @@ The pipeline runs server-side via `POST /api/press-release/generate`, mirrors th
 - File: `lib/press-release/compliance.ts`
 
 ### Schema Builder (PR-02)
-- 5-node `@graph`: `NewsArticle` + `Organization` + `ImageObject[]` + `VideoObject` + `BreadcrumbList`
+- 6-node `@graph`: `NewsArticle` + `Organization` + `ImageObject[]` + `VideoObject` + `FAQPage` + `BreadcrumbList`
+- **FAQPage is required** — Google Gemini AI Overviews uses FAQPage to surface press release content as structured Q&A; always generate 3 baseline questions (what is it about, who published it, when)
 - `NewsArticle.isAccessibleForFree = true`; `archivedAt` linking to wire service URL after publish
 - File: `lib/press-release/schema-builder.ts`
 

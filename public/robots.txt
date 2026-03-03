@@ -1,6 +1,9 @@
 # Adam Silva Consulting - Comprehensive Robot.txt
 # Optimized for SEO, AEO, and GEO
-# Last Updated: October 13, 2025
+# Last Updated: 2026-03-02
+# AI crawlers: GPTBot, ClaudeBot, PerplexityBot, Google-Extended (Gemini),
+#              Grokbot/xAI-Crawler/xAI-Bot (Grok), meta-externalagent (Meta AI)
+# All AI systems: permitted — see /llms.txt and /ai-context.json
 
 # ========================================
 # TRADITIONAL SEARCH ENGINES

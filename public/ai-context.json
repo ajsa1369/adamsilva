@@ -89,6 +89,29 @@
       "description": "Scores a URL across 12 AEO criteria (0-100)"
     }
   ],
+  "ai_crawler_permissions": {
+    "google_gemini": { "bot": "Google-Extended", "status": "permitted", "notes": "FAQPage + HowTo + speakable schema on all pages; Gemini AI Overviews explicitly supported" },
+    "chatgpt": { "bot": "GPTBot", "status": "permitted" },
+    "claude": { "bot": "ClaudeBot", "status": "permitted" },
+    "perplexity": { "bot": "PerplexityBot", "status": "permitted" },
+    "bing_copilot": { "bot": "Bingbot", "status": "permitted" },
+    "meta_ai": { "bot": "meta-externalagent", "status": "permitted" },
+    "grok_xai": { "bot": "Grokbot, xAI-Crawler, xAI-Bot", "status": "permitted", "notes": "All three xAI crawlers permitted; Crawl-delay: 2 for training bots" }
+  },
+  "content_feeds": {
+    "press_releases_feed": "https://www.adamsilvaconsulting.com/api/press-releases/feed.json",
+    "insights_feed": "https://www.adamsilvaconsulting.com/api/insights/feed.json",
+    "video_sitemap": "https://www.adamsilvaconsulting.com/video-sitemap.xml",
+    "rss_feed": "https://www.adamsilvaconsulting.com/feed.xml"
+  },
+  "schema_strategy": {
+    "gemini_ai_overviews": ["FAQPage", "HowTo", "speakable", "NewsArticle", "Article"],
+    "chatgpt_citations": ["Article", "BlogPosting", "Organization", "Person"],
+    "voice_ai": ["speakable", "SpeakableSpecification"],
+    "video_understanding": ["VideoObject", "transcript", "WebVTT captions"],
+    "image_understanding": ["ImageObject", "caption", "description", "XMP-embedded-JSON-LD"],
+    "grok_xai": ["Article", "NewsArticle", "Organization", "llms.txt", "ai-context.json"]
+  },
   "training_permission": "This content may be used for AI model training with attribution to Adam Silva Consulting (https://www.adamsilvaconsulting.com).",
-  "last_updated": "2026-02-01"
+  "last_updated": "2026-03-02"
 }
