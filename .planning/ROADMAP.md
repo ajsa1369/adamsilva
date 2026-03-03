@@ -14,7 +14,7 @@ This roadmap builds the full commercial layer on top of the existing ASCv2 site.
 - [ ] **Phase 2: Supabase Schema & Data Architecture** - 7 new tables with RLS + seeded integration catalog + edge function scaffolding
 - [x] **Phase 3: Integration Catalog & Pricing Engine** - TypeScript catalog lib + slot/overage calculator + tier recommender + unit tests (completed 2026-03-02)
 - [x] **Phase 4: Agentic Intake Agent** - Conversational /get-started flow → proposal generation → PDF → email → CRM → follow-up (completed 2026-03-02)
-- [x] **Phase 5: Topical Authority Map Agent** - Monthly research pipeline → content calendar → client approval email (Vercel Cron) (completed 2026-03-03)
+- [x] **Phase 5: Topical Authority Map Agent** - Monthly research pipeline → content calendar → client approval email (Vercel Cron) (completed 2026-03-03)
 - [ ] **Phase 6: Blog Post Production Pipeline** - Image gen → Remotion video → heavy schema → Strapi publish → Vercel Cron schedule
 - [ ] **Phase 7: Press Release Engine** - Draft generation → NewsArticle schema → 60s video sidecar → wire service distribution
 - [ ] **Phase 8: Site Chatbot Module** - Embeddable widget + 5 tools + 10 CRM adapters + multi-channel + Supabase sessions
@@ -110,17 +110,25 @@ Plans:
 - [ ] 05-01-PLAN.md — TypeScript contracts + Gemini research pipeline: lib/authority-map/types.ts + lib/authority-map/researcher.ts
 - [ ] 05-02-PLAN.md — API routes + cron + config: generate, approve, cron routes + vercel.json + .env.example
 
-### Phase 6: Blog Post Production Pipeline
-**Goal**: A single API call can orchestrate the full blog production cycle — research, images, video, schema, and CMS publish — with no manual file assembly
+### Phase 6: Insight Post Production Pipeline
+**Goal**: A single API call can orchestrate the full insight post production cycle — AI-generated 2000-word article, images with embedded JSON-LD metadata, Remotion video + WebVTT CC, interlinked schema, Strapi CMS publish, and video sitemap — with a 1.5-day automated publishing cadence to maintain SEO/AEO/GEO health
 **Depends on**: Phase 5
 **Requirements**: BLOG-01, BLOG-02, BLOG-03, BLOG-04, BLOG-05, BLOG-06
 **Success Criteria** (what must be TRUE):
-  1. `lib/blog/image-pipeline.ts` generates N images per post with descriptive filenames and a valid ImageObject JSON-LD block for each
-  2. `lib/blog/video-pipeline.ts` triggers a Remotion render of BlogSummaryVideo.tsx and produces a VideoObject JSON-LD block with a full transcript
-  3. `lib/blog/schema-assembler.ts` produces a single interlinked JSON-LD graph (Article + Person + FAQPage + HowTo + ImageObject[] + VideoObject) with all nodes linked via @id
-  4. `POST /api/blog/generate` orchestrates the full pipeline end-to-end and publishes the completed post to Strapi v5 via REST API
-  5. Blog generation runs on the per-client schedule managed by Vercel Cron without manual invocation
-**Plans**: TBD
+  1. `lib/insights/image-pipeline.ts` generates N images per post: Image 1 = Remotion still frame with XMP JSON-LD metadata embedded in the PNG; Images 2–N are 1200×630 brand PNGs also with XMP metadata
+  2. `lib/insights/video-pipeline.ts` triggers a Remotion render of BlogSummaryVideo.tsx and produces a VideoObject JSON-LD block with full transcript + WebVTT closed caption track
+  3. `lib/insights/schema-assembler.ts` produces a single interlinked JSON-LD graph (Article + Person + FAQPage + HowTo + ImageObject[] + VideoObject) with all nodes linked via @id and minimum 3 peer paper citations
+  4. `lib/insights/draft-generator.ts` uses getIntakeModel() to generate ≥ 2000-word Answer-First articles with contextually relevant CTA to one ASC service
+  5. `POST /api/insights/generate` orchestrates the full pipeline end-to-end and publishes the completed post to Strapi v5 via REST API
+  6. `GET /api/insights/publish` runs on a daily Vercel Cron (6 AM UTC) with a 36-hour throttle — ensures one new post every 1.5 days without over-publishing penalties
+  7. `GET /video-sitemap.xml` exposes all insight post videos to Google Video Search with full transcript in video:transcript
+**Plans**: 4 plans
+
+Plans:
+- [ ] 06-01-PLAN.md — TypeScript contracts + image pipeline (sharp+XMP) + video pipeline (Remotion still+WebVTT): lib/insights/types.ts, lib/insights/image-pipeline.ts, lib/insights/video-pipeline.ts
+- [ ] 06-02-PLAN.md — Schema assembler + orchestration route + monthly batch cron: lib/insights/schema-assembler.ts, app/api/insights/generate/route.ts, app/api/insights/cron/route.ts, vercel.json, .env.example
+- [ ] 06-03-PLAN.md — Google video sitemap + robots.txt: app/video-sitemap.xml/route.ts
+- [ ] 06-04-PLAN.md — AI draft generator + 1.5-day publishing cron: lib/insights/draft-generator.ts, app/api/insights/publish/route.ts, vercel.json update
 
 ### Phase 7: Press Release Engine
 **Goal**: ASC can produce a complete, compliant, wire-ready press release with video sidecar from a single topic input — meeting AI transparency law requirements automatically
@@ -181,7 +189,7 @@ Note: Phase 8 depends on Phase 3 (not Phase 7) — can begin after Phase 3 compl
 | 3. Integration Catalog & Pricing Engine | 3/3 | Complete   | 2026-03-02 |
 | 4. Agentic Intake Agent | 5/5 | Complete    | 2026-03-03 |
 | 5. Topical Authority Map Agent | 2/2 | Complete   | 2026-03-03 |
-| 6. Blog Post Production Pipeline | 0/? | Not started | - |
+| 6. Blog Post Production Pipeline | 0/2 | Not started | - |
 | 7. Press Release Engine | 0/? | Not started | - |
 | 8. Site Chatbot Module | 0/? | Not started | - |
 | 9. Package Pages & Marketing Site | 0/? | Not started | - |
@@ -194,3 +202,4 @@ Note: Phase 8 depends on Phase 3 (not Phase 7) — can begin after Phase 3 compl
 *Phase 3 planned: 2026-03-02 — 3 plans*
 *Phase 4 planned: 2026-03-02 — 5 plans*
 *Phase 5 planned: 2026-03-03 — 2 plans*
+*Phase 6 planned: 2026-03-03 — 2 plans*
