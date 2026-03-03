@@ -914,3 +914,11 @@
 # ==============================================================================
 !/supabase/
 !/supabase/**
+
+# ==============================================================================
+# ASCv2 — app/(marketing)/packages/ must NOT be gitignored
+# The **/packages/ pattern above is for NuGet/C# package artifacts.
+# Override it for this project's marketing packages pages.
+# ==============================================================================
+!/app/
+!/app/**
