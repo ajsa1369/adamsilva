@@ -2,13 +2,13 @@
 gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
-status: unknown
-last_updated: "2026-03-03T10:28:51.778Z"
+status: in-progress
+last_updated: "2026-03-03T12:57:45.352Z"
 progress:
-  total_phases: 8
+  total_phases: 9
   completed_phases: 8
-  total_plans: 33
-  completed_plans: 33
+  total_plans: 37
+  completed_plans: 34
 ---
 
 # GSD State — ASC Commercial Platform
@@ -18,16 +18,16 @@ progress:
 See: .planning/PROJECT.md (updated 2026-03-02)
 
 **Core value:** Every prospect gets an instant, accurate, branded proposal — no sales calls required to qualify.
-**Current focus:** Phase 8 — Site Chatbot Module COMPLETE. All 6 plans done. Ready for Phase 9.
+**Current focus:** Phase 9 — Package Pages & Marketing Site. Plan 01 complete, 3 remaining.
 
 ## Current Position
 
-Phase: 8 of 10 (Site Chatbot Module) — COMPLETE
-Plan: 6 of 6 completed (checkpoint:human-verify approved)
-Status: 08-06 fully complete — ChatWidget.tsx (floating button + streaming panel), /chatbot-widget iframe route, public/chatbot-embed.js vanilla JS embed script, .env.example Phase 8 block. Human-verify approved.
-Last activity: 2026-03-03 — Phase 8 complete
+Phase: 9 of 10 (Package Pages & Marketing Site) — IN PROGRESS
+Plan: 1 of 4 completed
+Status: 09-01 complete — lib/data/packages.ts (6 tiers + 8 platform matrix) and components/ROICalculator.tsx (interactive ROI calculator). Ready for Plan 09-02.
+Last activity: 2026-03-03 — Plan 09-01 complete
 
-Progress: [██████████████████] 100%
+Progress: [████████████████░░] 92%
 
 ## Performance Metrics
 
@@ -58,6 +58,7 @@ Progress: [██████████████████] 100%
 | Phase 08-site-chatbot-module P03 | 3 | 2 tasks | 12 files |
 | Phase 08-site-chatbot-module P04 | 1 | 1 tasks | 1 files |
 | Phase 08-site-chatbot-module P05 | 2 | 2 tasks | 7 files |
+| Phase 09-package-pages-marketing-site P01 | 3 | 2 tasks | 2 files |
 
 ## Accumulated Context
 
@@ -145,6 +146,9 @@ Progress: [██████████████████] 100%
 - generate/route.ts content field: stub replaced with await generateDraft(topic, authorName, siteUrl)
 
 ### Key Decisions
+- No --color-navy CSS var; used --color-text + --color-accent from globals.css design tokens (09-01)
+- lib/data/packages.ts is fully independent from lib/integrations/catalog.ts — separate purposes, no cross-imports (09-01)
+- ROI denominator uses setup cost per plan formula: ((annualRevenueLift - annualCost) / setupCost) * 100 (09-01)
 - body goes inside DefaultChatTransport not useChat — ai@6 UseChatOptions has no body field; HttpChatTransportInitOptions accepts body?: Resolvable<object> (08-06)
 - iframe embed pattern (not web component) — works on Shopify without framework dependency, no CORS issues, no bundle needed on host page (08-06)
 - Inline hex in embed.js (#4D8EC0, #1B2E4B) — globals.css not loaded on external pages; CSS vars only in ChatWidget.tsx (08-06)
@@ -258,6 +262,12 @@ Progress: [██████████████████] 100%
 - followup_sent_at TIMESTAMPTZ column used for re-send prevention — status column never patched to 'followed_up' (not in CHECK constraint) (04-05)
 - CRON_SECRET auth is optional (if block) — allows local dev without secret, secured in Vercel production (04-05)
 
+### Phase 9 Progress (09-01 complete)
+- lib/data/packages.ts: PackagePageData interface + PACKAGES array (6 tiers: bronze, silver, gold, core, shopify-starter, shopify-growth) + ComplianceLevel type + PlatformEntry interface + PLATFORM_MATRIX array (8 platforms)
+- components/ROICalculator.tsx: 'use client' interactive calculator — 4 inputs (tier, leads/month, close rate, deal size) + 3 computed outputs (monthly lift, annual ROI %, payback months) + CTA to /get-started
+- All pricing matches PRD Section 5 exactly; all compliance values match PRD Section 9 exactly
+- PACKAGES and PLATFORM_MATRIX serve as single source of truth for all Phase 9 marketing pages
+
 ### Pending Todos
 None yet.
 
@@ -271,6 +281,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-03T07:05:00Z
-Stopped at: Completed 08-06-PLAN.md (all 3 tasks) — human-verify approved. Phase 8 fully complete.
+Last session: 2026-03-03T12:55:50Z
+Stopped at: Completed 09-01-PLAN.md (all 2 tasks) — lib/data/packages.ts + components/ROICalculator.tsx. Phase 9 Plan 01 complete.
 Resume file: None
