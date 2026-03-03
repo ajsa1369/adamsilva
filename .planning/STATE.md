@@ -3,12 +3,12 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: unknown
-last_updated: "2026-03-03T06:38:05.265Z"
+last_updated: "2026-03-03T06:42:17.566Z"
 progress:
   total_phases: 8
   completed_phases: 7
   total_plans: 33
-  completed_plans: 30
+  completed_plans: 31
 ---
 
 # GSD State — ASC Commercial Platform
@@ -18,14 +18,14 @@ progress:
 See: .planning/PROJECT.md (updated 2026-03-02)
 
 **Core value:** Every prospect gets an instant, accurate, branded proposal — no sales calls required to qualify.
-**Current focus:** Phase 8 — Site Chatbot Module. Plan 3 of 6 complete.
+**Current focus:** Phase 8 — Site Chatbot Module. Plan 4 of 6 complete.
 
 ## Current Position
 
 Phase: 8 of 10 (Site Chatbot Module) — IN PROGRESS
-Plan: 3 of 6 completed
-Status: 08-03 complete — lib/chatbot/tools.ts (5 chatbot tools: bookAppointment, calculateJobCost, createCRMLead, escalateToHuman, lookupOrderStatus), lib/chatbot/crm-adapters/ (10 CRM adapters + getCRMAdapter() factory)
-Last activity: 2026-03-03 — Completed 08-03 (chatbot tools + 10 CRM adapters)
+Plan: 4 of 6 completed
+Status: 08-04 complete — app/api/chatbot/[clientId]/route.ts (streaming chatbot API: getChatModel, retrieveContext RAG, chatbotTools x5, persistSession to chatbot_sessions)
+Last activity: 2026-03-03 — Completed 08-04 (streaming chatbot API route)
 
 Progress: [█████████████████] 88%
 
@@ -56,6 +56,7 @@ Progress: [█████████████████] 88%
 | Phase 08-site-chatbot-module P01 | 2 | 2 tasks | 4 files |
 | Phase 08-site-chatbot-module P02 | 2 | 2 tasks | 2 files |
 | Phase 08-site-chatbot-module P03 | 3 | 2 tasks | 12 files |
+| Phase 08-site-chatbot-module P04 | 1 | 1 tasks | 1 files |
 
 ## Accumulated Context
 
@@ -143,6 +144,9 @@ Progress: [█████████████████] 88%
 - generate/route.ts content field: stub replaced with await generateDraft(topic, authorName, siteUrl)
 
 ### Key Decisions
+- runtime='nodejs' not 'edge' in chatbot route — Supabase createClient + session upsert requires Node.js; intake/chat/route.ts uses edge because it has no Supabase writes (08-04)
+- onFinish callback for persistSession — session written after stream completes; try/catch ensures session failure never blocks chat response (08-04)
+- TypedToolCall input is unknown not Record<string,unknown> in ai@6 onFinish — cast to Record<string,unknown> only at JSONB storage boundary (08-04)
 - vector(768) matches Google text-embedding-004 native output — same VECTOR_DIMENSIONS constant as embedder.ts; migration 014 uses vector(768) (08-02)
 - IVFFlat lists=100 for pgvector ANN — appropriate default for tables under 1M rows per pgvector docs (08-02)
 - RLS service_role_all on chatbot_knowledge — knowledge base never public-readable, service role only (08-02)
@@ -259,6 +263,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-03T06:36:30Z
-Stopped at: Completed 08-03-PLAN.md — lib/chatbot/tools.ts (5 chatbot tools + chatbotTools barrel), lib/chatbot/crm-adapters/ (10 CRM adapter classes + getCRMAdapter() factory). Phase 8 Plan 3 complete.
+Last session: 2026-03-03T06:40:47Z
+Stopped at: Completed 08-04-PLAN.md — app/api/chatbot/[clientId]/route.ts (streaming chatbot API: getChatModel, retrieveContext RAG, chatbotTools x5, persistSession to chatbot_sessions). Phase 8 Plan 4 complete.
 Resume file: None
