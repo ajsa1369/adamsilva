@@ -154,6 +154,9 @@ Progress: [█████████████████░] 97%
 - gitignore **/packages/ negation via !/app/ + !/app/** — same pattern as existing lib/ and supabase/ fixes (09-02)
 - getBadgeVariant() maps shopify-starter/shopify-growth to 'legacy' Badge variant — not in Badge variant union type (09-02)
 - PlatformWarning without callback props (undefined) renders info-only without CTA buttons — server component compatibility (09-02)
+- Server/client split: page.tsx is server component (exports metadata + JSON-LD), PlatformCheckTool.tsx is separate 'use client' component (useState for platform selection) — standard Next.js 14 pattern (09-03)
+- complianceCell() maps ComplianceLevel to ComparisonTable cell: 'full'->true (green check), 'none'->false (red cross), others->descriptive string (09-03)
+- PlatformWarning callbacks use window.location.href navigation — valid in client component, simpler than router for full page transitions (09-03)
 - ROI denominator uses setup cost per plan formula: ((annualRevenueLift - annualCost) / setupCost) * 100 (09-01)
 - body goes inside DefaultChatTransport not useChat — ai@6 UseChatOptions has no body field; HttpChatTransportInitOptions accepts body?: Resolvable<object> (08-06)
 - iframe embed pattern (not web component) — works on Shopify without framework dependency, no CORS issues, no bundle needed on host page (08-06)
@@ -292,6 +295,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-03T13:05:01Z
-Stopped at: Completed 09-02-PLAN.md (all 2 tasks) — /packages comparison page + /packages/[tier] detail pages. Phase 9 Plan 02 complete.
+Last session: 2026-03-03T13:05:08Z
+Stopped at: Completed 09-03-PLAN.md (all 2 tasks) — /platform-check page + PlatformCheckTool component. Phase 9 Plan 03 complete.
 Resume file: None

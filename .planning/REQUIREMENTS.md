@@ -77,7 +77,7 @@ Requirements for ASC Commercial Platform v1.0. Each maps to roadmap phases.
 
 - [x] **PKG-01**: Prospect can compare all package tiers side-by-side at `/packages`
 - [x] **PKG-02**: Prospect can view full details for each individual tier at `/packages/[tier]`
-- [ ] **PKG-03**: Prospect can check their platform's protocol compliance at `/platform-check`
+- [x] **PKG-03**: Prospect can check their platform's protocol compliance at `/platform-check`
 - [x] **PKG-04**: Prospect can estimate ROI from a package via an interactive calculator component
 - [x] **PKG-05**: All new pages include heavy JSON-LD (Service, FAQPage, HowTo schema)
 
@@ -166,7 +166,7 @@ Which phases cover which requirements. Populated during roadmap creation.
 | CHAT-05 | Phase 8 | Complete |
 | PKG-01 | Phase 9 | Complete |
 | PKG-02 | Phase 9 | Complete |
-| PKG-03 | Phase 9 | Pending |
+| PKG-03 | Phase 9 | Complete |
 | PKG-04 | Phase 9 | Complete |
 | PKG-05 | Phase 9 | Complete |
 | MCP-01 | Phase 10 | Pending |
