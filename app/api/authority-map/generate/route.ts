@@ -2,12 +2,13 @@
  * app/api/authority-map/generate/route.ts
  *
  * POST endpoint: validate request → call generateAuthorityMap (researcher) →
- * upsert result to Supabase authority_maps table → send branded Resend approval email →
+ * upsert result to Supabase authority_maps table → send branded SMTP approval email →
  * return { success: true, mapId, topicCount }
  */
 
 import { z } from 'zod'
 import { generateAuthorityMap } from '@/lib/authority-map/researcher'
+import { sendMail } from '@/lib/email/smtp'
 import type { ClientConfig, AuthorityMapTopic } from '@/lib/authority-map/types'
 
 export const runtime = 'nodejs'
@@ -193,36 +194,18 @@ export async function POST(req: Request) {
       throw new Error('Supabase upsert did not return a row id')
     }
 
-    // 3. Send branded approval email via Resend
-    const resendKey = process.env.RESEND_API_KEY
-    if (!resendKey) {
-      throw new Error('RESEND_API_KEY not configured')
-    }
-
+    // 3. Send branded approval email via SMTP (hosting.com mail server)
     const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://www.adamsilvaconsulting.com'
     const monthLabel = getMonthLabel(result.month)
     const approveUrl = `${siteUrl}/api/authority-map/approve?id=${row.id}`
     const top5Topics = result.topics.slice(0, 5)
     const emailHtml = buildApprovalEmailHtml(monthLabel, result.topics.length, top5Topics, approveUrl)
 
-    const emailRes = await fetch('https://api.resend.com/emails', {
-      method: 'POST',
-      headers: {
-        Authorization: `Bearer ${resendKey}`,
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        from: 'Adam Silva Consulting <info@adamsilvaconsulting.com>',
-        to: [config.approvalEmail],
-        subject: `Your ${monthLabel} Content Calendar is Ready — Review Required`,
-        html: emailHtml,
-      }),
+    await sendMail({
+      to: config.approvalEmail,
+      subject: `Your ${monthLabel} Content Calendar is Ready — Review Required`,
+      html: emailHtml,
     })
-
-    if (!emailRes.ok) {
-      const errText = await emailRes.text()
-      throw new Error(`Resend email failed: ${emailRes.status} ${errText}`)
-    }
 
     return Response.json(
       { success: true, mapId: row.id, topicCount: result.topics.length },

@@ -4,13 +4,14 @@
  * Vercel Cron GET handler: fires on the first Monday of each month at 9 AM UTC.
  * Reads AUTHORITY_MAP_CLIENTS env var (JSON array of ClientConfig),
  * runs generateAuthorityMap per client sequentially (avoids rate limits),
- * upserts to Supabase authority_maps, sends approval email via Resend.
+ * upserts to Supabase authority_maps, sends approval email via SMTP (hosting.com).
  *
  * Cron schedule defined in vercel.json: "0 9 1-7 * 1" (first Monday, 9 AM UTC).
  * Auth: Vercel injects Authorization: Bearer {CRON_SECRET} automatically.
  */
 
 import { generateAuthorityMap } from '@/lib/authority-map/researcher'
+import { sendMail } from '@/lib/email/smtp'
 import type { ClientConfig } from '@/lib/authority-map/types'
 
 export const runtime = 'nodejs'
@@ -41,7 +42,6 @@ export async function GET(req: Request) {
 
   const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL
   const serviceKey = process.env.SUPABASE_SERVICE_ROLE_KEY
-  const resendKey = process.env.RESEND_API_KEY
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://www.adamsilvaconsulting.com'
 
   const errors: string[] = []
@@ -83,22 +83,12 @@ export async function GET(req: Request) {
         throw new Error('Supabase upsert did not return a row id')
       }
 
-      // 3. Send approval email via Resend (minimal link — full branded template in generate route)
-      if (resendKey) {
-        await fetch('https://api.resend.com/emails', {
-          method: 'POST',
-          headers: {
-            Authorization: `Bearer ${resendKey}`,
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            from: 'Adam Silva Consulting <info@adamsilvaconsulting.com>',
-            to: [client.approvalEmail],
-            subject: `Your ${result.month} Content Calendar is Ready — Review Required`,
-            html: `<p>Your authority map for ${result.month} has been generated. <a href="${siteUrl}/api/authority-map/approve?id=${row.id}">Approve here</a></p>`,
-          }),
-        })
-      }
+      // 3. Send approval email via SMTP (hosting.com mail server)
+      await sendMail({
+        to: client.approvalEmail,
+        subject: `Your ${result.month} Content Calendar is Ready — Review Required`,
+        html: `<p>Your authority map for ${result.month} has been generated. <a href="${siteUrl}/api/authority-map/approve?id=${row.id}">Approve here</a></p>`,
+      })
 
       processed++
     } catch (err) {
