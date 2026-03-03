@@ -139,6 +139,15 @@ Progress: [██████████████] 68%
 - generate/route.ts content field: stub replaced with await generateDraft(topic, authorName, siteUrl)
 
 ### Key Decisions
+- Double-fallback in researcher: MCP path in outer try/catch; AI path in inner try/catch; final catch returns graceful stub — researcher never throws (07-04)
+- ADAPTERS registry in distributor.ts keyed by service name — unknown services return status: 'error' without throwing (07-04)
+- Promise.allSettled (not Promise.all) in distribute() — one adapter failing does not block the other 3 (07-04)
+- Default wireServices = ['einpresswire'] in distribute() — EIN Presswire free tier as safe default per CONTEXT.md (07-04)
+- VideoObject.duration always 'PT60S' — never uses video.duration from pipeline (may be shorter for stub renders); PR-03 requires 60-second sidecar (07-03)
+- body?: string added to PressReleaseSchemaInput — required for NewsArticle.description (200 chars) and FAQPage answer (300 chars); optional to avoid breaking callers without body (07-03)
+- Synthetic AuthorityMapTopic rank=1, authorityGapScore=0, faqClusters=[] — minimal shape satisfying pipeline types; press releases don't come from authority map researcher (07-03)
+- TODO(v2) for generateImages disk-path issue — generateImages hardcodes public/images/insights/; imagesBaseUrl controls public URL only; separate on disk deferred to v2 (07-03)
+- FAQPage always included (not conditional) — 3 baseline Q&As required for Google Gemini AI Overviews indexing per PR-02 spec (07-03)
 - wordCount counts headline + lead + body only — boilerplate and mediaContact are standard fixed blocks, word budget applies only to variable content (07-02)
 - buildDateline() generates ATLANTA /EINPresswire/ format — default wire for all ASC drafts unless overridden downstream (07-02)
 - parseResponse() throws descriptive error on invalid JSON — fail-fast prevents silent garbage data reaching Supabase (07-02)
@@ -227,6 +236,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-03T04:43:00Z
-Stopped at: Completed 07-02-PLAN.md — lib/press-release/draft-generator.ts (generatePressReleaseDraft, PRESS_RELEASE_SYSTEM_PROMPT), lib/press-release/compliance.ts (injectCompliance, AI_TRANSPARENCY_LABEL, AI_TRANSPARENCY_HTML_COMMENT). Phase 7 Plan 2 of 5 complete.
+Last session: 2026-03-03T04:34:00Z
+Stopped at: Completed 07-03-PLAN.md — lib/press-release/schema-builder.ts (buildPressReleaseSchema 6-node @graph, NewsArticle/Organization/ImageObject[]/VideoObject/FAQPage/BreadcrumbList), lib/press-release/media-pipeline.ts (generatePressReleaseMedia wrapping Phase 6 image+video pipelines with press-release paths). Phase 7 Plan 3 of 5 complete (07-03 SUMMARY.md retroactively created).
 Resume file: None
