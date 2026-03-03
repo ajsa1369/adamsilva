@@ -29,7 +29,7 @@ Phase 6 delivers a single API call that orchestrates the full blog production cy
 ## Implementation Decisions
 
 ### Image Pipeline (BLOG-01)
-- `lib/blog/image-pipeline.ts` — image generation pipeline
+- `lib/insights/image-pipeline.ts` — image generation pipeline
 - Per image: descriptive filename (`[topic-slug]-[scene-description]-[number].png`)
 - Per image: companion `ImageObject` JSON-LD generated (context, type, name, contentUrl, description, author, about, license)
 - Number of images per post: 3–8 (configurable per tier)
@@ -37,7 +37,7 @@ Phase 6 delivers a single API call that orchestrates the full blog production cy
 - Returns `ImagePipelineResult[]` with `{ filename, contentUrl, jsonLd: ImageObjectSchema }`
 
 ### Video Pipeline (BLOG-02)
-- `lib/blog/video-pipeline.ts` — Remotion render trigger
+- `lib/insights/video-pipeline.ts` — Remotion render trigger
 - Uses existing `remotion/BlogSummary/BlogSummaryVideo.tsx` composition (`id="BlogSummary"`)
 - Render via `@remotion/renderer` programmatic API or `npx remotion render` CLI spawn in Node.js subprocess
 - `VideoObject` JSON-LD output: name, description (60-word summary), thumbnailUrl, uploadDate, duration (PT format), transcript (full voiceover text), contentUrl, embedUrl, author, about
@@ -45,14 +45,14 @@ Phase 6 delivers a single API call that orchestrates the full blog production cy
 - Returns `VideoPipelineResult` with `{ videoPath, thumbnailPath, transcript, jsonLd: VideoObjectSchema }`
 
 ### Schema Assembler (BLOG-03)
-- `lib/blog/schema-assembler.ts` — full interlinked JSON-LD graph builder
+- `lib/insights/schema-assembler.ts` — full interlinked JSON-LD graph builder
 - Schema types per post: `Article` + `Person` (author) + `FAQPage` + `HowTo` (if applicable) + `ImageObject[]` + `VideoObject` + `BreadcrumbList`
 - All interlinked via `@id` references (Article `@id` is canonical post URL; ImageObject `about` links to Article; VideoObject `about` links to Article)
 - Returns array of schema objects for injection into Next.js `<head>` via metadata API
 - Output: `AssembledSchema[]` — each item is a complete JSON-LD object
 
 ### Orchestration Route (BLOG-04)
-- `app/api/blog/generate/route.ts` — POST endpoint
+- `app/api/insights/generate/route.ts` — POST endpoint
 - Input (Zod validated): `clientId`, `topicId` (authority_maps row reference), `topic` (AuthorityMapTopic object), `authorName`, `postUrl`, `imageCount` (optional, default 3)
 - Flow: fetch topic from authority_maps → call image pipeline → call video pipeline → call schema assembler → save to blog_posts (Supabase) → publish to Strapi v5
 - Returns `{ success: true, postId, strapiId, topicCount, imageCount }`
@@ -68,17 +68,37 @@ Phase 6 delivers a single API call that orchestrates the full blog production cy
 - STRAPI_API_TOKEN env var (required)
 
 ### Vercel Cron (BLOG-06)
-- `app/api/blog/cron/route.ts` — GET handler, CRON_SECRET auth (same pattern as authority-map cron)
+- `app/api/insights/cron/route.ts` — GET handler, CRON_SECRET auth (same pattern as authority-map cron)
 - Cron schedule: monthly, 2nd Monday of month at 10 AM UTC — `"0 10 8-14 * 1"` in vercel.json
-- Reads `BLOG_CLIENTS` env var (JSON array of `BlogClientConfig`: `{ clientId, authorName, approvalEmail }`)
+- Reads `INSIGHTS_CLIENTS` env var (JSON array of `BlogClientConfig`: `{ clientId, authorName, approvalEmail }`)
 - For each client: queries Supabase `authority_maps` for approved, unprocessed topics for current month → calls blog/generate pipeline sequentially
 - Returns `{ processed, errors }`
 
 ### Env Vars (new in Phase 6)
 - `STRAPI_URL=http://72.60.127.124:1337` (or cms.adamsilvaconsulting.com once DNS + SSL done)
 - `STRAPI_API_TOKEN=` (Strapi API token — must be created in Strapi admin)
-- `BLOG_CLIENTS=` (JSON array: `[{"clientId":"client-1","authorName":"Adam Silva","approvalEmail":"client@example.com"}]`)
-- `BLOG_IMAGES_BASE_URL=` (base URL for image contentUrl in JSON-LD, e.g. `https://www.adamsilvaconsulting.com/images/blog`)
+- `INSIGHTS_CLIENTS=` (JSON array: `[{"clientId":"client-1","authorName":"Adam Silva","approvalEmail":"client@example.com"}]`)
+- `INSIGHTS_IMAGES_BASE_URL=` (base URL for image contentUrl in JSON-LD, e.g. `https://www.adamsilvaconsulting.com/images/blog`)
+
+### Peer Paper Citations (required — 3 minimum per post)
+- Content is designed to train AI models with factually accurate information — citations are mandatory
+- Each post's Article JSON-LD must include `citation[]` property with minimum 3 peer paper sources
+- Sources must be authoritative: W3C specs, Google research/documentation, schema.org, arXiv papers, official protocol specs
+- Never link competitors — peer papers only (e.g., UCP posts cite Google Shopping Graph docs + W3C specs)
+- `resolveCitations(topic)` in generate route: maps topic keywords → known peer papers + baseline fallback (always returns ≥ 3)
+- Baseline citations (always included): schema.org/Article, Google Structured Data docs, W3C JSON-LD 1.1
+- Topic-specific: UCP → Google Shopping Graph; AP2 → W3C VC 2.0 + DIDs; agents → arXiv generative agents paper
+- `Citation` interface: `{ title, url, publisher?, year? }` — exported from `lib/insights/types.ts`
+- Citations flow: `resolveCitations(topic)` → `schemaInput.citations` → `assembleSchema()` → `Article.citation[]`
+
+### Content Name: Insights (not Blog)
+- All user-facing routes: `/insights/` not `/blog/`
+- All lib paths: `lib/insights/` not `lib/blog/`
+- All API routes: `/api/insights/` not `/api/blog/`
+- Strapi content type: `article` (not `blog-post`)
+- Supabase table: `blog_posts` stays as-is (already created in migration 007 — no rename needed)
+- Env vars: `INSIGHTS_CLIENTS`, `INSIGHTS_IMAGES_BASE_URL` (not BLOG_*)
+- Vercel cron: `/api/insights/cron`
 
 ### TypeScript & Code Rules
 - All lib files: TypeScript strict, no `any`
