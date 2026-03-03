@@ -3,12 +3,12 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: unknown
-last_updated: "2026-03-03T06:42:17.566Z"
+last_updated: "2026-03-03T06:48:15Z"
 progress:
   total_phases: 8
-  completed_phases: 7
+  completed_phases: 8
   total_plans: 33
-  completed_plans: 31
+  completed_plans: 33
 ---
 
 # GSD State — ASC Commercial Platform
@@ -18,16 +18,16 @@ progress:
 See: .planning/PROJECT.md (updated 2026-03-02)
 
 **Core value:** Every prospect gets an instant, accurate, branded proposal — no sales calls required to qualify.
-**Current focus:** Phase 8 — Site Chatbot Module. Plan 4 of 6 complete.
+**Current focus:** Phase 8 — Site Chatbot Module. Plan 6 of 6 complete — PHASE DONE (paused at checkpoint:human-verify).
 
 ## Current Position
 
-Phase: 8 of 10 (Site Chatbot Module) — IN PROGRESS
-Plan: 4 of 6 completed
-Status: 08-04 complete — app/api/chatbot/[clientId]/route.ts (streaming chatbot API: getChatModel, retrieveContext RAG, chatbotTools x5, persistSession to chatbot_sessions)
-Last activity: 2026-03-03 — Completed 08-04 (streaming chatbot API route)
+Phase: 8 of 10 (Site Chatbot Module) — AWAITING HUMAN VERIFY
+Plan: 6 of 6 completed (checkpoint:human-verify pending)
+Status: 08-06 complete — ChatWidget.tsx (floating button + streaming panel), /chatbot-widget iframe route, public/chatbot-embed.js vanilla JS embed script, .env.example Phase 8 block
+Last activity: 2026-03-03 — Completed 08-06 (embed script + ChatWidget)
 
-Progress: [█████████████████] 88%
+Progress: [██████████████████] 100%
 
 ## Performance Metrics
 
@@ -57,6 +57,7 @@ Progress: [█████████████████] 88%
 | Phase 08-site-chatbot-module P02 | 2 | 2 tasks | 2 files |
 | Phase 08-site-chatbot-module P03 | 3 | 2 tasks | 12 files |
 | Phase 08-site-chatbot-module P04 | 1 | 1 tasks | 1 files |
+| Phase 08-site-chatbot-module P05 | 2 | 2 tasks | 7 files |
 
 ## Accumulated Context
 
@@ -144,6 +145,9 @@ Progress: [█████████████████] 88%
 - generate/route.ts content field: stub replaced with await generateDraft(topic, authorName, siteUrl)
 
 ### Key Decisions
+- slugToTier() derives tier from clientId prefix convention (e.g., 'gold-acme-xyz' → gold tier) — no Supabase query in Phase 8; Phase 9+ replaces with client-tier mapping table (08-05)
+- stopWhen:stepCountIs(5) replaces maxSteps:5 in generateText() — ai@6 renamed/removed maxSteps; stopWhen is the correct api@6 parameter for step limiting (08-05)
+- SMS 160-char truncation via text.slice(0, 160) enforced server-side — SMS protocol limit; fallback message used if text is empty after truncation (08-05)
 - runtime='nodejs' not 'edge' in chatbot route — Supabase createClient + session upsert requires Node.js; intake/chat/route.ts uses edge because it has no Supabase writes (08-04)
 - onFinish callback for persistSession — session written after stream completes; try/catch ensures session failure never blocks chat response (08-04)
 - TypedToolCall input is unknown not Record<string,unknown> in ai@6 onFinish — cast to Record<string,unknown> only at JSONB storage boundary (08-04)
@@ -263,6 +267,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-03T06:40:47Z
-Stopped at: Completed 08-04-PLAN.md — app/api/chatbot/[clientId]/route.ts (streaming chatbot API: getChatModel, retrieveContext RAG, chatbotTools x5, persistSession to chatbot_sessions). Phase 8 Plan 4 complete.
+Last session: 2026-03-03T06:45:48Z
+Stopped at: Completed 08-05-PLAN.md — channel-router (slugToTier prefix derivation), SMS/Voice/WhatsApp channel modules, 3 inbound webhook API routes with tier enforcement. Phase 8 Plan 5 complete.
 Resume file: None

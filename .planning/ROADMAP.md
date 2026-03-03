@@ -17,7 +17,7 @@ This roadmap builds the full commercial layer on top of the existing ASCv2 site.
 - [x] **Phase 5: Topical Authority Map Agent** - Monthly research pipeline → content calendar → client approval email (Vercel Cron) (completed 2026-03-03)
 - [ ] **Phase 6: Blog Post Production Pipeline** - Image gen → Remotion video → heavy schema → Strapi publish → Vercel Cron schedule
 - [x] **Phase 7: Press Release Engine** - Draft generation → NewsArticle schema → 60s video sidecar → wire service distribution (completed 2026-03-03)
-- [ ] **Phase 8: Site Chatbot Module** - Embeddable widget + 5 tools + 10 CRM adapters + multi-channel + Supabase sessions
+- [x] **Phase 8: Site Chatbot Module** - Embeddable widget + 5 tools + 10 CRM adapters + multi-channel + Supabase sessions (completed 2026-03-03)
 - [ ] **Phase 9: Package Pages & Marketing Site** - /packages, /packages/[tier], /platform-check, ROI calculator, JSON-LD
 - [ ] **Phase 10: Vercel MCP Server & Protocol Stack** - MCP server (6 tools) + dynamic /.well-known/* + ACP adapter + AP2 mandate
 
@@ -206,7 +206,7 @@ Note: Phase 8 depends on Phase 3 (not Phase 7) — can begin after Phase 3 compl
 | 5. Topical Authority Map Agent | 2/2 | Complete   | 2026-03-03 |
 | 6. Blog Post Production Pipeline | 4/4 | Complete   | 2026-03-03 |
 | 7. Press Release Engine | 5/5 | Complete   | 2026-03-03 |
-| 8. Site Chatbot Module | 4/6 | In Progress|  |
+| 8. Site Chatbot Module | 6/6 | Complete   | 2026-03-03 |
 | 9. Package Pages & Marketing Site | 0/? | Not started | - |
 | 10. Vercel MCP Server & Protocol Stack | 0/? | Not started | - |
 
