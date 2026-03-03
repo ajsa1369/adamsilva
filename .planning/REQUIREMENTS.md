@@ -94,44 +94,44 @@ Which phases cover which requirements. Updated during roadmap creation.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| STRIPE-01 | — | Pending |
-| STRIPE-02 | — | Pending |
-| STRIPE-03 | — | Pending |
-| STRIPE-04 | — | Pending |
-| PAY-01 | — | Pending |
-| PAY-02 | — | Pending |
-| PAY-03 | — | Pending |
-| PAY-04 | — | Pending |
-| PAY-05 | — | Pending |
-| PAY-06 | — | Pending |
-| HOOK-01 | — | Pending |
-| HOOK-02 | — | Pending |
-| HOOK-03 | — | Pending |
-| HOOK-04 | — | Pending |
-| STATE-01 | — | Pending |
-| STATE-02 | — | Pending |
-| STATE-03 | — | Pending |
-| STATE-04 | — | Pending |
-| DEFEND-01 | — | Pending |
-| DEFEND-02 | — | Pending |
-| DEFEND-03 | — | Pending |
-| DEFEND-04 | — | Pending |
-| PROTO-01 | — | Pending |
-| PROTO-02 | — | Pending |
-| PROTO-03 | — | Pending |
-| PROTO-04 | — | Pending |
-| PROTO-05 | — | Pending |
-| UI-01 | — | Pending |
-| UI-02 | — | Pending |
-| UI-03 | — | Pending |
-| UI-04 | — | Pending |
-| UI-05 | — | Pending |
+| STRIPE-01 | Phase 10 | Pending |
+| STRIPE-02 | Phase 10 | Pending |
+| STRIPE-03 | Phase 10 | Pending |
+| STRIPE-04 | Phase 10 | Pending |
+| HOOK-01 | Phase 10 | Pending |
+| HOOK-02 | Phase 10 | Pending |
+| HOOK-04 | Phase 10 | Pending |
+| STATE-01 | Phase 11 | Pending |
+| STATE-02 | Phase 11 | Pending |
+| STATE-03 | Phase 11 | Pending |
+| STATE-04 | Phase 11 | Pending |
+| PAY-05 | Phase 11 | Pending |
+| HOOK-03 | Phase 11 | Pending |
+| PAY-01 | Phase 12 | Pending |
+| PAY-02 | Phase 12 | Pending |
+| PAY-03 | Phase 12 | Pending |
+| PAY-04 | Phase 12 | Pending |
+| PAY-06 | Phase 12 | Pending |
+| DEFEND-01 | Phase 12 | Pending |
+| DEFEND-02 | Phase 12 | Pending |
+| DEFEND-03 | Phase 12 | Pending |
+| DEFEND-04 | Phase 12 | Pending |
+| UI-01 | Phase 12 | Pending |
+| UI-02 | Phase 12 | Pending |
+| UI-03 | Phase 12 | Pending |
+| UI-04 | Phase 12 | Pending |
+| UI-05 | Phase 12 | Pending |
+| PROTO-01 | Phase 13 | Pending |
+| PROTO-02 | Phase 13 | Pending |
+| PROTO-03 | Phase 13 | Pending |
+| PROTO-04 | Phase 13 | Pending |
+| PROTO-05 | Phase 13 | Pending |
 
 **Coverage:**
 - v2.0 requirements: 32 total
-- Mapped to phases: 0
-- Unmapped: 32 ⚠️
+- Mapped to phases: 32
+- Unmapped: 0
 
 ---
 *Requirements defined: 2026-03-03*
-*Last updated: 2026-03-03 after research synthesis*
+*Last updated: 2026-03-03 — traceability updated after roadmap creation*

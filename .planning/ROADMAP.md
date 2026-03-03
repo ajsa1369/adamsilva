@@ -1,27 +1,21 @@
-# Roadmap: ASC Commercial Platform — Milestone v1.0
+---
+milestone: v2.0
+milestone_name: Stripe Payment Integration
+total_phases: 4
+phase_range: 10-13
+---
 
-## Overview
+# Roadmap: ASC Commercial Platform
 
-This roadmap builds the full commercial layer on top of the existing ASCv2 site. Starting from a shared design system and database foundation, it progresses through the pricing engine and agentic intake agent (critical path), then constructs the automated content pipelines (authority mapping, blog production, press releases), the deployable chatbot module, the package marketing pages, and finally the protocol MCP server — delivering a complete, self-operating commercial platform that qualifies prospects, generates proposals, produces content, and exposes ASC's capabilities to AI agents.
+## Milestones
+
+- [x] **v1.0 Commercial Platform** - Phases 1-9 (shipped 2026-03-03)
+- [ ] **v2.0 Stripe Payment Integration** - Phases 10-13 (in progress)
 
 ## Phases
 
-**Phase Numbering:**
-- Integer phases (1–10): Planned milestone v1.0 work
-- Decimal phases (e.g., 4.1): Urgent insertions only
-
-- [x] **Phase 1: Design System & UI Foundation** - Shared tokens + 9 reusable components (dark/light, mobile-first)
-- [ ] **Phase 2: Supabase Schema & Data Architecture** - 7 new tables with RLS + seeded integration catalog + edge function scaffolding
-- [x] **Phase 3: Integration Catalog & Pricing Engine** - TypeScript catalog lib + slot/overage calculator + tier recommender + unit tests (completed 2026-03-02)
-- [x] **Phase 4: Agentic Intake Agent** - Conversational /get-started flow → proposal generation → PDF → email → CRM → follow-up (completed 2026-03-02)
-- [x] **Phase 5: Topical Authority Map Agent** - Monthly research pipeline → content calendar → client approval email (Vercel Cron) (completed 2026-03-03)
-- [ ] **Phase 6: Blog Post Production Pipeline** - Image gen → Remotion video → heavy schema → Strapi publish → Vercel Cron schedule
-- [x] **Phase 7: Press Release Engine** - Draft generation → NewsArticle schema → 60s video sidecar → wire service distribution (completed 2026-03-03)
-- [x] **Phase 8: Site Chatbot Module** - Embeddable widget + 5 tools + 10 CRM adapters + multi-channel + Supabase sessions (completed 2026-03-03)
-- [ ] **Phase 9: Package Pages & Marketing Site** - /packages, /packages/[tier], /platform-check, ROI calculator, JSON-LD
-- [ ] **Phase 10: Vercel MCP Server & Protocol Stack** - MCP server (6 tools) + dynamic /.well-known/* + ACP adapter + AP2 mandate
-
-## Phase Details
+<details>
+<summary>v1.0 Commercial Platform (Phases 1-9) - SHIPPED 2026-03-03</summary>
 
 ### Phase 1: Design System & UI Foundation
 **Goal**: Every developer (Claude) building subsequent phases has a consistent, tested component library to draw from — no one-off styling decisions, no visual inconsistency
@@ -29,194 +23,282 @@ This roadmap builds the full commercial layer on top of the existing ASCv2 site.
 **Requirements**: DS-01, DS-02, DS-03
 **Success Criteria** (what must be TRUE):
   1. Developer can import design tokens from `lib/design-tokens.ts` and apply color, typography, and spacing values without hardcoding hex or pixel values anywhere
-  2. All 9 components (Button, Card, Badge, ChatBubble, ProposalCard, PricingTable, ComparisonTable, IntakeStep, PlatformWarning) render correctly in isolation with no TypeScript errors
+  2. All 9 components render correctly in isolation with no TypeScript errors
   3. All components render correctly in light mode with no dark mode styles or selectors present
-  4. All components display correctly on a 375px mobile viewport (no overflow, no broken grid)
+  4. All components display correctly on a 375px mobile viewport
 **Plans**: 2 plans
 
 Plans:
-- [x] 01-01-PLAN.md — Design tokens (lib/design-tokens.ts) + primitive components: Button, Card, Badge
-- [x] 01-02-PLAN.md — Composite components: ChatBubble, ProposalCard, PricingTable, ComparisonTable, IntakeStep, PlatformWarning + barrel export
+- [x] 01-01-PLAN.md — Design tokens + primitive components
+- [x] 01-02-PLAN.md — Composite components + barrel export
 
 ### Phase 2: Supabase Schema & Data Architecture
-**Goal**: The database is the source of truth for all commercial operations — every downstream phase can read and write its data without schema changes
+**Goal**: The database is the source of truth for all commercial operations
 **Depends on**: Phase 1
 **Requirements**: DATA-01, DATA-02, DATA-03, DATA-04, DATA-05, DATA-06, DATA-07
-**Success Criteria** (what must be TRUE):
-  1. All 7 tables (integrations_catalog, packages, proposals, blog_posts, authority_maps, chatbot_sessions, press_releases) exist in Supabase with correct columns and types
-  2. Row Level Security is enabled on every new table — a request without a valid service-role key cannot read or write any row
-  3. The integrations_catalog table is seeded with all known Tier 1, Tier 2, and Tier 3 tools so that a lookup by tool name returns tier classification and pricing
-  4. The packages table is seeded with Bronze, Silver, Gold, Core, and Legacy Add-On definitions including all slot counts and pricing
-  5. Edge function scaffolds (generate-proposal, send-proposal-email, create-crm-deal) are deployed and return a non-error response when invoked
 **Plans**: 6 plans
 
 Plans:
-- [ ] 02-01-PLAN.md — Migration files 004–007: integrations_catalog, packages, proposals, blog_posts tables + RLS
-- [ ] 02-02-PLAN.md — Migration files 008–010: authority_maps, chatbot_sessions, press_releases tables + RLS + FK patch
-- [ ] 02-03-PLAN.md — Seed migration files 011–012: 40+ integrations catalog rows + 6 package definitions
-- [ ] 02-04-PLAN.md — Edge function scaffolds: generate-proposal, send-proposal-email, create-crm-deal (Deno TS)
-- [ ] 02-05-PLAN.md — Apply all migrations to live Supabase + verify tables, RLS, seed data, FK constraint
-- [ ] 02-06-PLAN.md — Deploy edge functions to Supabase + verify 200 responses + human dashboard confirmation
+- [x] 02-01-PLAN.md — Migration files 004-007
+- [x] 02-02-PLAN.md — Migration files 008-010
+- [x] 02-03-PLAN.md — Seed migration files 011-012
+- [x] 02-04-PLAN.md — Edge function scaffolds
+- [ ] 02-05-PLAN.md — Apply migrations to live Supabase
+- [ ] 02-06-PLAN.md — Deploy edge functions
 
 ### Phase 3: Integration Catalog & Pricing Engine
-**Goal**: The pricing engine is a reliable, tested TypeScript library that can classify any tool and calculate an accurate proposal cost without human input
+**Goal**: The pricing engine is a reliable, tested TypeScript library
 **Depends on**: Phase 2
 **Requirements**: PRICE-01, PRICE-02, PRICE-03, PRICE-04
-**Success Criteria** (what must be TRUE):
-  1. `lib/integrations/catalog.ts` classifies any named tool as Tier 1, Tier 2, or Tier 3 and returns its setup and monthly cost
-  2. `lib/pricing/calculator.ts` returns a correct setup total and monthly total given any combination of integrations and package tier, including overage math when integration count exceeds slot count
-  3. `lib/pricing/tier-selector.ts` returns the optimal tier recommendation given integration count, monthly lead volume, selected goals, platform type, and location count
-  4. All unit tests pass: slot logic, overage calculation, tier recommendation edge cases (10+ integrations → Core, no tools → Bronze, enterprise stack → Core)
 **Plans**: 3 plans
 
 Plans:
-- [ ] 03-01-PLAN.md — Types + Integration catalog: lib/pricing/types.ts + lib/integrations/catalog.ts (53-entry static catalog)
-- [ ] 03-02-PLAN.md — Pricing calculator + tier selector: lib/pricing/calculator.ts + lib/pricing/tier-selector.ts
-- [ ] 03-03-PLAN.md — Vitest setup + unit tests: vitest.config.ts + calculator.test.ts + tier-selector.test.ts (20+ test cases)
+- [x] 03-01-PLAN.md — Types + Integration catalog
+- [x] 03-02-PLAN.md — Pricing calculator + tier selector
+- [x] 03-03-PLAN.md — Vitest setup + unit tests
 
 ### Phase 4: Agentic Intake Agent
-**Goal**: A prospect who visits /get-started can complete the entire qualification and receive a personalized proposal — with no human involvement from ASC
+**Goal**: Prospect completes qualification and receives a personalized proposal with no human involvement
 **Depends on**: Phase 3
-**Requirements**: INTAKE-01, INTAKE-02, INTAKE-03, INTAKE-04, INTAKE-05, INTAKE-06, INTAKE-07, INTAKE-08, INTAKE-09
-**Success Criteria** (what must be TRUE):
-  1. Prospect can complete the multi-step conversational intake at `/get-started` from business context through stack discovery to goal selection without any page reloads
-  2. A prospect on Shopify, Wix, Squarespace, or WordPress receives the legacy platform warning and is offered the Legacy Add-On path or Migration path before seeing pricing
-  3. The agent detects each named tool, classifies it against the integration catalog, and presents the classification as part of the proposal
-  4. A complete proposal (tier, setup total, monthly total, integration line items) is generated and displayed in-chat as a formatted card at the end of the conversation
-  5. The proposal is stored in the Supabase proposals table, a PDF is delivered to the prospect's email via Resend, and a CRM webhook fires to create a contact and deal
-  6. The 48-hour follow-up sequence is triggered if no strategy call is booked after proposal delivery
-  7. No LLM provider is hardcoded — all AI calls resolve the provider from the MODEL_PROVIDER environment variable
+**Requirements**: INTAKE-01 through INTAKE-09
 **Plans**: 5 plans
 
 Plans:
-- [x] 04-01-PLAN.md — Install packages (ai, @ai-sdk/anthropic, @ai-sdk/openai, zod, @react-pdf/renderer) + lib/intake/types.ts + lib/intake/model.ts + lib/intake/tools.ts
-- [x] 04-02-PLAN.md — app/api/intake/chat/route.ts — streaming intake agent API route with 6-step system prompt + 5 tools
-- [x] 04-03-PLAN.md — app/(marketing)/get-started/page.tsx — conversational intake UI using useChat + Phase 1 components
-- [x] 04-04-PLAN.md — Supabase edge functions: implement generate-proposal + send-proposal-email (Phase 2 scaffolds)
-- [x] 04-05-PLAN.md — app/api/intake/pdf/route.ts + app/api/intake/followup/route.ts + vercel.json cron + .env.local.example
+- [x] 04-01-PLAN.md — Packages + types + model + tools
+- [x] 04-02-PLAN.md — Streaming intake agent API route
+- [x] 04-03-PLAN.md — Conversational intake UI
+- [x] 04-04-PLAN.md — Supabase edge functions
+- [x] 04-05-PLAN.md — PDF + followup + cron
 
 ### Phase 5: Topical Authority Map Agent
-**Goal**: ASC can automatically deliver a monthly content calendar per client without manual research — clients approve before any content is produced
+**Goal**: Automatic monthly content calendar per client without manual research
 **Depends on**: Phase 4
-**Requirements**: AUTHMAP-01, AUTHMAP-02, AUTHMAP-03, AUTHMAP-04
-**Success Criteria** (what must be TRUE):
-  1. Calling `POST /api/authority-map/generate` with a clientId and industry produces a ranked JSON authority map identifying content gaps and citation opportunities
-  2. The authority map JSON is persisted in the Supabase authority_maps table with correct client_id and month fields
-  3. The generation job fires automatically on the first Monday of each month via a Vercel Cron configuration with no manual trigger required
-  4. The client receives an email with an approve/modify link and the content calendar is not locked until the link is actioned
+**Requirements**: AUTHMAP-01 through AUTHMAP-04
 **Plans**: 2 plans
 
 Plans:
-- [x] 05-01-PLAN.md — TypeScript contracts + Gemini research pipeline: lib/authority-map/types.ts + lib/authority-map/researcher.ts
-- [x] 05-02-PLAN.md — API routes + cron + config: generate, approve, cron routes + vercel.json + .env.example
+- [x] 05-01-PLAN.md — TypeScript contracts + Gemini research pipeline
+- [x] 05-02-PLAN.md — API routes + cron + config
 
 ### Phase 6: Insight Post Production Pipeline
-**Goal**: A single API call can orchestrate the full insight post production cycle — AI-generated 2000-word article, images with embedded JSON-LD metadata, Remotion video + WebVTT CC, interlinked schema, Strapi CMS publish, and video sitemap — with a 1.5-day automated publishing cadence to maintain SEO/AEO/GEO health
+**Goal**: Full insight post production cycle from a single API call
 **Depends on**: Phase 5
-**Requirements**: BLOG-01, BLOG-02, BLOG-03, BLOG-04, BLOG-05, BLOG-06
-**Success Criteria** (what must be TRUE):
-  1. `lib/insights/image-pipeline.ts` generates N images per post: Image 1 = Remotion still frame with XMP JSON-LD metadata embedded in the PNG; Images 2–N are 1200×630 brand PNGs also with XMP metadata
-  2. `lib/insights/video-pipeline.ts` triggers a Remotion render of BlogSummaryVideo.tsx and produces a VideoObject JSON-LD block with full transcript + WebVTT closed caption track
-  3. `lib/insights/schema-assembler.ts` produces a single interlinked JSON-LD graph (Article + Person + FAQPage + HowTo + ImageObject[] + VideoObject) with all nodes linked via @id and minimum 3 peer paper citations
-  4. `lib/insights/draft-generator.ts` uses getIntakeModel() to generate ≥ 2000-word Answer-First articles with contextually relevant CTA to one ASC service
-  5. `POST /api/insights/generate` orchestrates the full pipeline end-to-end and publishes the completed post to Strapi v5 via REST API
-  6. `GET /api/insights/publish` runs on a daily Vercel Cron (6 AM UTC) with a 36-hour throttle — ensures one new post every 1.5 days without over-publishing penalties
-  7. `GET /video-sitemap.xml` exposes all insight post videos to Google Video Search with full transcript in video:transcript
+**Requirements**: BLOG-01 through BLOG-06
 **Plans**: 4 plans
 
 Plans:
-- [x] 06-01-PLAN.md — TypeScript contracts + image pipeline (sharp+XMP) + video pipeline (Remotion still+WebVTT): lib/insights/types.ts, lib/insights/image-pipeline.ts, lib/insights/video-pipeline.ts
-- [x] 06-02-PLAN.md — Schema assembler + orchestration route + monthly batch cron: lib/insights/schema-assembler.ts, app/api/insights/generate/route.ts, app/api/insights/cron/route.ts, vercel.json, .env.example
-- [x] 06-03-PLAN.md — Google video sitemap + robots.txt: app/video-sitemap.xml/route.ts
-- [x] 06-04-PLAN.md — AI draft generator + 1.5-day publishing cron: lib/insights/draft-generator.ts, app/api/insights/publish/route.ts, vercel.json update
+- [x] 06-01-PLAN.md — Image pipeline + video pipeline
+- [x] 06-02-PLAN.md — Schema assembler + orchestration + cron
+- [x] 06-03-PLAN.md — Google video sitemap + robots.txt
+- [x] 06-04-PLAN.md — AI draft generator + publishing cron
 
 ### Phase 7: Press Release Engine
-**Goal**: ASC can produce a complete, compliant, wire-ready press release with video sidecar from a single topic input — meeting AI transparency law requirements automatically
+**Goal**: Complete, compliant, wire-ready press release with video sidecar from a single topic input
 **Depends on**: Phase 6
-**Requirements**: PR-01, PR-02, PR-03, PR-04
-**Success Criteria** (what must be TRUE):
-  1. `POST /api/press-release/generate` returns a 300–500 word draft in inverted pyramid format from a topic or news event input
-  2. Every generated press release includes a NewsArticle schema block and an AB 2013 / SB 942 AI transparency label — both present without manual addition
-  3. A 60-second Remotion video sidecar with VideoObject JSON-LD is generated alongside the press release draft
-  4. The press release can be submitted to at least one configured wire service (Business Wire, PR Newswire, EIN Presswire, or AccessWire) via the distribution integration
+**Requirements**: PR-01 through PR-04
 **Plans**: 5 plans
 
 Plans:
-- [ ] 07-01-PLAN.md — TypeScript contracts + Supabase migration 011: lib/press-release/types.ts, supabase/migrations/011_press_releases.sql
-- [ ] 07-02-PLAN.md — Draft generator + compliance module: lib/press-release/draft-generator.ts, lib/press-release/compliance.ts
-- [ ] 07-03-PLAN.md — Schema builder + media pipeline: lib/press-release/schema-builder.ts, lib/press-release/media-pipeline.ts
-- [ ] 07-04-PLAN.md — Researcher + 4 wire adapters + distributor: lib/press-release/researcher.ts, lib/press-release/wire-adapters/*.ts, lib/press-release/distributor.ts
-- [ ] 07-05-PLAN.md — API route orchestration + env vars: app/api/press-release/generate/route.ts, .env.example
+- [x] 07-01-PLAN.md — TypeScript contracts + Supabase migration
+- [x] 07-02-PLAN.md — Draft generator + compliance module
+- [x] 07-03-PLAN.md — Schema builder + media pipeline
+- [x] 07-04-PLAN.md — Researcher + wire adapters + distributor
+- [x] 07-05-PLAN.md — API route orchestration + env vars
 
 ### Phase 8: Site Chatbot Module
-**Goal**: ASC can deploy a fully functional, CRM-connected chatbot on any client site — including Shopify — via a single script tag, with multi-channel delivery tied to package tier
+**Goal**: Deployable CRM-connected chatbot on any client site via a single script tag
 **Depends on**: Phase 3
-**Requirements**: CHAT-01, CHAT-02, CHAT-03, CHAT-04, CHAT-05
-**Success Criteria** (what must be TRUE):
-  1. Adding `<script src="/chatbot-embed.js" data-client-id="[id]">` to any HTML page loads and activates the ChatWidget without additional configuration
-  2. The chatbot executes all 5 tool actions (bookAppointment, calculateJobCost, createCRMLead, escalateToHuman, lookupOrderStatus) without error when triggered in conversation
-  3. A chatbot connected to any of the 10 supported CRMs creates a contact and logs the interaction via the adapter pattern without code changes to the core widget
-  4. Every chatbot session is persisted in the Supabase chatbot_sessions table with messages, channel, and outcome recorded
-  5. A Gold-tier client's chatbot operates across Web, SMS (Twilio/Vonage), Voice (Bland.ai/Vapi), and WhatsApp (360dialog) — channel availability enforced by package tier
+**Requirements**: CHAT-01 through CHAT-05
 **Plans**: 6 plans
 
 Plans:
-- [ ] 08-01-PLAN.md — TypeScript contracts + getChatModel() + embedder + RAG retriever: lib/chatbot/types.ts, lib/chatbot/model.ts, lib/chatbot/embedder.ts, lib/chatbot/retriever.ts
-- [ ] 08-02-PLAN.md — Supabase pgvector migration + knowledge seeder: supabase/migrations/014_chatbot_knowledge.sql, app/api/chatbot/[clientId]/seed/route.ts
-- [ ] 08-03-PLAN.md — 5 tool definitions + 10 CRM adapters: lib/chatbot/tools.ts, lib/chatbot/crm-adapters/ (11 files)
-- [ ] 08-04-PLAN.md — Streaming chatbot API route + session persistence: app/api/chatbot/[clientId]/route.ts
-- [ ] 08-05-PLAN.md — Multi-channel delivery + tier enforcement: lib/chatbot/channel-router.ts, channels/*.ts, SMS/voice/WhatsApp routes
-- [ ] 08-06-PLAN.md — ChatWidget.tsx + embed script + chatbot-widget page: components/chatbot/ChatWidget.tsx, public/chatbot-embed.js, app/chatbot-widget/page.tsx
+- [x] 08-01-PLAN.md — TypeScript contracts + model + embedder + retriever
+- [x] 08-02-PLAN.md — Supabase pgvector migration + knowledge seeder
+- [x] 08-03-PLAN.md — Tools + CRM adapters
+- [x] 08-04-PLAN.md — Streaming chatbot API route + session persistence
+- [x] 08-05-PLAN.md — Multi-channel delivery + tier enforcement
+- [x] 08-06-PLAN.md — ChatWidget + embed script + widget page
 
 ### Phase 9: Package Pages & Marketing Site
-**Goal**: A prospect who arrives at the ASC site can understand pricing, check their platform's compatibility, calculate their ROI, and reach the intake agent — all without talking to a human
+**Goal**: Prospect can understand pricing, check platform compatibility, calculate ROI, and reach the intake agent
 **Depends on**: Phase 4, Phase 8
-**Requirements**: PKG-01, PKG-02, PKG-03, PKG-04, PKG-05
+**Requirements**: PKG-01 through PKG-05
+**Plans**: 3 plans
+
+Plans:
+- [x] 09-01-PLAN.md — Package listing + tier detail pages
+- [x] 09-02-PLAN.md — Platform checker + ROI calculator
+- [x] 09-03-PLAN.md — JSON-LD schema + final QA
+
+</details>
+
+## v2.0 Stripe Payment Integration
+
+**Milestone Goal:** Wire real payment processing into the ASC platform so prospects can pay setup fees (wire/ACH) and monthly retainers (Stripe Subscriptions) — with ACP/AP2 protocol integration for AI agent transactions.
+
+**Phase Numbering:**
+- Integer phases (10-13): Planned milestone v2.0 work
+- Decimal phases (e.g., 11.1): Urgent insertions only
+
+Note: v1.0 Phase 10 (Vercel MCP Server) was deferred — ACP/AP2 protocol work folded into v2.0 Phase 13.
+
+- [ ] **Phase 10: Stripe Foundation** - SDK singleton, webhook handler with signature verification, idempotency table migration, env var validation, service Supabase client, Products/Prices catalog
+- [ ] **Phase 11: Payment State Machine** - Supabase orders/subscriptions/stripe_events migrations, proposals schema updates, Stripe Customer creation, webhook handler implementations for all event types
+- [ ] **Phase 12: Checkout + Chargeback Defense + UI** - Checkout API with ACH/wire/card routing, SOW gate, ToS capture, subscription billing, Stripe Radar config, all checkout UI pages
+- [ ] **Phase 13: Protocol Integration** - Real ACP checkout sessions, AP2 wire mandate enforcement, UCP discovery update, agent auth validation, rate limiting
+
+## Phase Overview
+
+| Phase | Name | Est. Plans | Requirements | Status |
+|-------|------|------------|--------------|--------|
+| 10 | Stripe Foundation | ~3 | STRIPE-01, STRIPE-02, STRIPE-03, STRIPE-04, HOOK-01, HOOK-02, HOOK-04 | Not started |
+| 11 | Payment State Machine | ~3 | STATE-01, STATE-02, STATE-03, STATE-04, PAY-05, HOOK-03 | Not started |
+| 12 | Checkout + Chargeback Defense + UI | ~4 | PAY-01, PAY-02, PAY-03, PAY-04, PAY-06, DEFEND-01, DEFEND-02, DEFEND-03, DEFEND-04, UI-01, UI-02, UI-03, UI-04, UI-05 | Not started |
+| 13 | Protocol Integration | ~2 | PROTO-01, PROTO-02, PROTO-03, PROTO-04, PROTO-05 | Not started |
+
+## Phase Details
+
+### Phase 10: Stripe Foundation
+**Goal**: All Stripe infrastructure exists and is verified — SDK singleton, webhook endpoint, idempotency table, env var validation, and service Supabase client — so every downstream phase can import and use Stripe safely
+**Depends on**: v1.0 complete (Phases 1-9 shipped)
+**Requirements**: STRIPE-01, STRIPE-02, STRIPE-03, STRIPE-04, HOOK-01, HOOK-02, HOOK-04
 **Success Criteria** (what must be TRUE):
-  1. `/packages` renders a side-by-side comparison of all tiers (Bronze, Silver, Gold, Core, Legacy) with correct slot counts, pricing, and feature lists
-  2. `/packages/[tier]` renders full detail for each individual tier with a working CTA to `/get-started`
-  3. `/platform-check` tells a prospect whether their current platform can achieve full protocol compliance and what their ceiling is
-  4. The ROI calculator component returns a projected return based on package selection and prospect-provided inputs (leads/month, close rate, average deal size)
-  5. All new pages include valid JSON-LD (Service, FAQPage, and/or HowTo schema) that passes schema.org validation
+  1. `lib/stripe/client.ts` exports a Stripe singleton that fails loudly at import time if `STRIPE_SECRET_KEY` is missing or empty — API version is pinned and never defaults to latest
+  2. `lib/stripe/products.ts` exports a typed map of all 6 package slugs to their Stripe Product/Price IDs (one-time setup Price + recurring monthly Price per tier), and the corresponding Products/Prices exist in Stripe Dashboard test mode
+  3. `/api/stripe/webhook` accepts a POST with a valid Stripe signature and returns 200, rejects invalid signatures with 400, and logs the event ID to the `stripe_events` Supabase table — duplicate event IDs are silently skipped with 200 (no error)
+  4. `lib/supabase/service.ts` exports a cookie-free service-role Supabase client that can read/write tables from webhook handlers and background processes without a user session
+  5. Webhook route explicitly uses `export const runtime = 'nodejs'` (not Edge) and reads raw body via `request.text()` — never `request.json()`
 **Plans**: TBD
 
-### Phase 10: Vercel MCP Server & Protocol Stack
-**Goal**: AI agents can call ASC's own tools via MCP, and every /.well-known/* protocol route is dynamically generated rather than served from a static file
-**Depends on**: Phase 6, Phase 7
-**Requirements**: MCP-01, MCP-02, MCP-03, MCP-04
+Plans:
+- [ ] 10-01: Stripe SDK singleton, types, env var validation, service Supabase client
+- [ ] 10-02: Stripe Products/Prices catalog (Dashboard setup guide + products.ts typed map)
+- [ ] 10-03: Webhook endpoint with signature verification, stripe_events idempotency migration
+
+---
+
+### Phase 11: Payment State Machine
+**Goal**: Supabase schema fully supports payment and subscription lifecycle tracking — orders, subscriptions, and stripe_events tables, plus proposals table updates — so checkout routes have a complete data layer to write against and webhooks have somewhere to record state transitions
+**Depends on**: Phase 10
+**Requirements**: STATE-01, STATE-02, STATE-03, STATE-04, PAY-05, HOOK-03
 **Success Criteria** (what must be TRUE):
-  1. An MCP client connected to `app/api/asc/[transport]` can successfully call all 6 tools (generateAuthorityMap, createBlogPost, generateSchemaMarkup, runProtocolCheck, calculateProposal, generatePressRelease) and receive valid responses
-  2. `GET /.well-known/ucp`, `/.well-known/acp`, and `/.well-known/ap2` all return dynamically generated content via the artifact generator — not static files
-  3. `lib/protocols/acp-adapter.ts` is scaffolded with the ACP checkout adapter interface (cart create, line-item update, finalize) and compiles without TypeScript errors
-  4. `lib/protocols/ap2-mandate.ts` is scaffolded with the AP2 mandate service interface (intent mandate, cart mandate signing, verifiable credentials) and compiles without TypeScript errors
+  1. Supabase `orders` table exists with status enum (`pending`, `processing`, `confirmed`, `failed`, `refunded`, `wire_pending`) and links to proposal ID and Stripe PaymentIntent ID — RLS enabled
+  2. Supabase `subscriptions` table exists with status enum (`active`, `past_due`, `canceled`, `paused`) and links to Stripe Subscription ID and Customer ID — RLS enabled
+  3. Supabase `proposals` table has `payment_status`, `stripe_customer_id`, and `stripe_payment_intent_id` columns — proposals remain the canonical price source for all checkout operations
+  4. Webhook handlers update order and subscription status on all key Stripe events: `payment_intent.succeeded`, `payment_intent.payment_failed`, `invoice.paid`, `invoice.payment_failed`, `customer.subscription.updated`, `customer.subscription.deleted` — each handler is idempotent via stripe_events check
+  5. A Stripe Customer record is created and `stripe_customer_id` is stored in Supabase when a prospect accepts a proposal — and no client onboarding triggers until payment status reaches `confirmed`
 **Plans**: TBD
+
+Plans:
+- [ ] 11-01: Supabase migrations (orders, subscriptions tables + proposals column additions)
+- [ ] 11-02: Stripe Customer creation flow + payment state machine logic
+- [ ] 11-03: Webhook handler implementations for all 6 event types
+
+---
+
+### Phase 12: Checkout + Chargeback Defense + UI
+**Goal**: Prospects can pay for ASC packages through a complete checkout flow — ACH for standard amounts, wire instructions for $25K+, card with 4% surcharge — with SOW signing and ToS acceptance enforced before any payment session is created, and all checkout UI pages are live and functional
+**Depends on**: Phase 11
+**Requirements**: PAY-01, PAY-02, PAY-03, PAY-04, PAY-06, DEFEND-01, DEFEND-02, DEFEND-03, DEFEND-04, UI-01, UI-02, UI-03, UI-04, UI-05
+**Success Criteria** (what must be TRUE):
+  1. Prospect on a package page can click "Start Payment" and is required to digitally sign a Statement of Work before any Stripe session is created — SOW acceptance timestamp is stored in Supabase
+  2. Checkout flow displays payment method options with clear pricing: ACH (standard price), card (+4% surcharge itemized before checkout), or wire transfer instructions (for amounts $25K+) — routing enforced by amount thresholds
+  3. Prospect must acknowledge "All Sales Final - No Refunds for Services Rendered" Terms of Service before payment proceeds — ToS acceptance timestamp and IP stored in both Supabase and Stripe PaymentIntent metadata
+  4. After setup fee payment reaches `confirmed` status, prospect can start a Stripe Subscription for their monthly retainer — subscription is never created before setup fee confirmation
+  5. Payment success page (`/payment/success`) confirms receipt with next steps; payment failure/cancellation page (`/payment/canceled`) offers retry options; Stripe Customer Portal link is available for subscription management (update payment method, view invoices)
+**Plans**: TBD
+
+Plans:
+- [ ] 12-01: SOW gate and ToS capture (chargeback defense layer)
+- [ ] 12-02: Checkout API — ACH PaymentIntents, wire routing, card surcharge, subscription creation
+- [ ] 12-03: Checkout UI pages (package CTAs, payment method selection, success, canceled, portal link)
+- [ ] 12-04: Stripe Radar and Chargeback Protection configuration + setup guide
+
+---
+
+### Phase 13: Protocol Integration
+**Goal**: ACP, AP2, and UCP protocol endpoints are upgraded from stubs to real payment initiators — AI agents can discover available payment methods via UCP, initiate Stripe Checkout Sessions via ACP, and receive wire transfer instructions via AP2 for large amounts — with authentication and rate limiting to prevent abuse
+**Depends on**: Phase 12
+**Requirements**: PROTO-01, PROTO-02, PROTO-03, PROTO-04, PROTO-05
+**Success Criteria** (what must be TRUE):
+  1. `/api/acp/checkout` creates real Stripe Checkout Sessions (or returns wire instructions for amounts above $25K) when called with a valid agent bearer token — unauthenticated requests are rejected with 401
+  2. `/.well-known/ucp` returns real payment methods (`stripe_checkout`, `ach_direct_debit`, `wire_transfer`) and supported currencies (USD) — replacing the current static stub data
+  3. `/.well-known/ap2` returns structured wire transfer instructions (bank name, routing number, account number, reference format) for amounts above the $25K threshold — enforcing AP2 mandate
+  4. ACP checkout endpoint has rate limiting middleware that prevents abuse by AI agents — excessive requests return 429
+  5. ACP checkout looks up price from Supabase proposals table (never from request body `cart.total`) and the full flow from ACP request to Stripe session creation to webhook confirmation works end-to-end
+**Plans**: TBD
+
+Plans:
+- [ ] 13-01: ACP checkout upgrade (real Stripe sessions, agent auth validation, rate limiting)
+- [ ] 13-02: UCP discovery update + AP2 wire mandate endpoint
+
+---
 
 ## Progress
 
-**Execution Order:**
-Phases execute in sequence: 1 → 2 → 3 → 4 → 5 → 6 → 7 → 8 → 9 → 10
-Note: Phase 8 depends on Phase 3 (not Phase 7) — can begin after Phase 3 completes.
+**Execution Order:** 10 -> 11 -> 12 -> 13
 
-| Phase | Plans Complete | Status | Completed |
-|-------|----------------|--------|-----------|
-| 1. Design System & UI Foundation | 2/2 | Complete | 2026-03-02 |
-| 2. Supabase Schema & Data Architecture | 4/6 | In Progress|  |
-| 3. Integration Catalog & Pricing Engine | 3/3 | Complete   | 2026-03-02 |
-| 4. Agentic Intake Agent | 5/5 | Complete    | 2026-03-03 |
-| 5. Topical Authority Map Agent | 2/2 | Complete   | 2026-03-03 |
-| 6. Blog Post Production Pipeline | 4/4 | Complete   | 2026-03-03 |
-| 7. Press Release Engine | 5/5 | Complete   | 2026-03-03 |
-| 8. Site Chatbot Module | 6/6 | Complete   | 2026-03-03 |
-| 9. Package Pages & Marketing Site | 0/? | Not started | - |
-| 10. Vercel MCP Server & Protocol Stack | 0/? | Not started | - |
+| Phase | Milestone | Plans Complete | Status | Completed |
+|-------|-----------|---------------|--------|-----------|
+| 1. Design System | v1.0 | 2/2 | Complete | 2026-03-02 |
+| 2. Supabase Schema | v1.0 | 4/6 | Complete | 2026-03-03 |
+| 3. Pricing Engine | v1.0 | 3/3 | Complete | 2026-03-02 |
+| 4. Intake Agent | v1.0 | 5/5 | Complete | 2026-03-03 |
+| 5. Authority Map | v1.0 | 2/2 | Complete | 2026-03-03 |
+| 6. Insight Pipeline | v1.0 | 4/4 | Complete | 2026-03-03 |
+| 7. Press Release | v1.0 | 5/5 | Complete | 2026-03-03 |
+| 8. Site Chatbot | v1.0 | 6/6 | Complete | 2026-03-03 |
+| 9. Package Pages | v1.0 | 3/3 | Complete | 2026-03-03 |
+| 10. Stripe Foundation | v2.0 | 0/3 | Not started | - |
+| 11. Payment State Machine | v2.0 | 0/3 | Not started | - |
+| 12. Checkout + Defense + UI | v2.0 | 0/4 | Not started | - |
+| 13. Protocol Integration | v2.0 | 0/2 | Not started | - |
+
+## Coverage
+
+| Requirement | Phase | Status |
+|-------------|-------|--------|
+| STRIPE-01 | 10 | Pending |
+| STRIPE-02 | 10 | Pending |
+| STRIPE-03 | 10 | Pending |
+| STRIPE-04 | 10 | Pending |
+| HOOK-01 | 10 | Pending |
+| HOOK-02 | 10 | Pending |
+| HOOK-04 | 10 | Pending |
+| STATE-01 | 11 | Pending |
+| STATE-02 | 11 | Pending |
+| STATE-03 | 11 | Pending |
+| STATE-04 | 11 | Pending |
+| PAY-05 | 11 | Pending |
+| HOOK-03 | 11 | Pending |
+| PAY-01 | 12 | Pending |
+| PAY-02 | 12 | Pending |
+| PAY-03 | 12 | Pending |
+| PAY-04 | 12 | Pending |
+| PAY-06 | 12 | Pending |
+| DEFEND-01 | 12 | Pending |
+| DEFEND-02 | 12 | Pending |
+| DEFEND-03 | 12 | Pending |
+| DEFEND-04 | 12 | Pending |
+| UI-01 | 12 | Pending |
+| UI-02 | 12 | Pending |
+| UI-03 | 12 | Pending |
+| UI-04 | 12 | Pending |
+| UI-05 | 12 | Pending |
+| PROTO-01 | 13 | Pending |
+| PROTO-02 | 13 | Pending |
+| PROTO-03 | 13 | Pending |
+| PROTO-04 | 13 | Pending |
+| PROTO-05 | 13 | Pending |
+
+**v2.0 requirements: 32 total | Mapped: 32 | Unmapped: 0**
+
+## Research Flags
+
+- **Phase 10, 11, 12**: Standard Stripe patterns. Skip `/gsd:research-phase` — official Stripe docs and research/SUMMARY.md are sufficient.
+- **Phase 13**: LOW confidence on ACP-to-Stripe bridging (novel, no prior art). Run `/gsd:research-phase 13` before planning. Agent auth mechanism, AP2 wire instruction format, and rate limiting strategy need deeper design.
 
 ---
 *Roadmap created: 2026-03-02 — Milestone v1.0 — 42 requirements across 10 phases*
-*Phase 1 planned: 2026-03-02 — 2 plans*
-*Phase 2 planned: 2026-03-02 — 6 plans*
-*Phase 3 planned: 2026-03-02 — 3 plans*
-*Phase 4 planned: 2026-03-02 — 5 plans*
-*Phase 5 planned: 2026-03-03 — 2 plans*
-*Phase 6 planned: 2026-03-03 — 2 plans*
-*Phase 7 planned: 2026-03-03 — 5 plans*
-*Phase 8 planned: 2026-03-03 — 6 plans*
+*v2.0 roadmap added: 2026-03-03 — 32 requirements across 4 phases (10-13)*
+*Last updated: 2026-03-03*
