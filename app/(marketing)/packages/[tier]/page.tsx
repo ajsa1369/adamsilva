@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import { JsonLd } from '@/app/components/seo/JsonLd'
-import { ComparisonTable, PlatformWarning, Badge } from '@/components/ui'
+import { ComparisonTable, Badge } from '@/components/ui'
 import type { ComparisonRow } from '@/components/ui/ComparisonTable'
 import type { BadgeProps } from '@/components/ui/Badge'
 import { ROICalculator } from '@/components/ROICalculator'
@@ -75,7 +75,18 @@ function getBadgeVariant(
 // Page Component (server component)
 // ---------------------------------------------------------------------------
 
-export default function TierPage({ params }: { params: { tier: string } }) {
+export default function TierPage({
+  params,
+  searchParams,
+}: {
+  params: { tier: string }
+  searchParams: {
+    tier?: string
+    leads?: string
+    rate?: string
+    deal?: string
+  }
+}) {
   const pkg = PACKAGES.find((p) => p.slug === params.tier)
   if (!pkg) notFound()
 
@@ -293,19 +304,35 @@ export default function TierPage({ params }: { params: { tier: string } }) {
         </section>
       )}
 
-      {/* Platform Warning for Shopify/Legacy tiers */}
+      {/* Platform Warning for Shopify/Legacy tiers — inline server-side */}
       {pkg.isLegacy && (
         <section className="section">
           <div className="container">
-            <PlatformWarning platform="Shopify" />
-            <p className="text-sm text-[var(--color-muted)] mt-3">
-              <Link
-                href="/platform-check"
-                className="text-[var(--color-accent)]"
-              >
-                Check your platform&apos;s full compliance ceiling &rarr;
-              </Link>
-            </p>
+            <div className="rounded-xl border border-amber-300 bg-amber-50 p-6">
+              <div className="flex items-start gap-4">
+                <div className="shrink-0 w-10 h-10 rounded-full bg-amber-500/20 flex items-center justify-center text-amber-400 text-lg">
+                  &#9888;
+                </div>
+                <div className="flex-1 min-w-0">
+                  <h3 className="font-semibold text-[var(--color-text)] font-display text-lg mb-1">
+                    Legacy Platform Detected
+                  </h3>
+                  <p className="text-sm text-[var(--color-muted)] mb-4">
+                    This package is designed for legacy platforms with architectural
+                    limitations. Full protocol compliance requires migration to a
+                    headless stack.
+                  </p>
+                  <div className="flex gap-3 flex-wrap">
+                    <Link href="/platform-check" className="btn-secondary text-sm">
+                      Check Compliance Ceiling
+                    </Link>
+                    <Link href="/get-started" className="btn-primary text-sm">
+                      Explore Migration Path
+                    </Link>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </section>
       )}
@@ -366,7 +393,14 @@ export default function TierPage({ params }: { params: { tier: string } }) {
       {pkg.slug !== 'core' && (
         <section className="section">
           <div className="container">
-            <ROICalculator defaultTier={roiTier} />
+            <ROICalculator
+              defaultTier={roiTier}
+              formAction={`/packages/${pkg.slug}`}
+              tier={searchParams.tier}
+              leads={searchParams.leads}
+              rate={searchParams.rate}
+              deal={searchParams.deal}
+            />
           </div>
         </section>
       )}

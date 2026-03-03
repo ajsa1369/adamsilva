@@ -161,7 +161,13 @@ const pageSchema = {
 export default function PackagesPage({
   searchParams,
 }: {
-  searchParams: { view?: string }
+  searchParams: {
+    view?: string
+    tier?: string
+    leads?: string
+    rate?: string
+    deal?: string
+  }
 }) {
   const showMonthly = searchParams.view === 'monthly'
 
@@ -281,7 +287,14 @@ export default function PackagesPage({
       {/* ROI Calculator */}
       <section className="section">
         <div className="container">
-          <ROICalculator />
+          <ROICalculator
+            formAction="/packages"
+            tier={searchParams.tier}
+            leads={searchParams.leads}
+            rate={searchParams.rate}
+            deal={searchParams.deal}
+            hiddenParams={showMonthly ? { view: 'monthly' } : undefined}
+          />
         </div>
       </section>
 

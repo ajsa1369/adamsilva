@@ -76,7 +76,11 @@ const pageSchema = {
   ],
 }
 
-export default function PlatformCheckPage() {
+export default function PlatformCheckPage({
+  searchParams,
+}: {
+  searchParams: { platform?: string }
+}) {
   return (
     <>
       <JsonLd data={pageSchema} />
@@ -102,8 +106,8 @@ export default function PlatformCheckPage() {
           </p>
         </div>
       </section>
-      {/* Interactive tool — client component */}
-      <PlatformCheckTool />
+      {/* Platform checker — server component, reads searchParams */}
+      <PlatformCheckTool selectedPlatform={searchParams.platform} />
     </>
   )
 }
