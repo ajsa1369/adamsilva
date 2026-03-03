@@ -104,7 +104,11 @@ Plans:
   2. The authority map JSON is persisted in the Supabase authority_maps table with correct client_id and month fields
   3. The generation job fires automatically on the first Monday of each month via a Vercel Cron configuration with no manual trigger required
   4. The client receives an email with an approve/modify link and the content calendar is not locked until the link is actioned
-**Plans**: TBD
+**Plans**: 2 plans
+
+Plans:
+- [ ] 05-01-PLAN.md — TypeScript contracts + Gemini research pipeline: lib/authority-map/types.ts + lib/authority-map/researcher.ts
+- [ ] 05-02-PLAN.md — API routes + cron + config: generate, approve, cron routes + vercel.json + .env.example
 
 ### Phase 6: Blog Post Production Pipeline
 **Goal**: A single API call can orchestrate the full blog production cycle — research, images, video, schema, and CMS publish — with no manual file assembly
@@ -176,7 +180,7 @@ Note: Phase 8 depends on Phase 3 (not Phase 7) — can begin after Phase 3 compl
 | 2. Supabase Schema & Data Architecture | 4/6 | In Progress|  |
 | 3. Integration Catalog & Pricing Engine | 3/3 | Complete   | 2026-03-02 |
 | 4. Agentic Intake Agent | 5/5 | Complete    | 2026-03-03 |
-| 5. Topical Authority Map Agent | 0/? | Not started | - |
+| 5. Topical Authority Map Agent | 0/2 | Not started | - |
 | 6. Blog Post Production Pipeline | 0/? | Not started | - |
 | 7. Press Release Engine | 0/? | Not started | - |
 | 8. Site Chatbot Module | 0/? | Not started | - |
@@ -189,3 +193,4 @@ Note: Phase 8 depends on Phase 3 (not Phase 7) — can begin after Phase 3 compl
 *Phase 2 planned: 2026-03-02 — 6 plans*
 *Phase 3 planned: 2026-03-02 — 3 plans*
 *Phase 4 planned: 2026-03-02 — 5 plans*
+*Phase 5 planned: 2026-03-03 — 2 plans*
