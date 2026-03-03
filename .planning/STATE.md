@@ -3,7 +3,7 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: unknown
-last_updated: "2026-03-03T06:28:38Z"
+last_updated: "2026-03-03T06:38:05.265Z"
 progress:
   total_phases: 8
   completed_phases: 7
@@ -18,14 +18,14 @@ progress:
 See: .planning/PROJECT.md (updated 2026-03-02)
 
 **Core value:** Every prospect gets an instant, accurate, branded proposal — no sales calls required to qualify.
-**Current focus:** Phase 8 — Site Chatbot Module. Plan 2 of 6 complete.
+**Current focus:** Phase 8 — Site Chatbot Module. Plan 3 of 6 complete.
 
 ## Current Position
 
 Phase: 8 of 10 (Site Chatbot Module) — IN PROGRESS
-Plan: 2 of 6 completed
-Status: 08-02 complete — supabase/migrations/014_chatbot_knowledge.sql (pgvector table + IVFFlat index + RLS + match_chatbot_knowledge RPC), app/api/chatbot/[clientId]/seed/route.ts (SHA-256 dedup knowledge seeding API)
-Last activity: 2026-03-03 — Completed 08-02 (pgvector knowledge base migration + knowledge seeding API)
+Plan: 3 of 6 completed
+Status: 08-03 complete — lib/chatbot/tools.ts (5 chatbot tools: bookAppointment, calculateJobCost, createCRMLead, escalateToHuman, lookupOrderStatus), lib/chatbot/crm-adapters/ (10 CRM adapters + getCRMAdapter() factory)
+Last activity: 2026-03-03 — Completed 08-03 (chatbot tools + 10 CRM adapters)
 
 Progress: [█████████████████] 88%
 
@@ -55,6 +55,7 @@ Progress: [█████████████████] 88%
 | Phase 07-press-release-engine P05 | 3 | 4 tasks | 5 files |
 | Phase 08-site-chatbot-module P01 | 2 | 2 tasks | 4 files |
 | Phase 08-site-chatbot-module P02 | 2 | 2 tasks | 2 files |
+| Phase 08-site-chatbot-module P03 | 3 | 2 tasks | 12 files |
 
 ## Accumulated Context
 
@@ -147,6 +148,11 @@ Progress: [█████████████████] 88%
 - RLS service_role_all on chatbot_knowledge — knowledge base never public-readable, service role only (08-02)
 - CHATBOT_SEED_SECRET optional auth on seed route — skipped if env var absent for dev; enforced in production (08-02)
 - SHA-256 dedup pre-check before embed() call — avoids wasteful Google AI API calls for already-known chunks (08-02)
+- getCRMAdapter() returns null for unknown types — caller handles null with graceful { success: false, error } to LLM; no throw on unknown CRM type (08-03)
+- Salesforce adapter deferred to TODO(v2) OAuth2 stub — complex OAuth client credentials flow deferred per plan spec; stub returns descriptive error (08-03)
+- bookAppointment returns static Calendly URL stub — CALENDLY_API_KEY integration deferred per CONTEXT.md; real booking v2 TODO (08-03)
+- AbortController + setTimeout for 5s lookupOrderStatus fetch timeout — fetch has no native timeout, prevents hanging tool calls (08-03)
+- Close CRM Lead+Contact model — Close uses Lead as top-level entity; createContact creates Lead with one contact, returns both dealId and contactId (08-03)
 - getChatModel() uses gemini-2.5-flash-lite-preview-06-17 as Google default — lowest latency for real-time chat vs gemini-2.0-flash used by intake (08-01)
 - VECTOR_DIMENSIONS=768 — Google text-embedding-004 natively outputs 768 dimensions; exported constant ensures migration 014 alignment (08-01)
 - retrieveContext() graceful fallback — returns '' on missing env, embed error, or RPC error; chatbot operates without RAG (08-01)
@@ -253,6 +259,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-03T06:28:30Z
-Stopped at: Completed 08-01-PLAN.md — lib/chatbot/types.ts (14 shared TypeScript contracts), lib/chatbot/model.ts (getChatModel, Gemini 2.5 Flash Lite), lib/chatbot/embedder.ts (embedText, VECTOR_DIMENSIONS=768), lib/chatbot/retriever.ts (retrieveContext, pgvector RAG). Phase 8 Plan 1 complete.
+Last session: 2026-03-03T06:36:30Z
+Stopped at: Completed 08-03-PLAN.md — lib/chatbot/tools.ts (5 chatbot tools + chatbotTools barrel), lib/chatbot/crm-adapters/ (10 CRM adapter classes + getCRMAdapter() factory). Phase 8 Plan 3 complete.
 Resume file: None
