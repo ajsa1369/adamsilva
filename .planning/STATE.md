@@ -2,13 +2,13 @@
 gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
-status: unknown
-last_updated: "2026-03-02T22:59:55.646Z"
+status: in_progress
+last_updated: "2026-03-02T23:18:00.000Z"
 progress:
   total_phases: 4
-  completed_phases: 3
+  completed_phases: 4
   total_plans: 16
-  completed_plans: 13
+  completed_plans: 14
 ---
 
 # GSD State — ASC Commercial Platform
@@ -18,21 +18,21 @@ progress:
 See: .planning/PROJECT.md (updated 2026-03-02)
 
 **Core value:** Every prospect gets an instant, accurate, branded proposal — no sales calls required to qualify.
-**Current focus:** Phase 4 — Agentic Intake Agent
+**Current focus:** Phase 4 — COMPLETE. Ready for Phase 5.
 
 ## Current Position
 
-Phase: 4 of 10 (Agentic Intake Agent)
-Plan: 4 of 5 completed
-Status: In progress
-Last activity: 2026-03-02 — Completed 04-04 (generate-proposal + send-proposal-email edge functions)
+Phase: 4 of 10 (Agentic Intake Agent) — COMPLETE
+Plan: 5 of 5 completed
+Status: Phase 4 complete
+Last activity: 2026-03-02 — Completed 04-05 (PDF generation route, follow-up cron, vercel.json, .env.local.example)
 
 Progress: [████████░░] 40%
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 7
+- Total plans completed: 14
 - Average duration: 2 min
 - Total execution time: 0.2 hours
 
@@ -43,12 +43,12 @@ Progress: [████████░░] 40%
 | 01-design-system-ui-foundation | 1/2 | 4 min | 4 min |
 | 02-supabase-schema-data-architecture | 4/6 | 2 min | 0.5 min |
 | 03-integration-catalog-pricing-engine | 3/3 | 5 min | 1.7 min |
-| 04-agentic-intake-agent | 1/5 | 5 min | 5 min |
+| 04-agentic-intake-agent | 5/5 | 8 min | 1.6 min |
 
 **Recent Trend:**
-- Last 5 plans: 02-02 (2 min), 02-03 (2 min), 02-04 (2 min), 03-01 (1 min), 03-02 (1 min), 04-01 (5 min)
-- Trend: Type/catalog/algorithm tasks completing quickly; API version fixes add ~3 min
-| Phase 04-agentic-intake-agent P04 | 4 | 2 tasks | 2 files |
+- Last 5 plans: 03-02 (1 min), 04-01 (5 min), 04-03, 04-04, 04-05 (8 min)
+- Trend: Phase 4 complete — intake agent, edge functions, PDF, cron all implemented
+| Phase 04-agentic-intake-agent P05 | 2 | 2 tasks | 4 files |
 
 ## Accumulated Context
 
@@ -87,7 +87,7 @@ Progress: [████████░░] 40%
 - 010_press_releases.sql: wire_service CHECK(5), status CHECK(5), schema_json JSONB, RLS + idempotent FK patch fk_blog_posts_authority_map
 - supabase/migrations/ is now git-tracked (fixed .gitignore **/*.sql issue)
 
-### Phase 4 Progress (04-01, 04-04 complete)
+### Phase 4 Progress (04-01, 04-03, 04-04, 04-05 complete — PHASE DONE)
 - lib/intake/types.ts: ProspectData, ProposalLineItem, ProposalData — shared contracts for all Phase 4 plans
 - lib/intake/model.ts: getIntakeModel() — MODEL_PROVIDER routing (anthropic default / openai if set)
 - lib/intake/tools.ts: 5 tools (lookupIntegration, detectPlatformTier, calculateProposal, generateProposalPDF, saveToCRM), intakeTools barrel export
@@ -95,6 +95,11 @@ Progress: [████████░░] 40%
 - ai@6 API: uses inputSchema (not parameters), execute receives (input, options) not destructured args
 - supabase/functions/generate-proposal/index.ts: full Deno implementation — validates 5 required fields, inserts 13 columns to proposals table via service role REST API, returns { success, proposal_id }
 - supabase/functions/send-proposal-email/index.ts: full Deno implementation — branded HTML email with pricing summary + PDF CTA + strategy call CTA via Resend, returns { success, email_id }
+- app/(marketing)/get-started/page.tsx: 'use client' intake chat UI using ai@6 useChat hook (DefaultChatTransport, UIMessage.parts[], DynamicToolUIPart); renders ChatBubble history, IntakeStep progress, PlatformWarning + ProposalCard from tool results; Book Strategy Call + Download PDF CTAs
+- app/api/intake/pdf/route.tsx: Node.js runtime React-PDF route; branded proposal with header, prospect, pricing stats, integrations, tier reasoning, CTA, footer; returns { pdfUrl } as base64 data URI
+- app/api/intake/followup/route.ts: Vercel Cron GET handler; queries proposals past 48h with followup_sent_at IS NULL; sends follow-up emails via send-proposal-email; PATCHes followup_sent_at (not status)
+- vercel.json: cron entry /api/intake/followup at 0 9 * * * (daily 9 AM UTC)
+- .env.local.example: documents 9 required Phase 4 env vars
 
 ### Key Decisions
 - MODEL_PROVIDER env var (never hardcode LLM provider) — enforced in INTAKE-09
@@ -125,19 +130,29 @@ Progress: [████████░░] 40%
 - generate-proposal uses Prefer: return=representation to get proposal_id from insert without a second query (04-04)
 - JSONB columns (integrations_detected, goals) serialized via JSON.stringify before Supabase REST insert (04-04)
 - send-proposal-email branded HTML uses brand colors #1B2E4B + #4D8EC0 matching design tokens; proposal_delivery Resend tag for analytics (04-04)
+- useChat from @ai-sdk/react not ai/react — ai@6 split the react hooks to a separate package (04-03)
+- DefaultChatTransport({ api: '/api/intake/chat' }) required to set custom API endpoint in ai@6 (04-03)
+- UIMessage.parts[] used for all message content — no message.content string or toolInvocations in ai@6 (04-03)
+- Input state managed via local useState in ai@6 — useChat no longer returns input/handleInputChange (04-03)
+- sendMessage({ text }) replaces append/handleSubmit pattern from ai v3/v4 (04-03)
+- DynamicToolUIPart (type='dynamic-tool', state='output-available') used for tool result detection in ai@6 (04-03)
+- PDF route uses .tsx extension for JSX syntax with @react-pdf/renderer; returns base64 data URI (no Vercel Blob needed for v1) (04-05)
+- followup_sent_at TIMESTAMPTZ column used for re-send prevention — status column never patched to 'followed_up' (not in CHECK constraint) (04-05)
+- CRON_SECRET auth is optional (if block) — allows local dev without secret, secured in Vercel production (04-05)
 
 ### Pending Todos
 None yet.
 
 ### Blockers/Concerns
 - Strapi admin account not yet created — needed for Phase 6 (blog publish)
-- RESEND_API_KEY not yet set — needed for Phase 4 (proposal email)
-- MODEL_PROVIDER + ANTHROPIC_API_KEY / OPENAI_API_KEY not yet set — needed for Phase 4
+- RESEND_API_KEY not yet set — needed for Phase 4 proposal email delivery (see .env.local.example)
+- MODEL_PROVIDER + ANTHROPIC_API_KEY / OPENAI_API_KEY not yet set — needed for Phase 4 intake agent
 - Vercel preview URL for ASCv2 branch not yet confirmed
 - DNS: cms.adamsilvaconsulting.com A record not yet pointing to VPS
+- Supabase proposals table migration (006_proposals.sql) must be applied before intake flow goes live
 
 ## Session Continuity
 
-Last session: 2026-03-02T23:01:28Z
-Stopped at: Completed 04-04-PLAN.md — generate-proposal and send-proposal-email edge functions
+Last session: 2026-03-02T23:18:00Z
+Stopped at: Completed 04-05-PLAN.md — PDF generation route, follow-up cron, vercel.json, .env.local.example. Phase 4 complete.
 Resume file: None

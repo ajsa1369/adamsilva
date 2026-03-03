@@ -32,7 +32,7 @@ Requirements for ASC Commercial Platform v1.0. Each maps to roadmap phases.
 
 ### Intake Agent (INTAKE)
 
-- [ ] **INTAKE-01**: Prospect can start a conversational intake flow at `/get-started` and answer questions about their business, stack, and goals
+- [x] **INTAKE-01**: Prospect can start a conversational intake flow at `/get-started` and answer questions about their business, stack, and goals
 - [x] **INTAKE-02**: Agent detects the prospect's website platform and routes to legacy warning path (Shopify/Wix/Squarespace/WordPress) or full package path (headless/custom)
 - [x] **INTAKE-03**: Agent looks up each named tool against the integration catalog and classifies it (Tier 1/2/3)
 - [x] **INTAKE-04**: Agent generates a complete proposal (tier recommendation, setup total, monthly total, integration line items) at end of conversation
@@ -136,7 +136,7 @@ Which phases cover which requirements. Populated during roadmap creation.
 | PRICE-02 | Phase 3 | Complete |
 | PRICE-03 | Phase 3 | Complete |
 | PRICE-04 | Phase 3 | Complete |
-| INTAKE-01 | Phase 4 | Pending |
+| INTAKE-01 | Phase 4 | Complete |
 | INTAKE-02 | Phase 4 | Complete |
 | INTAKE-03 | Phase 4 | Complete |
 | INTAKE-04 | Phase 4 | Complete |

@@ -13,7 +13,7 @@ This roadmap builds the full commercial layer on top of the existing ASCv2 site.
 - [x] **Phase 1: Design System & UI Foundation** - Shared tokens + 9 reusable components (dark/light, mobile-first)
 - [ ] **Phase 2: Supabase Schema & Data Architecture** - 7 new tables with RLS + seeded integration catalog + edge function scaffolding
 - [x] **Phase 3: Integration Catalog & Pricing Engine** - TypeScript catalog lib + slot/overage calculator + tier recommender + unit tests (completed 2026-03-02)
-- [ ] **Phase 4: Agentic Intake Agent** - Conversational /get-started flow → proposal generation → PDF → email → CRM → follow-up
+- [x] **Phase 4: Agentic Intake Agent** - Conversational /get-started flow → proposal generation → PDF → email → CRM → follow-up (completed 2026-03-02)
 - [ ] **Phase 5: Topical Authority Map Agent** - Monthly research pipeline → content calendar → client approval email (Vercel Cron)
 - [ ] **Phase 6: Blog Post Production Pipeline** - Image gen → Remotion video → heavy schema → Strapi publish → Vercel Cron schedule
 - [ ] **Phase 7: Press Release Engine** - Draft generation → NewsArticle schema → 60s video sidecar → wire service distribution
@@ -89,11 +89,11 @@ Plans:
 **Plans**: 5 plans
 
 Plans:
-- [ ] 04-01-PLAN.md — Install packages (ai, @ai-sdk/anthropic, @ai-sdk/openai, zod, @react-pdf/renderer) + lib/intake/types.ts + lib/intake/model.ts + lib/intake/tools.ts
-- [ ] 04-02-PLAN.md — app/api/intake/chat/route.ts — streaming intake agent API route with 6-step system prompt + 5 tools
-- [ ] 04-03-PLAN.md — app/(marketing)/get-started/page.tsx — conversational intake UI using useChat + Phase 1 components
-- [ ] 04-04-PLAN.md — Supabase edge functions: implement generate-proposal + send-proposal-email (Phase 2 scaffolds)
-- [ ] 04-05-PLAN.md — app/api/intake/pdf/route.ts + app/api/intake/followup/route.ts + vercel.json cron + .env.local.example
+- [x] 04-01-PLAN.md — Install packages (ai, @ai-sdk/anthropic, @ai-sdk/openai, zod, @react-pdf/renderer) + lib/intake/types.ts + lib/intake/model.ts + lib/intake/tools.ts
+- [x] 04-02-PLAN.md — app/api/intake/chat/route.ts — streaming intake agent API route with 6-step system prompt + 5 tools
+- [x] 04-03-PLAN.md — app/(marketing)/get-started/page.tsx — conversational intake UI using useChat + Phase 1 components
+- [x] 04-04-PLAN.md — Supabase edge functions: implement generate-proposal + send-proposal-email (Phase 2 scaffolds)
+- [x] 04-05-PLAN.md — app/api/intake/pdf/route.ts + app/api/intake/followup/route.ts + vercel.json cron + .env.local.example
 
 ### Phase 5: Topical Authority Map Agent
 **Goal**: ASC can automatically deliver a monthly content calendar per client without manual research — clients approve before any content is produced
@@ -175,7 +175,7 @@ Note: Phase 8 depends on Phase 3 (not Phase 7) — can begin after Phase 3 compl
 | 1. Design System & UI Foundation | 2/2 | Complete | 2026-03-02 |
 | 2. Supabase Schema & Data Architecture | 4/6 | In Progress|  |
 | 3. Integration Catalog & Pricing Engine | 3/3 | Complete   | 2026-03-02 |
-| 4. Agentic Intake Agent | 2/5 | In Progress|  |
+| 4. Agentic Intake Agent | 5/5 | Complete   | 2026-03-02 |
 | 5. Topical Authority Map Agent | 0/? | Not started | - |
 | 6. Blog Post Production Pipeline | 0/? | Not started | - |
 | 7. Press Release Engine | 0/? | Not started | - |
