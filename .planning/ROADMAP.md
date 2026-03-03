@@ -107,8 +107,8 @@ Plans:
 **Plans**: 2 plans
 
 Plans:
-- [ ] 05-01-PLAN.md — TypeScript contracts + Gemini research pipeline: lib/authority-map/types.ts + lib/authority-map/researcher.ts
-- [ ] 05-02-PLAN.md — API routes + cron + config: generate, approve, cron routes + vercel.json + .env.example
+- [x] 05-01-PLAN.md — TypeScript contracts + Gemini research pipeline: lib/authority-map/types.ts + lib/authority-map/researcher.ts
+- [x] 05-02-PLAN.md — API routes + cron + config: generate, approve, cron routes + vercel.json + .env.example
 
 ### Phase 6: Insight Post Production Pipeline
 **Goal**: A single API call can orchestrate the full insight post production cycle — AI-generated 2000-word article, images with embedded JSON-LD metadata, Remotion video + WebVTT CC, interlinked schema, Strapi CMS publish, and video sitemap — with a 1.5-day automated publishing cadence to maintain SEO/AEO/GEO health
@@ -125,7 +125,7 @@ Plans:
 **Plans**: 4 plans
 
 Plans:
-- [ ] 06-01-PLAN.md — TypeScript contracts + image pipeline (sharp+XMP) + video pipeline (Remotion still+WebVTT): lib/insights/types.ts, lib/insights/image-pipeline.ts, lib/insights/video-pipeline.ts
+- [x] 06-01-PLAN.md — TypeScript contracts + image pipeline (sharp+XMP) + video pipeline (Remotion still+WebVTT): lib/insights/types.ts, lib/insights/image-pipeline.ts, lib/insights/video-pipeline.ts
 - [ ] 06-02-PLAN.md — Schema assembler + orchestration route + monthly batch cron: lib/insights/schema-assembler.ts, app/api/insights/generate/route.ts, app/api/insights/cron/route.ts, vercel.json, .env.example
 - [ ] 06-03-PLAN.md — Google video sitemap + robots.txt: app/video-sitemap.xml/route.ts
 - [ ] 06-04-PLAN.md — AI draft generator + 1.5-day publishing cron: lib/insights/draft-generator.ts, app/api/insights/publish/route.ts, vercel.json update

@@ -51,8 +51,8 @@ Requirements for ASC Commercial Platform v1.0. Each maps to roadmap phases.
 
 ### Blog Pipeline (BLOG)
 
-- [ ] **BLOG-01**: System can generate N blog post images per post with descriptive filenames and companion ImageObject JSON-LD for each
-- [ ] **BLOG-02**: System can trigger a Remotion render for BlogSummaryVideo.tsx and generate VideoObject JSON-LD with full transcript
+- [x] **BLOG-01**: System can generate N blog post images per post with descriptive filenames and companion ImageObject JSON-LD for each
+- [x] **BLOG-02**: System can trigger a Remotion render for BlogSummaryVideo.tsx and generate VideoObject JSON-LD with full transcript
 - [ ] **BLOG-03**: System can assemble interlinked JSON-LD schema for a post (Article + Person + FAQPage + HowTo + ImageObject[] + VideoObject, all linked via @id)
 - [ ] **BLOG-04**: System can orchestrate the full blog pipeline (research → draft → images → video → schema → publish) via a single API route
 - [ ] **BLOG-05**: Completed posts are published to Strapi v5 via REST API
@@ -149,8 +149,8 @@ Which phases cover which requirements. Populated during roadmap creation.
 | AUTHMAP-02 | Phase 5 | Complete |
 | AUTHMAP-03 | Phase 5 | Complete |
 | AUTHMAP-04 | Phase 5 | Complete |
-| BLOG-01 | Phase 6 | Pending |
-| BLOG-02 | Phase 6 | Pending |
+| BLOG-01 | Phase 6 | Complete |
+| BLOG-02 | Phase 6 | Complete |
 | BLOG-03 | Phase 6 | Pending |
 | BLOG-04 | Phase 6 | Pending |
 | BLOG-05 | Phase 6 | Pending |
