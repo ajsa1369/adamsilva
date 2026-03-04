@@ -79,7 +79,7 @@ export default async function ServicePage({ params }: PageProps) {
       question: `How long does ${service.name} take?`,
       answer: `${service.name} takes ${service.timeline}. ${
         service.price === 'Custom'
-          ? 'Timeline may vary based on your existing infrastructure and scope. Contact Adam for a precise project timeline.'
+          ? 'Timeline may vary based on your existing infrastructure and scope. Contact our team for a precise project timeline.'
           : `The ${service.timeline} timeline begins once the engagement is confirmed and kickoff is complete. ${service.price === '0' ? 'This service is completely free — no commitment required.' : ''}`
       }`,
     },
@@ -87,7 +87,7 @@ export default async function ServicePage({ params }: PageProps) {
       question: `Who is ${service.name} for?`,
       answer: `${service.name} is designed for ${service.audience}. ${
         service.featured
-          ? 'This is one of our most popular services — contact Adam to get started or learn more about whether it fits your current stage.'
+          ? 'This is one of our most popular services — contact our team to get started or learn more about whether it fits your current stage.'
           : 'If you are unsure whether this service fits your needs, start with the free Agentic Commerce Readiness Assessment (ACRA) for a prioritized strategic roadmap.'
       }`,
     },
@@ -596,7 +596,7 @@ export default async function ServicePage({ params }: PageProps) {
             </h2>
             <p className="text-[var(--color-muted)] mb-8 leading-relaxed">
               {service.price === 'Custom'
-                ? `${service.name} is scoped to your infrastructure. Contact Adam to get a precise proposal and timeline.`
+                ? `${service.name} is scoped to your infrastructure. Contact our team for a precise proposal and timeline.`
                 : `For ${service.priceDisplay}, get ${service.name} delivered in ${service.timeline}. No retainer, no lock-in.`}
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">

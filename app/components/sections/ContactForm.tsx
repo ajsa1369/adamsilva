@@ -81,8 +81,8 @@ export function ContactForm() {
           Message Received
         </h3>
         <p className="text-[var(--color-muted)] mb-6">
-          Thank you for reaching out. Adam will review your inquiry and respond within 24
-          business hours. Your free 15-minute consultation is included.
+          Thank you for reaching out. Our team will review your inquiry and respond within 24
+          business hours. A complimentary 15-minute consultation is included.
         </p>
         <button
           onClick={() => setStatus('idle')}

@@ -35,7 +35,7 @@ const servicesFAQs = [
   {
     question: 'Can I combine multiple services?',
     answer:
-      'Yes — and combining services compounds results. The most effective approach is the full 16-week protocol stack: start with the Agentic Commerce Readiness Assessment (ACRA), add GEO Implementation and UCP Protocol Implementation in weeks 3-6, integrate ACP and AP2 in weeks 7-10, and activate the Authority Building Program in weeks 11-14. Custom enterprise bundles are available — contact Adam for a tailored roadmap.',
+      'Yes — and combining services compounds results. The most effective approach is the full 16-week protocol stack: start with the Agentic Commerce Readiness Assessment (ACRA), add GEO Implementation and UCP Protocol Implementation in weeks 3-6, integrate ACP and AP2 in weeks 7-10, and activate the Authority Building Program in weeks 11-14. Custom enterprise bundles are available — contact our team for a tailored roadmap.',
   },
 ]
 

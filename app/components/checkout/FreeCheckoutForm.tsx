@@ -53,7 +53,7 @@ export function FreeCheckoutForm() {
         </h2>
         <p className="mb-6" style={{ color: 'var(--color-muted)' }}>
           Your Agentic Commerce Readiness Assessment is being prepared.
-          Adam will deliver it within 48 hours.
+          Our team will deliver it within 48 hours.
         </p>
         <Link href="/" className="btn-primary">
           Back to Home

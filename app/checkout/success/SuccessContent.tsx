@@ -34,7 +34,11 @@ export function SuccessContent() {
         </h1>
 
         <p className="text-lg mb-2" style={{ color: 'var(--color-muted)' }}>
-          Thank you for your purchase. Adam will reach out within 24 hours to schedule your kickoff.
+          Thank you for your purchase. Our engagement team will reach out within 24 hours to schedule your kickoff and assign a dedicated project lead.
+        </p>
+
+        <p className="text-sm mb-2" style={{ color: 'var(--color-muted)' }}>
+          A confirmation has been sent to your email with next steps and onboarding details.
         </p>
 
         {orderId && (
@@ -49,7 +53,7 @@ export function SuccessContent() {
             <ArrowRight size={16} />
           </Link>
           <Link href="/contact" className="btn-secondary">
-            Contact Adam
+            Contact Our Team
           </Link>
         </div>
       </div>

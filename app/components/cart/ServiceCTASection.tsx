@@ -63,7 +63,7 @@ export function ServiceCTASection({ service, accentColor, compact }: ServiceCTAS
         href={`/contact?service=${encodeURIComponent(service.id)}`}
         className="btn-secondary"
       >
-        Contact Adam Instead
+        Speak With Our Team
       </Link>
     </div>
   )
