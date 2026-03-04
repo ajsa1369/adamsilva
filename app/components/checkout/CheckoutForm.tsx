@@ -3,12 +3,129 @@
 import { useState, useEffect } from 'react'
 import { Elements, PaymentElement, useStripe, useElements } from '@stripe/react-stripe-js'
 import Link from 'next/link'
-import { ArrowRight, ShoppingCart, Loader2 } from 'lucide-react'
+import { ArrowRight, ShoppingCart, Loader2, Building2, CreditCard, AlertTriangle } from 'lucide-react'
 import { getStripeJs } from '@/lib/stripe/client-browser'
 import { useCart } from '@/lib/cart/context'
 import { OrderSummary } from './OrderSummary'
 import { FreeCheckoutForm } from './FreeCheckoutForm'
-import type { CheckoutPayload, CheckoutResponse } from '@/lib/cart/types'
+import type { CheckoutPayload, CheckoutResponse, PaymentMethod } from '@/lib/cart/types'
+import { CARD_CONVENIENCE_FEE_RATE } from '@/lib/cart/types'
+
+function NoRefundsDisclaimer() {
+  return (
+    <div
+      className="p-4 rounded-lg flex items-start gap-3"
+      style={{ background: 'rgba(245,158,11,0.08)', border: '1px solid rgba(245,158,11,0.2)' }}
+    >
+      <AlertTriangle size={18} className="flex-shrink-0 mt-0.5" style={{ color: '#f59e0b' }} />
+      <div>
+        <p className="text-sm font-semibold" style={{ color: '#f59e0b' }}>
+          All Sales Are Final — No Refunds
+        </p>
+        <p className="text-xs mt-1" style={{ color: 'var(--color-muted)' }}>
+          By completing this purchase you acknowledge that all services are non-refundable. Please review your order carefully before proceeding.
+        </p>
+      </div>
+    </div>
+  )
+}
+
+function PaymentMethodSelector({
+  selected,
+  onChange,
+  convenienceFeeAmount,
+}: {
+  selected: PaymentMethod
+  onChange: (m: PaymentMethod) => void
+  convenienceFeeAmount: number
+}) {
+  return (
+    <div className="card p-6">
+      <h2
+        className="text-lg font-bold mb-4"
+        style={{ color: 'var(--color-text)', fontFamily: 'var(--font-display)' }}
+      >
+        Payment Method
+      </h2>
+      <div className="space-y-3">
+        {/* ACH / Wire — preferred */}
+        <label
+          className="flex items-start gap-3 p-4 rounded-lg cursor-pointer transition-all"
+          style={{
+            border: selected === 'ach'
+              ? '2px solid #10b981'
+              : '2px solid var(--color-border)',
+            background: selected === 'ach'
+              ? 'rgba(16,185,129,0.05)'
+              : 'transparent',
+          }}
+        >
+          <input
+            type="radio"
+            name="paymentMethod"
+            value="ach"
+            checked={selected === 'ach'}
+            onChange={() => onChange('ach')}
+            className="mt-1"
+          />
+          <div className="flex-1">
+            <div className="flex items-center gap-2">
+              <Building2 size={16} style={{ color: '#10b981' }} />
+              <span className="text-sm font-bold" style={{ color: 'var(--color-text)' }}>
+                ACH Bank Transfer / Wire
+              </span>
+              <span
+                className="text-[10px] font-bold uppercase px-1.5 py-0.5 rounded"
+                style={{ background: 'rgba(16,185,129,0.15)', color: '#10b981' }}
+              >
+                Recommended
+              </span>
+            </div>
+            <p className="text-xs mt-1" style={{ color: 'var(--color-muted)' }}>
+              No convenience fee. Pay directly from your bank account.
+            </p>
+          </div>
+        </label>
+
+        {/* Credit Card — with 4% fee */}
+        <label
+          className="flex items-start gap-3 p-4 rounded-lg cursor-pointer transition-all"
+          style={{
+            border: selected === 'card'
+              ? '2px solid #3b82f6'
+              : '2px solid var(--color-border)',
+            background: selected === 'card'
+              ? 'rgba(59,130,246,0.05)'
+              : 'transparent',
+          }}
+        >
+          <input
+            type="radio"
+            name="paymentMethod"
+            value="card"
+            checked={selected === 'card'}
+            onChange={() => onChange('card')}
+            className="mt-1"
+          />
+          <div className="flex-1">
+            <div className="flex items-center gap-2">
+              <CreditCard size={16} style={{ color: '#3b82f6' }} />
+              <span className="text-sm font-bold" style={{ color: 'var(--color-text)' }}>
+                Credit / Debit Card
+              </span>
+            </div>
+            <p className="text-xs mt-1" style={{ color: 'var(--color-muted)' }}>
+              A {(CARD_CONVENIENCE_FEE_RATE * 100).toFixed(0)}% convenience fee applies
+              {convenienceFeeAmount > 0 && (
+                <> — adds <strong style={{ color: '#ef4444' }}>${convenienceFeeAmount.toLocaleString()}</strong> to your total</>
+              )}
+            </p>
+          </div>
+        </label>
+      </div>
+    </div>
+  )
+}
 
 function CheckoutFormInner({ orderId }: { orderId: string }) {
   const stripe = useStripe()
@@ -50,10 +167,12 @@ function CheckoutFormInner({ orderId }: { orderId: string }) {
           className="text-lg font-bold mb-4"
           style={{ color: 'var(--color-text)', fontFamily: 'var(--font-display)' }}
         >
-          Payment
+          Payment Details
         </h2>
         <PaymentElement options={{ layout: 'tabs' }} />
       </div>
+
+      <NoRefundsDisclaimer />
 
       {status === 'error' && (
         <div className="p-4 rounded-lg" style={{ background: 'rgba(239,68,68,0.1)', border: '1px solid rgba(239,68,68,0.2)' }}>
@@ -74,11 +193,15 @@ function CheckoutFormInner({ orderId }: { orderId: string }) {
           </>
         ) : (
           <>
-            Pay {totals.setupTotal > 0 ? `$${(totals.setupTotal + totals.monthlyTotal).toLocaleString()}` : 'Now'}
+            Confirm &amp; Pay {totals.setupTotal > 0 ? `$${(totals.setupTotal + totals.monthlyTotal).toLocaleString()}` : 'Now'}
             <ArrowRight size={16} />
           </>
         )}
       </button>
+
+      <p className="text-[11px] text-center" style={{ color: 'var(--color-muted-2)' }}>
+        By clicking &quot;Confirm &amp; Pay&quot; you agree that all sales are final and non-refundable.
+      </p>
     </form>
   )
 }
@@ -86,9 +209,13 @@ function CheckoutFormInner({ orderId }: { orderId: string }) {
 function PaidCheckout() {
   const { items, totals } = useCart()
   const [form, setForm] = useState({ name: '', email: '', company: '' })
+  const [paymentMethod, setPaymentMethod] = useState<PaymentMethod>('ach')
   const [sessionData, setSessionData] = useState<CheckoutResponse | null>(null)
   const [status, setStatus] = useState<'billing' | 'creating' | 'payment' | 'error'>('billing')
   const [errorMsg, setErrorMsg] = useState('')
+
+  const baseTotal = totals.setupTotal + totals.monthlyTotal
+  const convenienceFee = paymentMethod === 'card' ? Math.round(baseTotal * CARD_CONVENIENCE_FEE_RATE) : 0
 
   const handleBillingSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -99,6 +226,7 @@ function PaidCheckout() {
       const payload: CheckoutPayload = {
         items: items.map(i => ({ id: i.id, type: i.type, quantity: i.quantity })),
         customer: form,
+        paymentMethod,
       }
 
       const res = await fetch('/api/checkout/create-session', {
@@ -121,7 +249,7 @@ function PaidCheckout() {
     }
   }
 
-  // Step 1: Billing form
+  // Step 1: Billing form + payment method selection
   if (status === 'billing' || status === 'creating' || status === 'error') {
     return (
       <div className="grid lg:grid-cols-[1fr_380px] gap-8">
@@ -191,6 +319,14 @@ function PaidCheckout() {
               </div>
             </div>
 
+            <PaymentMethodSelector
+              selected={paymentMethod}
+              onChange={setPaymentMethod}
+              convenienceFeeAmount={convenienceFee}
+            />
+
+            <NoRefundsDisclaimer />
+
             {status === 'error' && (
               <div className="p-4 rounded-lg" style={{ background: 'rgba(239,68,68,0.1)', border: '1px solid rgba(239,68,68,0.2)' }}>
                 <p className="text-sm text-red-500">{errorMsg}</p>
@@ -215,10 +351,14 @@ function PaidCheckout() {
                 </>
               )}
             </button>
+
+            <p className="text-[11px] text-center" style={{ color: 'var(--color-muted-2)' }}>
+              By proceeding you agree that all sales are final and non-refundable.
+            </p>
           </form>
         </div>
         <div>
-          <OrderSummary />
+          <OrderSummary paymentMethod={paymentMethod} />
         </div>
       </div>
     )
@@ -249,7 +389,7 @@ function PaidCheckout() {
         </Elements>
       </div>
       <div>
-        <OrderSummary />
+        <OrderSummary paymentMethod={paymentMethod} />
       </div>
     </div>
   )
@@ -288,6 +428,6 @@ export function CheckoutForm() {
     return <FreeCheckoutForm />
   }
 
-  // Paid cart — two-step: billing → Stripe Elements
+  // Paid cart — two-step: billing + method → Stripe Elements
   return <PaidCheckout />
 }

@@ -1,6 +1,8 @@
 'use client'
 
 import { useCart } from '@/lib/cart/context'
+import type { PaymentMethod } from '@/lib/cart/types'
+import { CARD_CONVENIENCE_FEE_RATE } from '@/lib/cart/types'
 
 function formatPrice(amount: number): string {
   return amount.toLocaleString('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 })
@@ -12,8 +14,12 @@ const PRICING_BADGE: Record<string, { label: string; color: string }> = {
   free: { label: 'Free', color: '#f59e0b' },
 }
 
-export function OrderSummary() {
+export function OrderSummary({ paymentMethod = 'ach' }: { paymentMethod?: PaymentMethod }) {
   const { items, totals } = useCart()
+
+  const baseTotal = totals.setupTotal + totals.monthlyTotal
+  const convenienceFee = paymentMethod === 'card' ? Math.round(baseTotal * CARD_CONVENIENCE_FEE_RATE) : 0
+  const grandTotal = baseTotal + convenienceFee
 
   return (
     <div className="card p-6 sticky top-24">
@@ -72,9 +78,9 @@ export function OrderSummary() {
         {totals.setupTotal > 0 && (
           <div className="flex justify-between">
             <span className="text-sm" style={{ color: 'var(--color-muted)' }}>
-              {totals.hasRecurring ? 'Setup / One-time' : 'Total'}
+              {totals.hasRecurring ? 'Setup / One-time' : 'Subtotal'}
             </span>
-            <span className="text-lg font-bold" style={{ color: 'var(--color-text)' }}>
+            <span className="text-sm font-semibold" style={{ color: 'var(--color-text)' }}>
               {formatPrice(totals.setupTotal)}
             </span>
           </div>
@@ -82,16 +88,55 @@ export function OrderSummary() {
         {totals.monthlyTotal > 0 && (
           <div className="flex justify-between">
             <span className="text-sm" style={{ color: 'var(--color-muted)' }}>Monthly recurring</span>
-            <span className="text-lg font-bold" style={{ color: 'var(--color-text)' }}>
+            <span className="text-sm font-semibold" style={{ color: 'var(--color-text)' }}>
               {formatPrice(totals.monthlyTotal)}/mo
             </span>
           </div>
         )}
-        {totals.hasRecurring && totals.setupTotal > 0 && (
-          <p className="text-xs mt-2" style={{ color: 'var(--color-muted-2)' }}>
-            Due today: {formatPrice(totals.setupTotal + totals.monthlyTotal)} (setup + first month)
+
+        {/* Convenience fee line */}
+        {convenienceFee > 0 && (
+          <div className="flex justify-between">
+            <span className="text-sm" style={{ color: '#ef4444' }}>
+              Card convenience fee (4%)
+            </span>
+            <span className="text-sm font-semibold" style={{ color: '#ef4444' }}>
+              +{formatPrice(convenienceFee)}
+            </span>
+          </div>
+        )}
+
+        {/* Divider before grand total */}
+        <div className="pt-2 mt-2" style={{ borderTop: '1px solid var(--color-border)' }}>
+          <div className="flex justify-between">
+            <span className="text-sm font-bold" style={{ color: 'var(--color-text)' }}>
+              {totals.hasRecurring ? 'Due today' : 'Total'}
+            </span>
+            <span className="text-lg font-bold" style={{ color: 'var(--color-text)' }}>
+              {formatPrice(grandTotal)}
+            </span>
+          </div>
+        </div>
+
+        {totals.hasRecurring && (
+          <p className="text-xs" style={{ color: 'var(--color-muted-2)' }}>
+            Includes setup fees + first month.
+            {paymentMethod === 'card' && ' The 4% card fee applies to each billing cycle.'}
           </p>
         )}
+
+        {paymentMethod === 'ach' && (
+          <p className="text-[10px] mt-2" style={{ color: '#10b981' }}>
+            No convenience fee — you save {formatPrice(Math.round(baseTotal * CARD_CONVENIENCE_FEE_RATE))} vs. card payment.
+          </p>
+        )}
+      </div>
+
+      {/* No refunds policy */}
+      <div className="mt-4 pt-4" style={{ borderTop: '1px solid var(--color-border)' }}>
+        <p className="text-[11px] font-semibold" style={{ color: 'var(--color-muted-2)' }}>
+          All sales are final. No refunds.
+        </p>
       </div>
     </div>
   )

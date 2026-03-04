@@ -1,8 +1,10 @@
 import Stripe from 'stripe'
 import { getStripe } from './client'
 import { getStripePricing } from './products'
-import { getStripeServicePricing, hasMonthlyPricing } from './services'
+import { getStripeServicePricing } from './services'
 import type { PackageSlug, ServiceSlug } from './types'
+import type { PaymentMethod } from '@/lib/cart/types'
+import { CARD_CONVENIENCE_FEE_RATE } from '@/lib/cart/types'
 
 // ---------------------------------------------------------------------------
 // Customer management
@@ -91,7 +93,8 @@ export function resolveCartItems(items: CartLineItem[]): ResolvedCartItems {
 export async function createOneTimePayment(
   customerId: string,
   items: CartLineItem[],
-  orderId: string
+  orderId: string,
+  paymentMethod: PaymentMethod = 'ach'
 ): Promise<Stripe.PaymentIntent> {
   const stripe = getStripe()
   const resolved = resolveCartItems(items)
@@ -107,13 +110,19 @@ export async function createOneTimePayment(
     throw new Error('Cannot create payment with zero amount')
   }
 
+  // Apply 4% convenience fee for credit card payments
+  if (paymentMethod === 'card') {
+    const feeCents = Math.round(totalCents * CARD_CONVENIENCE_FEE_RATE)
+    totalCents += feeCents
+  }
+
   // Create a PaymentIntent for the total
   return stripe.paymentIntents.create({
     amount: totalCents,
     currency: 'usd',
     customer: customerId,
-    payment_method_types: ['card'],
-    metadata: { orderId },
+    payment_method_types: paymentMethod === 'ach' ? ['us_bank_account'] : ['card'],
+    metadata: { orderId, paymentMethod },
   })
 }
 
@@ -121,10 +130,40 @@ export async function createOneTimePayment(
 export async function createSubscription(
   customerId: string,
   items: CartLineItem[],
-  orderId: string
+  orderId: string,
+  paymentMethod: PaymentMethod = 'ach'
 ): Promise<Stripe.Subscription> {
   const stripe = getStripe()
   const resolved = resolveCartItems(items)
+
+  // For card payments, calculate convenience fee on setup items and add as extra invoice item
+  if (paymentMethod === 'card') {
+    // Calculate total setup/one-time amount to apply the 4% fee
+    let setupCents = 0
+    for (const item of resolved.invoiceItems) {
+      const price = await stripe.prices.retrieve(item.price)
+      setupCents += price.unit_amount || 0
+    }
+    // Also calculate first month recurring total for the fee
+    let recurringCents = 0
+    for (const item of resolved.subscriptionItems) {
+      if (!item.price) continue
+      const price = await stripe.prices.retrieve(item.price)
+      recurringCents += price.unit_amount || 0
+    }
+    const totalFirstPayment = setupCents + recurringCents
+    const feeCents = Math.round(totalFirstPayment * CARD_CONVENIENCE_FEE_RATE)
+
+    if (feeCents > 0) {
+      // Create an ad-hoc price for the convenience fee
+      const feePrice = await stripe.prices.create({
+        unit_amount: feeCents,
+        currency: 'usd',
+        product_data: { name: 'Credit Card Convenience Fee (4%)' },
+      })
+      resolved.invoiceItems.push({ price: feePrice.id })
+    }
+  }
 
   return stripe.subscriptions.create({
     customer: customerId,
@@ -132,10 +171,10 @@ export async function createSubscription(
     add_invoice_items: resolved.invoiceItems,
     payment_behavior: 'default_incomplete',
     payment_settings: {
-      payment_method_types: ['card'],
+      payment_method_types: paymentMethod === 'ach' ? ['us_bank_account'] : ['card'],
       save_default_payment_method: 'on_subscription',
     },
     expand: ['latest_invoice.payment_intent'],
-    metadata: { orderId },
+    metadata: { orderId, paymentMethod },
   })
 }

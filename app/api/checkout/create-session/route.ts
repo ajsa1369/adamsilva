@@ -8,7 +8,7 @@ import {
 } from '@/lib/stripe/checkout'
 import { getServiceById } from '@/lib/data/services'
 import { PACKAGES } from '@/lib/data/packages'
-import type { CartItemType } from '@/lib/cart/types'
+import type { CartItemType, PaymentMethod } from '@/lib/cart/types'
 
 export const runtime = 'nodejs'
 
@@ -25,6 +25,7 @@ interface RequestBody {
     email: string
     company: string
   }
+  paymentMethod: PaymentMethod
 }
 
 function validateRequest(body: unknown): body is RequestBody {
@@ -34,6 +35,7 @@ function validateRequest(body: unknown): body is RequestBody {
   if (!b.customer || typeof b.customer !== 'object') return false
   const c = b.customer as Record<string, unknown>
   if (!c.name || !c.email) return false
+  if (b.paymentMethod !== 'ach' && b.paymentMethod !== 'card') return false
   return true
 }
 
@@ -69,7 +71,7 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    const { items, customer } = body
+    const { items, customer, paymentMethod } = body
 
     // Filter out free items (ACRA) — they don't go through Stripe
     const paidItems = items.filter(i => {
@@ -139,7 +141,7 @@ export async function POST(request: NextRequest) {
 
     if (resolved.hasRecurring) {
       // Subscription flow
-      const sub = await createSubscription(stripeCustomer.id, paidItems, orderId)
+      const sub = await createSubscription(stripeCustomer.id, paidItems, orderId, paymentMethod)
       subscriptionId = sub.id
 
       // Get client secret from the first invoice's payment intent
@@ -160,7 +162,7 @@ export async function POST(request: NextRequest) {
         .eq('id', orderId)
     } else {
       // One-time payment flow
-      const pi = await createOneTimePayment(stripeCustomer.id, paidItems, orderId)
+      const pi = await createOneTimePayment(stripeCustomer.id, paidItems, orderId, paymentMethod)
       clientSecret = pi.client_secret!
 
       // Update order with payment intent ID

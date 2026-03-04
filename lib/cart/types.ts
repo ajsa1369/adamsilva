@@ -1,5 +1,9 @@
 export type CartItemType = 'package' | 'service'
 export type PricingModel = 'one-time' | 'recurring' | 'free'
+export type PaymentMethod = 'ach' | 'card'
+
+/** 4% convenience fee for credit card payments */
+export const CARD_CONVENIENCE_FEE_RATE = 0.04
 
 export interface CartItem {
   id: string
@@ -31,6 +35,7 @@ export interface CheckoutPayload {
     email: string
     company: string
   }
+  paymentMethod: PaymentMethod
 }
 
 /** Response from the checkout API route */
