@@ -202,7 +202,7 @@ export function HeroSection() {
                     className="text-xs font-medium text-white"
                     style={{ fontFamily: 'var(--font-sans)', opacity: 0.9 }}
                   >
-                    UCP · ACP · AP2 — Watch the 45s explainer
+                    UCP · ACP · AP2 — Watch the explainer
                   </span>
                 </div>
               </div>

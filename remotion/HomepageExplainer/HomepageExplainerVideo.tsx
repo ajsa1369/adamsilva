@@ -1,4 +1,4 @@
-import { AbsoluteFill, Sequence, useCurrentFrame, useVideoConfig, spring, interpolate } from 'remotion'
+import { AbsoluteFill, Audio, Sequence, staticFile, useCurrentFrame, useVideoConfig, spring, interpolate } from 'remotion'
 import { COLORS, GRADIENTS } from '../shared/colors'
 
 export interface HomepageExplainerProps {
@@ -557,17 +557,24 @@ function CTASlide() {
 /* ── Main Composition ── */
 export function HomepageExplainerVideo({ testimonialQuote, testimonialAuthor }: HomepageExplainerProps) {
   const fps = 30
-  const titleDur = fps * 4       // 0-4s
-  const problemDur = fps * 5     // 4-9s
-  const protocolDur = fps * 6    // 6s each
-  const resultsDur = fps * 6     // 27-33s
-  const flywheelDur = fps * 6    // 33-39s
-  const ctaDur = fps * 6         // 39-45s
+
+  // Slide durations matched to Deepgram Delia narration audio
+  const titleDur = 150       // 5.0s (4.5s audio + gap)
+  const problemDur = 214     // 7.1s (6.6s audio + gap)
+  const ucpDur = 326         // 10.9s (10.4s audio + gap)
+  const acpDur = 335         // 11.2s (10.7s audio + gap)
+  const ap2Dur = 306         // 10.2s (9.7s audio + gap)
+  const resultsDur = 261     // 8.7s (8.2s audio + gap)
+  const flywheelDur = 345    // 11.5s (11.0s audio + gap)
+  const ctaDur = 247         // 8.2s (7.7s audio + gap)
 
   let offset = 0
 
   return (
     <AbsoluteFill style={{ fontFamily: 'Inter, sans-serif' }}>
+      {/* Narration audio track */}
+      <Audio src={staticFile('audio/explainer-narration.mp3')} />
+
       <Sequence from={offset} durationInFrames={titleDur}>
         <TitleSlide />
       </Sequence>
@@ -576,7 +583,7 @@ export function HomepageExplainerVideo({ testimonialQuote, testimonialAuthor }: 
         <ProblemSlide />
       </Sequence>
 
-      <Sequence from={(offset += problemDur)} durationInFrames={protocolDur}>
+      <Sequence from={(offset += problemDur)} durationInFrames={ucpDur}>
         <ProtocolSlide
           acronym="UCP"
           name="AI Discovery Layer"
@@ -587,7 +594,7 @@ export function HomepageExplainerVideo({ testimonialQuote, testimonialAuthor }: 
         />
       </Sequence>
 
-      <Sequence from={(offset += protocolDur)} durationInFrames={protocolDur}>
+      <Sequence from={(offset += ucpDur)} durationInFrames={acpDur}>
         <ProtocolSlide
           acronym="ACP"
           name="AI Checkout Layer"
@@ -598,7 +605,7 @@ export function HomepageExplainerVideo({ testimonialQuote, testimonialAuthor }: 
         />
       </Sequence>
 
-      <Sequence from={(offset += protocolDur)} durationInFrames={protocolDur}>
+      <Sequence from={(offset += acpDur)} durationInFrames={ap2Dur}>
         <ProtocolSlide
           acronym="AP2"
           name="Trust & Verification Layer"
@@ -609,7 +616,7 @@ export function HomepageExplainerVideo({ testimonialQuote, testimonialAuthor }: 
         />
       </Sequence>
 
-      <Sequence from={(offset += protocolDur)} durationInFrames={resultsDur}>
+      <Sequence from={(offset += ap2Dur)} durationInFrames={resultsDur}>
         <ResultsSlide quote={testimonialQuote} author={testimonialAuthor} />
       </Sequence>
 

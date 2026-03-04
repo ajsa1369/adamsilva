@@ -72,12 +72,12 @@ const roadmapHowTo = buildHowToSchema(
 
 const videoSchema = {
   '@type': 'VideoObject',
-  name: 'Agentic Commerce Explained in 45 Seconds — UCP, ACP, AP2',
-  description: 'A 45-second explainer video covering the three protocols that power agentic commerce: UCP (discovery), ACP (checkout), and AP2 (trust).',
+  name: 'Agentic Commerce Explained — UCP, ACP, AP2',
+  description: 'A narrated explainer video covering the three protocols that power agentic commerce: UCP (discovery), ACP (checkout), and AP2 (trust).',
   thumbnailUrl: `${SITE_URL}/images/hero/business-hero.jpg`,
   contentUrl: `${SITE_URL}/videos/homepage-explainer.mp4`,
   uploadDate: '2026-03-04',
-  duration: 'PT45S',
+  duration: 'PT73S',
   publisher: { '@type': 'Organization', name: 'Adam Silva Consulting' },
   inLanguage: 'en-US',
 }

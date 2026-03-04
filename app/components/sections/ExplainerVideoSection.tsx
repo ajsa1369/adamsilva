@@ -91,7 +91,7 @@ export function ExplainerVideoSection() {
                 lineHeight: 1.2,
               }}
             >
-              45 Seconds to Understand Agentic Commerce
+              Agentic Commerce Explained
             </h2>
             <p
               className="mb-6"

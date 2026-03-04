@@ -25,8 +25,8 @@ const DEFAULT_EXPLAINER_PROPS: HomepageExplainerProps = {
 // BlogSummary: 30fps × 28s = 840 frames
 const BLOG_DURATION = 840
 
-// HomepageExplainer: 30fps × 45s = 1350 frames
-const EXPLAINER_DURATION = 1350
+// HomepageExplainer: 30fps × 72.8s = 2184 frames (matched to Delia narration)
+const EXPLAINER_DURATION = 2184
 
 export const RemotionRoot: React.FC = () => {
   return (
