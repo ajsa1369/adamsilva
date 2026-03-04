@@ -101,9 +101,9 @@ export function Footer() {
               <Image
                 src="/images/logo-clear.png"
                 alt="Adam Silva Consulting"
-                width={140}
-                height={36}
-                className="h-8 w-auto mb-5"
+                width={220}
+                height={55}
+                className="h-11 w-auto mb-5"
               />
             </Link>
             <p className="text-sm leading-relaxed mb-5" style={{ color: 'var(--color-muted-2)' }}>

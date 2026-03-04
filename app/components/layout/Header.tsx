@@ -13,14 +13,14 @@ const NAV_ITEMS = [
     href: '/services',
     hasDropdown: true,
     children: [
-      { label: 'Off-Hours Voice Agent', href: '/services/off-hours-voice-agent', tag: '$2,500' },
-      { label: 'Quoting Agent', href: '/services/quoting-agent', tag: '$3,500' },
-      { label: 'Auto-Appointment Setter', href: '/services/auto-appointment-setter', tag: '$5,000' },
-      { label: 'Lead Scraping (Hunter)', href: '/services/lead-scraping', tag: '$5,000' },
-      { label: 'Lead Enrichment Pipeline', href: '/services/lead-enrichment', tag: '$2,000' },
-      { label: 'AI Readiness Check', href: '/services/ai-readiness-check', tag: '$100' },
-      { label: 'AEO Audit', href: '/services/aeo-audit', tag: '$500' },
-      { label: 'UCP Protocol Stack', href: '/services/ucp-implementation', tag: 'Custom' },
+      { label: 'Off-Hours Voice Agent', href: '/services/off-hours-voice-agent' },
+      { label: 'Quoting Agent', href: '/services/quoting-agent' },
+      { label: 'Auto-Appointment Setter', href: '/services/auto-appointment-setter' },
+      { label: 'Lead Scraping (Hunter)', href: '/services/lead-scraping' },
+      { label: 'Lead Enrichment Pipeline', href: '/services/lead-enrichment' },
+      { label: 'AI Readiness Check', href: '/services/ai-readiness-check' },
+      { label: 'AEO Audit', href: '/services/aeo-audit' },
+      { label: 'UCP Protocol Stack', href: '/services/ucp-implementation' },
     ],
   },
   {
@@ -28,10 +28,10 @@ const NAV_ITEMS = [
     href: '/protocols',
     hasDropdown: true,
     children: [
-      { label: 'Protocol Overview', href: '/protocols', tag: null },
-      { label: 'UCP — Universal Commerce', href: '/protocols/ucp', tag: 'Google' },
-      { label: 'ACP — Agentic Checkout', href: '/protocols/acp', tag: 'OpenAI' },
-      { label: 'AP2 — Agent Payments', href: '/protocols/ap2', tag: 'Google' },
+      { label: 'Protocol Overview', href: '/protocols' },
+      { label: 'UCP — Universal Commerce', href: '/protocols/ucp' },
+      { label: 'ACP — Agentic Checkout', href: '/protocols/acp' },
+      { label: 'AP2 — Agent Payments', href: '/protocols/ap2' },
     ],
   },
   { label: 'Insights', href: '/insights', hasDropdown: false },
@@ -73,9 +73,9 @@ export function Header() {
           <Image
             src="/images/logo-clear.png"
             alt="Adam Silva Consulting"
-            width={160}
-            height={40}
-            className="h-9 w-auto nav-logo"
+            width={240}
+            height={60}
+            className="h-12 w-auto nav-logo"
             priority
           />
         </Link>
@@ -107,35 +107,26 @@ export function Header() {
                   </button>
 
                   {openDropdown === item.href && item.children && (
-                    <div
-                      className="nav-dropdown-panel absolute top-full left-0 mt-2 w-60 rounded-xl overflow-hidden z-50"
-                      style={{ backdropFilter: 'blur(20px)' }}
-                    >
-                      <div className="p-1.5">
-                        {item.children.map((child) => (
-                          <Link
-                            key={child.href}
-                            href={child.href}
-                            className={`flex items-center justify-between px-3.5 py-2.5 rounded-lg text-sm transition-all duration-150 group ${
-                              pathname === child.href
-                                ? 'text-[var(--color-accent)] bg-[rgba(14,165,233,0.08)]'
-                                : 'text-[var(--color-muted)] hover:text-[var(--color-text)] hover:bg-[rgba(255,255,255,0.04)]'
-                            }`}
-                          >
-                            <span>{child.label}</span>
-                            {child.tag && (
-                              <span className="text-[10px] font-mono font-semibold px-1.5 py-0.5 rounded"
-                                style={{
-                                  background: 'rgba(14,165,233,0.1)',
-                                  color: 'rgba(14,165,233,0.8)',
-                                  border: '1px solid rgba(14,165,233,0.15)',
-                                }}
-                              >
-                                {child.tag}
-                              </span>
-                            )}
-                          </Link>
-                        ))}
+                    <div className="absolute top-full left-0 pt-1 z-50">
+                      <div
+                        className="nav-dropdown-panel w-64 rounded-xl overflow-hidden"
+                        style={{ backdropFilter: 'blur(20px)' }}
+                      >
+                        <div className="p-1.5">
+                          {item.children.map((child) => (
+                            <Link
+                              key={child.href}
+                              href={child.href}
+                              className={`block px-4 py-3 rounded-lg text-sm transition-all duration-150 ${
+                                pathname === child.href
+                                  ? 'text-[var(--color-accent)] bg-[rgba(14,165,233,0.08)]'
+                                  : 'text-[var(--color-muted)] hover:text-[var(--color-text)] hover:bg-[rgba(255,255,255,0.04)]'
+                              }`}
+                            >
+                              {child.label}
+                            </Link>
+                          ))}
+                        </div>
                       </div>
                     </div>
                   )}
@@ -208,13 +199,10 @@ export function Header() {
                       <Link
                         key={child.href}
                         href={child.href}
-                        className="flex items-center justify-between px-3.5 py-2 rounded-lg text-xs transition-colors"
+                        className="block px-3.5 py-2.5 rounded-lg text-xs transition-colors"
                         style={{ color: 'var(--color-muted-2)' }}
                       >
-                        <span>{child.label}</span>
-                        {child.tag && (
-                          <span className="text-[10px] font-mono opacity-60">{child.tag}</span>
-                        )}
+                        {child.label}
                       </Link>
                     ))}
                   </div>
