@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
-import Image from 'next/image'
 import { usePathname } from 'next/navigation'
 import { Menu, X, ChevronDown, Zap } from 'lucide-react'
 import { ThemeToggle } from './ThemeToggle'
@@ -69,14 +68,12 @@ export function Header() {
       <nav className="container flex items-center justify-between h-16" aria-label="Main navigation">
 
         {/* Logo */}
-        <Link href="/" className="flex items-center gap-2.5 flex-shrink-0 group" aria-label="Adam Silva Consulting — Home">
-          <Image
-            src="/images/logo-clear.png"
-            alt="Adam Silva Consulting"
-            width={240}
-            height={60}
-            className="h-12 w-auto nav-logo"
-            priority
+        <Link href="/" className="flex items-center flex-shrink-0 group" aria-label="Adam Silva Consulting — Home">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/images/logo-full.svg"
+            alt="Adam Silva Consulting — Global Infrastructure for Agentic Commerce"
+            className="h-10 w-auto nav-logo"
           />
         </Link>
 

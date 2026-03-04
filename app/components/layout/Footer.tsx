@@ -1,7 +1,6 @@
 'use client'
 
 import Link from 'next/link'
-import Image from 'next/image'
 import { ArrowRight, Linkedin, Twitter, Rss, Zap } from 'lucide-react'
 
 const FOOTER_LINKS = {
@@ -97,17 +96,16 @@ export function Footer() {
 
           {/* Brand */}
           <div className="col-span-2 md:col-span-1">
-            <Link href="/" aria-label="Adam Silva Consulting — Home">
-              <Image
-                src="/images/logo-clear.png"
-                alt="Adam Silva Consulting"
-                width={220}
-                height={55}
-                className="h-11 w-auto mb-5"
+            <Link href="/" aria-label="Adam Silva Consulting — Home" className="block mb-5">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/images/logo-full.svg"
+                alt="Adam Silva Consulting — Global Infrastructure for Agentic Commerce"
+                className="h-16 w-auto"
               />
             </Link>
             <p className="text-sm leading-relaxed mb-5" style={{ color: 'var(--color-muted-2)' }}>
-              Global Infrastructure for Agentic Commerce — the definitive authority for UCP, ACP, and AP2 protocol implementation.
+              The definitive authority for UCP, ACP, and AP2 protocol implementation.
             </p>
             <div className="flex items-center gap-1">
               {[
