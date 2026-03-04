@@ -5,8 +5,9 @@ import { ArrowRight, CheckCircle, Clock, Users } from 'lucide-react'
 import { JsonLd } from '@/app/components/seo/JsonLd'
 import { buildPageSchema, SITE_URL } from '@/lib/schemas/organization'
 import { buildServiceSchema, buildHowToSchema } from '@/lib/schemas/service'
-import { buildFAQSchema } from '@/lib/schemas/faq'
+import { buildFAQSchema, buildWebPageSchema } from '@/lib/schemas/faq'
 import { SERVICES, getServiceById } from '@/lib/data/services'
+import { RelatedContent } from '@/app/components/sections/RelatedContent'
 
 interface PageProps {
   params: Promise<{ slug: string }>
@@ -89,6 +90,7 @@ export default async function ServicePage({ params }: PageProps) {
           : 'If you are unsure whether this service fits your needs, start with the free Agentic Commerce Readiness Assessment (ACRA) for a prioritized strategic roadmap.'
       }`,
     },
+    ...(service.customFAQs ?? []),
   ]
 
   // Build HowTo from deliverables
@@ -112,7 +114,14 @@ export default async function ServicePage({ params }: PageProps) {
     audience: service.audience,
   })
 
+  const webPageSchema = buildWebPageSchema({
+    name: service.name,
+    description: service.description,
+    url: `${SITE_URL}/services/${service.id}`,
+  })
+
   const pageJsonLd = buildPageSchema(`/services/${service.id}`, [
+    webPageSchema,
     serviceSchemaData,
     deliverableHowTo,
     buildFAQSchema(serviceFAQs),
@@ -341,6 +350,38 @@ export default async function ServicePage({ params }: PageProps) {
                     </span>
                   </div>
 
+                  {service.relatedProtocol && (
+                    <>
+                      <div className="h-px bg-[var(--color-border)]" />
+                      <div>
+                        <div className="text-xs text-[var(--color-muted-2)] mb-2">Protocol</div>
+                        <Link
+                          href={`/protocols/${service.relatedProtocol}`}
+                          className="text-sm font-semibold hover:underline"
+                          style={{ color: accentColor }}
+                        >
+                          {service.relatedProtocol.toUpperCase()} Deep Dive →
+                        </Link>
+                      </div>
+                    </>
+                  )}
+
+                  {service.relatedHubPage && (
+                    <>
+                      <div className="h-px bg-[var(--color-border)]" />
+                      <div>
+                        <div className="text-xs text-[var(--color-muted-2)] mb-2">Learn More</div>
+                        <Link
+                          href={service.relatedHubPage}
+                          className="text-sm font-semibold hover:underline"
+                          style={{ color: accentColor }}
+                        >
+                          Hub Page →
+                        </Link>
+                      </div>
+                    </>
+                  )}
+
                   <div className="h-px bg-[var(--color-border)]" />
 
                   <Link
@@ -402,6 +443,78 @@ export default async function ServicePage({ params }: PageProps) {
           </ul>
         </div>
       </section>
+
+      {/* What Makes This Different */}
+      {service.uniqueInsight && (
+        <section className="section" aria-labelledby="unique-insight-heading">
+          <div className="container max-w-3xl">
+            <div className="text-center mb-8">
+              <span
+                className="badge mb-4"
+                style={{
+                  background: `color-mix(in srgb, ${accentColor} 15%, transparent)`,
+                  color: accentColor,
+                }}
+              >
+                Why Us
+              </span>
+              <h2
+                id="unique-insight-heading"
+                className="text-3xl font-bold text-[var(--color-text)]"
+              >
+                What Makes This Different
+              </h2>
+            </div>
+            <div
+              className="card p-8 border-l-4"
+              style={{ borderLeftColor: accentColor }}
+            >
+              <p className="text-[var(--color-text)] leading-relaxed text-base speakable-answer">
+                {service.uniqueInsight}
+              </p>
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* How It Works */}
+      {service.howItWorksSteps && (
+        <section
+          className="section bg-[var(--color-surface)]"
+          aria-labelledby="how-it-works-heading"
+        >
+          <div className="container max-w-3xl">
+            <div className="text-center mb-10">
+              <span className="badge mb-4">Process</span>
+              <h2
+                id="how-it-works-heading"
+                className="text-3xl font-bold text-[var(--color-text)]"
+              >
+                How It Works
+              </h2>
+              <p className="text-[var(--color-muted)] mt-3">
+                A clear, step-by-step process from kickoff to delivery.
+              </p>
+            </div>
+            <ol className="space-y-4" aria-label={`${service.name} process steps`}>
+              {service.howItWorksSteps.map((step, i) => (
+                <li key={i} className="card p-5 flex items-start gap-4">
+                  <div
+                    className="w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold shrink-0 text-white"
+                    style={{ background: accentColor }}
+                    aria-hidden="true"
+                  >
+                    {i + 1}
+                  </div>
+                  <span className="text-sm text-[var(--color-text)] leading-relaxed pt-1">
+                    {step}
+                  </span>
+                </li>
+              ))}
+            </ol>
+          </div>
+        </section>
+      )}
 
       {/* Features */}
       <section className="section" aria-labelledby="features-heading">
@@ -475,6 +588,9 @@ export default async function ServicePage({ params }: PageProps) {
           </div>
         </div>
       </section>
+
+      {/* Related Content */}
+      <RelatedContent currentPath={`/services/${service.id}`} />
 
       {/* CTA */}
       <section className="section" aria-labelledby="service-cta-heading">

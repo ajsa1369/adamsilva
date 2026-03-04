@@ -71,7 +71,15 @@ export async function GET(): Promise<Response> {
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? SITE_URL
 
   if (!supabaseUrl || !serviceKey) {
-    return new Response('Supabase not configured', { status: 500 })
+    // Return valid empty video sitemap when Supabase is not configured
+    const emptyXml = buildVideoSitemapXml([])
+    return new Response(emptyXml, {
+      status: 200,
+      headers: {
+        'Content-Type': 'application/xml; charset=utf-8',
+        'Cache-Control': 'public, max-age=3600, s-maxage=3600',
+      },
+    })
   }
 
   // Fetch all blog_posts with schema_json populated

@@ -23,3 +23,18 @@ export function buildSpeakableSchema(cssSelectors: string[] = ['.speakable-answe
     cssSelector: cssSelectors,
   }
 }
+
+export function buildWebPageSchema(config: {
+  name: string
+  description: string
+  url: string
+  speakableSelectors?: string[]
+}) {
+  return {
+    '@type': 'WebPage',
+    name: config.name,
+    description: config.description,
+    url: config.url,
+    speakable: buildSpeakableSchema(config.speakableSelectors),
+  }
+}

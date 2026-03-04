@@ -18,6 +18,8 @@ export interface BlogPostSchemaConfig {
   faqs?: FAQItem[]
   videoUrl?: string
   videoDuration?: number
+  videoTranscript?: string
+  videoEmbedUrl?: string
   wordCount?: number
 }
 
@@ -74,8 +76,11 @@ export function buildBlogPostSchema(config: BlogPostSchemaConfig) {
         ? config.coverImage
         : `${SITE_URL}/images/${config.coverImage}`,
       contentUrl: config.videoUrl,
+      ...(config.videoEmbedUrl && { embedUrl: config.videoEmbedUrl }),
       uploadDate: config.publishedAt,
       ...(config.videoDuration && { duration: `PT${config.videoDuration}S` }),
+      ...(config.videoTranscript && { transcript: config.videoTranscript }),
+      regionsAllowed: 'US,CA,GB,AU,DE,FR,JP',
       publisher: { '@id': ORG_ID },
       author: adamSilvaSchema,
       inLanguage: 'en-US',

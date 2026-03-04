@@ -6,6 +6,7 @@ import { Footer } from './components/layout/Footer'
 import { JsonLd } from './components/seo/JsonLd'
 import { organizationSchema, websiteSchema } from '@/lib/schemas/organization'
 import { logoImageSchema } from '@/lib/schemas/image'
+import { adamSilvaSchema } from '@/lib/schemas/person'
 
 const robotoCondensed = Roboto_Condensed({
   subsets: ['latin'],
@@ -110,6 +111,7 @@ const rootSchema = {
     organizationSchema,
     websiteSchema,
     logoImageSchema,
+    adamSilvaSchema,
   ],
 }
 

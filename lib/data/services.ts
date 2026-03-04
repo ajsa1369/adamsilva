@@ -1,3 +1,8 @@
+export interface ServiceFAQ {
+  question: string
+  answer: string
+}
+
 export interface Service {
   id: string
   name: string
@@ -12,6 +17,11 @@ export interface Service {
   icon: string
   category: 'audit' | 'optimization' | 'automation' | 'protocol' | 'content'
   featured: boolean
+  uniqueInsight?: string
+  relatedProtocol?: string
+  relatedHubPage?: string
+  howItWorksSteps?: string[]
+  customFAQs?: ServiceFAQ[]
 }
 
 export const SERVICES: Service[] = [
@@ -42,6 +52,18 @@ export const SERVICES: Service[] = [
     icon: 'CheckCircle',
     category: 'audit',
     featured: true,
+    uniqueInsight: 'The ACRA is the only free assessment that evaluates all three agentic commerce protocols (UCP, ACP, AP2) alongside AEO and GEO readiness in a single report. Most competitors charge $2,000+ for partial audits.',
+    howItWorksSteps: [
+      'Submit your domain and primary product category',
+      'We crawl your site for structured data, .well-known endpoints, and rendering method',
+      'Automated scoring across 7 pillars: protocol compliance, schema coverage, token efficiency, authority signals, content structure, AI discoverability, and competitive positioning',
+      'Adam personally reviews the automated report and adds strategic recommendations',
+      'You receive a prioritized PDF with custom infographics within 48 hours',
+    ],
+    customFAQs: [
+      { question: 'Is the ACRA really free?', answer: 'Yes — completely free with no commitment. The ACRA is our lead magnet. We deliver a genuinely useful strategic roadmap because the best clients self-select into paid engagements after seeing their gaps.' },
+      { question: 'What happens after I get my ACRA report?', answer: 'You receive a prioritized action plan. Many teams implement quick wins immediately. For larger gaps (protocol implementation, authority building), we recommend the Gold or Enterprise package — but there is zero pressure.' },
+    ],
   },
   {
     id: 'aeo-audit',
@@ -70,6 +92,15 @@ export const SERVICES: Service[] = [
     icon: 'Search',
     category: 'audit',
     featured: false,
+    uniqueInsight: 'Most agencies audit for traditional SEO. Our AEO Audit tests your citations across 5 live AI platforms (ChatGPT, Perplexity, Claude, Gemini, Bing Copilot) and maps exactly why you are or aren\'t being cited.',
+    relatedHubPage: '/hub/answer-engine-optimization',
+    howItWorksSteps: [
+      'We query your brand, products, and key topics across ChatGPT, Perplexity, Claude, Gemini, and Bing Copilot',
+      'Each AI response is scored: cited, mentioned, recommended, or absent',
+      'Your structured data is evaluated against our 12-point AEO framework',
+      'Competitor citation comparison reveals who is winning and why',
+      'Deliverable: gap analysis with prioritized fixes ranked by citation impact',
+    ],
   },
   {
     id: 'geo-implementation',
@@ -98,6 +129,15 @@ export const SERVICES: Service[] = [
     icon: 'Zap',
     category: 'optimization',
     featured: false,
+    uniqueInsight: 'GEO goes beyond SEO: we restructure your content so AI models generate answers that cite your brand. The key insight is token efficiency — AI models prefer concise, schema-rich, SSR-rendered pages over bloated SPA bundles.',
+    relatedHubPage: '/hub/generative-engine-optimization',
+    howItWorksSteps: [
+      'Baseline audit: measure current AI citation rate and token cost per page',
+      'Schema implementation: JSON-LD on all page types (Article, FAQPage, HowTo, ClaimReview)',
+      'Content restructuring: Answer-First format with speakable markup',
+      'Authority signal enhancement: E-E-A-T signals, internal linking, ClaimReview citations',
+      'Performance report: before/after citation rates across 5 AI platforms',
+    ],
   },
   {
     id: 'authority-building',
@@ -126,6 +166,19 @@ export const SERVICES: Service[] = [
     icon: 'Award',
     category: 'optimization',
     featured: true,
+    uniqueInsight: 'The Authority Flywheel is Adam Silva\'s proprietary methodology: publish primary research → earn AI citations → build schema authority → attract more citations. Within 90 days, clients go from invisible to cited by ChatGPT and Perplexity.',
+    relatedHubPage: '/hub/answer-engine-optimization',
+    howItWorksSteps: [
+      'Authority audit: identify your current citation footprint and topical gaps',
+      'Content strategy: 10 articles targeting high-citation-probability topics',
+      'Schema architecture: complete JSON-LD graph with Person, Organization, Article, FAQPage, DefinedTermSet',
+      'Hub-and-spoke deployment: topical authority pages linking to all related content',
+      'Flywheel activation: monthly citation audits with course corrections',
+    ],
+    customFAQs: [
+      { question: 'How do you measure citation growth?', answer: 'We query your brand topics across ChatGPT, Perplexity, Claude, Gemini, and Bing Copilot monthly. Each response is scored: direct citation (link), brand mention, recommendation, or absent. You get a dashboard showing citation rate over time.' },
+      { question: 'What is the Authority Flywheel?', answer: 'The Authority Flywheel is a self-reinforcing cycle: publish authoritative content → AI models cite it → citations build authority signals → authority signals make AI models cite you more. The key is primary research and schema depth — these are the signals AI models trust most.' },
+    ],
   },
   {
     id: 'agent-ready-blog-creator',
@@ -238,6 +291,16 @@ export const SERVICES: Service[] = [
     icon: 'Network',
     category: 'protocol',
     featured: false,
+    uniqueInsight: 'UCP is the foundational layer of agentic commerce — without it, AI shopping agents cannot discover your business exists. Google AI Mode and Perplexity Shopping both rely on UCP manifests for product discovery.',
+    relatedProtocol: 'ucp',
+    relatedHubPage: '/hub/universal-commerce-protocol',
+    howItWorksSteps: [
+      'Capability mapping: document every product, service, and API your business offers',
+      'Manifest creation: .well-known/ucp/manifest.json with full capability declarations',
+      'Transport binding: configure REST, MCP, and A2A transport layers',
+      'Agent testing: verify discovery by Google AI Mode, Perplexity Shopping, and custom agents',
+      'Monitoring: ongoing manifest validation and compliance alerts',
+    ],
   },
   {
     id: 'acp-integration',
@@ -266,6 +329,16 @@ export const SERVICES: Service[] = [
     icon: 'ShoppingCart',
     category: 'protocol',
     featured: false,
+    uniqueInsight: 'ACP enables what no traditional checkout can: an AI agent browsing, selecting, and purchasing on behalf of a human — with cryptographic authorization. ChatGPT Instant Checkout is the first mass-market implementation.',
+    relatedProtocol: 'acp',
+    relatedHubPage: '/hub/agentic-commerce-protocol',
+    howItWorksSteps: [
+      'Payment infrastructure audit: verify Stripe account and product catalog readiness',
+      'ACP endpoint development: /api/acp/negotiate and /api/acp/checkout routes',
+      'Stripe SPT integration: delegated payment tokens for agent-initiated transactions',
+      'Agent authentication: identity verification layer for purchasing agents',
+      'ChatGPT Instant Checkout: configuration and compliance testing',
+    ],
   },
   {
     id: 'ap2-trust-layer',
@@ -294,6 +367,16 @@ export const SERVICES: Service[] = [
     icon: 'Shield',
     category: 'protocol',
     featured: false,
+    uniqueInsight: 'AP2 is the legal backbone of agentic commerce. Without cryptographic mandates, agent-initiated transactions have no audit trail and no dispute resolution. AP2 makes agentic payments legally defensible.',
+    relatedProtocol: 'ap2',
+    relatedHubPage: '/hub/agent-payments-protocol',
+    howItWorksSteps: [
+      'Trust architecture design: define mandate types (Intent, Cart), signing authorities, and verification flow',
+      'Mandate implementation: .well-known/ap2/mandates.json with cryptographic schemas',
+      'Verifiable Credentials: agent identity verification and credential issuance',
+      'x402 integration: crypto payment protocol support for cross-border agent transactions',
+      'Audit trail deployment: non-repudiation logging with dispute resolution framework',
+    ],
   },
 
   // -- AI Agent Modules --
@@ -324,6 +407,14 @@ export const SERVICES: Service[] = [
     icon: 'FileText',
     category: 'automation',
     featured: true,
+    uniqueInsight: 'Unlike chatbot "quote generators" that hallucinate prices, the Quoting Agent uses deterministic rules from your actual pricing matrix. Every quote is consistent, auditable, and flows directly into a booking calendar.',
+    howItWorksSteps: [
+      'Pricing matrix extraction: we codify your rules, tiers, modifiers, and exceptions',
+      'Intake flow design: required fields, disqualifiers, and edge-case routing',
+      'Quote engine deployment: deterministic pricing with approval workflow for exceptions',
+      'Booking integration: calendar with territory routing, round-robin, and buffer logic',
+      'CRM writeback: quote record, status, notes, and reporting hooks',
+    ],
   },
   {
     id: 'off-hours-voice-agent',
@@ -352,6 +443,14 @@ export const SERVICES: Service[] = [
     icon: 'Bot',
     category: 'automation',
     featured: true,
+    uniqueInsight: 'Every missed call is a lost lead. The Off-Hours Voice Agent doesn\'t just answer — it qualifies, captures structured data, and writes it to your CRM. It\'s an owned asset trained on your scripts, not a generic IVR.',
+    howItWorksSteps: [
+      'Script and FAQ grounding: we train the agent on your brand voice, products, and policies',
+      'Call flow design: qualify, capture required fields, route/escalate, handle edge cases',
+      'Voice deployment: human-sounding agent answers calls after-hours and during overflow',
+      'CRM integration: structured data extraction from every call, written to your CRM',
+      'Monitoring: transcript review dashboard with escalation alerts',
+    ],
   },
   {
     id: 'lead-enrichment',

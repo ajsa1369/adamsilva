@@ -1,6 +1,69 @@
+import { TESTIMONIALS } from '@/lib/data/testimonials'
+import { buildAggregateRatingSchema } from './review'
+
 const SITE_URL = 'https://www.adamsilvaconsulting.com'
 const ORG_ID = `${SITE_URL}/#organization`
 const WEBSITE_ID = `${SITE_URL}/#website`
+
+const aggregateRating = buildAggregateRatingSchema(TESTIMONIALS)
+
+// Breadcrumb display names for URL segments
+const BREADCRUMB_NAMES: Record<string, string> = {
+  services: 'Services',
+  'ai-readiness-check': 'Agentic Commerce Readiness Assessment',
+  'aeo-audit': 'AEO Audit',
+  'geo-implementation': 'GEO Implementation',
+  'authority-building': 'Authority Building Program',
+  'quoting-agent': 'Quoting Agent',
+  'off-hours-voice-agent': 'Off-Hours Voice Agent',
+  'lead-enrichment': 'Lead Enrichment Pipeline',
+  'lead-scraping': 'Lead Scraping',
+  'auto-appointment-setter': 'Auto-Appointment Setter',
+  'agent-ready-blog-creator': 'Blog Creator Engine',
+  'press-syndicator': 'Press Syndicator',
+  'unified-sales-agent': 'Unified Sales Agent',
+  'social-media-manager': 'Social Media Manager',
+  'social-media-poster': 'Social Media Poster',
+  'rag-message-replier': 'RAG Message Replier',
+  'ucp-implementation': 'UCP Implementation',
+  'acp-integration': 'ACP Integration',
+  'ap2-trust-layer': 'AP2 Trust Layer',
+  protocols: 'Protocols',
+  ucp: 'UCP',
+  acp: 'ACP',
+  ap2: 'AP2',
+  hub: 'Knowledge Hub',
+  'universal-commerce-protocol': 'Universal Commerce Protocol (UCP)',
+  'agentic-commerce-protocol': 'Agentic Commerce Protocol (ACP)',
+  'agent-payments-protocol': 'Agent Payments Protocol (AP2)',
+  'answer-engine-optimization': 'Answer Engine Optimization (AEO)',
+  'generative-engine-optimization': 'Generative Engine Optimization (GEO)',
+  about: 'About',
+  contact: 'Contact',
+  insights: 'Insights',
+  resources: 'Resources',
+  glossary: 'Glossary',
+  'case-studies': 'Case Studies',
+  research: 'Research',
+  tools: 'Tools',
+  'token-calculator': 'Token Efficiency Calculator',
+  'protocol-checker': 'Protocol Compliance Checker',
+  'aeo-score': 'AEO Score Analyzer',
+  packages: 'Packages',
+  'get-started': 'Get Started',
+  'platform-check': 'Platform Check',
+  'authority-hub': 'Authority Hub',
+  'state-of-agentic-commerce-2026': 'State of Agentic Commerce 2026',
+  'protocol-adoption-index': 'Protocol Adoption Index',
+  bronze: 'Bronze',
+  silver: 'Silver',
+  gold: 'Gold',
+  core: 'Core',
+  'shopify-starter': 'Shopify Starter',
+  'shopify-growth': 'Shopify Growth',
+  frameworks: 'Frameworks',
+  'authority-flywheel': 'Authority Flywheel',
+}
 
 export const organizationSchema = {
   '@type': 'Organization',
@@ -29,6 +92,7 @@ export const organizationSchema = {
   sameAs: [
     'https://www.linkedin.com/company/adam-silva-consulting',
     'https://twitter.com/adamsilvacons',
+    'https://github.com/ajsa1369',
   ],
   knowsAbout: [
     'Universal Commerce Protocol (UCP)',
@@ -39,13 +103,17 @@ export const organizationSchema = {
     'Agentic Commerce',
     'AI-Mediated Transactions',
     'Enterprise AI Transformation',
+    'Token Efficiency Optimization',
+    'Authority Flywheel Methodology',
   ],
   expertise: 'Agentic Commerce Protocol Implementation',
+  numberOfEmployees: { '@type': 'QuantitativeValue', value: 1 },
   hasOfferCatalog: {
     '@type': 'OfferCatalog',
     name: 'Agentic Commerce Services',
     url: `${SITE_URL}/services`,
   },
+  ...(aggregateRating ? { aggregateRating } : {}),
 }
 
 export const websiteSchema = {
@@ -78,14 +146,25 @@ export function buildBreadcrumbSchema(items: { name: string; url: string }[]) {
   }
 }
 
+const defaultSpeakable = {
+  '@type': 'SpeakableSpecification',
+  cssSelector: ['.speakable-answer', 'h1', '[aria-labelledby]'],
+}
+
 export function buildPageSchema(pathname: string, additionalSchemas: object[] = []) {
   const breadcrumbs = buildBreadcrumbSchemaFromPath(pathname)
+  // Include SpeakableSpecification unless one is already provided
+  const hasSpeakable = additionalSchemas.some(
+    (s) => (s as Record<string, unknown>)['@type'] === 'WebPage'
+      || (s as Record<string, unknown>)['@type'] === 'SpeakableSpecification'
+  )
   return {
     '@context': 'https://schema.org',
     '@graph': [
       organizationSchema,
       websiteSchema,
       ...(breadcrumbs ? [breadcrumbs] : []),
+      ...(!hasSpeakable ? [defaultSpeakable] : []),
       ...additionalSchemas,
     ],
   }
@@ -99,13 +178,11 @@ function buildBreadcrumbSchemaFromPath(pathname: string) {
   let currentPath = ''
   for (const segment of segments) {
     currentPath += `/${segment}`
-    items.push({
-      name: segment
-        .split('-')
-        .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
-        .join(' '),
-      url: currentPath,
-    })
+    const displayName = BREADCRUMB_NAMES[segment] || segment
+      .split('-')
+      .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
+      .join(' ')
+    items.push({ name: displayName, url: currentPath })
   }
   return buildBreadcrumbSchema(items)
 }
