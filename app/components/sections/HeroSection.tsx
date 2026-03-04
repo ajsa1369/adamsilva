@@ -178,7 +178,6 @@ export function HeroSection() {
                 onPause={() => setIsPlaying(false)}
                 onEnded={() => setIsPlaying(false)}
                 playsInline
-                muted
                 loop
               >
                 <source src="/videos/hero-ad.mp4" type="video/mp4" />
