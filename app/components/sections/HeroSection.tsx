@@ -1,8 +1,5 @@
-'use client'
-
-import { useRef, useState } from 'react'
 import Link from 'next/link'
-import { ArrowRight, ChevronRight, Play, Pause } from 'lucide-react'
+import { ArrowRight, ChevronRight } from 'lucide-react'
 
 const STATS = [
   { value: '15+', label: 'AI & Automation Services' },
@@ -12,18 +9,6 @@ const STATS = [
 ]
 
 export function HeroSection() {
-  const videoRef = useRef<HTMLVideoElement>(null)
-  const [isPlaying, setIsPlaying] = useState(false)
-
-  const handleToggle = () => {
-    if (videoRef.current) {
-      if (isPlaying) {
-        videoRef.current.pause()
-      } else {
-        videoRef.current.play()
-      }
-    }
-  }
 
   return (
     <section
@@ -169,77 +154,15 @@ export function HeroSection() {
               }}
             >
               <video
-                ref={videoRef}
+                controls
                 preload="metadata"
                 poster="/images/hero/tech-services-hero.jpg"
                 className="w-full h-auto block"
                 style={{ aspectRatio: '16/9', background: '#0f172a' }}
-                onPlay={() => setIsPlaying(true)}
-                onPause={() => setIsPlaying(false)}
-                onEnded={() => setIsPlaying(false)}
                 playsInline
-                loop
               >
                 <source src="/videos/hero-ad.mp4" type="video/mp4" />
               </video>
-
-              {/* Play/Pause overlay */}
-              {!isPlaying && (
-                <button
-                  onClick={handleToggle}
-                  className="absolute inset-0 flex items-center justify-center cursor-pointer"
-                  style={{ background: 'rgba(0,0,0,0.2)' }}
-                  aria-label="Play hero video"
-                >
-                  <div
-                    className="w-16 h-16 rounded-full flex items-center justify-center transition-transform hover:scale-110"
-                    style={{
-                      background: 'rgba(37,99,235,0.9)',
-                      boxShadow: '0 0 0 8px rgba(37,99,235,0.2), 0 0 0 16px rgba(37,99,235,0.08)',
-                    }}
-                  >
-                    <Play size={24} fill="#fff" stroke="#fff" />
-                  </div>
-                </button>
-              )}
-
-              {/* Pause button (small, bottom-right) when playing */}
-              {isPlaying && (
-                <button
-                  onClick={handleToggle}
-                  className="absolute bottom-3 right-3 w-8 h-8 rounded-full flex items-center justify-center cursor-pointer transition-opacity hover:opacity-100"
-                  style={{
-                    background: 'rgba(0,0,0,0.5)',
-                    backdropFilter: 'blur(4px)',
-                    opacity: 0.6,
-                  }}
-                  aria-label="Pause hero video"
-                >
-                  <Pause size={14} fill="#fff" stroke="#fff" />
-                </button>
-              )}
-
-              {/* Bottom caption */}
-              {!isPlaying && (
-                <div
-                  className="absolute bottom-0 left-0 right-0 px-5 py-3"
-                  style={{ background: 'rgba(0,0,0,0.5)', backdropFilter: 'blur(8px)' }}
-                >
-                  <div className="flex items-center gap-3">
-                    <div className="flex items-center gap-1">
-                      <span className="w-2 h-2 rounded-full" style={{ background: '#0ea5e9' }} />
-                      <span className="w-2 h-2 rounded-full" style={{ background: '#a855f7' }} />
-                      <span className="w-2 h-2 rounded-full" style={{ background: '#10b981' }} />
-                    </div>
-                    <span
-                      className="text-xs font-medium text-white"
-                      style={{ fontFamily: 'var(--font-sans)', opacity: 0.9 }}
-                    >
-                      AI Agents · Lead Gen · Advertising · Results
-                    </span>
-                  </div>
-                </div>
-              )}
             </div>
           </div>
 
