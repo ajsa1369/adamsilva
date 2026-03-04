@@ -5,6 +5,8 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { Menu, X, ChevronDown, Zap } from 'lucide-react'
 import { ThemeToggle } from './ThemeToggle'
+import { CartIcon } from '@/app/components/cart/CartIcon'
+import { CartDrawer } from '@/app/components/cart/CartDrawer'
 
 const NAV_ITEMS = [
   {
@@ -44,6 +46,7 @@ export function Header() {
   const [mobileOpen, setMobileOpen] = useState(false)
   const [openDropdown, setOpenDropdown] = useState<string | null>(null)
   const [scrolled, setScrolled] = useState(false)
+  const [cartOpen, setCartOpen] = useState(false)
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20)
@@ -145,9 +148,10 @@ export function Header() {
           ))}
         </div>
 
-        {/* CTA + Theme */}
+        {/* CTA + Theme + Cart */}
         <div className="hidden lg:flex items-center gap-2.5">
           <ThemeToggle />
+          <CartIcon onClick={() => setCartOpen(true)} />
           <Link
             href="/contact"
             className="btn-primary text-sm py-2 px-4"
@@ -160,6 +164,7 @@ export function Header() {
         {/* Mobile */}
         <div className="lg:hidden flex items-center gap-2">
           <ThemeToggle />
+          <CartIcon onClick={() => setCartOpen(true)} />
           <button
             onClick={() => setMobileOpen(!mobileOpen)}
             aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
@@ -215,6 +220,7 @@ export function Header() {
           </div>
         </div>
       )}
+      <CartDrawer open={cartOpen} onClose={() => setCartOpen(false)} />
     </header>
   )
 }

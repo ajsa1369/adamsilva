@@ -3,6 +3,7 @@ import { Roboto, Roboto_Condensed, JetBrains_Mono } from 'next/font/google'
 import './globals.css'
 import { Header } from './components/layout/Header'
 import { Footer } from './components/layout/Footer'
+import { CartProvider } from '@/lib/cart/context'
 import { JsonLd } from './components/seo/JsonLd'
 import { organizationSchema, websiteSchema } from '@/lib/schemas/organization'
 import { logoImageSchema } from '@/lib/schemas/image'
@@ -147,9 +148,11 @@ export default function RootLayout({
             `,
           }}
         />
-        <Header />
-        <main className="min-h-screen pt-20">{children}</main>
-        <Footer />
+        <CartProvider>
+          <Header />
+          <main className="min-h-screen pt-20">{children}</main>
+          <Footer />
+        </CartProvider>
       </body>
     </html>
   )

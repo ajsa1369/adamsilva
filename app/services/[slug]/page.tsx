@@ -1,13 +1,14 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
-import { ArrowRight, CheckCircle, Clock, Users } from 'lucide-react'
+import { CheckCircle, Clock, Users } from 'lucide-react'
 import { JsonLd } from '@/app/components/seo/JsonLd'
 import { buildPageSchema, SITE_URL } from '@/lib/schemas/organization'
 import { buildServiceSchema, buildHowToSchema } from '@/lib/schemas/service'
 import { buildFAQSchema, buildWebPageSchema } from '@/lib/schemas/faq'
 import { SERVICES, getServiceById } from '@/lib/data/services'
 import { RelatedContent } from '@/app/components/sections/RelatedContent'
+import { ServiceCTASection } from '@/app/components/cart/ServiceCTASection'
 
 interface PageProps {
   params: Promise<{ slug: string }>
@@ -248,18 +249,7 @@ export default async function ServicePage({ params }: PageProps) {
               </div>
             </div>
 
-            <div className="flex flex-col sm:flex-row gap-4">
-              <Link
-                href={`/contact?service=${encodeURIComponent(service.id)}`}
-                className="btn-primary"
-              >
-                Get {service.name}
-                <ArrowRight size={16} />
-              </Link>
-              <Link href="/services" className="btn-secondary">
-                View All Services
-              </Link>
-            </div>
+            <ServiceCTASection service={service} accentColor={accentColor} />
           </div>
         </div>
       </section>
@@ -384,14 +374,7 @@ export default async function ServicePage({ params }: PageProps) {
 
                   <div className="h-px bg-[var(--color-border)]" />
 
-                  <Link
-                    href={`/contact?service=${encodeURIComponent(service.id)}`}
-                    className="btn-primary w-full justify-center"
-                    style={{ background: accentColor }}
-                  >
-                    Get Started
-                    <ArrowRight size={14} />
-                  </Link>
+                  <ServiceCTASection service={service} accentColor={accentColor} compact />
                 </div>
               </div>
             </div>
@@ -617,17 +600,7 @@ export default async function ServicePage({ params }: PageProps) {
                 : `For ${service.priceDisplay}, get ${service.name} delivered in ${service.timeline}. No retainer, no lock-in.`}
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link
-                href={`/contact?service=${encodeURIComponent(service.id)}`}
-                className="btn-primary"
-                style={{ background: accentColor }}
-              >
-                Get {service.name}
-                <ArrowRight size={16} />
-              </Link>
-              <Link href="/services" className="btn-secondary">
-                View All Services
-              </Link>
+              <ServiceCTASection service={service} accentColor={accentColor} />
             </div>
           </div>
         </div>

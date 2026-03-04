@@ -1,6 +1,15 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { stripe, getWebhookSecret } from '@/lib/stripe/client'
 import { supabaseService } from '@/lib/supabase/service'
+import type Stripe from 'stripe'
+import {
+  handlePaymentSuccess,
+  handlePaymentFailure,
+  handleInvoicePaid,
+  handleInvoicePaymentFailed,
+  handleSubscriptionUpdated,
+  handleSubscriptionCancelled,
+} from '@/lib/stripe/webhook-handlers'
 
 // CRITICAL: Must be Node.js runtime — Stripe SDK uses crypto module (not available in Edge)
 export const runtime = 'nodejs'
@@ -69,16 +78,31 @@ export async function POST(request: NextRequest) {
   }
 
   // Route to event-specific handlers
-  switch (event.type) {
-    // Phase 11 will implement these handlers:
-    // case 'payment_intent.succeeded':
-    // case 'payment_intent.payment_failed':
-    // case 'invoice.paid':
-    // case 'invoice.payment_failed':
-    // case 'customer.subscription.updated':
-    // case 'customer.subscription.deleted':
-    default:
-      console.log(`[stripe/webhook] Unhandled event type: ${event.type}`)
+  try {
+    switch (event.type) {
+      case 'payment_intent.succeeded':
+        await handlePaymentSuccess(event.data.object as Stripe.PaymentIntent)
+        break
+      case 'payment_intent.payment_failed':
+        await handlePaymentFailure(event.data.object as Stripe.PaymentIntent)
+        break
+      case 'invoice.paid':
+        await handleInvoicePaid(event.data.object as Stripe.Invoice)
+        break
+      case 'invoice.payment_failed':
+        await handleInvoicePaymentFailed(event.data.object as Stripe.Invoice)
+        break
+      case 'customer.subscription.updated':
+        await handleSubscriptionUpdated(event.data.object as Stripe.Subscription)
+        break
+      case 'customer.subscription.deleted':
+        await handleSubscriptionCancelled(event.data.object as Stripe.Subscription)
+        break
+      default:
+        console.log(`[stripe/webhook] Unhandled event type: ${event.type}`)
+    }
+  } catch (err) {
+    console.error(`[stripe/webhook] Handler error for ${event.type}:`, err)
   }
 
   // Respond quickly — Stripe times out after 30 seconds
