@@ -172,6 +172,8 @@ export function Footer() {
           </p>
           <div className="flex items-center gap-5 text-xs" style={{ fontFamily: 'var(--font-sans)' }}>
             {[
+              { label: 'Terms', href: '/terms' },
+              { label: 'Privacy', href: '/privacy' },
               { label: 'Glossary', href: '/glossary' },
               { label: 'Sitemap', href: '/sitemap' },
               { label: 'UCP Manifest', href: '/.well-known/ucp/manifest.json', title: 'AI Agent Discovery' },

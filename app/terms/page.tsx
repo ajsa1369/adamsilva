@@ -241,8 +241,8 @@ export default function TermsPage() {
             <p className="text-xs" style={{ color: 'var(--color-muted-2)' }}>
               By completing a purchase on adamsilvaconsulting.com, you confirm that you have read and agree
               to these Terms of Service. If you have questions, contact us at{' '}
-              <a href="mailto:adam@adamsilvaconsulting.com" style={{ color: 'var(--color-accent)' }}>
-                adam@adamsilvaconsulting.com
+              <a href="mailto:legal@adamsilvaconsulting.com" style={{ color: 'var(--color-accent)' }}>
+                legal@adamsilvaconsulting.com
               </a>{' '}
               before placing your order.
             </p>
