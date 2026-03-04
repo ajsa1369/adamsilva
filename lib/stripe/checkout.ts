@@ -116,12 +116,16 @@ export async function createOneTimePayment(
     totalCents += feeCents
   }
 
+  // Build payment method types — include card as fallback if ACH unavailable
+  const paymentMethodTypes: string[] =
+    paymentMethod === 'ach' ? ['us_bank_account', 'card'] : ['card']
+
   // Create a PaymentIntent for the total
   return stripe.paymentIntents.create({
     amount: totalCents,
     currency: 'usd',
     customer: customerId,
-    payment_method_types: paymentMethod === 'ach' ? ['us_bank_account'] : ['card'],
+    payment_method_types: paymentMethodTypes,
     metadata: { orderId, paymentMethod },
   })
 }
@@ -171,7 +175,7 @@ export async function createSubscription(
     add_invoice_items: resolved.invoiceItems,
     payment_behavior: 'default_incomplete',
     payment_settings: {
-      payment_method_types: paymentMethod === 'ach' ? ['us_bank_account'] : ['card'],
+      payment_method_types: paymentMethod === 'ach' ? ['us_bank_account', 'card'] : ['card'],
       save_default_payment_method: 'on_subscription',
     },
     expand: ['latest_invoice.payment_intent'],
