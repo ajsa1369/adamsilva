@@ -71,9 +71,6 @@ export async function POST(request: NextRequest) {
 
     const { items, customer } = body
 
-    // Resolve server-side pricing to determine flow
-    const resolved = resolveCartItems(items)
-
     // Filter out free items (ACRA) — they don't go through Stripe
     const paidItems = items.filter(i => {
       if (i.type === 'service') {
@@ -89,6 +86,9 @@ export async function POST(request: NextRequest) {
         { status: 400 }
       )
     }
+
+    // Resolve server-side pricing (paid items only)
+    const resolved = resolveCartItems(paidItems)
 
     // Find or create Stripe customer
     const stripeCustomer = await findOrCreateCustomer(
