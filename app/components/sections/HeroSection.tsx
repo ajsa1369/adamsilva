@@ -153,11 +153,11 @@ export function HeroSection() {
             {/* CTAs */}
             <div className="animate-fade-up-delay-3 flex flex-wrap gap-3">
               <Link href="/services/ai-readiness-check" className="btn-primary">
-                Start with $100 AI Check
+                Free AI Readiness Check
                 <ArrowRight size={15} />
               </Link>
               <Link href="/services" className="btn-secondary">
-                All 15 Services
+                All 18 Services
                 <ChevronRight size={15} />
               </Link>
             </div>

@@ -17,19 +17,19 @@ export interface Service {
 export const SERVICES: Service[] = [
   {
     id: 'ai-readiness-check',
-    name: 'AI Readiness Check',
-    tagline: 'Diagnose your agentic commerce readiness in 48 hours',
+    name: 'Agentic Commerce Readiness Assessment (ACRA)',
+    tagline: 'Free 7-pillar assessment that maps your path to agentic commerce',
     description:
-      'A comprehensive 48-hour assessment of your current digital infrastructure against agentic commerce standards. We evaluate your structured data, protocol compliance, token efficiency, and authority signals — delivering a prioritized action plan.',
-    price: '100',
-    priceDisplay: '$100',
+      'A comprehensive assessment of your current digital infrastructure against agentic commerce standards. We evaluate your structured data, protocol compliance, token efficiency, authority signals, and AI readiness — delivering a prioritized strategic roadmap with custom infographics.',
+    price: '0',
+    priceDisplay: 'Free',
     timeline: '48 hours',
     deliverables: [
       'UCP/ACP/AP2 protocol compliance audit',
       'Structured data coverage report',
       'Token efficiency score (vs. ASC benchmark)',
       'Authority signal inventory',
-      'Prioritized action plan (PDF)',
+      'Prioritized action plan with custom infographics (PDF)',
     ],
     features: [
       'JSON-LD coverage analysis',
@@ -49,8 +49,8 @@ export const SERVICES: Service[] = [
     tagline: 'Find every gap in your Answer Engine Optimization strategy',
     description:
       'A deep-dive audit of your Answer Engine Optimization posture across ChatGPT, Perplexity, Claude, Gemini, and Bing Copilot. We identify why you\'re not being cited, what\'s missing, and what to do about it.',
-    price: '500',
-    priceDisplay: '$500',
+    price: '5000',
+    priceDisplay: '$5,000',
     timeline: '5 business days',
     deliverables: [
       'AEO gap analysis (12-point framework)',
@@ -77,8 +77,8 @@ export const SERVICES: Service[] = [
     tagline: 'Optimize your content for generative AI engines',
     description:
       'Full implementation of Generative Engine Optimization across your existing content. We restructure pages, add schema, improve authority signals, and ensure AI models cite your brand as the authoritative source.',
-    price: '2500',
-    priceDisplay: '$2,500',
+    price: '7500',
+    priceDisplay: '$7,500',
     timeline: '2 weeks',
     deliverables: [
       'Schema implementation (all page types)',
@@ -105,8 +105,8 @@ export const SERVICES: Service[] = [
     tagline: 'Become the definitive source AI agents cite in your market',
     description:
       'A 90-day intensive program that builds your brand into the authoritative source AI agents cite when your topics come up. Combines content strategy, schema architecture, protocol implementation, and flywheel activation.',
-    price: '5000',
-    priceDisplay: '$5,000',
+    price: '15000',
+    priceDisplay: '$15,000',
     timeline: '90 days',
     deliverables: [
       '10× 2,000+ word authority articles',
@@ -133,8 +133,8 @@ export const SERVICES: Service[] = [
     tagline: 'Automated 2,000+ word articles that dominate AI citations',
     description:
       'A fully automated content production system that creates AEO/GEO-optimized blog articles — 2,000+ words each, with video summaries, proper schema, and internal linking. Scale your authority without scaling your team.',
-    price: 'Custom',
-    priceDisplay: 'Custom',
+    price: '4500',
+    priceDisplay: '$4,500 + $2,500/mo',
     timeline: 'Ongoing',
     deliverables: [
       '4–8 articles/month (2,000+ words each)',
@@ -161,8 +161,8 @@ export const SERVICES: Service[] = [
     tagline: 'Amplify your authority signals across news networks',
     description:
       'A strategic press syndication program that distributes your thought leadership, protocol announcements, and research publications across news networks — building E-E-A-T signals and driving AI citation authority.',
-    price: 'Custom',
-    priceDisplay: 'Custom',
+    price: '6500',
+    priceDisplay: '$6,500 + $3,000/mo',
     timeline: 'Ongoing',
     deliverables: [
       'Monthly press releases (NewsArticle schema)',
@@ -189,8 +189,8 @@ export const SERVICES: Service[] = [
     tagline: 'An AI agent that sells and supports like your best rep',
     description:
       'A custom AI sales and customer service agent trained on your products, pricing, protocols, and policies. Handles inbound inquiries, qualifies leads, answers product questions, and initiates ACP checkout — 24/7.',
-    price: 'Custom',
-    priceDisplay: 'Custom',
+    price: '45000',
+    priceDisplay: '$45,000 + $5,000/mo',
     timeline: '4 weeks',
     deliverables: [
       'Custom AI agent deployment',
@@ -217,8 +217,8 @@ export const SERVICES: Service[] = [
     tagline: 'Make your business discoverable by every AI shopping agent',
     description:
       'Complete implementation of the Universal Commerce Protocol (UCP) — enabling AI agents to discover your capabilities, products, and services through standardized manifest files and capability declarations.',
-    price: 'Custom',
-    priceDisplay: 'Custom',
+    price: '15000',
+    priceDisplay: '$15,000',
     timeline: '2 weeks',
     deliverables: [
       '.well-known/ucp/manifest.json',
@@ -245,8 +245,8 @@ export const SERVICES: Service[] = [
     tagline: 'Enable AI agents to complete purchases in your store',
     description:
       'Full integration of the Agentic Commerce Protocol (ACP) — enabling AI agents to execute checkout directly in your platform. Includes Stripe SPT setup, delegated payment authorization, and ChatGPT Instant Checkout compatibility.',
-    price: 'Custom',
-    priceDisplay: 'Custom',
+    price: '25000',
+    priceDisplay: '$25,000',
     timeline: '3–4 weeks',
     deliverables: [
       'ACP checkout API endpoints',
@@ -273,8 +273,8 @@ export const SERVICES: Service[] = [
     tagline: 'Cryptographic trust infrastructure for agentic transactions',
     description:
       'Implementation of the Agent Payments Protocol (AP2) — including Intent and Cart mandates, Verifiable Credentials, x402 crypto payment support, and non-repudiation audit trails. The trust layer that makes agentic commerce legally defensible.',
-    price: 'Custom',
-    priceDisplay: 'Custom',
+    price: '35000',
+    priceDisplay: '$35,000',
     timeline: '4–6 weeks',
     deliverables: [
       '.well-known/ap2/mandates.json',
@@ -303,8 +303,8 @@ export const SERVICES: Service[] = [
     tagline: 'Instant, rules-based pricing quotes with a built-in booking flow',
     description:
       "A specialized AI quoting engine that delivers consistent, rules-based pricing in real time based on your variables and closes the loop with a booking flow. No more delays. Governed by deterministic rules with an approval path for edge cases.",
-    price: '3500',
-    priceDisplay: '$3,500 + $750/mo',
+    price: '8500',
+    priceDisplay: '$8,500 + $1,200/mo',
     timeline: '3 weeks',
     deliverables: [
       'Rules/logic model built from your pricing matrix',
@@ -331,8 +331,8 @@ export const SERVICES: Service[] = [
     tagline: 'Human-sounding AI answers every call 24/7/365 — zero missed leads',
     description:
       'A human-sounding voice AI that answers calls after-hours and during overflow, handles FAQs, captures lead data, and routes urgent calls by your rules. Owned asset trained to your scripts and brand.',
-    price: '2500',
-    priceDisplay: '$2,500 + $500/mo',
+    price: '6500',
+    priceDisplay: '$6,500 + $950/mo',
     timeline: '3 weeks',
     deliverables: [
       'Voice agent with your scripts, FAQ grounding, and guardrails',
@@ -359,8 +359,8 @@ export const SERVICES: Service[] = [
     tagline: 'Turn partial leads into prioritized, contactable records automatically',
     description:
       'A managed data pipeline that turns partial leads into usable, prioritized records: role, firmographics, verified contact methods, and key qualifiers. Reps stop researching and start selling.',
-    price: '2000',
-    priceDisplay: '$2,000 + $1,000/mo',
+    price: '5500',
+    priceDisplay: '$5,500 + $1,500/mo',
     timeline: '2 weeks',
     deliverables: [
       'Enrichment workflow with provider routing, fallbacks, and retries',
@@ -387,8 +387,8 @@ export const SERVICES: Service[] = [
     tagline: 'Build a continuous stream of net-new ICP targets on demand',
     description:
       'An automated workflow that discovers net-new ICP targets from public sources and produces a clean, validated list for outreach. Shifts you from reactive to proactive.',
-    price: '5000',
-    priceDisplay: '$5,000 + $1,500/mo',
+    price: '9500',
+    priceDisplay: '$9,500 + $2,200/mo',
     timeline: '3 weeks',
     deliverables: [
       'Source connectors and extraction logic per approved sources',
@@ -415,8 +415,8 @@ export const SERVICES: Service[] = [
     tagline: 'AI qualifies and books while interest is highest — no email tag',
     description:
       'A top-of-funnel scheduling system that qualifies prospects and books appointments immediately while interest is highest. Removes back-and-forth email tag that kills booking rates.',
-    price: '5000',
-    priceDisplay: '$5,000 + $1,500/mo',
+    price: '8500',
+    priceDisplay: '$8,500 + $1,800/mo',
     timeline: '3 weeks',
     deliverables: [
       'Scheduling workflow: qualify, propose times, confirm, writeback',
@@ -438,6 +438,91 @@ export const SERVICES: Service[] = [
     featured: true,
   },
 
+  // -- Social & Authority Agents --
+  {
+    id: 'social-media-manager',
+    name: 'Social Media Manager Agent',
+    tagline: 'AI-driven social strategy that builds the authority LLMs cite',
+    description:
+      'A managed AI agent that plans, schedules, and optimizes your social media presence across LinkedIn, X, Instagram, and Facebook. Builds the multi-platform authority signals that make LLMs recommend your brand and agents discover your products.',
+    price: '6500',
+    priceDisplay: '$6,500 + $1,500/mo',
+    timeline: '3 weeks',
+    deliverables: [
+      'Social strategy aligned to AI authority goals',
+      'Content calendar with platform-specific optimization',
+      'Engagement monitoring and response automation',
+      'Monthly authority signal and citation tracking report',
+      'Hashtag and topic cluster strategy',
+    ],
+    features: [
+      'Multi-platform management (LinkedIn, X, Instagram, Facebook)',
+      'AI authority signal optimization',
+      'Engagement analytics dashboard',
+      'Brand voice consistency enforcement',
+      'Up to 2 strategy adjustments per month',
+    ],
+    audience: 'Brands building AI discoverability through social authority',
+    icon: 'Share2',
+    category: 'automation',
+    featured: false,
+  },
+  {
+    id: 'social-media-poster',
+    name: 'Social Media Poster Agent',
+    tagline: 'Automated multi-platform posting that keeps your brand visible 24/7',
+    description:
+      'An automated posting agent that publishes content across all your social channels on schedule — maintaining consistent brand presence without manual effort. Ensures your brand stays visible to both humans and AI crawlers.',
+    price: '4500',
+    priceDisplay: '$4,500 + $950/mo',
+    timeline: '2 weeks',
+    deliverables: [
+      'Multi-platform posting automation setup',
+      'Content queue and scheduling system',
+      'Platform-specific format optimization (images, carousels, threads)',
+      'Post performance analytics dashboard',
+      'Monthly engagement report',
+    ],
+    features: [
+      'Automated scheduling across all platforms',
+      'Platform-native format optimization',
+      'Hashtag and mention automation',
+      'Post recycling for evergreen content',
+      'Up to 1 workflow update per month',
+    ],
+    audience: 'Businesses needing consistent social presence without manual effort',
+    icon: 'Send',
+    category: 'content',
+    featured: false,
+  },
+  {
+    id: 'rag-message-replier',
+    name: 'RAG Message Replier Agent',
+    tagline: 'AI-powered replies grounded in your knowledge base — across every channel',
+    description:
+      'A retrieval-augmented generation (RAG) agent that replies to messages across email, chat, and social using your proprietary knowledge base. Ensures every response is accurate, on-brand, and builds the citation authority that makes LLMs recommend your business.',
+    price: '7500',
+    priceDisplay: '$7,500 + $1,800/mo',
+    timeline: '3 weeks',
+    deliverables: [
+      'RAG pipeline with your knowledge base ingestion',
+      'Multi-channel reply automation (email, chat, social DMs)',
+      'Response quality monitoring and escalation rules',
+      'Knowledge base update workflow',
+      'Monthly accuracy and response time report',
+    ],
+    features: [
+      'Grounded in your proprietary data — no hallucination',
+      'Multi-channel support (email, chat, social)',
+      'Human escalation for low-confidence queries',
+      'Knowledge base versioning and updates',
+      'Up to 2 knowledge base updates per month',
+    ],
+    audience: 'Businesses with high message volume needing accurate, fast replies',
+    icon: 'MessageCircle',
+    category: 'automation',
+    featured: false,
+  },
 ]
 
 export function getServiceById(id: string): Service | undefined {

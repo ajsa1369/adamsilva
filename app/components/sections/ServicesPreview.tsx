@@ -1,10 +1,10 @@
 import Link from 'next/link'
-import { ArrowRight, CheckCircle, Search, Zap, Award, FileText, Network, ShoppingCart, Shield, Bot } from 'lucide-react'
+import { ArrowRight, CheckCircle, Search, Zap, Award, FileText, Network, ShoppingCart, Shield, Bot, Share2, Send, MessageCircle } from 'lucide-react'
 import { getFeaturedServices } from '@/lib/data/services'
 
 const ICON_MAP: Record<string, React.ElementType> = {
   CheckCircle, Search, Zap, Award, FileText, Network, ShoppingCart, Shield, Bot,
-  Newspaper: FileText,
+  Newspaper: FileText, Share2, Send, MessageCircle,
 }
 
 export function ServicesPreview() {
@@ -33,7 +33,7 @@ export function ServicesPreview() {
             </p>
           </div>
           <Link href="/services" className="btn-secondary text-sm shrink-0">
-            All 15 Services
+            All 18 Services
             <ArrowRight size={14} />
           </Link>
         </div>

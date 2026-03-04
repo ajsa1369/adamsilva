@@ -78,7 +78,7 @@ export default async function ServicePage({ params }: PageProps) {
       answer: `${service.name} takes ${service.timeline}. ${
         service.price === 'Custom'
           ? 'Timeline may vary based on your existing infrastructure and scope. Contact Adam for a precise project timeline.'
-          : `The ${service.timeline} timeline begins once the engagement is confirmed and kickoff is complete.`
+          : `The ${service.timeline} timeline begins once the engagement is confirmed and kickoff is complete. ${service.price === '0' ? 'This service is completely free — no commitment required.' : ''}`
       }`,
     },
     {
@@ -86,7 +86,7 @@ export default async function ServicePage({ params }: PageProps) {
       answer: `${service.name} is designed for ${service.audience}. ${
         service.featured
           ? 'This is one of our most popular services — contact Adam to get started or learn more about whether it fits your current stage.'
-          : 'If you are unsure whether this service fits your needs, start with the AI Readiness Check ($100) for a prioritized action plan.'
+          : 'If you are unsure whether this service fits your needs, start with the free Agentic Commerce Readiness Assessment (ACRA) for a prioritized strategic roadmap.'
       }`,
     },
   ]
@@ -192,7 +192,17 @@ export default async function ServicePage({ params }: PageProps) {
                 >
                   {service.priceDisplay}
                 </div>
-                {service.price !== 'Custom' && (
+                {service.price === '0' && (
+                  <div className="text-xs text-[var(--color-muted-2)] mt-0.5">
+                    No cost — lead magnet
+                  </div>
+                )}
+                {service.price !== '0' && service.priceDisplay.includes('/mo') && (
+                  <div className="text-xs text-[var(--color-muted-2)] mt-0.5">
+                    Setup fee + monthly retainer
+                  </div>
+                )}
+                {service.price !== '0' && service.price !== 'Custom' && !service.priceDisplay.includes('/mo') && (
                   <div className="text-xs text-[var(--color-muted-2)] mt-0.5">
                     One-time flat fee
                   </div>

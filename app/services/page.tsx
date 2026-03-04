@@ -10,7 +10,7 @@ import { SERVICES } from '@/lib/data/services'
 export const metadata: Metadata = {
   title: 'Agentic Commerce Services — UCP, ACP, AP2 Implementation | Adam Silva Consulting',
   description:
-    'From a $100 AI Readiness Check to full protocol stack implementation, every Adam Silva Consulting service delivers measurable progress toward agentic commerce readiness.',
+    'From a free Agentic Commerce Readiness Assessment to full protocol stack implementation, every Adam Silva Consulting service delivers measurable progress toward agentic commerce readiness.',
   alternates: {
     canonical: `${SITE_URL}/services`,
   },
@@ -20,7 +20,7 @@ const servicesFAQs = [
   {
     question: 'Where should I start with agentic commerce services?',
     answer:
-      'Start with the AI Readiness Check ($100, 48 hours). It gives you a complete audit of your current agentic commerce posture — structured data coverage, protocol compliance, token efficiency, and authority signals — along with a prioritized action plan. This eliminates guesswork and ensures every dollar spent on subsequent services is targeted correctly.',
+      'Start with the free Agentic Commerce Readiness Assessment (ACRA). It gives you a complete audit of your current agentic commerce posture — structured data coverage, protocol compliance, token efficiency, and authority signals — along with a prioritized strategic roadmap. This eliminates guesswork and ensures every dollar spent on subsequent services is targeted correctly.',
   },
   {
     question: 'How do the UCP, ACP, and AP2 implementation services differ?',
@@ -131,21 +131,21 @@ export default function ServicesPage() {
       >
         <div className="container">
           <div className="max-w-3xl mx-auto text-center">
-            <span className="badge mb-4">10 Services</span>
+            <span className="badge mb-4">18 Services</span>
             <h1
               id="services-hero-heading"
               className="text-4xl lg:text-5xl font-bold text-[var(--color-text)] mb-6 leading-tight"
             >
-              10 Services to Build Your Agentic Commerce Infrastructure
+              18 Services to Build Your Agentic Commerce Infrastructure
             </h1>
             <p className="text-lg text-[var(--color-muted)] mb-8 leading-relaxed">
-              From a $100 AI Readiness Check to full protocol stack implementation, every Adam
-              Silva Consulting service delivers measurable progress toward agentic commerce
+              From a free Agentic Commerce Readiness Assessment to full protocol stack implementation,
+              every Adam Silva Consulting service delivers measurable progress toward agentic commerce
               readiness.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link href="/services/ai-readiness-check" className="btn-primary">
-                Start with AI Readiness Check — $100
+                Free AI Readiness Assessment
                 <ArrowRight size={16} />
               </Link>
               <Link href="/contact" className="btn-secondary">
@@ -293,15 +293,15 @@ export default function ServicesPage() {
                     <div className="text-[#3b82f6] text-xs uppercase tracking-wider mb-1">
                       Starter
                     </div>
-                    <div>AI Readiness Check</div>
-                    <div className="text-[#3b82f6] font-bold text-lg mt-1">$100</div>
+                    <div>ACRA Assessment</div>
+                    <div className="text-[#3b82f6] font-bold text-lg mt-1">Free</div>
                   </th>
                   <th className="text-center py-4 px-4 font-semibold text-[var(--color-text)] bg-[var(--color-surface-2)] rounded-t-lg">
                     <div className="text-[#8b5cf6] text-xs uppercase tracking-wider mb-1">
                       Authority
                     </div>
                     <div>Authority Building</div>
-                    <div className="text-[#8b5cf6] font-bold text-lg mt-1">$5,000</div>
+                    <div className="text-[#8b5cf6] font-bold text-lg mt-1">$15,000</div>
                   </th>
                   <th className="text-center py-4 px-4 font-semibold text-[var(--color-text)]">
                     <div className="text-[#10b981] text-xs uppercase tracking-wider mb-1">
@@ -417,7 +417,7 @@ export default function ServicesPage() {
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center mt-10">
             <Link href="/services/ai-readiness-check" className="btn-primary">
-              Start with AI Readiness Check — $100
+              Free AI Readiness Assessment
               <ArrowRight size={16} />
             </Link>
             <Link href="/contact" className="btn-secondary">
@@ -554,16 +554,16 @@ export default function ServicesPage() {
               id="services-cta-heading"
               className="text-3xl lg:text-4xl font-bold text-[var(--color-text)] mb-4"
             >
-              Start with the AI Readiness Check
+              Start with a Free ACRA Assessment
             </h2>
             <p className="text-[var(--color-muted)] mb-8 leading-relaxed">
-              For $100, get a complete 48-hour audit of your agentic commerce posture — structured
+              Get a complete 48-hour audit of your agentic commerce posture — structured
               data, protocol compliance, token efficiency, and authority signals — plus a
-              prioritized action plan for everything that follows.
+              prioritized strategic roadmap. Completely free.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link href="/services/ai-readiness-check" className="btn-primary">
-                Get Your AI Readiness Check — $100
+                Get Your Free Assessment
                 <ArrowRight size={16} />
               </Link>
               <Link href="/contact" className="btn-secondary">
