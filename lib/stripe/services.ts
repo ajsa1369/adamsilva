@@ -49,10 +49,7 @@ let _services: StripeServiceMap | null = null
 function getServices(): StripeServiceMap {
   if (!_services) {
     _services = {
-      'acra': {
-        productId: getEnv('STRIPE_SVC_ACRA'),
-        setupPriceId: getEnv('STRIPE_SVC_ACRA_SETUP'),
-      },
+      // ACRA is free — no Stripe product needed
       'aeo-audit': {
         productId: getEnv('STRIPE_SVC_AEO_AUDIT'),
         setupPriceId: getEnv('STRIPE_SVC_AEO_AUDIT_SETUP'),
@@ -153,8 +150,9 @@ export const STRIPE_SERVICES: StripeServiceMap = new Proxy({} as StripeServiceMa
 /**
  * Returns the Stripe Product/Price IDs for a given service slug.
  */
-export function getStripeServicePricing(slug: ServiceSlug): StripeServicePricing {
-  return getServices()[slug]
+export function getStripeServicePricing(slug: ServiceSlug): StripeServicePricing | null {
+  const services = getServices() as Record<string, StripeServicePricing | undefined>
+  return services[slug] || null
 }
 
 /**
@@ -162,5 +160,6 @@ export function getStripeServicePricing(slug: ServiceSlug): StripeServicePricing
  * false if it's one-time only (audits, implementations).
  */
 export function hasMonthlyPricing(slug: ServiceSlug): boolean {
-  return !!getServices()[slug].monthlyPriceId
+  const services = getServices() as Record<string, StripeServicePricing | undefined>
+  return !!services[slug]?.monthlyPriceId
 }

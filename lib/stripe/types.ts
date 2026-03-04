@@ -46,8 +46,11 @@ export type ServiceSlug =
   | 'social-media-poster'
   | 'rag-message-replier'
 
-// Map from service slug to Stripe pricing
-export type StripeServiceMap = Record<ServiceSlug, StripeServicePricing>
+// Slugs that have Stripe products (excludes free services like ACRA)
+export type PaidServiceSlug = Exclude<ServiceSlug, 'acra'>
+
+// Map from paid service slug to Stripe pricing
+export type StripeServiceMap = Record<PaidServiceSlug, StripeServicePricing>
 
 // Row shape for the stripe_events idempotency table
 export interface StripeEventRow {
