@@ -26,7 +26,7 @@ export interface Service {
 
 export const SERVICES: Service[] = [
   {
-    id: 'ai-readiness-check',
+    id: 'acra',
     name: 'Agentic Commerce Readiness Assessment (ACRA)',
     tagline: 'Free 7-pillar assessment that maps your path to agentic commerce',
     description:

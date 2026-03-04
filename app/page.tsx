@@ -61,7 +61,7 @@ const roadmapHowTo = buildHowToSchema(
   '16 Weeks to Agentic Readiness: The Implementation Roadmap',
   'A complete 16-week implementation roadmap for UCP, ACP, and AP2 protocol stack deployment — the exact methodology Adam Silva Consulting uses with enterprise clients.',
   [
-    { name: 'Week 1-2: AI Readiness Check', text: 'Complete audit of current agentic commerce posture — structured data coverage, protocol compliance, token efficiency, authority signals.' },
+    { name: 'Week 1-2: ACRA', text: 'Complete audit of current agentic commerce posture — structured data coverage, protocol compliance, token efficiency, authority signals.' },
     { name: 'Week 3-6: Foundation Layer', text: 'Deploy JSON-LD schema across all pages, implement UCP manifest, configure AP2 mandate infrastructure, and optimize for token efficiency.' },
     { name: 'Week 7-10: Execution Layer', text: 'Implement ACP checkout integration with Stripe SPT, configure product feeds, test agent checkout flows, and deploy Verifiable Credentials.' },
     { name: 'Week 11-14: Authority Layer', text: 'Launch authority flywheel — 10 AEO-optimized articles, hub pages, topical authority structure, and AI citation tracking.' },
@@ -77,7 +77,7 @@ const videoSchema = {
   thumbnailUrl: `${SITE_URL}/images/hero/business-hero.jpg`,
   contentUrl: `${SITE_URL}/videos/homepage-explainer.mp4`,
   uploadDate: '2026-03-04',
-  duration: 'PT73S',
+  duration: 'PT75S',
   publisher: { '@type': 'Organization', name: 'Adam Silva Consulting' },
   inLanguage: 'en-US',
 }
@@ -186,13 +186,13 @@ export default async function HomePage() {
               16 Weeks to Agentic Readiness
             </h2>
             <p className="text-[var(--color-muted)]">
-              Our proven implementation methodology — from AI readiness check to full protocol stack deployment.
+              Our proven implementation methodology — from ACRA to full protocol stack deployment.
             </p>
           </div>
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-5 gap-4">
             {[
-              { phase: 'Phase 1', weeks: 'Wk 1-2', title: 'AI Readiness Check', description: 'Full audit of current posture', color: '#3b82f6' },
+              { phase: 'Phase 1', weeks: 'Wk 1-2', title: 'ACRA', description: 'Full audit of current posture', color: '#3b82f6' },
               { phase: 'Phase 2', weeks: 'Wk 3-6', title: 'Foundation Layer', description: 'JSON-LD, UCP manifest, AP2 infrastructure', color: '#8b5cf6' },
               { phase: 'Phase 3', weeks: 'Wk 7-10', title: 'Execution Layer', description: 'ACP + Stripe SPT + agent checkout', color: '#10b981' },
               { phase: 'Phase 4', weeks: 'Wk 11-14', title: 'Authority Layer', description: 'Flywheel + 10 articles + hub pages', color: '#f59e0b' },
@@ -265,11 +265,11 @@ export default async function HomePage() {
               Ready to Build Agentic Commerce Infrastructure?
             </h2>
             <p className="text-[var(--color-muted)] mb-8">
-              Start with a free AI Readiness Check. We&apos;ll show you exactly where you stand — and what needs to change.
+              Start with a free Agentic Commerce Readiness Assessment (ACRA). We&apos;ll show you exactly where you stand — and what needs to change.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link href="/services/ai-readiness-check" className="btn-primary">
-                Free AI Readiness Check
+              <Link href="/services/acra" className="btn-primary">
+                Free ACRA
                 <ArrowRight size={16} />
               </Link>
               <Link href="/contact" className="btn-secondary">

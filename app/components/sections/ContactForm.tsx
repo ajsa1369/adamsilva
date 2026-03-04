@@ -15,7 +15,7 @@ interface FormData {
 
 const SERVICE_OPTIONS = [
   { value: '', label: 'Select a service...' },
-  { value: 'ai-readiness-check', label: 'AI Readiness Check' },
+  { value: 'acra', label: 'ACRA — Agentic Commerce Readiness Assessment' },
   { value: 'aeo-audit', label: 'AEO Audit' },
   { value: 'geo-implementation', label: 'GEO Implementation' },
   { value: 'authority-building', label: 'Authority Building' },

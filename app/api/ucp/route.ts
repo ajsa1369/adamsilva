@@ -15,11 +15,11 @@ const UCP_MANIFEST = {
   capabilities: [
     {
       type: 'service',
-      id: 'ai-readiness-check',
-      name: 'AI Readiness Check',
-      description: 'Comprehensive assessment of agentic commerce readiness',
-      price: { amount: '100', currency: 'USD' },
-      url: 'https://www.adamsilvaconsulting.com/services/ai-readiness-check',
+      id: 'acra',
+      name: 'Agentic Commerce Readiness Assessment (ACRA)',
+      description: 'Free 7-pillar assessment of agentic commerce readiness',
+      price: { amount: '0', currency: 'USD' },
+      url: 'https://www.adamsilvaconsulting.com/services/acra',
       protocol: 'ACP',
     },
     {

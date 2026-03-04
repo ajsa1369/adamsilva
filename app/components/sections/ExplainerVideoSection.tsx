@@ -118,8 +118,8 @@ export function ExplainerVideoSection() {
               ))}
             </ul>
 
-            <Link href="/services/ai-readiness-check" className="btn-primary text-sm">
-              Free AI Readiness Check
+            <Link href="/services/acra" className="btn-primary text-sm">
+              Free ACRA
               <ArrowRight size={14} />
             </Link>
           </div>

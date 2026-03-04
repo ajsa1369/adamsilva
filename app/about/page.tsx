@@ -306,8 +306,8 @@ export default function AboutPage() {
               Our Approach
             </h2>
             <p className="text-[var(--color-muted)]">
-              Four principles guide every engagement we take on — from the initial AI
-              Readiness Check through full protocol stack deployment.
+              Four principles guide every engagement we take on — from the initial ACRA
+              through full protocol stack deployment.
             </p>
           </div>
 
@@ -371,13 +371,13 @@ export default function AboutPage() {
               Ready to Build Agentic Commerce Infrastructure?
             </h2>
             <p className="text-[var(--color-muted)] mb-8">
-              Start with a $100 AI Readiness Check. We&apos;ll assess your current protocol
+              Start with a free Agentic Commerce Readiness Assessment (ACRA). We&apos;ll assess your current protocol
               compliance, structured data coverage, and agentic readiness — then map the
               fastest path to full implementation.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link href="/services/ai-readiness-check" className="btn-primary">
-                Start with AI Readiness Check &mdash; $100
+              <Link href="/services/acra" className="btn-primary">
+                Free ACRA
                 <ArrowRight size={16} />
               </Link>
               <Link href="/contact" className="btn-secondary">

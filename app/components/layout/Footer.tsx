@@ -5,7 +5,7 @@ import { ArrowRight, Linkedin, Twitter, Rss, Zap } from 'lucide-react'
 
 const FOOTER_LINKS = {
   Services: [
-    { label: 'AI Readiness Check', href: '/services/ai-readiness-check' },
+    { label: 'ACRA (Free)', href: '/services/acra' },
     { label: 'AEO Audit', href: '/services/aeo-audit' },
     { label: 'GEO Implementation', href: '/services/geo-implementation' },
     { label: 'Authority Building', href: '/services/authority-building' },

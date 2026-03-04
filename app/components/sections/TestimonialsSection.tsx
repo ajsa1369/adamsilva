@@ -9,7 +9,7 @@ const SERVICE_COLORS: Record<string, string> = {
   'acp-integration': '#a855f7',
   'ap2-trust-layer': '#10b981',
   'authority-building': '#8b5cf6',
-  'ai-readiness-check': '#3b82f6',
+  acra: '#3b82f6',
   'geo-implementation': '#10b981',
   'off-hours-voice-agent': '#0ea5e9',
   'aeo-audit': '#f59e0b',

@@ -405,15 +405,15 @@ export default function ProtocolsPage() {
             </h2>
             <p className="text-[var(--color-muted)] mb-8">
               Adam Silva Consulting implements the complete UCP/ACP/AP2 stack — from the initial
-              AI Readiness Check through full protocol deployment. 16 weeks to agentic readiness.
+              ACRA through full protocol deployment. 16 weeks to agentic readiness.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link href="/services" className="btn-primary">
                 View All Services
                 <ArrowRight size={16} />
               </Link>
-              <Link href="/services/ai-readiness-check" className="btn-secondary">
-                Start with AI Readiness Check &mdash; $100
+              <Link href="/services/acra" className="btn-secondary">
+                Free ACRA
               </Link>
             </div>
           </div>

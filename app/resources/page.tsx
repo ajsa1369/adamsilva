@@ -366,13 +366,13 @@ export default function ResourcesPage() {
             </h2>
             <p className="text-[var(--color-muted)] mb-8 leading-relaxed">
               The guide and tools give you the map. Adam Silva Consulting provides the
-              implementation. Start with a $100 AI Readiness Check &mdash; a 48-hour
+              implementation. Start with a free Agentic Commerce Readiness Assessment (ACRA) &mdash; a 48-hour
               assessment of your current protocol compliance, structured data, and agentic
               readiness.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link href="/services/ai-readiness-check" className="btn-primary">
-                Start AI Readiness Check &mdash; $100
+              <Link href="/services/acra" className="btn-primary">
+                Free ACRA
                 <ArrowRight size={16} />
               </Link>
               <Link href="/case-studies" className="btn-secondary">

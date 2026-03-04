@@ -47,7 +47,7 @@ const HUB_DATA: Record<string, {
     faqs: [
       {
         question: 'Where do I start with agentic commerce implementation?',
-        answer: 'Start with the AI Readiness Check ($100) to assess your current infrastructure against 47 agentic commerce criteria. This produces a prioritized implementation roadmap specific to your tech stack and business model. From there, most clients progress to UCP implementation, then ACP, then AP2.',
+        answer: 'Start with the free Agentic Commerce Readiness Assessment (ACRA) to assess your current infrastructure against 47 agentic commerce criteria. This produces a prioritized implementation roadmap specific to your tech stack and business model. From there, most clients progress to UCP implementation, then ACP, then AP2.',
       },
       {
         question: 'How long does full protocol stack implementation take?',
@@ -55,7 +55,7 @@ const HUB_DATA: Record<string, {
       },
     ],
     relatedServices: [
-      { label: 'AI Readiness Check', href: '/services/ai-readiness-check' },
+      { label: 'ACRA (Free)', href: '/services/acra' },
       { label: 'UCP Protocol Stack', href: '/services/ucp-implementation' },
       { label: 'ACP Checkout Integration', href: '/services/acp-integration' },
     ],
@@ -203,7 +203,7 @@ const HUB_DATA: Record<string, {
     ],
     relatedServices: [
       { label: 'UCP Protocol Stack', href: '/services/ucp-implementation' },
-      { label: 'AI Readiness Check', href: '/services/ai-readiness-check' },
+      { label: 'ACRA (Free)', href: '/services/acra' },
       { label: 'AEO Audit', href: '/services/aeo-audit' },
     ],
     relatedInsights: [
@@ -634,7 +634,7 @@ export default async function AuthorityHubSlugPage({
                   className="text-xs mb-4 leading-relaxed"
                   style={{ color: 'var(--color-muted)', fontFamily: 'var(--font-sans)' }}
                 >
-                  Start with an AI Readiness Check to see exactly where you stand — $100, delivered in 3 business days.
+                  Start with a free Agentic Commerce Readiness Assessment (ACRA) to see exactly where you stand — delivered in 48 hours.
                 </p>
                 <Link
                   href="/contact"

@@ -1,6 +1,8 @@
+'use client'
+
+import { useRef, useState } from 'react'
 import Link from 'next/link'
-import Image from 'next/image'
-import { ArrowRight, ChevronRight, Play } from 'lucide-react'
+import { ArrowRight, ChevronRight, Play, Pause } from 'lucide-react'
 
 const STATS = [
   { value: '15+', label: 'AI & Automation Services' },
@@ -10,6 +12,19 @@ const STATS = [
 ]
 
 export function HeroSection() {
+  const videoRef = useRef<HTMLVideoElement>(null)
+  const [isPlaying, setIsPlaying] = useState(false)
+
+  const handleToggle = () => {
+    if (videoRef.current) {
+      if (isPlaying) {
+        videoRef.current.pause()
+      } else {
+        videoRef.current.play()
+      }
+    }
+  }
+
   return (
     <section
       className="relative overflow-hidden"
@@ -134,8 +149,8 @@ export function HeroSection() {
 
             {/* CTAs */}
             <div className="animate-fade-up-delay-3 flex flex-wrap gap-3">
-              <Link href="/services/ai-readiness-check" className="btn-primary">
-                Free AI Readiness Check
+              <Link href="/services/acra" className="btn-primary">
+                Free ACRA
                 <ArrowRight size={15} />
               </Link>
               <Link href="/services" className="btn-secondary">
@@ -145,7 +160,7 @@ export function HeroSection() {
             </div>
           </div>
 
-          {/* ── Right: Hero Image ── */}
+          {/* ── Right: Hero Ad Video ── */}
           <div className="hidden lg:block animate-fade-up-delay-2">
             <div
               className="relative rounded-xl overflow-hidden"
@@ -153,59 +168,79 @@ export function HeroSection() {
                 boxShadow: '0 0 60px rgba(37,99,235,0.12), 0 0 0 1px rgba(37,99,235,0.08)',
               }}
             >
-              <Image
-                src="/images/hero/tech-services-hero.jpg"
-                alt="AI-powered agentic commerce infrastructure — protocol discovery, automated checkout, and cryptographic trust verification"
-                width={960}
-                height={640}
+              <video
+                ref={videoRef}
+                preload="metadata"
+                poster="/images/hero/tech-services-hero.jpg"
                 className="w-full h-auto block"
-                priority
-                sizes="480px"
-              />
-              {/* Gradient overlay */}
-              <div
-                className="absolute inset-0"
-                style={{
-                  background: 'linear-gradient(180deg, transparent 40%, rgba(0,0,0,0.3) 100%)',
-                }}
-              />
-
-              {/* Play button overlay */}
-              <a
-                href="#explainer-video"
-                className="absolute inset-0 flex items-center justify-center group/play"
-                aria-label="Watch the 45-second explainer video"
+                style={{ aspectRatio: '16/9', background: '#0f172a' }}
+                onPlay={() => setIsPlaying(true)}
+                onPause={() => setIsPlaying(false)}
+                onEnded={() => setIsPlaying(false)}
+                playsInline
+                muted
+                loop
               >
-                <div
-                  className="w-16 h-16 rounded-full flex items-center justify-center transition-transform group-hover/play:scale-110"
-                  style={{
-                    background: 'rgba(37,99,235,0.9)',
-                    boxShadow: '0 0 0 8px rgba(37,99,235,0.2), 0 0 0 16px rgba(37,99,235,0.08)',
-                  }}
+                <source src="/videos/hero-ad.mp4" type="video/mp4" />
+              </video>
+
+              {/* Play/Pause overlay */}
+              {!isPlaying && (
+                <button
+                  onClick={handleToggle}
+                  className="absolute inset-0 flex items-center justify-center cursor-pointer"
+                  style={{ background: 'rgba(0,0,0,0.2)' }}
+                  aria-label="Play hero video"
                 >
-                  <Play size={24} fill="#fff" stroke="#fff" />
-                </div>
-              </a>
+                  <div
+                    className="w-16 h-16 rounded-full flex items-center justify-center transition-transform hover:scale-110"
+                    style={{
+                      background: 'rgba(37,99,235,0.9)',
+                      boxShadow: '0 0 0 8px rgba(37,99,235,0.2), 0 0 0 16px rgba(37,99,235,0.08)',
+                    }}
+                  >
+                    <Play size={24} fill="#fff" stroke="#fff" />
+                  </div>
+                </button>
+              )}
+
+              {/* Pause button (small, bottom-right) when playing */}
+              {isPlaying && (
+                <button
+                  onClick={handleToggle}
+                  className="absolute bottom-3 right-3 w-8 h-8 rounded-full flex items-center justify-center cursor-pointer transition-opacity hover:opacity-100"
+                  style={{
+                    background: 'rgba(0,0,0,0.5)',
+                    backdropFilter: 'blur(4px)',
+                    opacity: 0.6,
+                  }}
+                  aria-label="Pause hero video"
+                >
+                  <Pause size={14} fill="#fff" stroke="#fff" />
+                </button>
+              )}
 
               {/* Bottom caption */}
-              <div
-                className="absolute bottom-0 left-0 right-0 px-5 py-3"
-                style={{ background: 'rgba(0,0,0,0.5)', backdropFilter: 'blur(8px)' }}
-              >
-                <div className="flex items-center gap-3">
-                  <div className="flex items-center gap-1">
-                    <span className="w-2 h-2 rounded-full" style={{ background: '#0ea5e9' }} />
-                    <span className="w-2 h-2 rounded-full" style={{ background: '#a855f7' }} />
-                    <span className="w-2 h-2 rounded-full" style={{ background: '#10b981' }} />
+              {!isPlaying && (
+                <div
+                  className="absolute bottom-0 left-0 right-0 px-5 py-3"
+                  style={{ background: 'rgba(0,0,0,0.5)', backdropFilter: 'blur(8px)' }}
+                >
+                  <div className="flex items-center gap-3">
+                    <div className="flex items-center gap-1">
+                      <span className="w-2 h-2 rounded-full" style={{ background: '#0ea5e9' }} />
+                      <span className="w-2 h-2 rounded-full" style={{ background: '#a855f7' }} />
+                      <span className="w-2 h-2 rounded-full" style={{ background: '#10b981' }} />
+                    </div>
+                    <span
+                      className="text-xs font-medium text-white"
+                      style={{ fontFamily: 'var(--font-sans)', opacity: 0.9 }}
+                    >
+                      AI Agents · Lead Gen · Advertising · Results
+                    </span>
                   </div>
-                  <span
-                    className="text-xs font-medium text-white"
-                    style={{ fontFamily: 'var(--font-sans)', opacity: 0.9 }}
-                  >
-                    UCP · ACP · AP2 — Watch the explainer
-                  </span>
                 </div>
-              </div>
+              )}
             </div>
           </div>
 

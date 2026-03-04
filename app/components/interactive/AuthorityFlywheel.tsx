@@ -31,7 +31,7 @@ const PILLARS = [
     color: '#8b5cf6',
     rgb: '139,92,246',
     feedsInto: 'Content authority',
-    services: ['AI Readiness Check ($100)', 'AEO Audit ($500)', 'GEO Implementation ($2,500)', 'Authority Building ($5,000)'],
+    services: ['ACRA (Free)', 'AEO Audit ($500)', 'GEO Implementation ($2,500)', 'Authority Building ($5,000)'],
     description: 'Appear in every AI answer — ChatGPT, Perplexity, Gemini, and Claude. AEO and GEO optimization that makes AI cite your brand as the authoritative source.',
     href: '/services/aeo-audit',
     connects: ['protocols', 'content', 'leads'],

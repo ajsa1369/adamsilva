@@ -450,11 +450,11 @@ export default function StateOfAgenticCommerce2026Page() {
           </h2>
           <p className="text-[var(--color-muted)] mb-8">
             Our research shows 85% of enterprises are unprepared for agentic commerce. The gap is
-            closing — but only for the organizations moving now. Start with an AI Readiness Check.
+            closing — but only for the organizations moving now. Start with a free Agentic Commerce Readiness Assessment (ACRA).
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link href="/services/ai-readiness-check" className="btn-primary">
-              Get an AI Readiness Check — $100
+            <Link href="/services/acra" className="btn-primary">
+              Free ACRA
               <ArrowRight size={16} />
             </Link>
             <Link href="/contact" className="btn-secondary">

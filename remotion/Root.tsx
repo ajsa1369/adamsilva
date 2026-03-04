@@ -1,6 +1,7 @@
 import { Composition } from 'remotion'
 import { BlogSummaryVideo, type BlogSummaryProps } from './BlogSummary/BlogSummaryVideo'
 import { HomepageExplainerVideo, type HomepageExplainerProps } from './HomepageExplainer/HomepageExplainerVideo'
+import { HeroAdVideo, type HeroAdProps } from './HeroAd/HeroAdVideo'
 
 const DEFAULT_BLOG_PROPS: BlogSummaryProps = {
   title: 'The Agentic Commerce Protocols: UCP, ACP, and AP2',
@@ -25,8 +26,15 @@ const DEFAULT_EXPLAINER_PROPS: HomepageExplainerProps = {
 // BlogSummary: 30fps × 28s = 840 frames
 const BLOG_DURATION = 840
 
-// HomepageExplainer: 30fps × 72.8s = 2184 frames (matched to Delia narration)
-const EXPLAINER_DURATION = 2184
+// HomepageExplainer: 30fps × 74.97s = 2249 frames (matched to Delia narration w/ ACRA CTA)
+const EXPLAINER_DURATION = 2249
+
+// HeroAd: 30fps × 45.9s = 1379 frames (matched to Aurora narration)
+const HERO_AD_DURATION = 1379
+
+const DEFAULT_HERO_AD_PROPS: HeroAdProps = {
+  tagline: 'AI Agents. Lead Gen. Advertising. Results.',
+}
 
 export const RemotionRoot: React.FC = () => {
   return (
@@ -58,6 +66,16 @@ export const RemotionRoot: React.FC = () => {
         width={1920}
         height={1080}
         defaultProps={DEFAULT_EXPLAINER_PROPS}
+      />
+
+      <Composition
+        id="HeroAd"
+        component={HeroAdVideo}
+        durationInFrames={HERO_AD_DURATION}
+        fps={30}
+        width={1920}
+        height={1080}
+        defaultProps={DEFAULT_HERO_AD_PROPS}
       />
     </>
   )

@@ -10,7 +10,7 @@ const aggregateRating = buildAggregateRatingSchema(TESTIMONIALS)
 // Breadcrumb display names for URL segments
 const BREADCRUMB_NAMES: Record<string, string> = {
   services: 'Services',
-  'ai-readiness-check': 'Agentic Commerce Readiness Assessment',
+  acra: 'Agentic Commerce Readiness Assessment (ACRA)',
   'aeo-audit': 'AEO Audit',
   'geo-implementation': 'GEO Implementation',
   'authority-building': 'Authority Building Program',

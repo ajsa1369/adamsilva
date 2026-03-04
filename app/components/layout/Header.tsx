@@ -17,7 +17,7 @@ const NAV_ITEMS = [
       { label: 'Auto-Appointment Setter', href: '/services/auto-appointment-setter' },
       { label: 'Lead Scraping (Hunter)', href: '/services/lead-scraping' },
       { label: 'Lead Enrichment Pipeline', href: '/services/lead-enrichment' },
-      { label: 'AI Readiness Check', href: '/services/ai-readiness-check' },
+      { label: 'ACRA (Free)', href: '/services/acra' },
       { label: 'AEO Audit', href: '/services/aeo-audit' },
       { label: 'UCP Protocol Stack', href: '/services/ucp-implementation' },
     ],

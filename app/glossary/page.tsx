@@ -323,8 +323,8 @@ export default function GlossaryPage() {
               to checkout endpoints to mandate infrastructure.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link href="/services/ai-readiness-check" className="btn-primary">
-                Get AI Readiness Check — $100
+              <Link href="/services/acra" className="btn-primary">
+                Free ACRA
                 <ArrowRight size={16} />
               </Link>
               <Link href="/protocols" className="btn-secondary">

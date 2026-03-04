@@ -519,8 +519,8 @@ export default function CaseStudiesPage() {
               checkout endpoints, mandate infrastructure, schema, and authority content.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link href="/services/ai-readiness-check" className="btn-primary">
-                Start with AI Readiness Check — $100
+              <Link href="/services/acra" className="btn-primary">
+                Free ACRA
                 <ArrowRight size={16} />
               </Link>
               <Link href="/services" className="btn-secondary">

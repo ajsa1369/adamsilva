@@ -35,7 +35,7 @@ const servicesFAQs = [
   {
     question: 'Can I combine multiple services?',
     answer:
-      'Yes — and combining services compounds results. The most effective approach is the full 16-week protocol stack: start with the AI Readiness Check, add GEO Implementation and UCP Protocol Implementation in weeks 3-6, integrate ACP and AP2 in weeks 7-10, and activate the Authority Building Program in weeks 11-14. Custom enterprise bundles are available — contact Adam for a tailored roadmap.',
+      'Yes — and combining services compounds results. The most effective approach is the full 16-week protocol stack: start with the Agentic Commerce Readiness Assessment (ACRA), add GEO Implementation and UCP Protocol Implementation in weeks 3-6, integrate ACP and AP2 in weeks 7-10, and activate the Authority Building Program in weeks 11-14. Custom enterprise bundles are available — contact Adam for a tailored roadmap.',
   },
 ]
 
@@ -44,7 +44,7 @@ const roadmapHowTo = buildHowToSchema(
   'The complete 16-week implementation roadmap for UCP, ACP, and AP2 agentic commerce protocol stack deployment used by Adam Silva Consulting with enterprise clients.',
   [
     {
-      name: 'Week 1-2: AI Readiness Check',
+      name: 'Week 1-2: ACRA',
       text: 'Complete audit of current agentic commerce posture — structured data coverage, protocol compliance, token efficiency, and authority signals. Deliverable: prioritized action plan.',
     },
     {
@@ -144,8 +144,8 @@ export default function ServicesPage() {
               readiness.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link href="/services/ai-readiness-check" className="btn-primary">
-                Free AI Readiness Assessment
+              <Link href="/services/acra" className="btn-primary">
+                Free ACRA
                 <ArrowRight size={16} />
               </Link>
               <Link href="/contact" className="btn-secondary">
@@ -416,8 +416,8 @@ export default function ServicesPage() {
           </div>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center mt-10">
-            <Link href="/services/ai-readiness-check" className="btn-primary">
-              Free AI Readiness Assessment
+            <Link href="/services/acra" className="btn-primary">
+              Free ACRA
               <ArrowRight size={16} />
             </Link>
             <Link href="/contact" className="btn-secondary">
@@ -448,10 +448,10 @@ export default function ServicesPage() {
               {
                 phase: 'Phase 1',
                 weeks: 'Wk 1–2',
-                title: 'AI Readiness Check',
+                title: 'ACRA',
                 description: 'Full audit of current posture — protocol compliance, structured data, token efficiency',
                 color: '#3b82f6',
-                service: 'ai-readiness-check',
+                service: 'acra',
               },
               {
                 phase: 'Phase 2',
@@ -562,8 +562,8 @@ export default function ServicesPage() {
               prioritized strategic roadmap. Completely free.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link href="/services/ai-readiness-check" className="btn-primary">
-                Get Your Free Assessment
+              <Link href="/services/acra" className="btn-primary">
+                Get Your Free ACRA
                 <ArrowRight size={16} />
               </Link>
               <Link href="/contact" className="btn-secondary">

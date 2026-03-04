@@ -123,8 +123,8 @@ function buildGuideEmail(firstName: string): string {
       <!-- CTA -->
       <div style="background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%); border-radius: 12px; padding: 32px; text-align: center;">
         <h3 style="color: #ffffff; margin: 0 0 8px; font-size: 22px; font-weight: 800;">Ready to start?</h3>
-        <p style="color: rgba(255,255,255,0.88); margin: 0 0 24px; font-size: 15px;">Begin with a free AI Readiness Check — 3-day audit, $100, immediate action plan.</p>
-        <a href="${SITE_URL}/contact" style="display: inline-block; background: #ffffff; color: #1e40af; padding: 14px 36px; border-radius: 8px; text-decoration: none; font-weight: 800; font-size: 16px;">Get Your Readiness Check →</a>
+        <p style="color: rgba(255,255,255,0.88); margin: 0 0 24px; font-size: 15px;">Begin with a free Agentic Commerce Readiness Assessment (ACRA) — 48-hour audit, completely free.</p>
+        <a href="${SITE_URL}/services/acra" style="display: inline-block; background: #ffffff; color: #1e40af; padding: 14px 36px; border-radius: 8px; text-decoration: none; font-weight: 800; font-size: 16px;">Get Your Free ACRA →</a>
       </div>
     </div>
 

@@ -49,7 +49,7 @@ let _services: StripeServiceMap | null = null
 function getServices(): StripeServiceMap {
   if (!_services) {
     _services = {
-      'ai-readiness-check': {
+      'acra': {
         productId: getEnv('STRIPE_SVC_ACRA'),
         setupPriceId: getEnv('STRIPE_SVC_ACRA_SETUP'),
       },

@@ -27,7 +27,7 @@ export interface StripeServicePricing {
 
 // Service IDs matching lib/data/services.ts
 export type ServiceSlug =
-  | 'ai-readiness-check'
+  | 'acra'
   | 'aeo-audit'
   | 'geo-implementation'
   | 'authority-building'

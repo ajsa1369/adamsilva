@@ -528,7 +528,7 @@ function CTASlide() {
         marginBottom: 16,
         maxWidth: 800,
       }}>
-        Start with a Free AI Readiness Check
+        Start with a Free ACRA
       </h2>
       <p style={{
         color: 'rgba(255,255,255,0.7)',
@@ -566,7 +566,7 @@ export function HomepageExplainerVideo({ testimonialQuote, testimonialAuthor }: 
   const ap2Dur = 306         // 10.2s (9.7s audio + gap)
   const resultsDur = 261     // 8.7s (8.2s audio + gap)
   const flywheelDur = 345    // 11.5s (11.0s audio + gap)
-  const ctaDur = 247         // 8.2s (7.7s audio + gap)
+  const ctaDur = 312         // 10.4s (9.9s audio + gap)
 
   let offset = 0
 

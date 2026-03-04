@@ -54,7 +54,7 @@ const expectations = [
     icon: ArrowRight,
     title: 'No Long-Term Contract Required',
     description:
-      'Start with the $100 AI Readiness Check. Subsequent engagements are structured around clear deliverables, not retainer lock-ins.',
+      'Start with the free Agentic Commerce Readiness Assessment (ACRA). Subsequent engagements are structured around clear deliverables, not retainer lock-ins.',
   },
 ]
 

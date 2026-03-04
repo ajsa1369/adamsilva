@@ -340,8 +340,8 @@ export default function AuthorityFlywheelPage() {
                 Get Authority Building
                 <ArrowRight size={16} />
               </Link>
-              <Link href="/services/ai-readiness-check" className="btn-secondary">
-                Free ACRA Assessment
+              <Link href="/services/acra" className="btn-secondary">
+                Free ACRA
               </Link>
             </div>
           </div>
