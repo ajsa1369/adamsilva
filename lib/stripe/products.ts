@@ -13,8 +13,6 @@ import type { StripeProductPricing, StripePriceMap, PackageSlug } from '@/lib/st
 
 /**
  * Validates that a required environment variable is set and non-empty.
- * Called at module level so that missing vars throw at import time,
- * not at checkout time when it's too late to recover gracefully.
  */
 function getEnv(name: string): string {
   const value = process.env[name]
@@ -29,76 +27,55 @@ function getEnv(name: string): string {
 }
 
 // ---------------------------------------------------------------------------
-// Module-level env var reads — all 15 IDs are validated at import time
+// Lazy-initialized map — built on first access so `next build` doesn't crash
+// when Stripe env vars aren't set in the build environment.
 // ---------------------------------------------------------------------------
 
-// Bronze
-const BRONZE_PRODUCT_ID = getEnv('STRIPE_PRODUCT_BRONZE')
-const BRONZE_SETUP_PRICE_ID = getEnv('STRIPE_PRICE_BRONZE_SETUP')
-const BRONZE_MONTHLY_PRICE_ID = getEnv('STRIPE_PRICE_BRONZE_MONTHLY')
+let _products: StripePriceMap | null = null
 
-// Silver
-const SILVER_PRODUCT_ID = getEnv('STRIPE_PRODUCT_SILVER')
-const SILVER_SETUP_PRICE_ID = getEnv('STRIPE_PRICE_SILVER_SETUP')
-const SILVER_MONTHLY_PRICE_ID = getEnv('STRIPE_PRICE_SILVER_MONTHLY')
-
-// Gold
-const GOLD_PRODUCT_ID = getEnv('STRIPE_PRODUCT_GOLD')
-const GOLD_SETUP_PRICE_ID = getEnv('STRIPE_PRICE_GOLD_SETUP')
-const GOLD_MONTHLY_PRICE_ID = getEnv('STRIPE_PRICE_GOLD_MONTHLY')
-
-// Shopify Starter
-const SHOPIFY_STARTER_PRODUCT_ID = getEnv('STRIPE_PRODUCT_SHOPIFY_STARTER')
-const SHOPIFY_STARTER_SETUP_PRICE_ID = getEnv('STRIPE_PRICE_SHOPIFY_STARTER_SETUP')
-const SHOPIFY_STARTER_MONTHLY_PRICE_ID = getEnv('STRIPE_PRICE_SHOPIFY_STARTER_MONTHLY')
-
-// Shopify Growth
-const SHOPIFY_GROWTH_PRODUCT_ID = getEnv('STRIPE_PRODUCT_SHOPIFY_GROWTH')
-const SHOPIFY_GROWTH_SETUP_PRICE_ID = getEnv('STRIPE_PRICE_SHOPIFY_GROWTH_SETUP')
-const SHOPIFY_GROWTH_MONTHLY_PRICE_ID = getEnv('STRIPE_PRICE_SHOPIFY_GROWTH_MONTHLY')
-
-// ---------------------------------------------------------------------------
-// Typed map from package slug to Stripe Product/Price IDs
-// ---------------------------------------------------------------------------
+function getProducts(): StripePriceMap {
+  if (!_products) {
+    _products = {
+      bronze: {
+        productId: getEnv('STRIPE_PRODUCT_BRONZE'),
+        setupPriceId: getEnv('STRIPE_PRICE_BRONZE_SETUP'),
+        monthlyPriceId: getEnv('STRIPE_PRICE_BRONZE_MONTHLY'),
+      },
+      silver: {
+        productId: getEnv('STRIPE_PRODUCT_SILVER'),
+        setupPriceId: getEnv('STRIPE_PRICE_SILVER_SETUP'),
+        monthlyPriceId: getEnv('STRIPE_PRICE_SILVER_MONTHLY'),
+      },
+      gold: {
+        productId: getEnv('STRIPE_PRODUCT_GOLD'),
+        setupPriceId: getEnv('STRIPE_PRICE_GOLD_SETUP'),
+        monthlyPriceId: getEnv('STRIPE_PRICE_GOLD_MONTHLY'),
+      },
+      'shopify-starter': {
+        productId: getEnv('STRIPE_PRODUCT_SHOPIFY_STARTER'),
+        setupPriceId: getEnv('STRIPE_PRICE_SHOPIFY_STARTER_SETUP'),
+        monthlyPriceId: getEnv('STRIPE_PRICE_SHOPIFY_STARTER_MONTHLY'),
+      },
+      'shopify-growth': {
+        productId: getEnv('STRIPE_PRODUCT_SHOPIFY_GROWTH'),
+        setupPriceId: getEnv('STRIPE_PRICE_SHOPIFY_GROWTH_SETUP'),
+        monthlyPriceId: getEnv('STRIPE_PRICE_SHOPIFY_GROWTH_MONTHLY'),
+      },
+      core: null,
+    }
+  }
+  return _products
+}
 
 /**
- * STRIPE_PRODUCTS maps every fixed-price package slug to its Stripe Product ID
- * and two Price IDs (one-time setup fee + recurring monthly retainer).
- *
- * Core tier is null because it is custom-quoted — no fixed Stripe Price exists.
- *
+ * STRIPE_PRODUCTS — lazy proxy so imports don't crash at build time.
  * Usage: import { STRIPE_PRODUCTS } from '@/lib/stripe/products'
- *        const pricing = STRIPE_PRODUCTS['bronze']  // StripeProductPricing
- *        const corePricing = STRIPE_PRODUCTS['core'] // null
  */
-export const STRIPE_PRODUCTS: StripePriceMap = {
-  bronze: {
-    productId: BRONZE_PRODUCT_ID,
-    setupPriceId: BRONZE_SETUP_PRICE_ID,
-    monthlyPriceId: BRONZE_MONTHLY_PRICE_ID,
+export const STRIPE_PRODUCTS: StripePriceMap = new Proxy({} as StripePriceMap, {
+  get(_target, prop, receiver) {
+    return Reflect.get(getProducts(), prop, receiver)
   },
-  silver: {
-    productId: SILVER_PRODUCT_ID,
-    setupPriceId: SILVER_SETUP_PRICE_ID,
-    monthlyPriceId: SILVER_MONTHLY_PRICE_ID,
-  },
-  gold: {
-    productId: GOLD_PRODUCT_ID,
-    setupPriceId: GOLD_SETUP_PRICE_ID,
-    monthlyPriceId: GOLD_MONTHLY_PRICE_ID,
-  },
-  'shopify-starter': {
-    productId: SHOPIFY_STARTER_PRODUCT_ID,
-    setupPriceId: SHOPIFY_STARTER_SETUP_PRICE_ID,
-    monthlyPriceId: SHOPIFY_STARTER_MONTHLY_PRICE_ID,
-  },
-  'shopify-growth': {
-    productId: SHOPIFY_GROWTH_PRODUCT_ID,
-    setupPriceId: SHOPIFY_GROWTH_SETUP_PRICE_ID,
-    monthlyPriceId: SHOPIFY_GROWTH_MONTHLY_PRICE_ID,
-  },
-  core: null,
-}
+})
 
 // ---------------------------------------------------------------------------
 // Helper function
@@ -107,17 +84,7 @@ export const STRIPE_PRODUCTS: StripePriceMap = {
 /**
  * Returns the Stripe Product/Price IDs for a given package slug,
  * or null for the custom-quoted Core tier.
- *
- * Used by Phases 12 and 13 to look up Price IDs when creating
- * PaymentIntents and Checkout Sessions.
- *
- * @example
- *   const pricing = getStripePricing('bronze')
- *   // pricing.productId, pricing.setupPriceId, pricing.monthlyPriceId
- *
- *   const corePricing = getStripePricing('core')
- *   // null — handle with custom quote flow
  */
 export function getStripePricing(slug: PackageSlug): StripeProductPricing | null {
-  return STRIPE_PRODUCTS[slug]
+  return getProducts()[slug]
 }
