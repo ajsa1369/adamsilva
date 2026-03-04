@@ -3,6 +3,7 @@
 import Link from 'next/link'
 import { ArrowRight } from 'lucide-react'
 import { AddToCartButton } from './AddToCartButton'
+import { BuyNowButton } from './BuyNowButton'
 import { serviceToCartItem } from '@/lib/cart/helpers'
 import type { Service } from '@/lib/data/services'
 
@@ -58,7 +59,8 @@ export function ServiceCTASection({ service, accentColor, compact }: ServiceCTAS
 
   return (
     <div className="flex flex-col sm:flex-row gap-4">
-      <AddToCartButton item={cartItem} variant="primary" accentColor={accentColor} />
+      <BuyNowButton item={cartItem} accentColor={accentColor} />
+      <AddToCartButton item={cartItem} variant="secondary" />
       <Link
         href={`/contact?service=${encodeURIComponent(service.id)}`}
         className="btn-secondary"
