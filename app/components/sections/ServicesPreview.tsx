@@ -1,10 +1,19 @@
 import Link from 'next/link'
+import Image from 'next/image'
 import { ArrowRight, CheckCircle, Search, Zap, Award, FileText, Network, ShoppingCart, Shield, Bot, Share2, Send, MessageCircle } from 'lucide-react'
 import { getFeaturedServices } from '@/lib/data/services'
 
 const ICON_MAP: Record<string, React.ElementType> = {
   CheckCircle, Search, Zap, Award, FileText, Network, ShoppingCart, Shield, Bot,
   Newspaper: FileText, Share2, Send, MessageCircle,
+}
+
+const CATEGORY_IMAGES: Record<string, string> = {
+  audit: '/images/icons/analytics.jpg',
+  optimization: '/images/icons/aeo.jpg',
+  content: '/images/icons/ai-content.jpg',
+  automation: '/images/icons/automation.jpg',
+  protocol: '/images/icons/technical-seo.jpg',
 }
 
 export function ServicesPreview() {
@@ -45,9 +54,25 @@ export function ServicesPreview() {
               <Link
                 key={service.id}
                 href={`/services/${service.id}`}
-                className="card group flex flex-col"
-                style={{ padding: '1.5rem' }}
+                className="card group flex flex-col overflow-hidden"
+                style={{ padding: 0 }}
               >
+                {/* Category image */}
+                <div className="relative w-full" style={{ height: '120px' }}>
+                  <Image
+                    src={CATEGORY_IMAGES[service.category] || '/images/icons/analytics.jpg'}
+                    alt={service.name}
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                  />
+                  <div
+                    className="absolute inset-0"
+                    style={{ background: 'linear-gradient(180deg, transparent 30%, var(--color-surface) 100%)' }}
+                  />
+                </div>
+
+                <div style={{ padding: '1.25rem 1.5rem 1.5rem' }}>
                 <div className="flex items-start justify-between mb-5">
                   <div
                     className="w-11 h-11 rounded-xl flex items-center justify-center"
@@ -89,6 +114,7 @@ export function ServicesPreview() {
                 >
                   View details
                   <ArrowRight size={12} />
+                </div>
                 </div>
               </Link>
             )

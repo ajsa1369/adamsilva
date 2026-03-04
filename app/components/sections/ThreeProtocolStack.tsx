@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import Image from 'next/image'
 import { Network, ShoppingCart, Shield, ArrowRight } from 'lucide-react'
 
 const PROTOCOLS = [
@@ -10,6 +11,7 @@ const PROTOCOLS = [
     icon: Network,
     accent: '#0ea5e9',
     govBy: 'Google',
+    image: '/images/icons/analytics.jpg',
     description:
       'AI agents use UCP manifests to discover what you sell, your prices, and how to transact. Published at /.well-known/ucp — the entry point for every AI shopping agent.',
     bullets: ['Capability profiles & inventory feeds', 'REST / MCP / A2A transports', 'Agent discovery manifest'],
@@ -23,6 +25,7 @@ const PROTOCOLS = [
     icon: ShoppingCart,
     accent: '#a855f7',
     govBy: 'OpenAI + Stripe',
+    image: '/images/icons/automation.jpg',
     description:
       'ACP enables AI agents to complete purchases autonomously via Stripe SPT. ChatGPT Instant Checkout is ACP in action — the buy-without-leaving infrastructure.',
     bullets: ['Stripe Payment Tokens (SPT)', 'ChatGPT Instant Checkout', 'Delegated payment flows'],
@@ -36,6 +39,7 @@ const PROTOCOLS = [
     icon: Shield,
     accent: '#10b981',
     govBy: 'Google',
+    image: '/images/icons/technical-seo.jpg',
     description:
       'AP2 mandates create cryptographically signed authorizations for agentic transactions. Non-repudiation audit trails and Verifiable Credentials — the legal and trust layer.',
     bullets: ['Verifiable Credentials (W3C)', 'Cryptographic mandates', 'Enterprise audit trail'],
@@ -98,6 +102,17 @@ export function ThreeProtocolStack() {
                   transition: 'box-shadow 0.2s ease, border-color 0.2s ease',
                 }}
               >
+                {/* Protocol image */}
+                <div className="mb-4" style={{ borderBottom: `2px solid ${protocol.accent}` }}>
+                  <Image
+                    src={protocol.image}
+                    alt={`${protocol.name} — ${protocol.layer}`}
+                    width={80}
+                    height={80}
+                    className="rounded-lg object-cover"
+                  />
+                </div>
+
                 {/* Number + Acronym row */}
                 <div className="flex items-start justify-between mb-5">
                   <span
