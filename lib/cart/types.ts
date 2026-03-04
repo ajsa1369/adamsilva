@@ -36,6 +36,7 @@ export interface CheckoutPayload {
     company: string
   }
   paymentMethod: PaymentMethod
+  termsAcceptedAt: string // ISO 8601 timestamp
 }
 
 /** Response from the checkout API route */

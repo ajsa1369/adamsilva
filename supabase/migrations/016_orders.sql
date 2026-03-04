@@ -17,6 +17,8 @@ CREATE TABLE IF NOT EXISTS orders (
   currency                TEXT        NOT NULL DEFAULT 'usd',
   status                  TEXT        NOT NULL DEFAULT 'pending', -- pending, paid, active, failed, cancelled, refunded
   payment_type            TEXT        NOT NULL DEFAULT 'one_time',-- one_time, subscription, free
+  payment_method          TEXT,                                   -- 'ach' or 'card'
+  terms_accepted_at       TIMESTAMPTZ,                            -- ISO timestamp of ToS acceptance
   created_at              TIMESTAMPTZ NOT NULL DEFAULT NOW(),
   updated_at              TIMESTAMPTZ NOT NULL DEFAULT NOW()
 );

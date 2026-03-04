@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react'
 import { Elements, PaymentElement, useStripe, useElements } from '@stripe/react-stripe-js'
 import Link from 'next/link'
-import { ArrowRight, ShoppingCart, Loader2, Building2, CreditCard, AlertTriangle } from 'lucide-react'
+import { ArrowRight, ShoppingCart, Loader2, Building2, CreditCard, AlertTriangle, FileCheck } from 'lucide-react'
 import { getStripeJs } from '@/lib/stripe/client-browser'
 import { useCart } from '@/lib/cart/context'
 import { OrderSummary } from './OrderSummary'
@@ -210,6 +210,7 @@ function PaidCheckout() {
   const { items, totals } = useCart()
   const [form, setForm] = useState({ name: '', email: '', company: '' })
   const [paymentMethod, setPaymentMethod] = useState<PaymentMethod>('ach')
+  const [termsAccepted, setTermsAccepted] = useState(false)
   const [sessionData, setSessionData] = useState<CheckoutResponse | null>(null)
   const [status, setStatus] = useState<'billing' | 'creating' | 'payment' | 'error'>('billing')
   const [errorMsg, setErrorMsg] = useState('')
@@ -227,6 +228,7 @@ function PaidCheckout() {
         items: items.map(i => ({ id: i.id, type: i.type, quantity: i.quantity })),
         customer: form,
         paymentMethod,
+        termsAcceptedAt: new Date().toISOString(),
       }
 
       const res = await fetch('/api/checkout/create-session', {
@@ -327,6 +329,38 @@ function PaidCheckout() {
 
             <NoRefundsDisclaimer />
 
+            {/* Terms of Service acceptance */}
+            <div
+              className="p-4 rounded-lg"
+              style={{ border: `1px solid ${termsAccepted ? 'rgba(16,185,129,0.3)' : 'var(--color-border)'}` }}
+            >
+              <label className="flex items-start gap-3 cursor-pointer">
+                <input
+                  type="checkbox"
+                  required
+                  checked={termsAccepted}
+                  onChange={e => setTermsAccepted(e.target.checked)}
+                  className="mt-0.5 w-4 h-4 flex-shrink-0"
+                  style={{ accentColor: '#10b981' }}
+                />
+                <span className="text-sm" style={{ color: 'var(--color-text)' }}>
+                  <FileCheck size={14} className="inline mr-1" style={{ color: termsAccepted ? '#10b981' : 'var(--color-muted)' }} />
+                  I have read and agree to the{' '}
+                  <a
+                    href="/terms"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="underline font-semibold"
+                    style={{ color: 'var(--color-accent)' }}
+                  >
+                    Terms of Service
+                  </a>
+                  , including the no-refund policy and{' '}
+                  {paymentMethod === 'card' ? '4% credit card convenience fee' : 'payment terms'}.
+                </span>
+              </label>
+            </div>
+
             {status === 'error' && (
               <div className="p-4 rounded-lg" style={{ background: 'rgba(239,68,68,0.1)', border: '1px solid rgba(239,68,68,0.2)' }}>
                 <p className="text-sm text-red-500">{errorMsg}</p>
@@ -335,9 +369,9 @@ function PaidCheckout() {
 
             <button
               type="submit"
-              disabled={status === 'creating'}
+              disabled={status === 'creating' || !termsAccepted}
               className="btn-primary w-full justify-center text-base py-3"
-              style={status === 'creating' ? { opacity: 0.7 } : undefined}
+              style={status === 'creating' || !termsAccepted ? { opacity: 0.7 } : undefined}
             >
               {status === 'creating' ? (
                 <>
@@ -351,10 +385,6 @@ function PaidCheckout() {
                 </>
               )}
             </button>
-
-            <p className="text-[11px] text-center" style={{ color: 'var(--color-muted-2)' }}>
-              By proceeding you agree that all sales are final and non-refundable.
-            </p>
           </form>
         </div>
         <div>

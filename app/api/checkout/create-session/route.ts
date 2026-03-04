@@ -26,6 +26,7 @@ interface RequestBody {
     company: string
   }
   paymentMethod: PaymentMethod
+  termsAcceptedAt: string
 }
 
 function validateRequest(body: unknown): body is RequestBody {
@@ -36,6 +37,7 @@ function validateRequest(body: unknown): body is RequestBody {
   const c = b.customer as Record<string, unknown>
   if (!c.name || !c.email) return false
   if (b.paymentMethod !== 'ach' && b.paymentMethod !== 'card') return false
+  if (!b.termsAcceptedAt || typeof b.termsAcceptedAt !== 'string') return false
   return true
 }
 
@@ -71,7 +73,7 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    const { items, customer, paymentMethod } = body
+    const { items, customer, paymentMethod, termsAcceptedAt } = body
 
     // Filter out free items (ACRA) — they don't go through Stripe
     const paidItems = items.filter(i => {
@@ -122,6 +124,8 @@ export async function POST(request: NextRequest) {
         monthly_total: 0,
         status: 'pending',
         payment_type: resolved.hasRecurring ? 'subscription' : 'one_time',
+        terms_accepted_at: termsAcceptedAt,
+        payment_method: paymentMethod,
       })
       .select('id')
       .single()
