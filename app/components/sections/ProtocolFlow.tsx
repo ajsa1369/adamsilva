@@ -33,7 +33,7 @@ const STEPS = [
     body: 'Cryptographic mandate confirms the transaction. Audit trail created. Revenue secured.',
     color: '#f59e0b',
     rgb: '245,158,11',
-    image: '/images/insights/ai_authority_imperative_1_1.jpg',
+    image: '/images/insights/professional_expertise_credentials_authority_building_diagram.jpg',
   },
 ]
 

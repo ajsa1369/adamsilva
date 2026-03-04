@@ -1,3 +1,6 @@
+'use client'
+
+import { useRef, useState } from 'react'
 import Link from 'next/link'
 import { ArrowRight, Play } from 'lucide-react'
 
@@ -9,11 +12,21 @@ const KEY_POINTS = [
 ]
 
 export function ExplainerVideoSection() {
+  const videoRef = useRef<HTMLVideoElement>(null)
+  const [isPlaying, setIsPlaying] = useState(false)
+
+  const handlePlayClick = () => {
+    if (videoRef.current) {
+      videoRef.current.play()
+    }
+  }
+
   return (
     <section
       className="section bg-[var(--color-surface)]"
       aria-labelledby="explainer-video-heading"
       id="explainer-video"
+      style={{ scrollMarginTop: '6rem' }}
     >
       <div className="container">
         <div className="grid lg:grid-cols-[3fr_2fr] gap-10 lg:gap-14 items-center">
@@ -25,31 +38,39 @@ export function ExplainerVideoSection() {
             }}
           >
             <video
+              ref={videoRef}
               controls
               preload="metadata"
               poster="/images/hero/business-hero.jpg"
               className="w-full h-auto block"
               style={{ aspectRatio: '16/9', background: '#000' }}
+              onPlay={() => setIsPlaying(true)}
+              onPause={() => setIsPlaying(false)}
+              onEnded={() => setIsPlaying(false)}
             >
               <source src="/videos/homepage-explainer.mp4" type="video/mp4" />
               Your browser does not support the video element.
             </video>
 
-            {/* Decorative play overlay (shown before play) */}
-            <div
-              className="absolute inset-0 flex items-center justify-center pointer-events-none"
-              style={{ background: 'rgba(0,0,0,0.15)' }}
-            >
-              <div
-                className="w-16 h-16 rounded-full flex items-center justify-center"
-                style={{
-                  background: 'rgba(37,99,235,0.9)',
-                  boxShadow: '0 0 0 8px rgba(37,99,235,0.2)',
-                }}
+            {/* Play overlay — hidden once video is playing */}
+            {!isPlaying && (
+              <button
+                onClick={handlePlayClick}
+                className="absolute inset-0 flex items-center justify-center cursor-pointer"
+                style={{ background: 'rgba(0,0,0,0.15)' }}
+                aria-label="Play explainer video"
               >
-                <Play size={24} fill="#fff" stroke="#fff" />
-              </div>
-            </div>
+                <div
+                  className="w-16 h-16 rounded-full flex items-center justify-center transition-transform hover:scale-110"
+                  style={{
+                    background: 'rgba(37,99,235,0.9)',
+                    boxShadow: '0 0 0 8px rgba(37,99,235,0.2)',
+                  }}
+                >
+                  <Play size={24} fill="#fff" stroke="#fff" />
+                </div>
+              </button>
+            )}
           </div>
 
           {/* Content */}
