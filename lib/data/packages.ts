@@ -48,12 +48,12 @@ export const PACKAGES: PackagePageData[] = [
   {
     slug: 'bronze',
     name: 'Bronze',
-    tagline: 'Full agent fleet — up to 10 pages optimized in setup',
+    tagline: 'Full agent fleet — up to 30 pages optimized in setup',
     setupPrice: 16000,
     monthlyPrice: 3500,
     setupDisplay: '$16,000',
     monthlyDisplay: '$3,500/mo',
-    pagesIncluded: 10,
+    pagesIncluded: 30,
     tier1Slots: 3,
     tier2Slots: 0,
     tier3Slots: 0,
@@ -62,7 +62,7 @@ export const PACKAGES: PackagePageData[] = [
     highlighted: false,
     badge: null,
     highlights: [
-      'Up to 10 pages: full JSON-LD schema, AEO/GEO optimization, and protocol endpoints built in setup',
+      'Up to 30 pages: full JSON-LD schema, AEO/GEO optimization, and protocol endpoints built in setup',
       'AI Commerce Agent — web channel (24/7 lead capture + commerce)',
       'Authority Content Agent — topical map agent builds your content plan; unlimited 2,000-word articles + Remotion video + 2 schema-wrapped PNG images',
       'Press Release Agent — client-scheduled; pre-built schema rules + JSON-LD; you bring your syndication account + AI API',
@@ -82,12 +82,12 @@ export const PACKAGES: PackagePageData[] = [
       {
         question: 'Who is Bronze for?',
         answer:
-          'Bronze is for lean teams or smaller sites (up to 10 pages). You get the exact same agent fleet as Silver and Gold — AI Commerce Agent, Authority Content Agent with topical map planning, and Press Release Agent — applied to 10 pages in the setup. The setup fee reflects the man hours to implement full JSON-LD schema, AEO/GEO optimization, and protocol endpoints across those pages.',
+          'Bronze is for lean teams or smaller sites (up to 30 pages). You get the exact same agent fleet as Silver and Gold — AI Commerce Agent, Authority Content Agent with topical map planning, and Press Release Agent — applied to 30 pages in the setup. The setup fee reflects the man hours to implement full JSON-LD schema, AEO/GEO optimization, and protocol endpoints across those pages.',
       },
       {
         question: 'What is the difference between Bronze, Silver, and Gold?',
         answer:
-          'The agent fleet is identical across all three tiers. The only difference is the number of pages included in the setup: Bronze covers 10 pages, Silver covers 25 pages, Gold covers 50 pages. More pages means more man hours — more JSON-LD schema implementations, more AEO/GEO optimization, more protocol endpoints, more structured data coverage. If your site grows, you can add pages at any time.',
+          'The agent fleet is identical across all three tiers. The only difference is the number of pages included in the setup: Bronze covers 30 pages, Silver covers 60 pages, Gold covers 100 pages. More pages means more man hours — more JSON-LD schema implementations, more AEO/GEO optimization, more protocol endpoints, more structured data coverage. If your site grows, you can add pages at any time.',
       },
       {
         question: 'What does each Authority Content article include?',
@@ -101,17 +101,17 @@ export const PACKAGES: PackagePageData[] = [
       },
     ],
     heroDescription:
-      'Bronze is the full agent fleet applied to up to 10 pages: JSON-LD schema, AEO/GEO optimization, UCP protocol, and AI Commerce Agent all built in setup. Same agents as Silver and Gold — the difference is scope, not capability.',
+      'Bronze is the full agent fleet applied to up to 30 pages: JSON-LD schema, AEO/GEO optimization, UCP protocol, and AI Commerce Agent all built in setup. Same agents as Silver and Gold — the difference is scope, not capability.',
   },
   {
     slug: 'silver',
     name: 'Silver',
-    tagline: 'Full agent fleet — up to 25 pages optimized in setup',
+    tagline: 'Full agent fleet — up to 60 pages optimized in setup',
     setupPrice: 28000,
     monthlyPrice: 6500,
     setupDisplay: '$28,000',
     monthlyDisplay: '$6,500/mo',
-    pagesIncluded: 25,
+    pagesIncluded: 60,
     tier1Slots: 6,
     tier2Slots: 1,
     tier3Slots: 0,
@@ -120,7 +120,7 @@ export const PACKAGES: PackagePageData[] = [
     highlighted: false,
     badge: 'Best Value',
     highlights: [
-      'Up to 25 pages: full JSON-LD schema, AEO/GEO optimization, and protocol endpoints built in setup',
+      'Up to 60 pages: full JSON-LD schema, AEO/GEO optimization, and protocol endpoints built in setup',
       'AI Commerce Agent — web + SMS channels (24/7 lead capture + commerce)',
       'Authority Content Agent — topical map agent builds your content plan; unlimited 2,000-word articles + Remotion video + 2 schema-wrapped PNG images',
       'Press Release Agent — client-scheduled; pre-built schema rules + JSON-LD; you bring your syndication account + AI API',
@@ -140,7 +140,7 @@ export const PACKAGES: PackagePageData[] = [
       {
         question: "What's the difference between Bronze and Silver?",
         answer:
-          'Silver covers 25 pages in the setup vs 10 for Bronze — more man hours to implement JSON-LD schema, AEO/GEO optimization, and protocol endpoints across a larger site. Silver also adds SMS as a second AI Commerce Agent channel, partial ACP for agent-initiated checkout, and entity graph construction. The agent fleet itself is identical.',
+          'Silver covers 60 pages in the setup vs 30 for Bronze — more man hours to implement JSON-LD schema, AEO/GEO optimization, and protocol endpoints across a larger site. Silver also adds SMS as a second AI Commerce Agent channel, partial ACP for agent-initiated checkout, and entity graph construction. The agent fleet itself is identical.',
       },
       {
         question: 'What does each Authority Content article include?',
@@ -159,17 +159,17 @@ export const PACKAGES: PackagePageData[] = [
       },
     ],
     heroDescription:
-      'Silver is the full agent fleet applied to up to 25 pages: same agents as Bronze and Gold, covering more of your site. More pages means more JSON-LD schema, more AEO/GEO optimization, and more protocol surface area — which directly increases the number of entry points AI systems have into your business.',
+      'Silver is the full agent fleet applied to up to 60 pages: same agents as Bronze and Gold, covering more of your site. More pages means more JSON-LD schema, more AEO/GEO optimization, and more protocol surface area — which directly increases the number of entry points AI systems have into your business.',
   },
   {
     slug: 'gold',
     name: 'Gold',
-    tagline: 'Full agent fleet — up to 50 pages optimized in setup',
+    tagline: 'Full agent fleet — up to 100 pages optimized in setup',
     setupPrice: 48000,
     monthlyPrice: 12000,
     setupDisplay: '$48,000',
     monthlyDisplay: '$12,000/mo',
-    pagesIncluded: 50,
+    pagesIncluded: 100,
     tier1Slots: 12,
     tier2Slots: 3,
     tier3Slots: 1,
@@ -178,7 +178,7 @@ export const PACKAGES: PackagePageData[] = [
     highlighted: true,
     badge: 'Most Popular',
     highlights: [
-      'Up to 50 pages: full JSON-LD schema, AEO/GEO optimization, and protocol endpoints built in setup',
+      'Up to 100 pages: full JSON-LD schema, AEO/GEO optimization, and protocol endpoints built in setup',
       'AI Commerce Agent — web, SMS, voice, and WhatsApp channels (24/7)',
       'Authority Content Agent — topical map agent builds your content plan; unlimited 2,000-word articles + Remotion video + 2 schema-wrapped PNG images',
       'Press Release Agent — client-scheduled; pre-built schema rules + JSON-LD; you bring your syndication account + AI API',
@@ -198,7 +198,7 @@ export const PACKAGES: PackagePageData[] = [
       {
         question: "What makes Gold the 'Gold Standard'?",
         answer:
-          'Gold covers 50 pages in the setup — the most comprehensive schema, AEO/GEO, and protocol implementation of the three tiers. It also achieves full UCP + ACP + AP2 compliance, adds voice and WhatsApp as AI Commerce Agent channels, and includes a Dedicated Client Success Manager. The agent fleet is the same as Bronze and Silver — Gold just applies it to a larger surface area and adds the complete protocol stack.',
+          'Gold covers 100 pages in the setup — the most comprehensive schema, AEO/GEO, and protocol implementation of the three tiers. It also achieves full UCP + ACP + AP2 compliance, adds voice and WhatsApp as AI Commerce Agent channels, and includes a Dedicated Client Success Manager. The agent fleet is the same as Bronze and Silver — Gold just applies it to a larger surface area and adds the complete protocol stack.',
       },
       {
         question: 'How does the topical map agent work?',
@@ -217,7 +217,7 @@ export const PACKAGES: PackagePageData[] = [
       },
     ],
     heroDescription:
-      'Gold is the full agent fleet applied to up to 50 pages: maximum schema coverage, AEO/GEO optimization across your entire site, the full UCP/ACP/AP2 Gold Standard protocol stack, and four-channel AI Commerce Agent. Same agents as Bronze and Silver — Gold is for larger sites where more pages means more AI entry points.',
+      'Gold is the full agent fleet applied to up to 100 pages: maximum schema coverage, AEO/GEO optimization across your entire site, the full UCP/ACP/AP2 Gold Standard protocol stack, and four-channel AI Commerce Agent. Same agents as Bronze and Silver — Gold is for larger sites where more pages means more AI entry points.',
   },
   {
     slug: 'core',
