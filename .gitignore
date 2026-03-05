@@ -907,6 +907,9 @@
 !/lib/
 !/lib/**
 
+# Scripts with secrets (run locally only)
+/scripts/
+
 # ==============================================================================
 # ASCv2 — Supabase migrations must NOT be gitignored
 # The **/*.sql pattern above is for PostgreSQL dump files.

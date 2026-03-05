@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import Image from 'next/image'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { CheckCircle, Clock, Users } from 'lucide-react'
@@ -9,6 +10,10 @@ import { buildFAQSchema, buildWebPageSchema } from '@/lib/schemas/faq'
 import { SERVICES, getServiceById } from '@/lib/data/services'
 import { RelatedContent } from '@/app/components/sections/RelatedContent'
 import { ServiceCTASection } from '@/app/components/cart/ServiceCTASection'
+import { ServiceHeroStats } from '@/app/components/services/ServiceHeroStats'
+import { ServiceDeepDive } from '@/app/components/services/ServiceDeepDive'
+import { ServiceComparisonTable } from '@/app/components/services/ServiceComparisonTable'
+import { ServiceAudioPlayer } from '@/app/components/services/ServiceAudioPlayer'
 
 interface PageProps {
   params: Promise<{ slug: string }>
@@ -167,7 +172,8 @@ export default async function ServicePage({ params }: PageProps) {
         aria-labelledby="service-name-heading"
       >
         <div className="container">
-          <div className="max-w-3xl">
+          <div className={service.heroImage ? 'grid lg:grid-cols-[3fr_2fr] gap-10 lg:gap-14 items-center' : 'max-w-3xl'}>
+            <div>
             <div className="flex flex-wrap items-center gap-3 mb-6">
               <span
                 className="badge"
@@ -250,9 +256,42 @@ export default async function ServicePage({ params }: PageProps) {
             </div>
 
             <ServiceCTASection service={service} accentColor={accentColor} />
+
+            {/* Hero stats */}
+            {service.heroStats && service.heroStats.length > 0 && (
+              <ServiceHeroStats stats={service.heroStats} accentColor={accentColor} />
+            )}
           </div>
+          </div>
+
+          {/* Hero image */}
+          {service.heroImage && (
+            <div className="mt-12 lg:mt-0">
+              <div className="relative rounded-xl overflow-hidden" style={{ boxShadow: '0 0 40px rgba(37,99,235,0.08)' }}>
+                <Image
+                  src={service.heroImage}
+                  alt={`${service.name} — ${service.tagline}`}
+                  width={800}
+                  height={500}
+                  className="w-full h-auto"
+                  priority
+                />
+              </div>
+            </div>
+          )}
         </div>
       </section>
+
+      {/* Audio narration (only for services with generated audio) */}
+      {service.heroImage && (
+        <div className="container py-6">
+          <ServiceAudioPlayer
+            src={`/audio/services/${service.id}.mp3`}
+            title={`Listen: ${service.name} Overview`}
+            accentColor={accentColor}
+          />
+        </div>
+      )}
 
       {/* Description */}
       <section className="section" aria-labelledby="service-description-heading">
@@ -265,9 +304,15 @@ export default async function ServicePage({ params }: PageProps) {
               >
                 About {service.name}
               </h2>
-              <p className="text-[var(--color-muted)] leading-relaxed text-base">
+              <p className="text-[var(--color-muted)] leading-relaxed text-base speakable-answer">
                 {service.description}
               </p>
+
+              {service.longDescription && (
+                <p className="text-[var(--color-muted)] leading-relaxed text-sm mt-4">
+                  {service.longDescription}
+                </p>
+              )}
 
               {/* Audience callout */}
               <div
@@ -537,6 +582,20 @@ export default async function ServicePage({ params }: PageProps) {
           </ul>
         </div>
       </section>
+
+      {/* Deep Dive Sections */}
+      {service.deepDiveSections && service.deepDiveSections.length > 0 && (
+        <ServiceDeepDive sections={service.deepDiveSections} accentColor={accentColor} />
+      )}
+
+      {/* Comparison Table */}
+      {service.comparisonRows && service.comparisonRows.length > 0 && (
+        <ServiceComparisonTable
+          title={service.comparisonTitle ?? `${service.name} vs. the Alternative`}
+          rows={service.comparisonRows}
+          accentColor={accentColor}
+        />
+      )}
 
       {/* FAQ */}
       <section

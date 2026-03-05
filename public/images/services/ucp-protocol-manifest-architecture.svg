@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="500" viewBox="0 0 800 500">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0f172a" />
+      <stop offset="100%" stop-color="#1e293b" />
+    </linearGradient>
+  </defs>
+  <rect width="800" height="500" rx="16" fill="url(#bg)" />
+  <rect x="1" y="1" width="798" height="498" rx="16" fill="none" stroke="#f59e0b" stroke-opacity="0.15" />
+
+  <!-- Title -->
+  <text x="40" y="45" fill="#f8fafc" font-size="22" font-weight="700" font-family="system-ui, -apple-system, sans-serif">UCP Manifest Architecture</text>
+  <text x="40" y="70" fill="#94a3b8" font-size="13" font-family="system-ui, -apple-system, sans-serif">Three Transport Layers</text>
+
+  <!-- Grid lines -->
+  <line x1="80" y1="120" x2="760" y2="120" stroke="#334155" stroke-width="0.5" />
+  <line x1="80" y1="190" x2="760" y2="190" stroke="#334155" stroke-width="0.5" />
+  <line x1="80" y1="260" x2="760" y2="260" stroke="#334155" stroke-width="0.5" />
+  <line x1="80" y1="330" x2="760" y2="330" stroke="#334155" stroke-width="0.5" />
+  <line x1="80" y1="400" x2="760" y2="400" stroke="#334155" stroke-width="0.5" />
+
+  <!-- Y-axis labels -->
+  <text x="70" y="124" text-anchor="end" fill="#475569" font-size="10" font-family="system-ui, -apple-system, sans-serif">100</text>
+  <text x="70" y="264" text-anchor="end" fill="#475569" font-size="10" font-family="system-ui, -apple-system, sans-serif">50</text>
+  <text x="70" y="404" text-anchor="end" fill="#475569" font-size="10" font-family="system-ui, -apple-system, sans-serif">0</text>
+
+  <!-- Bars -->
+  
+      <rect x="156.66666666666669" y="134" width="60" height="266" rx="4" fill="#f59e0b" opacity="0.98" />
+      <text x="186.66666666666669" y="126" text-anchor="middle" fill="#f59e0b" font-size="12" font-weight="700" font-family="system-ui, -apple-system, sans-serif">95%</text>
+      <text x="186.66666666666669" y="420" text-anchor="middle" fill="#64748b" font-size="10" font-family="system-ui, -apple-system, sans-serif">REST API</text>
+    
+      <rect x="370.00000000000006" y="148" width="60" height="252" rx="4" fill="#f59e0b" opacity="0.96" />
+      <text x="400.00000000000006" y="140" text-anchor="middle" fill="#f59e0b" font-size="12" font-weight="700" font-family="system-ui, -apple-system, sans-serif">90%</text>
+      <text x="400.00000000000006" y="420" text-anchor="middle" fill="#64748b" font-size="10" font-family="system-ui, -apple-system, sans-serif">MCP Server</text>
+    
+      <rect x="583.3333333333334" y="162" width="60" height="238" rx="4" fill="#f59e0b" opacity="0.94" />
+      <text x="613.3333333333334" y="154" text-anchor="middle" fill="#f59e0b" font-size="12" font-weight="700" font-family="system-ui, -apple-system, sans-serif">85%</text>
+      <text x="613.3333333333334" y="420" text-anchor="middle" fill="#64748b" font-size="10" font-family="system-ui, -apple-system, sans-serif">A2A Protocol</text>
+    
+
+  <!-- Bottom bar -->
+  <rect x="0" y="460" width="800" height="40" rx="0" fill="#f59e0b" opacity="0.08" />
+  <text x="400" y="484" text-anchor="middle" fill="#f59e0b" font-size="11" font-weight="600" font-family="system-ui, -apple-system, sans-serif">Adam Silva Consulting — adamsilvaconsulting.com</text>
+</svg>

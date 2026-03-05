@@ -1,0 +1,8 @@
+node_modules
+.next
+.obsidian
+ASC
+Obsidian
+scripts
+supabase/.temp
+*.log

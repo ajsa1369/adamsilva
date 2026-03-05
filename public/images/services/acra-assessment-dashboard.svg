@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="500" viewBox="0 0 800 500">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0f172a" />
+      <stop offset="100%" stop-color="#1e293b" />
+    </linearGradient>
+  </defs>
+  <rect width="800" height="500" rx="16" fill="url(#bg)" />
+  <rect x="1" y="1" width="798" height="498" rx="16" fill="none" stroke="#3b82f6" stroke-opacity="0.15" />
+
+  <!-- Title -->
+  <text x="40" y="45" fill="#f8fafc" font-size="22" font-weight="700" font-family="system-ui, -apple-system, sans-serif">ACRA Assessment</text>
+  <text x="40" y="70" fill="#94a3b8" font-size="13" font-family="system-ui, -apple-system, sans-serif">9-Pillar Readiness Score</text>
+
+  <!-- Grid lines -->
+  <line x1="80" y1="120" x2="760" y2="120" stroke="#334155" stroke-width="0.5" />
+  <line x1="80" y1="190" x2="760" y2="190" stroke="#334155" stroke-width="0.5" />
+  <line x1="80" y1="260" x2="760" y2="260" stroke="#334155" stroke-width="0.5" />
+  <line x1="80" y1="330" x2="760" y2="330" stroke="#334155" stroke-width="0.5" />
+  <line x1="80" y1="400" x2="760" y2="400" stroke="#334155" stroke-width="0.5" />
+
+  <!-- Y-axis labels -->
+  <text x="70" y="124" text-anchor="end" fill="#475569" font-size="10" font-family="system-ui, -apple-system, sans-serif">100</text>
+  <text x="70" y="264" text-anchor="end" fill="#475569" font-size="10" font-family="system-ui, -apple-system, sans-serif">50</text>
+  <text x="70" y="404" text-anchor="end" fill="#475569" font-size="10" font-family="system-ui, -apple-system, sans-serif">0</text>
+
+  <!-- Bars -->
+  
+      <rect x="85.55555555555556" y="170.4" width="60" height="229.6" rx="4" fill="#3b82f6" opacity="0.9279999999999999" />
+      <text x="115.55555555555556" y="162.4" text-anchor="middle" fill="#3b82f6" font-size="12" font-weight="700" font-family="system-ui, -apple-system, sans-serif">82%</text>
+      <text x="115.55555555555556" y="420" text-anchor="middle" fill="#64748b" font-size="10" font-family="system-ui, -apple-system, sans-serif">UCP</text>
+    
+      <rect x="156.66666666666669" y="274" width="60" height="126" rx="4" fill="#3b82f6" opacity="0.78" />
+      <text x="186.66666666666669" y="266" text-anchor="middle" fill="#3b82f6" font-size="12" font-weight="700" font-family="system-ui, -apple-system, sans-serif">45%</text>
+      <text x="186.66666666666669" y="420" text-anchor="middle" fill="#64748b" font-size="10" font-family="system-ui, -apple-system, sans-serif">ACP</text>
+    
+      <rect x="227.77777777777777" y="316" width="60" height="84" rx="4" fill="#3b82f6" opacity="0.72" />
+      <text x="257.77777777777777" y="308" text-anchor="middle" fill="#3b82f6" font-size="12" font-weight="700" font-family="system-ui, -apple-system, sans-serif">30%</text>
+      <text x="257.77777777777777" y="420" text-anchor="middle" fill="#64748b" font-size="10" font-family="system-ui, -apple-system, sans-serif">AP2</text>
+    
+      <rect x="298.8888888888889" y="218" width="60" height="182" rx="4" fill="#3b82f6" opacity="0.86" />
+      <text x="328.8888888888889" y="210" text-anchor="middle" fill="#3b82f6" font-size="12" font-weight="700" font-family="system-ui, -apple-system, sans-serif">65%</text>
+      <text x="328.8888888888889" y="420" text-anchor="middle" fill="#64748b" font-size="10" font-family="system-ui, -apple-system, sans-serif">AEO</text>
+    
+      <rect x="370" y="237.60000000000002" width="60" height="162.39999999999998" rx="4" fill="#3b82f6" opacity="0.832" />
+      <text x="400" y="229.60000000000002" text-anchor="middle" fill="#3b82f6" font-size="12" font-weight="700" font-family="system-ui, -apple-system, sans-serif">58%</text>
+      <text x="400" y="420" text-anchor="middle" fill="#64748b" font-size="10" font-family="system-ui, -apple-system, sans-serif">GEO</text>
+    
+      <rect x="441.1111111111111" y="198.4" width="60" height="201.6" rx="4" fill="#3b82f6" opacity="0.8879999999999999" />
+      <text x="471.1111111111111" y="190.4" text-anchor="middle" fill="#3b82f6" font-size="12" font-weight="700" font-family="system-ui, -apple-system, sans-serif">72%</text>
+      <text x="471.1111111111111" y="420" text-anchor="middle" fill="#64748b" font-size="10" font-family="system-ui, -apple-system, sans-serif">Schema</text>
+    
+      <rect x="512.2222222222223" y="153.6" width="60" height="246.4" rx="4" fill="#3b82f6" opacity="0.952" />
+      <text x="542.2222222222223" y="145.6" text-anchor="middle" fill="#3b82f6" font-size="12" font-weight="700" font-family="system-ui, -apple-system, sans-serif">88%</text>
+      <text x="542.2222222222223" y="420" text-anchor="middle" fill="#64748b" font-size="10" font-family="system-ui, -apple-system, sans-serif">Token</text>
+    
+      <rect x="583.3333333333334" y="246" width="60" height="154" rx="4" fill="#3b82f6" opacity="0.8200000000000001" />
+      <text x="613.3333333333334" y="238" text-anchor="middle" fill="#3b82f6" font-size="12" font-weight="700" font-family="system-ui, -apple-system, sans-serif">55%</text>
+      <text x="613.3333333333334" y="420" text-anchor="middle" fill="#64748b" font-size="10" font-family="system-ui, -apple-system, sans-serif">Authority</text>
+    
+      <rect x="654.4444444444445" y="288" width="60" height="112" rx="4" fill="#3b82f6" opacity="0.76" />
+      <text x="684.4444444444445" y="280" text-anchor="middle" fill="#3b82f6" font-size="12" font-weight="700" font-family="system-ui, -apple-system, sans-serif">40%</text>
+      <text x="684.4444444444445" y="420" text-anchor="middle" fill="#64748b" font-size="10" font-family="system-ui, -apple-system, sans-serif">Competitive</text>
+    
+
+  <!-- Bottom bar -->
+  <rect x="0" y="460" width="800" height="40" rx="0" fill="#3b82f6" opacity="0.08" />
+  <text x="400" y="484" text-anchor="middle" fill="#3b82f6" font-size="11" font-weight="600" font-family="system-ui, -apple-system, sans-serif">Adam Silva Consulting — adamsilvaconsulting.com</text>
+</svg>
