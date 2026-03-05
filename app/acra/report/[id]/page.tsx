@@ -4,8 +4,9 @@ import Link from 'next/link'
 import { ArrowLeft, ArrowRight, Download, RefreshCw, AlertTriangle, CheckCircle2, XCircle, Star } from 'lucide-react'
 import { createClient } from '@/lib/supabase/server'
 import { ShareReportButton } from '@/app/components/acra/ShareReportButton'
-import { ScoreGauge } from '@/app/components/acra/ScoreGauge'
 import { ScoreCard } from '@/app/components/acra/ScoreCard'
+import { ScoreHero } from '@/app/components/acra/ScoreHero'
+import { PillarScoreChart } from '@/app/components/acra/PillarScoreChart'
 import { RevenueImpactPanel } from '@/app/components/acra/RevenueImpact'
 import { LLMScoreBoard } from '@/app/components/acra/LLMScoreBoard'
 import { RecommendedServices } from '@/app/components/acra/RecommendedServices'
@@ -261,44 +262,22 @@ export default async function ACRAReportPage({ params }: PageProps) {
             </div>
           )}
 
-          {/* Overall score hero */}
-          <div className="card p-6">
-            <div className="grid sm:grid-cols-4 gap-6 items-center">
-              <div className="flex flex-col items-center sm:border-r border-[var(--color-border)] pr-6">
-                <ScoreGauge score={r.overall_score} grade={grade} size="lg" />
-                <div className="text-sm font-semibold text-[var(--color-muted-2)] mt-2">Overall ACRA Score</div>
-              </div>
-              <div className="sm:col-span-3 grid grid-cols-2 sm:grid-cols-3 gap-4">
-                {[
-                  { label: 'Protocol', score: r.score_protocol_compliance },
-                  { label: 'AEO', score: r.score_aeo },
-                  { label: 'GEO', score: r.score_geo },
-                  { label: 'SEO', score: r.score_seo_foundation },
-                  { label: 'Social', score: r.score_social_authority },
-                  { label: 'Press', score: r.score_press_coverage },
-                  { label: 'AI Authority', score: r.score_ai_authority },
-                  { label: 'LLM Rec.', score: r.score_llm_recommendation },
-                  { label: 'Schema', score: r.score_structured_data },
-                ].map(({ label, score }) => {
-                  const g = score >= 90 ? 'A' : score >= 75 ? 'B' : score >= 60 ? 'C' : score >= 40 ? 'D' : 'F'
-                  const c = gradeColor[g]
-                  return (
-                    <div key={label} className="flex items-center gap-2">
-                      <div className="flex-1">
-                        <div className="flex justify-between text-xs mb-1">
-                          <span className="text-[var(--color-muted-2)]">{label}</span>
-                          <span className="font-bold" style={{ color: c }}>{score}</span>
-                        </div>
-                        <div className="h-1.5 bg-[var(--color-surface-2)] rounded-full overflow-hidden">
-                          <div className="h-full rounded-full" style={{ width: `${score}%`, background: c }} />
-                        </div>
-                      </div>
-                    </div>
-                  )
-                })}
-              </div>
-            </div>
-          </div>
+          {/* Overall score hero — animated client component */}
+          <ScoreHero
+            overallScore={r.overall_score}
+            grade={grade}
+            pillars={[
+              { label: 'Protocol', score: r.score_protocol_compliance },
+              { label: 'AEO', score: r.score_aeo },
+              { label: 'GEO', score: r.score_geo },
+              { label: 'SEO', score: r.score_seo_foundation },
+              { label: 'Social', score: r.score_social_authority },
+              { label: 'Press', score: r.score_press_coverage },
+              { label: 'AI Authority', score: r.score_ai_authority },
+              { label: 'LLM Rec.', score: r.score_llm_recommendation },
+              { label: 'Schema', score: r.score_structured_data },
+            ]}
+          />
 
           {/* Revenue Impact — first and most prominent */}
           <RevenueImpactPanel impact={revenueImpact} url={scan.url} />
@@ -321,6 +300,21 @@ export default async function ACRAReportPage({ params }: PageProps) {
             framework={scan.framework}
             overallScore={r.overall_score}
             revenueImpact={revenueImpact}
+          />
+
+          {/* Pillar radar + bar chart */}
+          <PillarScoreChart
+            pillars={[
+              { label: 'Protocol Compliance', short: 'Proto', score: r.score_protocol_compliance },
+              { label: 'Answer Engine Opt.', short: 'AEO', score: r.score_aeo },
+              { label: 'Generative Engine Opt.', short: 'GEO', score: r.score_geo },
+              { label: 'SEO Foundation', short: 'SEO', score: r.score_seo_foundation },
+              { label: 'Social Authority', short: 'Social', score: r.score_social_authority },
+              { label: 'Press Coverage', short: 'Press', score: r.score_press_coverage },
+              { label: 'AI Authority', short: 'AI Auth', score: r.score_ai_authority },
+              { label: 'LLM Recommendation', short: 'LLM', score: r.score_llm_recommendation },
+              { label: 'Structured Data', short: 'Schema', score: r.score_structured_data },
+            ]}
           />
 
           {/* Pillar breakdown */}

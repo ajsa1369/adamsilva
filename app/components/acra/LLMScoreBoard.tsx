@@ -53,11 +53,10 @@ function PerplexityLogo() {
 }
 
 function ClaudeLogo() {
-  // Anthropic's official A-mark glyph
+  // Official Claude logo PNG (provided by Anthropic)
   return (
-    <svg viewBox="0 0 24 24" fill="currentColor" className="w-full h-full">
-      <path d="M13.827 3.52h-3.654L5 20.52h3.2l1.261-3.753h5.079l1.261 3.753H19L13.827 3.52zm-3.476 10.5 1.649-4.91 1.649 4.91H10.35z" />
-    </svg>
+    // eslint-disable-next-line @next/next/no-img-element
+    <img src="/logos/claude.png" alt="Claude" className="w-full h-full object-contain" />
   )
 }
 
@@ -262,7 +261,7 @@ function GaugeCard({
         </svg>
         {/* Logo centered in ring */}
         <div className="absolute inset-0 flex items-center justify-center">
-          <div className="w-6 h-6" style={{ color }}>
+          <div className="w-6 h-6 flex items-center justify-center" style={{ color }}>
             <Logo />
           </div>
         </div>
@@ -353,7 +352,7 @@ export function LLMScoreBoard({ scores }: Props) {
               const sc = scoreColor(score)
               return (
                 <div key={key} className="flex items-center gap-3 px-4 py-3">
-                  <div className="w-5 h-5 shrink-0" style={{ color }}>
+                  <div className="w-5 h-5 shrink-0 flex items-center justify-center" style={{ color }}>
                     <Logo />
                   </div>
                   <div className="font-semibold text-xs text-[var(--color-text)] w-20 shrink-0">{name}</div>
