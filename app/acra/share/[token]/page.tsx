@@ -1,20 +1,18 @@
 import type { Metadata } from 'next'
-import { notFound, redirect } from 'next/navigation'
+import { notFound } from 'next/navigation'
 import Link from 'next/link'
-import { ArrowLeft, ArrowRight, Download, RefreshCw, AlertTriangle, CheckCircle2, XCircle, Star } from 'lucide-react'
-import { createClient } from '@/lib/supabase/server'
-import { ShareReportButton } from '@/app/components/acra/ShareReportButton'
+import { ArrowRight, AlertTriangle, CheckCircle2, XCircle, Star } from 'lucide-react'
+import { createClient } from '@supabase/supabase-js'
 import { ScoreGauge } from '@/app/components/acra/ScoreGauge'
 import { ScoreCard } from '@/app/components/acra/ScoreCard'
 import { RevenueImpactPanel } from '@/app/components/acra/RevenueImpact'
 import { LLMScoreBoard } from '@/app/components/acra/LLMScoreBoard'
 import { RecommendedServices } from '@/app/components/acra/RecommendedServices'
-import { ConsultationBooking } from '@/app/components/acra/ConsultationBooking'
 import { calculateRevenueImpact, type RevenueRange } from '@/lib/acra/revenue'
 import type { PillarScore, LLMScores, Finding } from '@/lib/acra/scoring'
 
 interface PageProps {
-  params: Promise<{ id: string }>
+  params: Promise<{ token: string }>
 }
 
 interface DBReport {
@@ -45,7 +43,6 @@ interface DBReport {
   missing_schema_types: string[]
   recommendations: Array<{ severity: string; title: string; detail: string; fixWith: string | null }>
   scan_meta: Record<string, unknown>
-  share_token: string
   created_at: string
   acra_scans: {
     url: string
@@ -55,6 +52,17 @@ interface DBReport {
     framework: string | null
     created_at: string
   }
+}
+
+const SERVICE_TO_PILLAR: Record<string, string> = {
+  'ucp-implementation': 'protocol',
+  'acp-integration': 'protocol',
+  'ap2-trust-layer': 'protocol',
+  'aeo-audit': 'aeo',
+  'geo-implementation': 'geo',
+  'authority-building': 'ai-authority',
+  'press-syndicator': 'press',
+  'social-media-manager': 'social',
 }
 
 function buildPillarsFromDB(report: DBReport): PillarScore[] {
@@ -67,7 +75,7 @@ function buildPillarsFromDB(report: DBReport): PillarScore[] {
   ): PillarScore => {
     const grade = score >= 90 ? 'A' : score >= 75 ? 'B' : score >= 60 ? 'C' : score >= 40 ? 'D' : 'F'
     const status: PillarScore['status'] = score >= 80 ? 'excellent' : score >= 60 ? 'good' : score >= 35 ? 'needs-work' : 'critical'
-    const findings = (report.recommendations as Array<{ severity: string; title: string; detail: string; fixWith: string | null }>)
+    const findings = report.recommendations
       .filter((r) => r.fixWith && SERVICE_TO_PILLAR[r.fixWith] === key)
       .map((r) => ({
         severity: r.severity as Finding['severity'],
@@ -109,47 +117,52 @@ function buildPillarsFromDB(report: DBReport): PillarScore[] {
   ]
 }
 
-const SERVICE_TO_PILLAR: Record<string, string> = {
-  'ucp-implementation': 'protocol',
-  'acp-integration': 'protocol',
-  'ap2-trust-layer': 'protocol',
-  'aeo-audit': 'aeo',
-  'geo-implementation': 'geo',
-  'authority-building': 'ai-authority',
-  'press-syndicator': 'press',
-  'social-media-manager': 'social',
+async function getReportByToken(token: string): Promise<DBReport | null> {
+  const supabase = createClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.SUPABASE_SERVICE_ROLE_KEY!
+  )
+  const { data, error } = await supabase
+    .from('acra_reports')
+    .select(`*, acra_scans ( url, company_name, industry, monthly_revenue_range, framework, created_at )`)
+    .eq('share_token', token)
+    .single()
+
+  if (error || !data) return null
+  return data as unknown as DBReport
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
-  const { id } = await params
+  const { token } = await params
+  const report = await getReportByToken(token)
+  if (!report) return { title: 'Report Not Found' }
+
+  const domain = (() => {
+    try { return new URL(report.acra_scans.url.startsWith('http') ? report.acra_scans.url : `https://${report.acra_scans.url}`).hostname }
+    catch { return report.acra_scans.url }
+  })()
+
   return {
-    title: `ACRA Report — Agentic Commerce Readiness Assessment | Adam Silva Consulting`,
-    description: `Your full Agentic Commerce Readiness Assessment report — 9 pillar scores, LLM recommendation scores, and projected revenue impact.`,
-    robots: { index: false },
+    title: `ACRA Report for ${domain} — Agentic Commerce Readiness Assessment`,
+    description: `Agentic Commerce Readiness Assessment for ${domain}. Overall score: ${report.overall_score}/100. See 9 pillar scores, LLM recommendation scores, and revenue impact.`,
+    openGraph: {
+      title: `ACRA Report: ${domain} scores ${report.overall_score}/100`,
+      description: `See how ${domain} performs across 9 agentic commerce pillars and what it means for AI-driven revenue.`,
+    },
   }
 }
 
-export default async function ACRAReportPage({ params }: PageProps) {
-  const { id } = await params
-  const supabase = await createClient()
-  const { data: { user } } = await supabase.auth.getUser()
+export default async function ACRASharePage({ params }: PageProps) {
+  const { token } = await params
+  const report = await getReportByToken(token)
+  if (!report) notFound()
 
-  if (!user) redirect('/acra/login')
-
-  const { data: report, error } = await supabase
-    .from('acra_reports')
-    .select(`
-      *, acra_scans ( url, company_name, industry, monthly_revenue_range, framework, created_at )
-    `)
-    .eq('id', id)
-    .eq('user_id', user.id)
-    .single()
-
-  if (error || !report) notFound()
-
-  const r = report as unknown as DBReport
+  const r = report
   const scan = r.acra_scans
-  const domain = (() => { try { return new URL(scan.url.startsWith('http') ? scan.url : `https://${scan.url}`).hostname } catch { return scan.url } })()
+  const domain = (() => {
+    try { return new URL(scan.url.startsWith('http') ? scan.url : `https://${scan.url}`).hostname }
+    catch { return scan.url }
+  })()
 
   const pillars = buildPillarsFromDB(r)
   const llmScores: LLMScores = {
@@ -184,15 +197,13 @@ export default async function ACRAReportPage({ params }: PageProps) {
 
   return (
     <>
-      {/* Sticky report header */}
+      {/* Shared report banner */}
       <div className="sticky top-0 z-40 border-b border-[var(--color-border)] bg-[var(--color-base)]/95 backdrop-blur-sm">
         <div className="container py-3 flex items-center justify-between gap-4">
           <div className="flex items-center gap-3">
-            <Link href="/acra/run" className="text-[var(--color-muted-2)] hover:text-[var(--color-accent)] flex items-center gap-1 text-sm">
-              <ArrowLeft size={14} />
-              <span className="hidden sm:inline">All Scans</span>
-            </Link>
-            <div className="text-sm font-bold text-[var(--color-text)] truncate max-w-[200px] sm:max-w-none">{domain}</div>
+            <Link href="/" className="text-sm font-bold text-[var(--color-accent)]">Adam Silva Consulting</Link>
+            <span className="text-[var(--color-muted-2)]">/</span>
+            <div className="text-sm font-bold text-[var(--color-text)] truncate max-w-[160px] sm:max-w-none">{domain}</div>
             <span
               className="text-sm font-bold px-2 py-0.5 rounded-full"
               style={{ background: `${gradeColor[grade]}20`, color: gradeColor[grade] }}
@@ -200,23 +211,23 @@ export default async function ACRAReportPage({ params }: PageProps) {
               Grade {grade}
             </span>
           </div>
-          <div className="flex items-center gap-2">
-            <span className="text-xs text-[var(--color-muted-2)] hidden sm:inline">
-              {new Date(r.created_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
-            </span>
-            <ShareReportButton shareToken={r.share_token} />
-            <Link href="/acra/run" className="btn-secondary text-xs py-1.5 px-3 flex items-center gap-1">
-              <RefreshCw size={12} />
-              Re-scan
-            </Link>
-          </div>
+          <Link href="/acra/login" className="btn-primary text-xs py-1.5 px-3">
+            Get Your Free ACRA →
+          </Link>
+        </div>
+      </div>
+
+      {/* Shared report notice */}
+      <div className="bg-[var(--color-surface)] border-b border-[var(--color-border)]">
+        <div className="container py-2 text-xs text-[var(--color-muted-2)] text-center">
+          This is a shared Agentic Commerce Readiness Assessment for <strong>{domain}</strong> — generated on {new Date(r.created_at).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}.{' '}
+          <Link href="/acra/login" className="text-[var(--color-accent)] hover:underline">Run your own free assessment →</Link>
         </div>
       </div>
 
       <div className="section">
         <div className="container max-w-5xl space-y-8">
 
-          {/* Critical alert banner */}
           {criticalCount > 0 && (
             <div
               className="flex items-start gap-3 p-4 rounded-xl text-white"
@@ -226,7 +237,7 @@ export default async function ACRAReportPage({ params }: PageProps) {
               <AlertTriangle size={20} className="shrink-0 mt-0.5" />
               <div>
                 <strong>{criticalCount} critical gap{criticalCount > 1 ? 's' : ''} found.</strong>{' '}
-                These issues are actively costing you AI revenue and reducing your LLM recommendation probability.
+                These issues are actively costing {domain} AI revenue and reducing LLM recommendation probability.
                 <Link href="/contact" className="ml-2 underline font-semibold">Book a free strategy call →</Link>
               </div>
             </div>
@@ -271,16 +282,10 @@ export default async function ACRAReportPage({ params }: PageProps) {
             </div>
           </div>
 
-          {/* Revenue Impact — first and most prominent */}
           <RevenueImpactPanel impact={revenueImpact} url={scan.url} />
-
-          {/* LLM Scores */}
           <LLMScoreBoard scores={llmScores} />
-
-          {/* ASC Gold Standard Comparison */}
           <GoldStandardSection score={r.overall_score} framework={scan.framework} pillars={pillarScoreMap} />
 
-          {/* Pillar breakdown */}
           <div>
             <h2 className="text-xl font-bold text-[var(--color-text)] mb-4">Detailed Pillar Analysis</h2>
             <div className="space-y-4">
@@ -290,7 +295,6 @@ export default async function ACRAReportPage({ params }: PageProps) {
             </div>
           </div>
 
-          {/* Detected signals */}
           <div className="grid sm:grid-cols-2 gap-6">
             <div className="card p-5">
               <h3 className="text-sm font-bold text-[var(--color-text)] mb-3">Schema Types Detected ({r.schema_types_found?.length ?? 0})</h3>
@@ -332,20 +336,19 @@ export default async function ACRAReportPage({ params }: PageProps) {
             </div>
           </div>
 
-          {/* Recommended services based on scan gaps */}
-          <RecommendedServices
-            pillarScores={pillarScoreMap}
-            domain={domain}
-            framework={scan.framework}
-          />
+          <RecommendedServices pillarScores={pillarScoreMap} domain={domain} framework={scan.framework} />
 
-          {/* Inline consultation booking */}
-          <ConsultationBooking
-            domain={domain}
-            overallScore={r.overall_score}
-            criticalCount={criticalCount}
-            pillarScores={pillarScoreMap}
-          />
+          {/* CTA for share page viewers */}
+          <div className="card p-8 text-center">
+            <h2 className="text-2xl font-bold text-[var(--color-text)] mb-2">How Does Your Site Score?</h2>
+            <p className="text-[var(--color-muted)] mb-6 max-w-lg mx-auto">
+              Get your own free Agentic Commerce Readiness Assessment in minutes — see exactly where you stand against AI-driven commerce.
+            </p>
+            <Link href="/acra/login" className="btn-primary inline-flex items-center gap-2">
+              Run My Free ACRA
+              <ArrowRight size={16} />
+            </Link>
+          </div>
 
         </div>
       </div>
@@ -363,36 +366,11 @@ function GoldStandardSection({
   pillars: Record<string, number>
 }) {
   const criteria = [
-    {
-      label: 'SPA + Server-Side Rendering (SSR)',
-      description: 'Content immediately available in HTML — no JavaScript required for AI agents to read.',
-      hint: framework ? `Implementation approach varies for ${framework}` : 'Requires SSR or edge rendering.',
-      pass: (pillars['seo'] ?? 0) >= 65,
-    },
-    {
-      label: 'Heavy JSON-LD Schema Library',
-      description: 'Dense schema markup for Product, Organization, Person, FAQPage, SpeakableSpecification, and more.',
-      hint: 'Maps all products and services as machine-readable entities.',
-      pass: (pillars['structured-data'] ?? 0) >= 70,
-    },
-    {
-      label: 'Agentic Protocol Stack (UCP/ACP/AP2)',
-      description: 'AI agents can discover, negotiate, and execute purchases without human intervention.',
-      hint: 'Requires /.well-known/ucp, /.well-known/acp, and /.well-known/ap2 endpoints.',
-      pass: (pillars['protocol'] ?? 0) >= 60,
-    },
-    {
-      label: 'Tier 1 Press Release Syndication',
-      description: 'Regular press releases distributed via Business Wire or PR Newswire — the #1 AI authority signal.',
-      hint: 'Branded web mentions have a 0.664 correlation with AI citation frequency (Ahrefs data).',
-      pass: (pillars['press'] ?? 0) >= 65,
-    },
-    {
-      label: 'Social Media Authority + sameAs Entity Graph',
-      description: 'LinkedIn, Twitter/X, YouTube linked via sameAs in JSON-LD — machines can verify your brand identity.',
-      hint: 'Social proof reduces AI recommendation hesitation by up to 40%.',
-      pass: (pillars['social'] ?? 0) >= 65,
-    },
+    { label: 'SPA + Server-Side Rendering (SSR)', description: 'Content immediately available in HTML — no JavaScript required for AI agents to read.', hint: framework ? `Implementation approach varies for ${framework}` : 'Requires SSR or edge rendering.', pass: (pillars['seo'] ?? 0) >= 65 },
+    { label: 'Heavy JSON-LD Schema Library', description: 'Dense schema markup for Product, Organization, Person, FAQPage, SpeakableSpecification, and more.', hint: 'Maps all products and services as machine-readable entities.', pass: (pillars['structured-data'] ?? 0) >= 70 },
+    { label: 'Agentic Protocol Stack (UCP/ACP/AP2)', description: 'AI agents can discover, negotiate, and execute purchases without human intervention.', hint: 'Requires /.well-known/ucp, /.well-known/acp, and /.well-known/ap2 endpoints.', pass: (pillars['protocol'] ?? 0) >= 60 },
+    { label: 'Tier 1 Press Release Syndication', description: 'Regular press releases distributed via Business Wire or PR Newswire — the #1 AI authority signal.', hint: 'Branded web mentions have a 0.664 correlation with AI citation frequency (Ahrefs data).', pass: (pillars['press'] ?? 0) >= 65 },
+    { label: 'Social Media Authority + sameAs Entity Graph', description: 'LinkedIn, Twitter/X, YouTube linked via sameAs in JSON-LD — machines can verify your brand identity.', hint: 'Social proof reduces AI recommendation hesitation by up to 40%.', pass: (pillars['social'] ?? 0) >= 65 },
   ]
 
   const passCount = criteria.filter((c) => c.pass).length
@@ -400,10 +378,7 @@ function GoldStandardSection({
 
   return (
     <div className="card overflow-hidden">
-      <div
-        className="p-5"
-        style={{ background: 'linear-gradient(135deg, color-mix(in srgb, #f59e0b 12%, transparent), color-mix(in srgb, #f59e0b 5%, transparent))' }}
-      >
+      <div className="p-5" style={{ background: 'linear-gradient(135deg, color-mix(in srgb, #f59e0b 12%, transparent), color-mix(in srgb, #f59e0b 5%, transparent))' }}>
         <div className="flex items-start justify-between gap-4">
           <div>
             <div className="flex items-center gap-2 mb-1">
@@ -416,52 +391,35 @@ function GoldStandardSection({
             </p>
           </div>
           <div className="text-right shrink-0">
-            <div className="text-2xl font-bold" style={{ color: atGoldStandard ? '#10b981' : passCount >= 3 ? '#f59e0b' : '#ef4444' }}>
-              {passCount}/5
-            </div>
+            <div className="text-2xl font-bold" style={{ color: atGoldStandard ? '#10b981' : passCount >= 3 ? '#f59e0b' : '#ef4444' }}>{passCount}/5</div>
             <div className="text-xs text-[var(--color-muted-2)]">criteria met</div>
           </div>
         </div>
       </div>
-
       <div className="divide-y divide-[var(--color-border)]">
         {criteria.map((c) => (
           <div key={c.label} className="p-4 flex items-start gap-3">
             <div className="mt-0.5 shrink-0">
-              {c.pass ? (
-                <CheckCircle2 size={18} className="text-green-500" />
-              ) : (
-                <XCircle size={18} className="text-red-400" />
-              )}
+              {c.pass ? <CheckCircle2 size={18} className="text-green-500" /> : <XCircle size={18} className="text-red-400" />}
             </div>
             <div className="flex-1 min-w-0">
               <div className="font-semibold text-sm text-[var(--color-text)]">{c.label}</div>
               <p className="text-xs text-[var(--color-muted-2)] mt-0.5 leading-relaxed">{c.description}</p>
-              {!c.pass && (
-                <p className="text-xs text-amber-600 mt-1 font-medium">{c.hint}</p>
-              )}
+              {!c.pass && <p className="text-xs text-amber-600 mt-1 font-medium">{c.hint}</p>}
             </div>
             <div className="shrink-0">
-              <span
-                className="text-xs font-bold px-2 py-0.5 rounded-full"
-                style={{
-                  background: c.pass ? '#10b98115' : '#ef444415',
-                  color: c.pass ? '#10b981' : '#ef4444',
-                }}
-              >
+              <span className="text-xs font-bold px-2 py-0.5 rounded-full" style={{ background: c.pass ? '#10b98115' : '#ef444415', color: c.pass ? '#10b981' : '#ef4444' }}>
                 {c.pass ? 'Pass' : 'Gap'}
               </span>
             </div>
           </div>
         ))}
       </div>
-
       {!atGoldStandard && (
         <div className="p-4 border-t border-[var(--color-border)] bg-[var(--color-surface)]">
           <p className="text-sm text-[var(--color-muted)] leading-relaxed">
-            <strong className="text-[var(--color-text)]">Your site is {5 - passCount} criteria away from the ASC Gold Standard.</strong>{' '}
+            <strong className="text-[var(--color-text)]">This site is {5 - passCount} criteria away from the ASC Gold Standard.</strong>{' '}
             Sites at Gold Standard level score 85+ overall and capture 3–5× more AI-driven revenue than average.
-            {framework && (` We have a proven implementation path for ${framework}.`)}
           </p>
           <Link href="/contact" className="btn-primary mt-3 inline-flex items-center gap-1.5 text-sm">
             See What Full Implementation Looks Like
