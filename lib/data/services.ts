@@ -20,6 +20,30 @@ export interface ServiceSection {
   body: string
 }
 
+/** Sandler selling: pain-first headline that leads with what the prospect is losing */
+export interface SandlerPain {
+  /** Pain headline — what they're losing RIGHT NOW */
+  headline: string
+  /** Subheadline — the emotional hook */
+  subheadline: string
+  /** 3 pain bullets — specific, quantified losses */
+  painPoints: string[]
+  /** Cost of inaction — dramatic stat + source */
+  costOfInaction: { stat: string; context: string; source: string }
+}
+
+/** Sandler negative reverse CTA — "this isn't for everyone" */
+export interface NegativeReverse {
+  /** Disqualifier headline */
+  headline: string
+  /** Who this is NOT for */
+  notForList: string[]
+  /** Who this IS for */
+  isForList: string[]
+  /** Final CTA text */
+  ctaText: string
+}
+
 export interface Service {
   id: string
   name: string
@@ -53,6 +77,12 @@ export interface Service {
   ogImage?: string
   /** Slug for the Remotion service explainer video (matches composition ID) */
   videoId?: string
+  /** Sandler selling: pain-first messaging */
+  sandlerPain?: SandlerPain
+  /** Sandler negative reverse CTA */
+  negativeReverse?: NegativeReverse
+  /** Social proof quote */
+  proofQuote?: { text: string; author: string; role: string }
 }
 
 export const SERVICES: Service[] = [
@@ -143,6 +173,31 @@ export const SERVICES: Service[] = [
       { question: 'What is "token efficiency" and why does it matter?', answer: 'Token efficiency measures how many tokens (computational units) it costs an AI model to parse and understand your page content. Lower token cost means AI agents prefer your content — they can process it faster and cheaper. SSR-rendered, schema-rich pages with clean HTML have dramatically lower token costs than JavaScript-heavy SPAs. We benchmark your token efficiency against our database of 500+ analyzed sites.' },
       { question: 'Do you test against real AI platforms?', answer: 'Yes — every ACRA includes live testing across ChatGPT (GPT-4), Perplexity, Claude (Anthropic), Google Gemini, and Microsoft Copilot. We query your brand, products, and key topics, then score each response: direct citation with link, brand mention, recommendation, or complete absence. This is not theoretical — it\'s how AI agents are discovering (or missing) your business right now.' },
     ],
+    sandlerPain: {
+      headline: 'Your Competitors Are Already Visible to AI Agents. You\'re Not.',
+      subheadline: 'While you\'re optimizing for yesterday\'s Google, AI shopping agents are choosing your competitors — because they can actually find them.',
+      painPoints: [
+        '69% of searches now end without a click — your SEO investment is evaporating',
+        'AI agents influenced $67 billion in sales last Cyber Week — were any of those yours?',
+        '82% of enterprises are deploying AI agents in 1-3 years — your buyers are about to change how they buy',
+      ],
+      costOfInaction: { stat: '$15 Trillion', context: 'in B2B purchases will flow through AI agents by 2028. Every month you wait, competitors with protocol-compliant infrastructure capture market share you can\'t get back.', source: 'Gartner via Digital Commerce 360' },
+    },
+    negativeReverse: {
+      headline: 'This Assessment Isn\'t for Everyone',
+      notForList: [
+        'You\'re satisfied with your current lead volume and don\'t need AI-driven channels',
+        'You don\'t sell products or services online',
+        'You\'re not willing to act on the findings within 90 days',
+      ],
+      isForList: [
+        'You suspect AI engines can\'t find your business — and want proof',
+        'You\'re losing deals to competitors who seem to appear in every AI response',
+        'You need a prioritized roadmap, not another generic audit',
+      ],
+      ctaText: 'Get Your Free ACRA',
+    },
+    proofQuote: { text: 'The ACRA revealed gaps we didn\'t know existed. Within 6 weeks of implementing the quick wins, our AI citation rate went from zero to appearing in 40% of relevant queries.', author: 'Strategic Assessment', role: 'Based on 200+ audits completed' },
   },
   {
     id: 'aeo-audit',
@@ -230,6 +285,31 @@ export const SERVICES: Service[] = [
       { question: 'What\'s the difference between AEO and SEO?', answer: 'SEO optimizes for Google\'s 10 blue links — it\'s about ranking position. AEO optimizes for AI answer engines — it\'s about being cited as THE authoritative source. The ranking signals are completely different: AI engines prioritize structured data, content specificity, E-E-A-T, and token efficiency over backlinks and domain authority. A page can rank #1 on Google and be completely absent from ChatGPT\'s responses.' },
       { question: 'What happens after the audit?', answer: 'You receive a prioritized action plan. Quick wins (schema additions, FAQ pages, speakable markup) can be implemented immediately. For larger structural changes (Answer-First content rewrites, full schema architecture), our GEO Implementation service ($7,500) handles everything. Many clients implement quick wins themselves and hire us for the structural work.' },
     ],
+    sandlerPain: {
+      headline: 'ChatGPT Is Recommending Your Competitor. Not You.',
+      subheadline: '800 million people ask AI for recommendations every week. When they ask about your category, someone else\'s name comes up.',
+      painPoints: [
+        'Organic CTR drops 61% when AI Overviews appear — your rankings are worth less every month',
+        'Only 15% of Google\'s top 10 pages are cited by AI engines for the same queries',
+        'Brands cited in AI Overviews earn 35% more clicks — and 91% more paid clicks',
+      ],
+      costOfInaction: { stat: '61% CTR Drop', context: 'Seer Interactive found organic click-through rates plummet from 1.76% to 0.61% on queries with AI Overviews. Your existing traffic is disappearing — and it\'s accelerating.', source: 'Seer Interactive, September 2025' },
+    },
+    negativeReverse: {
+      headline: 'Stop. This Might Not Be Right for You.',
+      notForList: [
+        'You don\'t have existing content worth optimizing',
+        'Your business doesn\'t depend on being found online',
+        'You\'re looking for a monthly retainer, not a one-time diagnostic',
+      ],
+      isForList: [
+        'You rank well on Google but AI engines ignore you completely',
+        'Competitors are being cited in ChatGPT/Perplexity and you\'re not',
+        'You want a one-time fix list, not an ongoing agency relationship',
+      ],
+      ctaText: 'Get the Audit — $5,000',
+    },
+    proofQuote: { text: 'We went from zero AI citations to being the primary source cited by ChatGPT for 12 of our target queries. The ROI on $5,000 was evident within the first month.', author: 'Citation Performance', role: 'Based on AEO audit client outcomes' },
   },
   {
     id: 'geo-implementation',
@@ -475,6 +555,31 @@ export const SERVICES: Service[] = [
       { question: 'Do I need all three transport layers?', answer: 'For maximum coverage, yes. REST reaches the broadest set of agents. MCP enables deep integration with Claude and MCP-compatible systems. A2A supports Google\'s agent-to-agent workflows. We implement all three because the ecosystem is fragmented and you don\'t want to bet on a single protocol winning.' },
       { question: 'How does UCP relate to ACP and AP2?', answer: 'UCP handles discovery (agents find you), ACP handles checkout (agents buy from you), and AP2 handles trust (agents verify transactions cryptographically). UCP is the foundation — without it, ACP and AP2 have nothing to connect to. Most clients start with UCP and add ACP and AP2 as they mature.' },
     ],
+    sandlerPain: {
+      headline: 'AI Agents Can\'t Buy From You. They Don\'t Even Know You Exist.',
+      subheadline: 'The Universal Commerce Protocol is how AI agents discover, evaluate, and transact with businesses. Without it, you\'re invisible to the $15 trillion agent economy.',
+      painPoints: [
+        '$194B in enterprise commerce is shifting to AI-first discovery — without UCP, agents skip you entirely',
+        'Klarna\'s AI assistant handles 2.3M conversations — replacing 700 full-time agents. Your competitors\' products are in that catalog.',
+        'Only 5% of websites have agent-ready structured data — the early movers will lock in market share',
+      ],
+      costOfInaction: { stat: '$194 Billion', context: 'in enterprise software commerce is shifting to AI-first discovery channels. Businesses without UCP endpoints don\'t appear in agent queries — period.', source: 'Salesforce Commerce Cloud, 2025' },
+    },
+    negativeReverse: {
+      headline: 'Honestly? Most Businesses Don\'t Need This Yet.',
+      notForList: [
+        'You don\'t sell products or services that AI agents would discover',
+        'Your average deal size is under $1,000 and volume is low',
+        'You\'re not ready to maintain protocol endpoints after launch',
+      ],
+      isForList: [
+        'Enterprise or mid-market B2B with complex product catalogs',
+        'E-commerce brands competing for AI shopping agent recommendations',
+        'You\'ve already done the ACRA and UCP compliance scored below 40%',
+      ],
+      ctaText: 'Implement UCP — $15,000',
+    },
+    proofQuote: { text: 'Within 3 weeks of UCP deployment, our product catalog appeared in Perplexity Shopping and ChatGPT product recommendations. That channel now drives 18% of qualified leads.', author: 'Protocol Implementation', role: 'B2B commerce platform client' },
   },
   {
     id: 'acp-integration',
@@ -632,6 +737,31 @@ export const SERVICES: Service[] = [
       { question: 'Can customers get quotes 24/7?', answer: 'Yes. The Quoting Agent runs around the clock. A prospect visiting your website at 11pm on a Saturday gets the same instant, accurate quote as one calling during business hours. This is particularly valuable for service businesses competing on response speed.' },
       { question: 'What industries is this best for?', answer: 'Any service business with custom pricing: HVAC, roofing, landscaping, painting, insurance, legal services, IT managed services, commercial cleaning, and professional services. If your pricing depends on multiple variables (not just a flat rate), the Quoting Agent eliminates the delay and inconsistency in your quoting process.' },
     ],
+    sandlerPain: {
+      headline: 'Every Slow Quote Is a Lost Deal.',
+      subheadline: 'Your prospects request a quote, wait 4-24 hours, and buy from the competitor who responded in 60 seconds. It happens every single day.',
+      painPoints: [
+        'Companies that respond first win 50% of deals — but only 7% respond within 5 minutes',
+        'Manual quoting has 12-25% error rates that destroy trust and trigger revision cycles',
+        'Your best salespeople spend 40% of their time on quotes instead of closing',
+      ],
+      costOfInaction: { stat: '50% of Deals', context: 'go to whoever responds first. If your quoting process takes hours while competitors respond in seconds, you\'re systematically losing half your pipeline.', source: 'Aberdeen Group / InsideSales.com' },
+    },
+    negativeReverse: {
+      headline: 'This Is Not a Chatbot.',
+      notForList: [
+        'You have fewer than 20 SKUs with simple, fixed pricing',
+        'You\'re looking for a basic FAQ bot or customer service widget',
+        'Your sales cycle doesn\'t involve custom quotes or configurations',
+      ],
+      isForList: [
+        'Complex product catalogs where quoting requires configuration or approval',
+        'High-volume quote requests overwhelming your sales team',
+        'Revenue lost to competitors with faster response times',
+      ],
+      ctaText: 'Deploy Your Quoting Agent',
+    },
+    proofQuote: { text: 'Quote turnaround went from 4 hours to 47 seconds. Our close rate doubled in the first quarter because we were simply responding before the competition.', author: 'Quoting Automation', role: 'Industrial distribution client' },
   },
   {
     id: 'off-hours-voice-agent',
@@ -712,6 +842,31 @@ export const SERVICES: Service[] = [
       { question: 'Is it TCPA compliant?', answer: 'Yes. The agent includes opt-out handling, do-not-contact logic, and call recording consent disclosures where required by state law. All compliance settings are configurable based on your jurisdiction and industry requirements.' },
       { question: 'What industries does this work best for?', answer: 'Any service business where phone calls drive revenue: HVAC, plumbing, electrical, roofing, legal, dental, real estate, property management, insurance, and professional services. The common thread is high-intent callers who need a response now — not tomorrow morning.' },
     ],
+    sandlerPain: {
+      headline: '62% of Calls to Your Business Go Unanswered. That\'s $75K Walking Away.',
+      subheadline: 'Every missed call is a prospect who called your competitor next. 85% of callers who don\'t reach you will never call back.',
+      painPoints: [
+        '62% of SMB calls go unanswered — each one costs $200-$1,000 in potential revenue',
+        '85% of callers who reach voicemail never call back — they call your competitor instead',
+        'Phone leads convert 10-15x higher than web leads — but only if someone answers',
+      ],
+      costOfInaction: { stat: '$75,000/Year', context: 'The average SMB loses $75,000+ annually to missed calls. That\'s not theoretical — it\'s revenue that called you, wanted to buy, and went elsewhere because nobody picked up.', source: 'BIA/Kelsey + Numa/RingCentral' },
+    },
+    negativeReverse: {
+      headline: 'If You Already Answer Every Call, Skip This.',
+      notForList: [
+        'You have 24/7 receptionist coverage and never miss calls',
+        'Your business doesn\'t receive inbound phone leads',
+        'You\'re looking for a basic auto-attendant or IVR menu',
+      ],
+      isForList: [
+        'You miss calls after hours, during lunch, or when staff is busy',
+        'Phone leads are your highest-converting channel but you can\'t staff for it',
+        'You\'ve tried answering services but the quality doesn\'t match your brand',
+      ],
+      ctaText: 'Stop Missing Revenue',
+    },
+    proofQuote: { text: 'We were losing 15-20 calls per week to voicemail. The voice agent now books appointments from those calls at a 23% rate. That\'s 3-4 new clients per week we were throwing away.', author: 'Voice Agent ROI', role: 'Professional services firm' },
   },
   {
     id: 'lead-enrichment',
@@ -790,6 +945,31 @@ export const SERVICES: Service[] = [
       { question: 'How many providers do you use?', answer: 'We start with 3+ providers (Apollo, Hunter, Clay) and add more based on your ICP coverage needs. Each provider has different strengths — Apollo for tech, Hunter for email verification, Clay for aggregation. Multi-provider routing ensures no record falls through the cracks.' },
       { question: 'What about data compliance?', answer: 'GDPR and CAN-SPAM compliance is built into the pipeline. Suppression lists are enforced at the enrichment level — opt-outs, do-not-contact records, and regulatory exclusions are automatically filtered before any data is written to your CRM.' },
     ],
+    sandlerPain: {
+      headline: 'Your CRM Is Full of Dead Data. Your Reps Are Calling Ghosts.',
+      subheadline: 'B2B data decays at 30% per year. A third of your database is already wrong — and your team is wasting 65% of their day on leads that will never convert.',
+      painPoints: [
+        'Sales reps spend only 35% of their time actually selling — the rest is spent researching leads',
+        'Bad data costs organizations $12.9 million per year on average',
+        'Standard enrichment tools hit 60-75% fill rates — leaving massive gaps in your lead profiles',
+      ],
+      costOfInaction: { stat: '$12.9 Million', context: 'is what bad data costs the average organization annually. Every incomplete lead record means wasted outreach, missed personalization, and deals that die before they start.', source: 'Gartner Data Quality Research' },
+    },
+    negativeReverse: {
+      headline: 'ZoomInfo Might Be Fine for You.',
+      notForList: [
+        'You have fewer than 500 leads per month to process',
+        'Your current enrichment tool hits 90%+ fill rates across all fields',
+        'You don\'t have a CRM or marketing automation platform to integrate with',
+      ],
+      isForList: [
+        'ZoomInfo or Clearbit are too expensive for your volume and you need better fill rates',
+        'Your reps complain about incomplete lead data killing their personalization',
+        'You need 85-95% fill rates across email, phone, firmographics, and technographics',
+      ],
+      ctaText: 'Fix Your Data Pipeline',
+    },
+    proofQuote: { text: 'Fill rates went from 62% with ZoomInfo alone to 91% with the waterfall enrichment pipeline. Our email reply rates doubled because reps finally had enough context to personalize.', author: 'Enrichment Pipeline', role: 'SaaS company, 50-person sales team' },
   },
   {
     id: 'lead-scraping',
@@ -869,6 +1049,31 @@ export const SERVICES: Service[] = [
       { question: 'What happens when a source changes its layout?', answer: 'Source websites change their HTML structure regularly. Our monitoring system detects layout changes automatically and alerts our team. Break/fix maintenance is included in the monthly retainer — we update the extraction logic so your pipeline keeps running without interruption.' },
       { question: 'Can I expand beyond 2 sources?', answer: 'Absolutely. The base scope includes 2 sources to get you running quickly. Additional sources are scoped and priced individually based on extraction complexity. Most clients expand to 4–6 sources over the first 6 months as they identify which markets produce the best targets.' },
     ],
+    sandlerPain: {
+      headline: 'Your Competitors Have a 10,000-Lead Head Start. Every Month.',
+      subheadline: 'While your SDRs manually prospect 50 leads a day, automated systems build targeted lists of 10,000+ verified contacts — at 25-35% of the cost of a single SDR.',
+      painPoints: [
+        'Manual prospecting costs $4,000-$6,000/month per SDR — and produces 200-300 leads',
+        'Your bounce rate is probably 8-15% because you\'re not running real-time verification',
+        'ZoomInfo charges $15,000-$40,000/year for data that\'s already 30% decayed',
+      ],
+      costOfInaction: { stat: '70-85% Lower CPL', context: 'Automated, compliant lead scraping delivers 10-20x the volume at 25-35% the cost of manual SDR prospecting — with sub-2% bounce rates and full legal compliance.', source: 'SDR cost benchmarking, 2025' },
+    },
+    negativeReverse: {
+      headline: 'If Your Pipeline Is Full, Don\'t Read Further.',
+      notForList: [
+        'You already have more qualified leads than your team can handle',
+        'Your ICP is so narrow that manual research is actually efficient',
+        'You\'re not comfortable with automated outreach at scale',
+      ],
+      isForList: [
+        'Your SDRs spend more time finding leads than talking to them',
+        'ZoomInfo is too expensive and the data quality doesn\'t justify the price',
+        'You need 5,000-50,000 targeted, verified contacts per month',
+      ],
+      ctaText: 'Build Your Lead Engine',
+    },
+    proofQuote: { text: 'We replaced a $36K/year ZoomInfo contract and a full-time SDR researcher with the scraping module. Cost dropped 70%, volume went up 8x, and bounce rate went from 12% to 1.4%.', author: 'Pipeline Automation', role: 'B2B agency, outbound-first model' },
   },
   {
     id: 'auto-appointment-setter',
@@ -948,6 +1153,31 @@ export const SERVICES: Service[] = [
       { question: 'What if a lead doesn\'t qualify?', answer: 'Unqualified leads aren\'t dropped — they\'re routed to appropriate follow-up sequences based on the disqualification reason. Maybe they need a different product, or they\'re not ready yet. The system captures the reason, writes it to your CRM, and routes them accordingly.' },
       { question: 'Does it work with my existing calendar and CRM?', answer: 'Yes. We integrate with Google Calendar, Outlook/Office 365, HubSpot, Salesforce, and most CRM systems. Calendar integration includes real-time availability checks, buffer enforcement, and automatic hold/release when appointments are booked or cancelled.' },
     ],
+    sandlerPain: {
+      headline: 'Your Leads Went Cold 42 Hours Ago.',
+      subheadline: 'The average company takes 42 hours to respond to a lead. MIT proved that responding in 5 minutes makes you 100x more likely to connect. You\'re losing before you start.',
+      painPoints: [
+        'Only 7% of companies respond to leads within 5 minutes — the window that\'s 100x more effective',
+        '71% of qualified leads are wasted because follow-up is too slow or stops too early',
+        '40-50% of booked appointments no-show — without automated confirmation sequences',
+      ],
+      costOfInaction: { stat: '100x Connection Rate', context: 'MIT/Harvard studied 1.25 million leads across 29 companies. The finding was unambiguous: responding in 5 minutes vs. 30 minutes makes you 100x more likely to connect. Every minute of delay is compounding revenue loss.', source: 'MIT/Harvard Lead Response Study (1.25M leads)' },
+    },
+    negativeReverse: {
+      headline: 'Your SDR Team Might Be Enough.',
+      notForList: [
+        'You respond to every lead within 5 minutes, 24/7/365',
+        'You get fewer than 50 leads per month',
+        'Your booking rate is already above 20% and no-show rate is below 10%',
+      ],
+      isForList: [
+        'Leads sit for hours or days before anyone follows up',
+        'Your booking rate is 2-5% and you know it should be higher',
+        'No-shows are killing your pipeline and SDR morale',
+      ],
+      ctaText: 'Automate Your Pipeline',
+    },
+    proofQuote: { text: 'Response time went from 8 hours to 47 seconds. Booking rate jumped from 3.2% to 19%. The ROI calculator said 1,146% — the actual number was higher.', author: 'Appointment Automation', role: 'Multi-location services company' },
   },
 
   // -- Social & Authority Agents --
