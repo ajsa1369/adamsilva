@@ -144,7 +144,7 @@ export default function ServicesPage() {
               readiness.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link href="/services/acra" className="btn-primary">
+              <Link href="/acra/run" className="btn-primary">
                 Free ACRA
                 <ArrowRight size={16} />
               </Link>
@@ -416,7 +416,7 @@ export default function ServicesPage() {
           </div>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center mt-10">
-            <Link href="/services/acra" className="btn-primary">
+            <Link href="/acra/run" className="btn-primary">
               Free ACRA
               <ArrowRight size={16} />
             </Link>
@@ -562,7 +562,7 @@ export default function ServicesPage() {
               prioritized strategic roadmap. Completely free.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link href="/services/acra" className="btn-primary">
+              <Link href="/acra/run" className="btn-primary">
                 Get Your Free ACRA
                 <ArrowRight size={16} />
               </Link>

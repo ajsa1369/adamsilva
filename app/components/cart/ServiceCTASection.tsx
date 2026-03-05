@@ -18,16 +18,16 @@ export function ServiceCTASection({ service, accentColor, compact }: ServiceCTAS
   const isCustom = service.price === 'Custom'
   const cartItem = serviceToCartItem(service)
 
-  // Free (ACRA): lead capture only
+  // Free (ACRA): send directly to the tool
   if (isFree) {
     return (
       <div className={compact ? '' : 'flex flex-col sm:flex-row gap-4'}>
         <Link
-          href={`/contact?service=${encodeURIComponent(service.id)}`}
+          href="/acra/run"
           className={`btn-primary ${compact ? 'w-full justify-center' : ''}`}
           style={accentColor ? { background: accentColor } : undefined}
         >
-          Get Free Assessment
+          Run My Free ACRA
           <ArrowRight size={16} />
         </Link>
       </div>
