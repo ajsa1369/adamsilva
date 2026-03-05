@@ -2,16 +2,37 @@
 
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
-import { Loader2, Mail, Lock, Eye, EyeOff } from 'lucide-react'
+import { Loader2, Mail, Lock, Eye, EyeOff, Phone } from 'lucide-react'
 import { createClient } from '@/lib/supabase/client'
 
 type Mode = 'login' | 'signup'
+
+// Free / consumer email domains — business emails only
+const FREE_EMAIL_DOMAINS = new Set([
+  'gmail.com', 'googlemail.com', 'yahoo.com', 'yahoo.co.uk', 'yahoo.ca',
+  'yahoo.com.au', 'ymail.com', 'hotmail.com', 'hotmail.co.uk', 'hotmail.ca',
+  'outlook.com', 'live.com', 'live.co.uk', 'msn.com', 'aol.com',
+  'icloud.com', 'me.com', 'mac.com', 'protonmail.com', 'proton.me',
+  'pm.me', 'mail.com', 'gmx.com', 'gmx.net', 'zoho.com', 'inbox.com',
+  'fastmail.com', 'hey.com', 'tutanota.com', 'guerrillamail.com',
+])
+
+function isBusinessEmail(email: string): boolean {
+  const domain = email.split('@')[1]?.toLowerCase()
+  return !!domain && !FREE_EMAIL_DOMAINS.has(domain)
+}
+
+const CONSENT_TEXT =
+  'I agree to receive marketing communications from Adam Silva Consulting via email and SMS. ' +
+  'Message and data rates may apply. You may unsubscribe at any time by replying STOP or clicking unsubscribe.'
 
 export function ACRALoginForm({ defaultMode = 'signup', redirectTo = '/acra/run' }: { defaultMode?: Mode; redirectTo?: string }) {
   const router = useRouter()
   const [mode, setMode] = useState<Mode>(defaultMode)
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const [phone, setPhone] = useState('')
+  const [consent, setConsent] = useState(false)
   const [showPass, setShowPass] = useState(false)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
@@ -23,34 +44,51 @@ export function ACRALoginForm({ defaultMode = 'signup', redirectTo = '/acra/run'
     e.preventDefault()
     setError('')
     setSuccess('')
+
+    if (mode === 'signup') {
+      if (!isBusinessEmail(email)) {
+        setError('Please use your business email address. Personal email providers (Gmail, Outlook, Yahoo, etc.) are not accepted.')
+        return
+      }
+      if (!phone.trim()) {
+        setError('A mobile number is required so we can send you your report link.')
+        return
+      }
+      if (!consent) {
+        setError('Please confirm your consent to receive communications.')
+        return
+      }
+    }
+
     setLoading(true)
 
     try {
       if (mode === 'signup') {
-        const { error } = await supabase.auth.signUp({ email, password })
-        if (error) throw error
-        setSuccess('Check your email to confirm your account, then come back to run your ACRA.')
+        const { data, error: signUpError } = await supabase.auth.signUp({ email, password })
+        if (signUpError) throw signUpError
+
+        // Log consent record server-side (IP + timestamp captured there)
+        await fetch('/api/auth/register', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            email,
+            phone: phone.trim(),
+            consentText: CONSENT_TEXT,
+            supabaseUserId: data.user?.id,
+          }),
+        })
+
+        setSuccess('Check your email to confirm your account, then sign in to run your ACRA.')
       } else {
-        const { error } = await supabase.auth.signInWithPassword({ email, password })
-        if (error) throw error
+        const { error: signInError } = await supabase.auth.signInWithPassword({ email, password })
+        if (signInError) throw signInError
         router.push(redirectTo)
         router.refresh()
       }
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Something went wrong.')
     } finally {
-      setLoading(false)
-    }
-  }
-
-  async function handleGoogleSignIn() {
-    setLoading(true)
-    const { error } = await supabase.auth.signInWithOAuth({
-      provider: 'google',
-      options: { redirectTo: `${window.location.origin}/acra/run` },
-    })
-    if (error) {
-      setError(error.message)
       setLoading(false)
     }
   }
@@ -75,31 +113,12 @@ export function ACRALoginForm({ defaultMode = 'signup', redirectTo = '/acra/run'
         ))}
       </div>
 
-      {/* Google OAuth */}
-      <button
-        type="button"
-        onClick={handleGoogleSignIn}
-        disabled={loading}
-        className="w-full flex items-center justify-center gap-2.5 py-2.5 px-4 mb-4 rounded-xl border border-[var(--color-border)] bg-white text-sm font-semibold text-[var(--color-text)] hover:bg-[var(--color-surface)] transition-colors disabled:opacity-50"
-      >
-        <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true">
-          <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
-          <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
-          <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
-          <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
-        </svg>
-        Continue with Google
-      </button>
-
-      <div className="flex items-center gap-3 mb-4">
-        <hr className="flex-1 border-[var(--color-border)]" />
-        <span className="text-xs text-[var(--color-muted-2)]">or</span>
-        <hr className="flex-1 border-[var(--color-border)]" />
-      </div>
-
       <form onSubmit={handleSubmit} className="space-y-3">
+        {/* Email */}
         <div>
-          <label htmlFor="auth-email" className="block text-xs font-semibold text-[var(--color-muted-2)] mb-1">Email</label>
+          <label htmlFor="auth-email" className="block text-xs font-semibold text-[var(--color-muted-2)] mb-1">
+            Business Email <span className="text-red-500">*</span>
+          </label>
           <div className="relative">
             <Mail size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-[var(--color-muted-2)]" />
             <input
@@ -108,14 +127,20 @@ export function ACRALoginForm({ defaultMode = 'signup', redirectTo = '/acra/run'
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
-              placeholder="you@company.com"
-              className="w-full pl-9 pr-4 py-2.5 text-sm rounded-xl border border-[var(--color-border)] bg-white focus:outline-none focus:border-[var(--color-accent)] focus:ring-2 focus:ring-[var(--color-accent-glow)] text-[var(--color-text)]"
+              placeholder="you@yourcompany.com"
+              className="w-full pl-9 pr-4 py-2.5 text-sm rounded-xl border border-[var(--color-border)] bg-white focus:outline-none focus:border-[var(--color-accent)] text-[var(--color-text)]"
             />
           </div>
+          {mode === 'signup' && (
+            <p className="text-xs text-[var(--color-muted-2)] mt-1">Business domains only — no Gmail, Outlook, Yahoo, etc.</p>
+          )}
         </div>
 
+        {/* Password */}
         <div>
-          <label htmlFor="auth-password" className="block text-xs font-semibold text-[var(--color-muted-2)] mb-1">Password</label>
+          <label htmlFor="auth-password" className="block text-xs font-semibold text-[var(--color-muted-2)] mb-1">
+            Password <span className="text-red-500">*</span>
+          </label>
           <div className="relative">
             <Lock size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-[var(--color-muted-2)]" />
             <input
@@ -126,7 +151,7 @@ export function ACRALoginForm({ defaultMode = 'signup', redirectTo = '/acra/run'
               required
               minLength={8}
               placeholder="Minimum 8 characters"
-              className="w-full pl-9 pr-10 py-2.5 text-sm rounded-xl border border-[var(--color-border)] bg-white focus:outline-none focus:border-[var(--color-accent)] focus:ring-2 focus:ring-[var(--color-accent-glow)] text-[var(--color-text)]"
+              className="w-full pl-9 pr-10 py-2.5 text-sm rounded-xl border border-[var(--color-border)] bg-white focus:outline-none focus:border-[var(--color-accent)] text-[var(--color-text)]"
             />
             <button
               type="button"
@@ -138,6 +163,45 @@ export function ACRALoginForm({ defaultMode = 'signup', redirectTo = '/acra/run'
             </button>
           </div>
         </div>
+
+        {/* Phone — signup only */}
+        {mode === 'signup' && (
+          <div>
+            <label htmlFor="auth-phone" className="block text-xs font-semibold text-[var(--color-muted-2)] mb-1">
+              Mobile Number <span className="text-red-500">*</span>
+            </label>
+            <div className="relative">
+              <Phone size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-[var(--color-muted-2)]" />
+              <input
+                id="auth-phone"
+                type="tel"
+                value={phone}
+                onChange={(e) => setPhone(e.target.value)}
+                required
+                placeholder="+1 (555) 000-0000"
+                className="w-full pl-9 pr-4 py-2.5 text-sm rounded-xl border border-[var(--color-border)] bg-white focus:outline-none focus:border-[var(--color-accent)] text-[var(--color-text)]"
+              />
+            </div>
+          </div>
+        )}
+
+        {/* Consent — signup only */}
+        {mode === 'signup' && (
+          <div className="flex items-start gap-2.5 pt-1">
+            <input
+              id="auth-consent"
+              type="checkbox"
+              checked={consent}
+              onChange={(e) => setConsent(e.target.checked)}
+              required
+              className="mt-0.5 h-4 w-4 rounded border-[var(--color-border)] accent-[var(--color-accent)] shrink-0"
+            />
+            <label htmlFor="auth-consent" className="text-xs text-[var(--color-muted-2)] leading-relaxed">
+              {CONSENT_TEXT}{' '}
+              <a href="/privacy" className="text-[var(--color-accent)] hover:underline">Privacy Policy</a>.
+            </label>
+          </div>
+        )}
 
         {error && (
           <div className="text-xs text-red-600 bg-red-50 border border-red-200 rounded-lg px-3 py-2" role="alert">
@@ -152,7 +216,7 @@ export function ACRALoginForm({ defaultMode = 'signup', redirectTo = '/acra/run'
 
         <button
           type="submit"
-          disabled={loading}
+          disabled={loading || (mode === 'signup' && !consent)}
           className="btn-primary w-full flex items-center justify-center gap-2 disabled:opacity-50"
         >
           {loading && <Loader2 size={14} className="animate-spin" />}
