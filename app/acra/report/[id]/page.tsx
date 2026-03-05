@@ -11,6 +11,7 @@ import { LLMScoreBoard } from '@/app/components/acra/LLMScoreBoard'
 import { RecommendedServices } from '@/app/components/acra/RecommendedServices'
 import { ConsultationBooking } from '@/app/components/acra/ConsultationBooking'
 import { ValueLeversSection } from '@/app/components/acra/ValueLevers'
+import { PackageRecommendation } from '@/app/components/acra/PackageRecommendation'
 import { calculateRevenueImpact, type RevenueRange } from '@/lib/acra/revenue'
 import type { PillarScore, LLMScores, Finding, ValueLevers } from '@/lib/acra/scoring'
 
@@ -285,6 +286,14 @@ export default async function ACRAReportPage({ params }: PageProps) {
 
           {/* ASC Gold Standard Comparison */}
           <GoldStandardSection score={r.overall_score} framework={scan.framework} pillars={pillarScoreMap} />
+
+          {/* Architecture & Package Recommendation */}
+          <PackageRecommendation
+            pillarScores={pillarScoreMap}
+            domain={domain}
+            framework={scan.framework}
+            overallScore={r.overall_score}
+          />
 
           {/* Pillar breakdown */}
           <div>

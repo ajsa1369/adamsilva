@@ -9,6 +9,7 @@ import { RevenueImpactPanel } from '@/app/components/acra/RevenueImpact'
 import { LLMScoreBoard } from '@/app/components/acra/LLMScoreBoard'
 import { RecommendedServices } from '@/app/components/acra/RecommendedServices'
 import { ValueLeversSection } from '@/app/components/acra/ValueLevers'
+import { PackageRecommendation } from '@/app/components/acra/PackageRecommendation'
 import { calculateRevenueImpact, type RevenueRange } from '@/lib/acra/revenue'
 import type { PillarScore, LLMScores, Finding, ValueLevers } from '@/lib/acra/scoring'
 
@@ -292,6 +293,14 @@ export default async function ACRASharePage({ params }: PageProps) {
 
           <LLMScoreBoard scores={llmScores} />
           <GoldStandardSection score={r.overall_score} framework={scan.framework} pillars={pillarScoreMap} />
+
+          {/* Architecture & Package Recommendation */}
+          <PackageRecommendation
+            pillarScores={pillarScoreMap}
+            domain={domain}
+            framework={scan.framework}
+            overallScore={r.overall_score}
+          />
 
           <div>
             <h2 className="text-xl font-bold text-[var(--color-text)] mb-4">Detailed Pillar Analysis</h2>
