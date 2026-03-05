@@ -287,10 +287,10 @@ function PackageCard({
   const color = PACKAGE_COLOR[pkg.slug] ?? '#6366f1'
   const gapsClosedBy: string[] = []
 
-  if (pillarScores['protocol'] < 60) gapsClosedBy.push('Agentic protocol stack (' + pkg.features.protocolStack + ')')
-  if (pillarScores['press'] < 60) gapsClosedBy.push(`${pkg.features.pressReleasesPerMonth} press release(s)/month — fastest AI authority signal`)
-  if (pillarScores['aeo'] < 60) gapsClosedBy.push(`${pkg.features.blogPostsPerMonth} authority blog post(s)/month`)
-  if (pillarScores['social'] < 60) gapsClosedBy.push('AI chatbot (' + pkg.features.chatbotChannels + ') for lead capture')
+  if (pillarScores['protocol'] < 60) gapsClosedBy.push('Protocol stack deployed: ' + pkg.features.protocolStack + ' — AI agents can discover and transact')
+  if (pillarScores['press'] < 60) gapsClosedBy.push(`Press Release Agent (${pkg.features.pressReleasesPerMonth}/mo) — entity schema trains LLMs to cite your brand`)
+  if (pillarScores['aeo'] < 60) gapsClosedBy.push(`Authority Content Agent (${pkg.features.blogPostsPerMonth} post${pkg.features.blogPostsPerMonth === 1 ? '' : 's'}/mo) — AEO-structured to become the source AI systems quote`)
+  if (pillarScores['social'] < 60) gapsClosedBy.push('AI Commerce Agent (' + pkg.features.chatbotChannels + ') — 24/7 lead capture across channels')
   gapsClosedBy.push('Schema.org JSON-LD library — dense structured data for all entities')
 
   return (
