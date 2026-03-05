@@ -61,15 +61,15 @@ export const PACKAGES: PackagePageData[] = [
     badge: null,
     highlights: [
       'AI Commerce Agent — web channel (24/7 lead capture + commerce)',
-      'Press Release Agent (1/mo) — AI-optimized with entity schema for LLM citation',
-      'Authority Content Agent (1 post/mo) — schema-structured to train AI on your business',
+      'Authority Content Agent (1 article/mo) — 2,000 words + Remotion video summary + 2 schema-wrapped PNG images',
+      'Press Release Agent (1/mo) — pre-built schema rules + JSON-LD; you bring your syndication account + AI API',
       'UCP Discovery Protocol — AI agents can find and read your site',
       'JSON-LD schema library — products, org, and services machine-readable',
       'Continuity plan: model updates + schema evolution included',
     ],
     features: {
       blogPostsPerMonth: 1,
-      imagesPerPost: 3,
+      imagesPerPost: 2,
       pressReleasesPerMonth: 1,
       chatbotChannels: 'Web',
       protocolStack: 'UCP',
@@ -80,21 +80,21 @@ export const PACKAGES: PackagePageData[] = [
       {
         question: 'Who is Bronze for?',
         answer:
-          'Bronze is for lean teams establishing their AI commerce foundation. You get a live AI Commerce Agent on your site, an automated press release pipeline with LLM citation schema, and authority content that actively trains AI systems to understand and recommend your business.',
+          'Bronze is for lean teams establishing their AI commerce foundation. You get a live AI Commerce Agent on your site, a monthly 2,000-word authority article with video summary and schema-wrapped images, and a press release pipeline that trains AI systems to understand and cite your business.',
       },
       {
-        question: 'What does the Press Release Agent actually do?',
+        question: 'What does each Authority Content article include?',
         answer:
-          'Our Press Release Agent writes, optimizes, and syndicates a press release each month with dense entity schema embedded. The schema tells AI systems exactly what your company does, what it sells, and why it should be cited — building AI authority faster than any other signal available.',
+          'Every article is 2,000 words, structured for answer engine citation (answer-first paragraphs, SpeakableSpecification markup, FAQ schema, entity linking). It ships with a Remotion-generated video summary with JSON-LD embedded in the video metadata, and 2 PNG images each wrapped in ImageObject schema — giving AI systems multiple machine-readable entry points into the content.',
       },
       {
-        question: 'How does the Authority Content Agent work?',
+        question: 'How does the Press Release Agent work and what do I need to provide?',
         answer:
-          'The agent produces AI-first blog content structured for answer engine citation: answer-first paragraphs, SpeakableSpecification markup, FAQ schema, and entity linking back to your product and organization graph. Each post is designed to be the source AI systems quote when someone asks about your category.',
+          'The Press Release Agent uses pre-populated rules and structure that ASC controls — you cannot break the schema format. JSON-LD entity markup is always included. You bring your own Business Wire or PR Newswire account (billed directly to you) and your own AI API key (also billed to you). ASC provides the agent, the rules, and the schema — you control the distribution costs.',
       },
     ],
     heroDescription:
-      'Bronze deploys your first set of AI agents — a web commerce agent, a press release agent, and an authority content agent — each producing schema-structured output that trains LLMs to understand and recommend your business.',
+      'Bronze deploys your first AI agent fleet: a web commerce agent, a press release agent with pre-built schema rules, and an authority content agent producing 2,000-word articles with Remotion video summaries and schema-wrapped images.',
   },
   {
     slug: 'silver',
@@ -112,16 +112,16 @@ export const PACKAGES: PackagePageData[] = [
     highlighted: false,
     badge: 'Best Value',
     highlights: [
-      'AI Commerce Agent — web + SMS channels',
-      'Press Release Agent (2/mo) — Tier-1 syndication with AI-training entity schema',
-      'Authority Content Agent (3 posts/mo) — topical cluster architecture for LLM citation',
+      'AI Commerce Agent — web + SMS channels (24/7 lead capture + commerce)',
+      'Authority Content Agent (3 articles/mo) — 2,000 words + Remotion video summary + 2 schema-wrapped PNG images each',
+      'Press Release Agent (2/mo) — pre-built schema rules + JSON-LD; you bring your syndication account + AI API',
       'UCP + ACP (partial) — AI agents can discover and initiate checkout',
       'Entity graph construction — sameAs + knowledge graph registration',
       'Continuity plan: agent retraining + protocol updates included',
     ],
     features: {
       blogPostsPerMonth: 3,
-      imagesPerPost: 5,
+      imagesPerPost: 2,
       pressReleasesPerMonth: 2,
       chatbotChannels: 'Web + SMS',
       protocolStack: 'UCP + ACP (partial)',
@@ -132,12 +132,17 @@ export const PACKAGES: PackagePageData[] = [
       {
         question: "What's the difference between Bronze and Silver?",
         answer:
-          'Silver runs more agents at higher velocity: 3 authority content posts per month vs 1, 2 press releases vs 1, adds SMS as a second commerce agent channel, and implements partial ACP so AI agents can initiate checkout flows on your site. The entity graph build is also included, registering your brand across AI knowledge graphs.',
+          'Silver runs more agents at higher velocity: 3 authority content articles per month vs 1, 2 press releases vs 1, adds SMS as a second commerce agent channel, and implements partial ACP so AI agents can initiate checkout flows on your site. Entity graph construction is also included, registering your brand across AI knowledge graphs.',
       },
       {
-        question: 'What does the SMS Commerce Agent do?',
+        question: 'What does each Authority Content article include at the Silver tier?',
         answer:
-          'The SMS Commerce Agent gives your business a phone number prospects can text. The agent handles product questions, qualifies leads, books appointments, and escalates to your team — all operating against your product schema so responses are always accurate.',
+          'Every article is 2,000 words, structured for answer engine citation (answer-first paragraphs, SpeakableSpecification markup, FAQ schema, entity linking). It ships with a Remotion-generated video summary with JSON-LD embedded in the video metadata, and 2 PNG images each wrapped in ImageObject schema — giving AI systems multiple machine-readable entry points into the content.',
+      },
+      {
+        question: 'How does the Press Release Agent work and what do I need to provide?',
+        answer:
+          'The Press Release Agent uses pre-populated rules and structure that ASC controls — you cannot break the schema format. JSON-LD entity markup is always included. You bring your own Business Wire or PR Newswire account (billed directly to you) and your own AI API key (also billed to you). ASC provides the agent, the rules, and the schema — you control the distribution costs.',
       },
       {
         question: 'What is the entity graph construction?',
@@ -146,7 +151,7 @@ export const PACKAGES: PackagePageData[] = [
       },
     ],
     heroDescription:
-      'Silver scales your agent fleet: web and SMS commerce agents, a higher-velocity press release and content pipeline, and entity graph registration that tells AI knowledge graphs exactly who you are and what you sell.',
+      'Silver scales your agent fleet: web and SMS commerce agents, three 2,000-word authority articles per month with Remotion video summaries and schema-wrapped images, two press releases, and entity graph registration that tells AI knowledge graphs exactly who you are and what you sell.',
   },
   {
     slug: 'gold',
@@ -164,16 +169,16 @@ export const PACKAGES: PackagePageData[] = [
     highlighted: true,
     badge: 'Most Popular',
     highlights: [
-      'AI Commerce Agent — web, SMS, voice, and WhatsApp channels',
-      'Press Release Agent (4/mo) — Business Wire / PR Newswire syndication with citation schema',
-      'Authority Content Agent (8 posts/mo) — full AEO/GEO topical architecture',
+      'AI Commerce Agent — web, SMS, voice, and WhatsApp channels (24/7)',
+      'Authority Content Agent (8 articles/mo) — 2,000 words + Remotion video summary + 2 schema-wrapped PNG images each',
+      'Press Release Agent (4/mo) — pre-built schema rules + JSON-LD; you bring your syndication account + AI API',
       'Full UCP + ACP + AP2 Gold Standard protocol stack',
       'Complete JSON-LD schema library — every entity, product, and service machine-readable',
       'Dedicated Client Success Manager',
     ],
     features: {
       blogPostsPerMonth: 8,
-      imagesPerPost: 8,
+      imagesPerPost: 2,
       pressReleasesPerMonth: 4,
       chatbotChannels: 'Web + SMS + Voice + WhatsApp',
       protocolStack: 'UCP + ACP + AP2 (Gold Standard)',
@@ -184,21 +189,26 @@ export const PACKAGES: PackagePageData[] = [
       {
         question: "What makes Gold the 'Gold Standard'?",
         answer:
-          'Gold achieves full compliance across all three agentic commerce protocols — UCP for AI discovery, ACP for agent-initiated checkout, and AP2 for cryptographic payment trust. Combined with 4 press releases/month and 8 authority content posts, Gold is the architecture that makes AI systems reliably discover, cite, and transact with your business.',
+          'Gold achieves full compliance across all three agentic commerce protocols — UCP for AI discovery, ACP for agent-initiated checkout, and AP2 for cryptographic payment trust. Combined with 4 press releases/month and 8 authority content articles, Gold is the architecture that makes AI systems reliably discover, cite, and transact with your business.',
+      },
+      {
+        question: 'What does each Authority Content article include at the Gold tier?',
+        answer:
+          'Every article is 2,000 words, structured for answer engine citation (answer-first paragraphs, SpeakableSpecification markup, FAQ schema, entity linking). It ships with a Remotion-generated video summary with JSON-LD embedded in the video metadata, and 2 PNG images each wrapped in ImageObject schema — giving AI systems multiple machine-readable entry points into the content. At 8 articles per month, this builds topical dominance at a pace that compounds quickly.',
+      },
+      {
+        question: 'How does the Press Release Agent work and what do I need to provide?',
+        answer:
+          'The Press Release Agent uses pre-populated rules and structure that ASC controls — you cannot break the schema format. JSON-LD entity markup is always included. You bring your own Business Wire or PR Newswire account (billed directly to you) and your own AI API key (also billed to you). ASC provides the agent, the rules, and the schema — you control the distribution costs. At 4 releases per month, branded web mentions compound to dramatically increase AI citation frequency.',
       },
       {
         question: 'How do the four AI Commerce Agent channels work together?',
         answer:
           'Each channel — web, SMS, voice, and WhatsApp — connects to the same underlying AI Commerce Agent with shared context. A prospect can start on your website, follow up via SMS, and close over WhatsApp. The agent maintains full conversation history and product knowledge across all four channels.',
       },
-      {
-        question: 'What does the Press Release Agent produce and why does it matter?',
-        answer:
-          'The Press Release Agent writes, schema-tags, and syndicates 4 press releases per month through Business Wire and PR Newswire. Each release includes dense JSON-LD that trains AI systems on your company, products, and expertise. Branded web mentions have a 0.664 correlation with AI citation frequency — 4 releases per month is the fastest compound path to becoming the brand AI recommends.',
-      },
     ],
     heroDescription:
-      'Gold is the complete agent fleet: four-channel AI Commerce Agent, a press release agent running at Tier-1 syndication velocity, an authority content agent building topical dominance, and the full UCP/ACP/AP2 protocol stack that lets AI agents buy from you autonomously.',
+      'Gold is the complete agent fleet: four-channel AI Commerce Agent, eight 2,000-word authority articles per month with Remotion video summaries and schema-wrapped images, four press releases with pre-built schema rules, and the full UCP/ACP/AP2 protocol stack that lets AI agents buy from you autonomously.',
   },
   {
     slug: 'core',
@@ -217,15 +227,15 @@ export const PACKAGES: PackagePageData[] = [
     badge: null,
     highlights: [
       'Unlimited AI Commerce Agent channels + custom channel development',
-      'Press Release Agent — custom cadence, white-label syndication',
-      'Authority Content Agent — unlimited production velocity',
+      'Authority Content Agent — unlimited 2,000-word articles, each with Remotion video summary + 2 schema-wrapped PNG images',
+      'Press Release Agent — custom cadence; pre-built schema rules + JSON-LD; you bring your syndication account + AI API',
       'Full protocol stack + white-label UCP/ACP/AP2 endpoints',
       'Custom agent training on your full product catalog and business logic',
       '24/7 dedicated agent operations team',
     ],
     features: {
       blogPostsPerMonth: 'Unlimited',
-      imagesPerPost: 10,
+      imagesPerPost: 2,
       pressReleasesPerMonth: 'Unlimited',
       chatbotChannels: 'All + custom',
       protocolStack: 'Full stack + white-label',
@@ -241,7 +251,7 @@ export const PACKAGES: PackagePageData[] = [
       {
         question: 'How is Core pricing determined?',
         answer:
-          'Core is custom-quoted based on agent fleet size, number of brands, content production volume, custom channel development, and white-label licensing scope. Setup starts from $75,000 and includes full agent training, protocol implementation, and dedicated operations.',
+          'Core is custom-quoted based on agent fleet size, number of brands, content production volume, custom channel development, and white-label licensing scope. Setup starts from $75,000 and includes full agent training, protocol implementation, and dedicated operations. Content production (articles, press releases) scales to your volume — you bring your own syndication accounts and AI API keys so distribution costs are billed directly to you.',
       },
       {
         question: 'What does white-label mean for Core clients?',
@@ -250,7 +260,7 @@ export const PACKAGES: PackagePageData[] = [
       },
     ],
     heroDescription:
-      'Core is the enterprise agent fleet — unlimited channels, custom agent training on your full product catalog, white-label protocol infrastructure, and a 24/7 dedicated team managing your entire agentic commerce operation.',
+      'Core is the enterprise agent fleet — unlimited channels, unlimited 2,000-word authority articles with Remotion video summaries and schema-wrapped images, custom press release cadence with pre-built schema rules, white-label protocol infrastructure, and a 24/7 dedicated team managing your entire agentic commerce operation.',
   },
   {
     slug: 'shopify-starter',
