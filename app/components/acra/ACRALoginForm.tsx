@@ -64,7 +64,12 @@ export function ACRALoginForm({ defaultMode = 'signup', redirectTo = '/acra/run'
 
     try {
       if (mode === 'signup') {
-        const { data, error: signUpError } = await supabase.auth.signUp({ email, password })
+        const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://www.adamsilvaconsulting.com'
+        const { data, error: signUpError } = await supabase.auth.signUp({
+          email,
+          password,
+          options: { emailRedirectTo: `${siteUrl}/acra/run` },
+        })
         if (signUpError) throw signUpError
 
         // Log consent record server-side (IP + timestamp captured there)
