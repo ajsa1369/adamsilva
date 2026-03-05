@@ -1,0 +1,471 @@
+import type { Metadata } from 'next'
+import { notFound, redirect } from 'next/navigation'
+import Link from 'next/link'
+import { ArrowLeft, ArrowRight, Download, RefreshCw, AlertTriangle, CheckCircle2, XCircle, Star } from 'lucide-react'
+import { createClient } from '@/lib/supabase/server'
+import { ScoreGauge } from '@/app/components/acra/ScoreGauge'
+import { ScoreCard } from '@/app/components/acra/ScoreCard'
+import { RevenueImpactPanel } from '@/app/components/acra/RevenueImpact'
+import { LLMScoreBoard } from '@/app/components/acra/LLMScoreBoard'
+import { RecommendedServices } from '@/app/components/acra/RecommendedServices'
+import { ConsultationBooking } from '@/app/components/acra/ConsultationBooking'
+import { calculateRevenueImpact, type RevenueRange } from '@/lib/acra/revenue'
+import type { PillarScore, LLMScores, Finding } from '@/lib/acra/scoring'
+
+interface PageProps {
+  params: Promise<{ id: string }>
+}
+
+interface DBReport {
+  id: string
+  overall_score: number
+  overall_grade: string
+  score_protocol_compliance: number
+  score_structured_data: number
+  score_aeo: number
+  score_geo: number
+  score_seo_foundation: number
+  score_social_authority: number
+  score_press_coverage: number
+  score_ai_authority: number
+  score_llm_recommendation: number
+  projected_monthly_loss_usd: number
+  projected_annual_loss_usd: number
+  ai_traffic_share_percent: number
+  competitor_ai_share_percent: number
+  llm_chatgpt: number
+  llm_perplexity: number
+  llm_claude: number
+  llm_gemini: number
+  llm_copilot: number
+  schema_types_found: string[]
+  social_profiles_found: string[]
+  press_sources_found: string[]
+  missing_schema_types: string[]
+  recommendations: Array<{ severity: string; title: string; detail: string; fixWith: string | null }>
+  scan_meta: Record<string, unknown>
+  created_at: string
+  acra_scans: {
+    url: string
+    company_name: string | null
+    industry: string | null
+    monthly_revenue_range: string | null
+    framework: string | null
+    created_at: string
+  }
+}
+
+function buildPillarsFromDB(report: DBReport): PillarScore[] {
+  const make = (
+    key: string,
+    label: string,
+    score: number,
+    summaryFn: (s: number) => string,
+    serviceUpsell: PillarScore['serviceUpsell']
+  ): PillarScore => {
+    const grade = score >= 90 ? 'A' : score >= 75 ? 'B' : score >= 60 ? 'C' : score >= 40 ? 'D' : 'F'
+    const status: PillarScore['status'] = score >= 80 ? 'excellent' : score >= 60 ? 'good' : score >= 35 ? 'needs-work' : 'critical'
+    const findings = (report.recommendations as Array<{ severity: string; title: string; detail: string; fixWith: string | null }>)
+      .filter((r) => r.fixWith && SERVICE_TO_PILLAR[r.fixWith] === key)
+      .map((r) => ({
+        severity: r.severity as Finding['severity'],
+        title: r.title,
+        detail: r.detail,
+        fixWith: r.fixWith ?? undefined,
+      }))
+    return { key, label, score, grade, status, summary: summaryFn(score), findings, serviceUpsell }
+  }
+
+  return [
+    make('protocol', 'Agentic Protocol Compliance', report.score_protocol_compliance,
+      (s) => s < 20 ? 'Zero agentic protocol coverage — AI agents cannot discover or buy from your site.' : s < 60 ? 'Partial protocol coverage.' : 'Strong protocol compliance.',
+      report.score_protocol_compliance < 60 ? { name: 'UCP Implementation', slug: 'ucp-implementation', price: '$15,000', urgency: 'Every month without this costs you agentic market share.' } : null),
+    make('structured-data', 'Structured Data & Semantics', report.score_structured_data,
+      (s) => `${report.schema_types_found?.length ?? 0} schema types found. ${report.missing_schema_types?.length ?? 0} critical types missing.`,
+      report.score_structured_data < 50 ? { name: 'AEO Audit', slug: 'aeo-audit', price: '$5,000', urgency: 'Fix structured data gaps before AI traffic scales.' } : null),
+    make('aeo', 'Answer Engine Optimization', report.score_aeo,
+      (s) => s < 30 ? 'Your site is not answering questions in a format AI engines can cite.' : s < 60 ? 'Partial AEO coverage.' : 'Strong AEO signals.',
+      report.score_aeo < 60 ? { name: 'AEO Audit', slug: 'aeo-audit', price: '$5,000', urgency: 'AI citation traffic is growing 340% YoY.' } : null),
+    make('geo', 'Generative Engine Optimization', report.score_geo,
+      (s) => s < 30 ? 'Missing E-E-A-T signals and topical depth that generative AI requires.' : s < 60 ? 'Moderate GEO coverage.' : 'Strong GEO foundation.',
+      report.score_geo < 60 ? { name: 'GEO Implementation', slug: 'geo-implementation', price: '$7,500', urgency: 'Generative search drives 28% of B2B discovery.' } : null),
+    make('seo', 'SEO Foundation', report.score_seo_foundation,
+      (s) => s < 40 ? 'Critical SEO gaps undermine both traditional and AI search.' : s < 70 ? 'SEO partially in place.' : 'Strong SEO foundation.',
+      null),
+    make('social', 'Social Authority Score', report.score_social_authority,
+      (s) => `${report.social_profiles_found?.length ?? 0} social profile(s) detected.`,
+      report.score_social_authority < 50 ? { name: 'Social Media Manager', slug: 'social-media-manager', price: '$6,500 + $1,500/mo', urgency: 'Social authority directly correlates with AI recommendation frequency.' } : null),
+    make('press', 'Press & PR Coverage', report.score_press_coverage,
+      (s) => s < 25 ? 'Critical: virtually no press footprint. AI systems cannot validate your authority.' : s < 60 ? 'Limited press coverage detected.' : 'Solid press coverage.',
+      report.score_press_coverage < 50 ? { name: 'Press Syndicator', slug: 'press-syndicator', price: '$6,500 + $3,000/mo', urgency: 'Press releases are the fastest path to AI authority.' } : null),
+    make('ai-authority', 'AI Authority Score', report.score_ai_authority,
+      (s) => s < 25 ? 'Your brand does not register as authoritative to AI systems.' : s < 60 ? 'Moderate AI authority.' : 'Strong AI authority foundation.',
+      report.score_ai_authority < 60 ? { name: 'Authority Building', slug: 'authority-building', price: '$15,000', urgency: 'AI authority compounds. Every month delayed, competitors build advantages.' } : null),
+    make('llm-recommendation', 'LLM Recommendation Score', report.score_llm_recommendation,
+      (s) => s < 20 ? 'No AI model would reliably recommend your brand for agentic commerce.' : s < 50 ? 'AI models have limited confidence in your brand.' : 'Strong AI recommendation signals.',
+      report.score_llm_recommendation < 50 ? { name: 'Gold Package', slug: 'gold', price: '$48,000 + $12,000/mo', urgency: 'Agentic commerce will drive 31% of e-commerce revenue by 2027.' } : null),
+  ]
+}
+
+const SERVICE_TO_PILLAR: Record<string, string> = {
+  'ucp-implementation': 'protocol',
+  'acp-integration': 'protocol',
+  'ap2-trust-layer': 'protocol',
+  'aeo-audit': 'aeo',
+  'geo-implementation': 'geo',
+  'authority-building': 'ai-authority',
+  'press-syndicator': 'press',
+  'social-media-manager': 'social',
+}
+
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  const { id } = await params
+  return {
+    title: `ACRA Report — Agentic Commerce Readiness Assessment | Adam Silva Consulting`,
+    description: `Your full Agentic Commerce Readiness Assessment report — 9 pillar scores, LLM recommendation scores, and projected revenue impact.`,
+    robots: { index: false },
+  }
+}
+
+export default async function ACRAReportPage({ params }: PageProps) {
+  const { id } = await params
+  const supabase = await createClient()
+  const { data: { user } } = await supabase.auth.getUser()
+
+  if (!user) redirect('/acra/login')
+
+  const { data: report, error } = await supabase
+    .from('acra_reports')
+    .select(`
+      *, acra_scans ( url, company_name, industry, monthly_revenue_range, framework, created_at )
+    `)
+    .eq('id', id)
+    .eq('user_id', user.id)
+    .single()
+
+  if (error || !report) notFound()
+
+  const r = report as unknown as DBReport
+  const scan = r.acra_scans
+  const domain = (() => { try { return new URL(scan.url.startsWith('http') ? scan.url : `https://${scan.url}`).hostname } catch { return scan.url } })()
+
+  const pillars = buildPillarsFromDB(r)
+  const llmScores: LLMScores = {
+    chatgpt: r.llm_chatgpt,
+    perplexity: r.llm_perplexity,
+    claude: r.llm_claude,
+    gemini: r.llm_gemini,
+    copilot: r.llm_copilot,
+  }
+
+  const pillarScoreMap: Record<string, number> = {
+    protocol: r.score_protocol_compliance,
+    'structured-data': r.score_structured_data,
+    aeo: r.score_aeo,
+    geo: r.score_geo,
+    seo: r.score_seo_foundation,
+    social: r.score_social_authority,
+    press: r.score_press_coverage,
+    'ai-authority': r.score_ai_authority,
+    'llm-recommendation': r.score_llm_recommendation,
+  }
+
+  const revenueImpact = calculateRevenueImpact(
+    r.overall_score,
+    pillarScoreMap,
+    (scan.monthly_revenue_range as RevenueRange) ?? undefined
+  )
+
+  const criticalCount = pillars.filter((p) => p.status === 'critical').length
+  const grade = r.overall_grade
+  const gradeColor: Record<string, string> = { A: '#10b981', B: '#22c55e', C: '#f59e0b', D: '#f97316', F: '#ef4444' }
+
+  return (
+    <>
+      {/* Sticky report header */}
+      <div className="sticky top-0 z-40 border-b border-[var(--color-border)] bg-[var(--color-base)]/95 backdrop-blur-sm">
+        <div className="container py-3 flex items-center justify-between gap-4">
+          <div className="flex items-center gap-3">
+            <Link href="/acra/run" className="text-[var(--color-muted-2)] hover:text-[var(--color-accent)] flex items-center gap-1 text-sm">
+              <ArrowLeft size={14} />
+              <span className="hidden sm:inline">All Scans</span>
+            </Link>
+            <div className="text-sm font-bold text-[var(--color-text)] truncate max-w-[200px] sm:max-w-none">{domain}</div>
+            <span
+              className="text-sm font-bold px-2 py-0.5 rounded-full"
+              style={{ background: `${gradeColor[grade]}20`, color: gradeColor[grade] }}
+            >
+              Grade {grade}
+            </span>
+          </div>
+          <div className="flex items-center gap-2">
+            <span className="text-xs text-[var(--color-muted-2)] hidden sm:inline">
+              {new Date(r.created_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
+            </span>
+            <Link href="/acra/run" className="btn-secondary text-xs py-1.5 px-3 flex items-center gap-1">
+              <RefreshCw size={12} />
+              Re-scan
+            </Link>
+          </div>
+        </div>
+      </div>
+
+      <div className="section">
+        <div className="container max-w-5xl space-y-8">
+
+          {/* Critical alert banner */}
+          {criticalCount > 0 && (
+            <div
+              className="flex items-start gap-3 p-4 rounded-xl text-white"
+              style={{ background: 'linear-gradient(135deg, #dc2626, #9f1239)' }}
+              role="alert"
+            >
+              <AlertTriangle size={20} className="shrink-0 mt-0.5" />
+              <div>
+                <strong>{criticalCount} critical gap{criticalCount > 1 ? 's' : ''} found.</strong>{' '}
+                These issues are actively costing you AI revenue and reducing your LLM recommendation probability.
+                <Link href="/contact" className="ml-2 underline font-semibold">Book a free strategy call →</Link>
+              </div>
+            </div>
+          )}
+
+          {/* Overall score hero */}
+          <div className="card p-6">
+            <div className="grid sm:grid-cols-4 gap-6 items-center">
+              <div className="flex flex-col items-center sm:border-r border-[var(--color-border)] pr-6">
+                <ScoreGauge score={r.overall_score} grade={grade} size="lg" />
+                <div className="text-sm font-semibold text-[var(--color-muted-2)] mt-2">Overall ACRA Score</div>
+              </div>
+              <div className="sm:col-span-3 grid grid-cols-2 sm:grid-cols-3 gap-4">
+                {[
+                  { label: 'Protocol', score: r.score_protocol_compliance },
+                  { label: 'AEO', score: r.score_aeo },
+                  { label: 'GEO', score: r.score_geo },
+                  { label: 'SEO', score: r.score_seo_foundation },
+                  { label: 'Social', score: r.score_social_authority },
+                  { label: 'Press', score: r.score_press_coverage },
+                  { label: 'AI Authority', score: r.score_ai_authority },
+                  { label: 'LLM Rec.', score: r.score_llm_recommendation },
+                  { label: 'Schema', score: r.score_structured_data },
+                ].map(({ label, score }) => {
+                  const g = score >= 90 ? 'A' : score >= 75 ? 'B' : score >= 60 ? 'C' : score >= 40 ? 'D' : 'F'
+                  const c = gradeColor[g]
+                  return (
+                    <div key={label} className="flex items-center gap-2">
+                      <div className="flex-1">
+                        <div className="flex justify-between text-xs mb-1">
+                          <span className="text-[var(--color-muted-2)]">{label}</span>
+                          <span className="font-bold" style={{ color: c }}>{score}</span>
+                        </div>
+                        <div className="h-1.5 bg-[var(--color-surface-2)] rounded-full overflow-hidden">
+                          <div className="h-full rounded-full" style={{ width: `${score}%`, background: c }} />
+                        </div>
+                      </div>
+                    </div>
+                  )
+                })}
+              </div>
+            </div>
+          </div>
+
+          {/* Revenue Impact — first and most prominent */}
+          <RevenueImpactPanel impact={revenueImpact} url={scan.url} />
+
+          {/* LLM Scores */}
+          <LLMScoreBoard scores={llmScores} />
+
+          {/* ASC Gold Standard Comparison */}
+          <GoldStandardSection score={r.overall_score} framework={scan.framework} pillars={pillarScoreMap} />
+
+          {/* Pillar breakdown */}
+          <div>
+            <h2 className="text-xl font-bold text-[var(--color-text)] mb-4">Detailed Pillar Analysis</h2>
+            <div className="space-y-4">
+              {pillars.map((pillar) => (
+                <ScoreCard key={pillar.key} pillar={pillar} />
+              ))}
+            </div>
+          </div>
+
+          {/* Detected signals */}
+          <div className="grid sm:grid-cols-2 gap-6">
+            <div className="card p-5">
+              <h3 className="text-sm font-bold text-[var(--color-text)] mb-3">Schema Types Detected ({r.schema_types_found?.length ?? 0})</h3>
+              {(r.schema_types_found ?? []).length > 0 ? (
+                <div className="flex flex-wrap gap-1.5">
+                  {r.schema_types_found.map((t) => (
+                    <span key={t} className="badge text-xs text-green-700 bg-green-100">{t}</span>
+                  ))}
+                </div>
+              ) : (
+                <p className="text-sm text-[var(--color-muted-2)]">No JSON-LD schema detected on this page.</p>
+              )}
+              {(r.missing_schema_types ?? []).length > 0 && (
+                <div className="mt-3">
+                  <div className="text-xs font-semibold text-red-500 mb-1.5">Missing ({r.missing_schema_types.length}):</div>
+                  <div className="flex flex-wrap gap-1.5">
+                    {r.missing_schema_types.map((t) => (
+                      <span key={t} className="badge text-xs text-red-600 bg-red-50">{t}</span>
+                    ))}
+                  </div>
+                </div>
+              )}
+            </div>
+
+            <div className="card p-5">
+              <h3 className="text-sm font-bold text-[var(--color-text)] mb-3">Social Profiles Found ({r.social_profiles_found?.length ?? 0})</h3>
+              {(r.social_profiles_found ?? []).length > 0 ? (
+                <ul className="space-y-1.5">
+                  {r.social_profiles_found.map((p) => (
+                    <li key={p}>
+                      <a href={p} target="_blank" rel="noopener noreferrer"
+                        className="text-xs text-[var(--color-accent)] hover:underline truncate block">{p}</a>
+                    </li>
+                  ))}
+                </ul>
+              ) : (
+                <p className="text-sm text-red-500 font-medium">No social profiles detected or linked via sameAs schema.</p>
+              )}
+            </div>
+          </div>
+
+          {/* Recommended services based on scan gaps */}
+          <RecommendedServices
+            pillarScores={pillarScoreMap}
+            domain={domain}
+            framework={scan.framework}
+          />
+
+          {/* Inline consultation booking */}
+          <ConsultationBooking
+            domain={domain}
+            overallScore={r.overall_score}
+            criticalCount={criticalCount}
+            pillarScores={pillarScoreMap}
+          />
+
+        </div>
+      </div>
+    </>
+  )
+}
+
+function GoldStandardSection({
+  score,
+  framework,
+  pillars,
+}: {
+  score: number
+  framework: string | null
+  pillars: Record<string, number>
+}) {
+  const criteria = [
+    {
+      label: 'SPA + Server-Side Rendering (SSR)',
+      description: 'Content immediately available in HTML — no JavaScript required for AI agents to read.',
+      hint: framework ? `Implementation approach varies for ${framework}` : 'Requires SSR or edge rendering.',
+      pass: (pillars['seo'] ?? 0) >= 65,
+    },
+    {
+      label: 'Heavy JSON-LD Schema Library',
+      description: 'Dense schema markup for Product, Organization, Person, FAQPage, SpeakableSpecification, and more.',
+      hint: 'Maps all products and services as machine-readable entities.',
+      pass: (pillars['structured-data'] ?? 0) >= 70,
+    },
+    {
+      label: 'Agentic Protocol Stack (UCP/ACP/AP2)',
+      description: 'AI agents can discover, negotiate, and execute purchases without human intervention.',
+      hint: 'Requires /.well-known/ucp, /.well-known/acp, and /.well-known/ap2 endpoints.',
+      pass: (pillars['protocol'] ?? 0) >= 60,
+    },
+    {
+      label: 'Tier 1 Press Release Syndication',
+      description: 'Regular press releases distributed via Business Wire or PR Newswire — the #1 AI authority signal.',
+      hint: 'Branded web mentions have a 0.664 correlation with AI citation frequency (Ahrefs data).',
+      pass: (pillars['press'] ?? 0) >= 65,
+    },
+    {
+      label: 'Social Media Authority + sameAs Entity Graph',
+      description: 'LinkedIn, Twitter/X, YouTube linked via sameAs in JSON-LD — machines can verify your brand identity.',
+      hint: 'Social proof reduces AI recommendation hesitation by up to 40%.',
+      pass: (pillars['social'] ?? 0) >= 65,
+    },
+  ]
+
+  const passCount = criteria.filter((c) => c.pass).length
+  const atGoldStandard = passCount >= 5
+
+  return (
+    <div className="card overflow-hidden">
+      <div
+        className="p-5"
+        style={{ background: 'linear-gradient(135deg, color-mix(in srgb, #f59e0b 12%, transparent), color-mix(in srgb, #f59e0b 5%, transparent))' }}
+      >
+        <div className="flex items-start justify-between gap-4">
+          <div>
+            <div className="flex items-center gap-2 mb-1">
+              <Star size={18} className="text-amber-500" />
+              <h2 className="font-bold text-[var(--color-text)]">ASC Gold Standard Comparison</h2>
+            </div>
+            <p className="text-sm text-[var(--color-muted-2)]">
+              The architecture ASC implements for clients generating $50M+ annually.
+              {framework && ` Framework detected: ${framework}.`}
+            </p>
+          </div>
+          <div className="text-right shrink-0">
+            <div className="text-2xl font-bold" style={{ color: atGoldStandard ? '#10b981' : passCount >= 3 ? '#f59e0b' : '#ef4444' }}>
+              {passCount}/5
+            </div>
+            <div className="text-xs text-[var(--color-muted-2)]">criteria met</div>
+          </div>
+        </div>
+      </div>
+
+      <div className="divide-y divide-[var(--color-border)]">
+        {criteria.map((c) => (
+          <div key={c.label} className="p-4 flex items-start gap-3">
+            <div className="mt-0.5 shrink-0">
+              {c.pass ? (
+                <CheckCircle2 size={18} className="text-green-500" />
+              ) : (
+                <XCircle size={18} className="text-red-400" />
+              )}
+            </div>
+            <div className="flex-1 min-w-0">
+              <div className="font-semibold text-sm text-[var(--color-text)]">{c.label}</div>
+              <p className="text-xs text-[var(--color-muted-2)] mt-0.5 leading-relaxed">{c.description}</p>
+              {!c.pass && (
+                <p className="text-xs text-amber-600 mt-1 font-medium">{c.hint}</p>
+              )}
+            </div>
+            <div className="shrink-0">
+              <span
+                className="text-xs font-bold px-2 py-0.5 rounded-full"
+                style={{
+                  background: c.pass ? '#10b98115' : '#ef444415',
+                  color: c.pass ? '#10b981' : '#ef4444',
+                }}
+              >
+                {c.pass ? 'Pass' : 'Gap'}
+              </span>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {!atGoldStandard && (
+        <div className="p-4 border-t border-[var(--color-border)] bg-[var(--color-surface)]">
+          <p className="text-sm text-[var(--color-muted)] leading-relaxed">
+            <strong className="text-[var(--color-text)]">Your site is {5 - passCount} criteria away from the ASC Gold Standard.</strong>{' '}
+            Sites at Gold Standard level score 85+ overall and capture 3–5× more AI-driven revenue than average.
+            {framework && (` We have a proven implementation path for ${framework}.`)}
+          </p>
+          <Link href="/contact" className="btn-primary mt-3 inline-flex items-center gap-1.5 text-sm">
+            See What Full Implementation Looks Like
+            <ArrowRight size={14} />
+          </Link>
+        </div>
+      )}
+    </div>
+  )
+}
