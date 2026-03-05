@@ -1,5 +1,6 @@
 'use client'
 
+import { useEffect, useState } from 'react'
 import { TrendingDown, DollarSign, AlertTriangle } from 'lucide-react'
 import type { RevenueImpact } from '@/lib/acra/revenue'
 import { formatCurrency } from '@/lib/acra/revenue'
@@ -11,6 +12,11 @@ interface Props {
 }
 
 export function RevenueImpactPanel({ impact, url }: Props) {
+  const [mounted, setMounted] = useState(false)
+  useEffect(() => {
+    const t = setTimeout(() => setMounted(true), 200)
+    return () => clearTimeout(t)
+  }, [])
   const domain = (() => { try { return new URL(url.startsWith('http') ? url : `https://${url}`).hostname } catch { return url } })()
 
   return (
@@ -71,27 +77,32 @@ export function RevenueImpactPanel({ impact, url }: Props) {
         </h3>
 
         <div className="space-y-3">
-          {impact.breakdown.map((item, i) => (
-            <div key={i} className="flex items-start gap-3">
-              {/* Bar */}
-              <div className="flex-1">
-                <div className="flex items-center justify-between mb-1">
-                  <span className="text-xs font-semibold text-[var(--color-text)]">{item.gap}</span>
-                  <span className="text-xs font-bold text-red-500">{formatCurrency(item.monthlyLoss)}/mo</span>
+          {impact.breakdown.map((item, i) => {
+            const barWidth = Math.min(100, (item.monthlyLoss / Math.max(1, impact.monthlyAtRisk)) * 100)
+            const barColor = item.urgency === 'critical' ? '#ef4444' : item.urgency === 'high' ? '#f97316' : '#f59e0b'
+            return (
+              <div key={i} className="flex items-start gap-3">
+                <div className="flex-1">
+                  <div className="flex items-center justify-between mb-1">
+                    <span className="text-xs font-semibold text-[var(--color-text)]">{item.gap}</span>
+                    <span className="text-xs font-bold text-red-500">{formatCurrency(item.monthlyLoss)}/mo</span>
+                  </div>
+                  <div className="h-2 bg-[var(--color-surface-2)] rounded-full overflow-hidden">
+                    <div
+                      className="h-full rounded-full"
+                      style={{
+                        width: mounted ? `${barWidth}%` : '0%',
+                        background: barColor,
+                        transition: `width 0.9s cubic-bezier(0.34, 1.2, 0.64, 1) ${i * 120}ms`,
+                        boxShadow: mounted ? `0 0 8px ${barColor}60` : 'none',
+                      }}
+                    />
+                  </div>
+                  <p className="text-xs text-[var(--color-muted-2)] mt-1 leading-snug">{item.description}</p>
                 </div>
-                <div className="h-1.5 bg-[var(--color-surface-2)] rounded-full overflow-hidden">
-                  <div
-                    className="h-full rounded-full"
-                    style={{
-                      width: `${Math.min(100, (item.monthlyLoss / Math.max(1, impact.monthlyAtRisk)) * 100)}%`,
-                      background: item.urgency === 'critical' ? '#ef4444' : item.urgency === 'high' ? '#f97316' : '#f59e0b',
-                    }}
-                  />
-                </div>
-                <p className="text-xs text-[var(--color-muted-2)] mt-1 leading-snug">{item.description}</p>
               </div>
-            </div>
-          ))}
+            )
+          })}
         </div>
 
         {/* 12-month projection */}
