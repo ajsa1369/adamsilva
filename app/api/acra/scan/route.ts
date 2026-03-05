@@ -110,6 +110,7 @@ export async function POST(req: NextRequest) {
           hasSSL: signals.hasSSL,
           hasSitemap: signals.hasSitemap,
           hasRobotsTxt: signals.hasRobotsTxt,
+          valueLevers: scores.valueLevers,
         },
       })
       .select('id')

@@ -8,8 +8,9 @@ import { ScoreCard } from '@/app/components/acra/ScoreCard'
 import { RevenueImpactPanel } from '@/app/components/acra/RevenueImpact'
 import { LLMScoreBoard } from '@/app/components/acra/LLMScoreBoard'
 import { RecommendedServices } from '@/app/components/acra/RecommendedServices'
+import { ValueLeversSection } from '@/app/components/acra/ValueLevers'
 import { calculateRevenueImpact, type RevenueRange } from '@/lib/acra/revenue'
-import type { PillarScore, LLMScores, Finding } from '@/lib/acra/scoring'
+import type { PillarScore, LLMScores, Finding, ValueLevers } from '@/lib/acra/scoring'
 
 interface PageProps {
   params: Promise<{ token: string }>
@@ -283,6 +284,12 @@ export default async function ACRASharePage({ params }: PageProps) {
           </div>
 
           <RevenueImpactPanel impact={revenueImpact} url={scan.url} />
+
+          {/* Risk Intelligence (4 Value Levers) */}
+          {!!r.scan_meta?.valueLevers && (
+            <ValueLeversSection levers={r.scan_meta.valueLevers as unknown as ValueLevers} />
+          )}
+
           <LLMScoreBoard scores={llmScores} />
           <GoldStandardSection score={r.overall_score} framework={scan.framework} pillars={pillarScoreMap} />
 

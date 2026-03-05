@@ -10,8 +10,9 @@ import { RevenueImpactPanel } from '@/app/components/acra/RevenueImpact'
 import { LLMScoreBoard } from '@/app/components/acra/LLMScoreBoard'
 import { RecommendedServices } from '@/app/components/acra/RecommendedServices'
 import { ConsultationBooking } from '@/app/components/acra/ConsultationBooking'
+import { ValueLeversSection } from '@/app/components/acra/ValueLevers'
 import { calculateRevenueImpact, type RevenueRange } from '@/lib/acra/revenue'
-import type { PillarScore, LLMScores, Finding } from '@/lib/acra/scoring'
+import type { PillarScore, LLMScores, Finding, ValueLevers } from '@/lib/acra/scoring'
 
 interface PageProps {
   params: Promise<{ id: string }>
@@ -273,6 +274,11 @@ export default async function ACRAReportPage({ params }: PageProps) {
 
           {/* Revenue Impact — first and most prominent */}
           <RevenueImpactPanel impact={revenueImpact} url={scan.url} />
+
+          {/* Risk Intelligence (4 Value Levers) */}
+          {!!r.scan_meta?.valueLevers && (
+            <ValueLeversSection levers={r.scan_meta.valueLevers as unknown as ValueLevers} />
+          )}
 
           {/* LLM Scores */}
           <LLMScoreBoard scores={llmScores} />

@@ -38,12 +38,39 @@ export interface LLMScores {
   copilot: number
 }
 
+export interface CrawlabilityFactor {
+  factor: string
+  pass: boolean
+  detail: string
+}
+
+export interface ValueLevers {
+  // Lever 1: LLM Crawlability Score (1-10)
+  llmCrawlabilityScore: number
+  llmCrawlabilityGrade: 'A' | 'B' | 'C' | 'D' | 'F'
+  llmCrawlabilityFactors: CrawlabilityFactor[]
+
+  // Lever 2: Zero-Click Traffic Projection
+  zeroClickRiskPercent: number        // % of organic traffic shifting to AI (0-100)
+  zeroClickCitationRate: number       // % of that traffic where you'd be cited (0-100)
+  zeroClickNetLossPercent: number     // actual % of total organic at risk of disappearing
+
+  // Lever 3: Hallucination & Misinformation Risk
+  hallucinationRiskLevel: 'low' | 'medium' | 'high' | 'critical'
+  hallucinationRiskReasons: string[]
+
+  // Lever 4: Shadow Competitor Context
+  competitorAdvantageMonths: number   // how many months ahead a compliant competitor is
+  shadowCompetitorStatement: string   // narrative about who IS being recommended
+}
+
 export interface ACRAScores {
   overall: number
   grade: 'A' | 'B' | 'C' | 'D' | 'F'
   pillars: PillarScore[]
   llm: LLMScores
   topRecommendations: Finding[]
+  valueLevers: ValueLevers
 }
 
 function toGrade(score: number): 'A' | 'B' | 'C' | 'D' | 'F' {
@@ -494,6 +521,113 @@ function scoreLLMRecommendation(s: ScanSignals): { pillar: PillarScore; llm: LLM
   }
 }
 
+// ── Value Levers: 4 high-stakes insight dimensions ───────────────────────────
+function computeValueLevers(s: ScanSignals, aeoScore: number, overallScore: number): ValueLevers {
+
+  // ── Lever 1: LLM Crawlability Score (1-10) ────────────────────────────────
+  const crawlFactors: CrawlabilityFactor[] = [
+    {
+      factor: 'Page Load Speed',
+      pass: s.loadTimeMs > 0 && s.loadTimeMs < 4000,
+      detail: s.loadTimeMs === 0 ? 'Site did not respond — AI crawlers will time out and skip entirely.' : s.loadTimeMs < 2000 ? `${s.loadTimeMs}ms — excellent. AI bots index fast pages first.` : s.loadTimeMs < 4000 ? `${s.loadTimeMs}ms — acceptable. Under 2,000ms preferred for priority crawling.` : `${s.loadTimeMs}ms — too slow. Googlebot and AI crawlers deprioritize pages over 4s.`,
+    },
+    {
+      factor: 'Server-Side Rendered Content',
+      pass: s.htmlLength > 8000 && s.longAnswerBlocks >= 1,
+      detail: s.htmlLength < 8000 ? 'Thin HTML detected — content likely loaded via JavaScript, which AI crawlers cannot execute.' : s.longAnswerBlocks < 1 ? 'No substantial text blocks in raw HTML. AI bots cannot extract meaningful content.' : `${s.longAnswerBlocks} substantive paragraph(s) in raw HTML. Good signal for AI extraction.`,
+    },
+    {
+      factor: 'SSL / HTTPS',
+      pass: s.hasSSL,
+      detail: s.hasSSL ? 'Site secured with HTTPS. Required for all AI agent integrations.' : 'No SSL detected. AI agents and modern crawlers refuse to index non-HTTPS sites.',
+    },
+    {
+      factor: 'Mobile Viewport',
+      pass: s.hasMobileViewport,
+      detail: s.hasMobileViewport ? 'Mobile viewport declared. AI crawlers use mobile-first indexing.' : 'No mobile viewport tag. AI systems using mobile-first indexing may penalize or skip this site.',
+    },
+    {
+      factor: 'Rich Schema Markup',
+      pass: s.schemaTypesFound.length >= 3,
+      detail: s.schemaTypesFound.length === 0 ? 'Zero structured data. AI systems have no machine-readable content to extract.' : s.schemaTypesFound.length < 3 ? `Only ${s.schemaTypesFound.length} schema type(s). Minimum 3 needed for reliable AI extraction.` : `${s.schemaTypesFound.length} schema types detected. Good machine-readable signal density.`,
+    },
+    {
+      factor: 'Answer-First Content Structure',
+      pass: s.longAnswerBlocks >= 2,
+      detail: s.longAnswerBlocks === 0 ? 'No answer-block paragraphs detected. AI systems cannot extract direct answers — they skip to sites that have them.' : s.longAnswerBlocks < 2 ? '1 substantive paragraph found. Aim for 3+ answer-first paragraphs for reliable AI citation.' : `${s.longAnswerBlocks} answer-block paragraphs detected. Strong citation extraction potential.`,
+    },
+    {
+      factor: 'Preload / Performance Hints',
+      pass: s.hasPreloadLinks,
+      detail: s.hasPreloadLinks ? 'Resource preloading detected. Signals a performance-optimized site to AI crawlers.' : 'No preload hints found. Adding <link rel="preload"> improves perceived load time for all bots.',
+    },
+  ]
+
+  const passCount = crawlFactors.filter((f) => f.pass).length
+  const rawScore = Math.max(1, Math.round((passCount / crawlFactors.length) * 10))
+  const llmCrawlabilityScore = rawScore
+  const llmCrawlabilityGrade: ValueLevers['llmCrawlabilityGrade'] =
+    rawScore >= 9 ? 'A' : rawScore >= 7 ? 'B' : rawScore >= 5 ? 'C' : rawScore >= 3 ? 'D' : 'F'
+
+  // ── Lever 2: Zero-Click Traffic Projection ────────────────────────────────
+  // Gartner: 40% of organic search traffic shifts to AI answer engines by 2026
+  // Citation rate based on AEO score — what % of that shifted traffic cites you
+  const zeroClickRiskPercent = 40  // industry-wide shift (fixed, Gartner projection)
+  const citationRate =
+    aeoScore >= 80 ? 75 :
+    aeoScore >= 60 ? 45 :
+    aeoScore >= 40 ? 20 :
+    aeoScore >= 20 ? 8 : 3
+  const zeroClickCitationRate = citationRate
+  // Net loss = % of total organic that shifts away AND you don't capture in AI
+  const zeroClickNetLossPercent = Math.round(zeroClickRiskPercent * (1 - citationRate / 100))
+
+  // ── Lever 3: Hallucination & Misinformation Risk ──────────────────────────
+  const hallucinationRiskReasons: string[] = []
+
+  if (!s.hasOrganizationSchema) hallucinationRiskReasons.push('No Organization schema — AI cannot verify your legal name, founding date, or contact details')
+  if (!s.socialSameAsInSchema) hallucinationRiskReasons.push('Social profiles not linked via sameAs — AI conflates your brand with similarly-named entities')
+  if (!s.hasPressPage) hallucinationRiskReasons.push('No press footprint — AI invents brand history from sparse third-party signals')
+  if (!s.hasEEATSignals) hallucinationRiskReasons.push('No E-E-A-T signals — AI cannot attribute expertise, generating generic or wrong descriptions of your services')
+  if (!s.hasWikipediaLink) hallucinationRiskReasons.push('No Wikipedia/Wikidata entry — primary LLM training source for brand facts is absent')
+  if (s.externalCitationEstimate < 25) hallucinationRiskReasons.push('Low external citation count — AI fills gaps with competitor data or fabricated information')
+
+  const hallucinationRiskLevel: ValueLevers['hallucinationRiskLevel'] =
+    hallucinationRiskReasons.length >= 5 ? 'critical' :
+    hallucinationRiskReasons.length >= 3 ? 'high' :
+    hallucinationRiskReasons.length >= 1 ? 'medium' : 'low'
+
+  // ── Lever 4: Shadow Competitor Context ───────────────────────────────────
+  // Estimate how many months ahead a competitor who IS protocol-compliant is
+  const missingProtocols = [!s.hasUCPManifest, !s.hasACPEndpoint, !s.hasAP2Endpoint].filter(Boolean).length
+  const missingAuthority = [!s.hasEEATSignals, !s.hasPressPage, !s.socialSameAsInSchema].filter(Boolean).length
+  const competitorAdvantageMonths = Math.min(24, (missingProtocols * 4) + (missingAuthority * 2) + (overallScore < 30 ? 6 : overallScore < 60 ? 3 : 0))
+
+  const protocolGap = !s.hasUCPManifest && !s.hasACPEndpoint
+  const authorityGap = !s.hasEEATSignals && !s.hasPressPage
+  const shadowCompetitorStatement =
+    protocolGap && authorityGap
+      ? 'Competitors with agentic protocol stacks (UCP/ACP) and press authority are being recommended by ChatGPT, Perplexity, and Gemini for purchases in your category. Your brand does not appear in these results — not because of price or quality, but because you are technically invisible to AI buying agents.'
+      : protocolGap
+      ? 'Brands with ACP-compatible checkout endpoints are completing AI-initiated transactions in your category while visitors to your site must find the purchase button themselves. Every AI agent recommendation flows to your protocol-ready competitors.'
+      : authorityGap
+      ? 'Competitors with structured press coverage and verified E-E-A-T signals are cited as category authorities by Perplexity and Claude. Without these signals, AI systems treat your brand as unverified and route purchase recommendations elsewhere.'
+      : 'Your foundational signals are partially in place. Competitors who close remaining gaps first will cement a citation advantage that compounds over 12–18 months as AI training data solidifies.'
+
+  return {
+    llmCrawlabilityScore,
+    llmCrawlabilityGrade,
+    llmCrawlabilityFactors: crawlFactors,
+    zeroClickRiskPercent,
+    zeroClickCitationRate,
+    zeroClickNetLossPercent,
+    hallucinationRiskLevel,
+    hallucinationRiskReasons,
+    competitorAdvantageMonths,
+    shadowCompetitorStatement,
+  }
+}
+
 // ── Master scoring function ───────────────────────────────────────────────────
 export function computeScores(signals: ScanSignals): ACRAScores {
   const protocol = scoreProtocol(signals)
@@ -530,11 +664,14 @@ export function computeScores(signals: ScanSignals): ACRAScores {
     })
     .slice(0, 8)
 
+  const valueLevers = computeValueLevers(signals, aeo.score, overall)
+
   return {
     overall,
     grade: toGrade(overall),
     pillars,
     llm,
     topRecommendations,
+    valueLevers,
   }
 }
