@@ -12,7 +12,9 @@ import { RecommendedServices } from '@/app/components/acra/RecommendedServices'
 import { ConsultationBooking } from '@/app/components/acra/ConsultationBooking'
 import { ValueLeversSection } from '@/app/components/acra/ValueLevers'
 import { PackageRecommendation } from '@/app/components/acra/PackageRecommendation'
+import { ReportJsonLD } from '@/app/components/acra/ReportJsonLD'
 import { calculateRevenueImpact, type RevenueRange } from '@/lib/acra/revenue'
+import { PACKAGES } from '@/lib/data/packages'
 import type { PillarScore, LLMScores, Finding, ValueLevers } from '@/lib/acra/scoring'
 
 interface PageProps {
@@ -184,8 +186,33 @@ export default async function ACRAReportPage({ params }: PageProps) {
   const grade = r.overall_grade
   const gradeColor: Record<string, string> = { A: '#10b981', B: '#22c55e', C: '#f59e0b', D: '#f97316', F: '#ef4444' }
 
+  // Resolve recommended package for JSON-LD
+  const recommendedPkg = r.overall_score >= 40
+    ? PACKAGES.find((p) => p.slug === 'gold')!
+    : r.overall_score >= 20
+    ? PACKAGES.find((p) => p.slug === 'silver')!
+    : PACKAGES.find((p) => p.slug === 'bronze')!
+
   return (
     <>
+      {/* Structured data for AI agents */}
+      <ReportJsonLD
+        domain={domain}
+        scannedUrl={scan.url}
+        companyName={scan.company_name}
+        industry={scan.industry}
+        overallScore={r.overall_score}
+        overallGrade={grade}
+        monthlyAtRisk={revenueImpact.monthlyAtRisk}
+        annualAtRisk={revenueImpact.annualAtRisk}
+        pillarScores={pillarScoreMap}
+        packageName={recommendedPkg.name}
+        packageSetupPrice={recommendedPkg.setupPrice}
+        packageMonthlyPrice={recommendedPkg.monthlyPrice}
+        framework={scan.framework}
+        reportDate={r.created_at}
+        shareUrl={`https://www.adamsilvaconsulting.com/acra/share/${r.share_token}`}
+      />
       {/* Sticky report header */}
       <div className="sticky top-0 z-40 border-b border-[var(--color-border)] bg-[var(--color-base)]/95 backdrop-blur-sm">
         <div className="container py-3 flex items-center justify-between gap-4">
@@ -293,6 +320,7 @@ export default async function ACRAReportPage({ params }: PageProps) {
             domain={domain}
             framework={scan.framework}
             overallScore={r.overall_score}
+            revenueImpact={revenueImpact}
           />
 
           {/* Pillar breakdown */}

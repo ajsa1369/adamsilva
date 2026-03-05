@@ -12,12 +12,15 @@
 import Link from 'next/link'
 import { CheckCircle2, XCircle, ArrowRight, Package, AlertTriangle, Cpu, TrendingUp } from 'lucide-react'
 import { PACKAGES, PLATFORM_MATRIX, type PlatformEntry, type PackagePageData } from '@/lib/data/packages'
+import { SavingsCounter } from '@/app/components/acra/SavingsCounter'
+import type { RevenueImpact } from '@/lib/acra/revenue'
 
 interface Props {
   pillarScores: Record<string, number>
   domain: string
   framework: string | null
   overallScore: number
+  revenueImpact: RevenueImpact
 }
 
 // ── Platform detection from free-text framework field ────────────────────────
@@ -273,11 +276,13 @@ function PackageCard({
   platform,
   displayName,
   pillarScores,
+  revenueImpact,
 }: {
   pkg: PackagePageData
   platform: PlatformEntry | null
   displayName: string | null
   pillarScores: Record<string, number>
+  revenueImpact: RevenueImpact
 }) {
   const color = PACKAGE_COLOR[pkg.slug] ?? '#6366f1'
   const gapsClosedBy: string[] = []
@@ -312,6 +317,19 @@ function PackageCard({
           </div>
         </div>
       </div>
+
+      {/* Animated savings / ROI counter */}
+      {revenueImpact.monthlyAtRisk > 0 && pkg.monthlyPrice && pkg.setupPrice && (
+        <div className="px-5 pb-2">
+          <SavingsCounter
+            monthlyAtRisk={revenueImpact.monthlyAtRisk}
+            annualAtRisk={revenueImpact.annualAtRisk}
+            setupPrice={pkg.setupPrice}
+            monthlyPrice={pkg.monthlyPrice}
+            packageName={pkg.name}
+          />
+        </div>
+      )}
 
       <div className="p-5 grid sm:grid-cols-2 gap-6">
         {/* What's included */}
@@ -374,7 +392,7 @@ function PackageCard({
 
 // ── Main export ───────────────────────────────────────────────────────────────
 
-export function PackageRecommendation({ pillarScores, domain, framework, overallScore }: Props) {
+export function PackageRecommendation({ pillarScores, domain, framework, overallScore, revenueImpact }: Props) {
   const { platform, displayName } = detectPlatform(framework)
   const pkg = pickPackage(overallScore)
   const aeoScore = pillarScores['aeo'] ?? 0
@@ -400,6 +418,7 @@ export function PackageRecommendation({ pillarScores, domain, framework, overall
           platform={platform}
           displayName={displayName}
           pillarScores={pillarScores}
+          revenueImpact={revenueImpact}
         />
       </div>
     </div>
