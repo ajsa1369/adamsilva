@@ -247,7 +247,7 @@ function FrameworkAssessment({
               'Next.js 14 Server Components — zero JS required for AI crawlers to read content',
               'Dense JSON-LD schema library — every entity, product, FAQ, and author is machine-readable',
               'Full UCP + ACP + AP2 protocol stack — AI agents can discover, negotiate, and purchase autonomously',
-              '4 press releases/month — the #1 AI citation signal, generating compounding LLM authority',
+              'Press Release Agent (client-scheduled) — entity-schema releases train LLMs to cite your brand',
               'sameAs entity graph — your brand identity is verified across all AI knowledge graphs',
               'AI-first content architecture — answer-first paragraphs and speakable markup throughout',
             ].map((item) => (
@@ -288,8 +288,8 @@ function PackageCard({
   const gapsClosedBy: string[] = []
 
   if (pillarScores['protocol'] < 60) gapsClosedBy.push('Protocol stack deployed: ' + pkg.features.protocolStack + ' — AI agents can discover and transact')
-  if (pillarScores['press'] < 60) gapsClosedBy.push(`Press Release Agent (${pkg.features.pressReleasesPerMonth}/mo) — entity schema trains LLMs to cite your brand`)
-  if (pillarScores['aeo'] < 60) gapsClosedBy.push(`Authority Content Agent (${pkg.features.blogPostsPerMonth} post${pkg.features.blogPostsPerMonth === 1 ? '' : 's'}/mo) — AEO-structured to become the source AI systems quote`)
+  if (pillarScores['press'] < 60) gapsClosedBy.push(`Press Release Agent (client-scheduled) — entity schema in every release trains LLMs to cite your brand`)
+  if (pillarScores['aeo'] < 60) gapsClosedBy.push(`Authority Content Agent (unlimited articles, topical map planning) — AEO-structured to become the source AI systems quote`)
   if (pillarScores['social'] < 60) gapsClosedBy.push('AI Commerce Agent (' + pkg.features.chatbotChannels + ') — 24/7 lead capture across channels')
   gapsClosedBy.push('Schema.org JSON-LD library — dense structured data for all entities')
 

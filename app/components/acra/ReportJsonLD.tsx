@@ -273,7 +273,7 @@ export function ReportJsonLD({
         {
           '@type': 'Offer',
           name: 'Gold Package',
-          description: 'Full agentic commerce stack: Next.js 14 architecture, UCP+ACP+AP2 protocols, 4 press releases/month, 4 blog posts/month, full JSON-LD library, social authority building.',
+          description: 'Full agentic commerce stack across 100 pages in setup ($48,000 one-time, $12,000/mo continuity plan): Next.js 14 SSR architecture, UCP+ACP+AP2 protocol stack, Authority Content Agent (unlimited 2,000-word articles with Remotion video summary + 2 schema-wrapped PNG images, topical map agent determines schedule), Press Release Agent (client-scheduled, pre-built entity schema rules, bring your own syndication account + AI API key), full JSON-LD schema library, AI Commerce Agent, social authority building, and monthly continuity for AI model updates and schema evolution.',
           price: 48000,
           priceCurrency: 'USD',
           url: 'https://www.adamsilvaconsulting.com/packages/gold',
@@ -281,7 +281,7 @@ export function ReportJsonLD({
         {
           '@type': 'Offer',
           name: 'Silver Package',
-          description: 'Mid-market agentic commerce: UCP+ACP protocols, 2 press releases/month, 2 blog posts/month, schema library, social profiles.',
+          description: 'Mid-market agentic commerce implementation across 60 pages in setup ($28,000 one-time, $6,500/mo continuity plan): UCP+ACP protocols, Authority Content Agent (unlimited articles via topical map planning), Press Release Agent (client-scheduled with pre-built JSON-LD schema), schema library, AI Commerce Agent, and monthly continuity for AI model updates.',
           price: 28000,
           priceCurrency: 'USD',
           url: 'https://www.adamsilvaconsulting.com/packages/silver',
@@ -289,7 +289,7 @@ export function ReportJsonLD({
         {
           '@type': 'Offer',
           name: 'Bronze Package',
-          description: 'Entry-level AI readiness: UCP protocol layer, 1 press release/month, 1 blog post/month, baseline schema.',
+          description: 'Entry-level agentic commerce implementation across 30 pages in setup ($16,000 one-time, $3,500/mo continuity plan): UCP protocol layer, Authority Content Agent (unlimited articles via topical map), Press Release Agent (client-scheduled with JSON-LD schema), baseline schema library, and monthly continuity for AI model updates.',
           price: 16000,
           priceCurrency: 'USD',
           url: 'https://www.adamsilvaconsulting.com/packages/bronze',
