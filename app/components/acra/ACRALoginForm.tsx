@@ -68,7 +68,7 @@ export function ACRALoginForm({ defaultMode = 'signup', redirectTo = '/acra/run'
         const { data, error: signUpError } = await supabase.auth.signUp({
           email,
           password,
-          options: { emailRedirectTo: `${siteUrl}/acra/run` },
+          options: { emailRedirectTo: `${siteUrl}/auth/callback?next=/acra/run` },
         })
         if (signUpError) throw signUpError
 
