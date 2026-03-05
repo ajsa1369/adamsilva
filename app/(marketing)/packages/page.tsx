@@ -21,14 +21,14 @@ import {
 
 export const metadata: Metadata = {
   title:
-    'Agentic Commerce Packages — Bronze, Silver, Gold, Core | Adam Silva Consulting',
+    'Agentic Commerce Packages — Bronze, Silver, Gold | Adam Silva Consulting',
   description:
-    'Compare all ASC agentic commerce packages. Bronze from $16,000 setup, Silver from $28,000, Gold from $48,000, Core custom enterprise. Side-by-side feature comparison.',
+    'Compare ASC agentic commerce packages. Bronze from $16,000 setup, Silver from $28,000, Gold from $48,000. Same agent fleet — full JSON-LD schema, AEO/GEO, and protocol stack applied to 30, 60, or 100 pages.',
   alternates: { canonical: `${SITE_URL}/packages` },
   openGraph: {
     title: 'Agentic Commerce Packages — ASC',
     description:
-      'Compare Bronze, Silver, Gold, Core packages for agentic commerce protocol implementation.',
+      'Compare Bronze, Silver, and Gold packages for agentic commerce implementation. Same agents, different page scope.',
     url: `${SITE_URL}/packages`,
     type: 'website',
   },
@@ -38,7 +38,8 @@ export const metadata: Metadata = {
 // Static data derivations
 // ---------------------------------------------------------------------------
 
-const mainTiers = PACKAGES.filter((p) => !p.isLegacy)
+// Bronze, Silver, Gold — the three purchasable tiers (Core is enterprise/custom, shown separately)
+const mainTiers = PACKAGES.filter((p) => !p.isLegacy && p.setupPrice !== null)
 
 const tierData: TierData[] = mainTiers.map((pkg) => ({
   id: pkg.slug as TierData['id'],
@@ -51,44 +52,43 @@ const tierData: TierData[] = mainTiers.map((pkg) => ({
   highlighted: pkg.highlighted,
 }))
 
-const comparisonColumns = ['Bronze', 'Silver', 'Gold', 'Core']
+const comparisonColumns = ['Bronze', 'Silver', 'Gold']
 
 const comparisonRows: ComparisonRow[] = [
   {
     feature: 'Setup Price',
-    values: ['$16,000', '$28,000', '$48,000', 'From $75K'],
+    values: ['$16,000', '$28,000', '$48,000'],
     highlight: true,
   },
   {
-    feature: 'Monthly',
-    values: ['$3,500', '$6,500', '$12,000', 'Custom'],
+    feature: 'Continuity Plan',
+    values: ['$3,500/mo', '$6,500/mo', '$12,000/mo'],
     highlight: true,
   },
   {
-    feature: 'T1 Integration Slots',
-    values: ['3', '6', '12', 'Unlimited'],
-  },
-  { feature: 'T2 Integration Slots', values: ['0', '1', '3', 'Unlimited'] },
-  { feature: 'T3 Integration Slots', values: ['0', '0', '1', 'Unlimited'] },
-  {
-    feature: 'Blog Posts / Month',
-    values: mainTiers.map((p) => String(p.features.blogPostsPerMonth)),
+    feature: 'Pages in Setup',
+    values: ['30', '60', '100'],
+    highlight: true,
   },
   {
-    feature: 'Images / Post',
-    values: mainTiers.map((p) => String(p.features.imagesPerPost)),
-  },
-  {
-    feature: 'Press Releases / Month',
-    values: mainTiers.map((p) => String(p.features.pressReleasesPerMonth)),
-  },
-  {
-    feature: 'Chatbot Channels',
+    feature: 'AI Commerce Agent Channels',
     values: mainTiers.map((p) => p.features.chatbotChannels),
   },
   {
     feature: 'Protocol Stack',
     values: mainTiers.map((p) => p.features.protocolStack),
+  },
+  {
+    feature: 'Authority Content Agent',
+    values: mainTiers.map(() => 'Unlimited articles'),
+  },
+  {
+    feature: 'Press Release Agent',
+    values: mainTiers.map(() => 'Client-scheduled'),
+  },
+  {
+    feature: 'Images per Article',
+    values: mainTiers.map((p) => String(p.features.imagesPerPost)),
   },
   {
     feature: 'Architecture',
@@ -136,9 +136,9 @@ const pageSchema = {
     },
     buildFAQSchema([
       {
-        question: 'What is the difference between Bronze and Gold?',
+        question: 'What is the difference between Bronze, Silver, and Gold?',
         answer:
-          'Bronze ($16,000 setup) includes 3 Tier-1 integrations, web chatbot, 1 blog/month, and UCP protocol. Gold ($48,000 setup) includes 12 T1 + 3 T2 + 1 T3 integrations, all 4 chatbot channels (Web, SMS, Voice, WhatsApp), 8 blogs/month, and full UCP+ACP+AP2 Gold Standard compliance.',
+          'All three tiers deploy the same agent fleet — AI Commerce Agent, Authority Content Agent (with topical map planning), and Press Release Agent. The only difference is the number of pages optimized in setup: Bronze covers 30 pages ($16,000), Silver covers 60 pages ($28,000), Gold covers 100 pages ($48,000). More pages means more JSON-LD schema implementations, AEO/GEO optimization, and protocol endpoints — which means more entry points for AI systems to find, cite, and transact with your business.',
       },
       {
         question: 'Which platforms are compatible with ASC packages?',
@@ -182,9 +182,7 @@ export default function PackagesPage({
             Agentic Commerce Packages
           </h1>
           <p className="text-lg text-[var(--color-muted)] max-w-2xl mx-auto mb-6">
-            From lean Bronze entry to unlimited Core — every package delivers AI
-            chatbot, authority content, press release pipeline, and progressive
-            protocol compliance.
+            Bronze, Silver, and Gold — the same agent fleet (AI Commerce Agent, Authority Content Agent, Press Release Agent) applied to 30, 60, or 100 pages. The price reflects the scope of the setup, not the capability.
           </p>
           <Link href="/get-started" className="btn-primary inline-block">
             Get Your Custom Proposal &rarr;
@@ -221,7 +219,7 @@ export default function PackagesPage({
           <PricingTable tiers={tierData} />
 
           {/* View Details links below PricingTable */}
-          <div className="grid grid-cols-4 gap-3 mt-4 min-w-[640px]">
+          <div className="grid grid-cols-3 gap-3 mt-4 max-w-2xl mx-auto">
             {mainTiers.map((pkg) => (
               <Link
                 key={pkg.slug}
@@ -246,6 +244,25 @@ export default function PackagesPage({
             rows={comparisonRows}
             caption="Side-by-side comparison of all ASC agentic commerce packages"
           />
+        </div>
+      </section>
+
+      {/* Enterprise / Core CTA */}
+      <section className="section">
+        <div className="container">
+          <div className="card p-6 border-l-4 border-[var(--color-accent)] flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+            <div>
+              <p className="font-semibold text-[var(--color-text)] mb-1">
+                Need more than 100 pages — or multi-brand / white-label?
+              </p>
+              <p className="text-[var(--color-muted)] text-sm">
+                Core is a custom-scoped engagement for enterprises, agencies, and multi-brand portfolios. Unlimited pages, custom agent training, white-label protocol endpoints. Priced from $75,000.
+              </p>
+            </div>
+            <Link href="/packages/core" className="btn-secondary text-sm shrink-0">
+              Learn About Core &rarr;
+            </Link>
+          </div>
         </div>
       </section>
 
