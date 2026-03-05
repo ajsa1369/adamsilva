@@ -3,7 +3,11 @@
  *
  * Two panels:
  * 1. Framework & Architecture Assessment — SSR status, platform ceiling, penalty flags
- * 2. Recommended Package (Bronze / Silver / Gold / Shopify-tier) — what closes the gaps
+ * 2. Recommended Package — always Gold Standard (migration path for legacy platforms)
+ *
+ * Policy: Shopify (including Hydrogen/Oxygen), Wix, Squarespace, and WordPress
+ * are all Legacy Architecture. The recommendation is always Gold + migration.
+ * There is no "good enough" answer on a legacy platform — only a migration path.
  */
 import Link from 'next/link'
 import { CheckCircle2, XCircle, ArrowRight, Package, AlertTriangle, Cpu, TrendingUp } from 'lucide-react'
@@ -18,50 +22,59 @@ interface Props {
 
 // ── Platform detection from free-text framework field ────────────────────────
 
-function detectPlatform(framework: string | null): PlatformEntry | null {
-  if (!framework) return null
+// Returns the matched platform entry AND a label override for Hydrogen/Oxygen variants
+function detectPlatform(framework: string | null): { platform: PlatformEntry | null; displayName: string | null } {
+  if (!framework) return { platform: null, displayName: null }
   const f = framework.toLowerCase().trim()
-  if (f.includes('shopify'))       return PLATFORM_MATRIX.find((p) => p.slug === 'shopify') ?? null
-  if (f.includes('wix'))           return PLATFORM_MATRIX.find((p) => p.slug === 'wix') ?? null
-  if (f.includes('squarespace'))   return PLATFORM_MATRIX.find((p) => p.slug === 'squarespace') ?? null
-  if (f.includes('wordpress') || f.includes(' wp ') || f === 'wp') {
-    // Heuristic: if framework specifically says "light" keep light, otherwise assume heavy (conservative)
-    const slug = f.includes('light') ? 'wordpress-light' : 'wordpress-heavy'
-    return PLATFORM_MATRIX.find((p) => p.slug === slug) ?? null
+
+  // Shopify Hydrogen / Oxygen — still Shopify legacy architecture
+  if (f.includes('hydrogen') || f.includes('oxygen')) {
+    return {
+      platform: PLATFORM_MATRIX.find((p) => p.slug === 'shopify') ?? null,
+      displayName: 'Shopify Hydrogen / Oxygen',
+    }
   }
-  if (f.includes('webflow'))       return PLATFORM_MATRIX.find((p) => p.slug === 'webflow-headless') ?? null
+  if (f.includes('shopify')) {
+    return { platform: PLATFORM_MATRIX.find((p) => p.slug === 'shopify') ?? null, displayName: 'Shopify' }
+  }
+  if (f.includes('wix')) {
+    return { platform: PLATFORM_MATRIX.find((p) => p.slug === 'wix') ?? null, displayName: 'Wix' }
+  }
+  if (f.includes('squarespace')) {
+    return { platform: PLATFORM_MATRIX.find((p) => p.slug === 'squarespace') ?? null, displayName: 'Squarespace' }
+  }
+  if (f.includes('wordpress') || f.includes(' wp ') || f === 'wp') {
+    const slug = f.includes('light') ? 'wordpress-light' : 'wordpress-heavy'
+    return { platform: PLATFORM_MATRIX.find((p) => p.slug === slug) ?? null, displayName: slug === 'wordpress-light' ? 'WordPress (Light Theme)' : 'WordPress (Heavy Theme)' }
+  }
+  if (f.includes('webflow')) {
+    return { platform: PLATFORM_MATRIX.find((p) => p.slug === 'webflow-headless') ?? null, displayName: 'Webflow (Headless)' }
+  }
   if (
     f.includes('next') || f.includes('react') || f.includes('nuxt') ||
     f.includes('headless') || f.includes('custom') || f.includes('gatsby') ||
     f.includes('astro') || f.includes('sveltekit') || f.includes('remix')
-  ) return PLATFORM_MATRIX.find((p) => p.slug === 'nextjs-custom') ?? null
-  return null
+  ) {
+    return { platform: PLATFORM_MATRIX.find((p) => p.slug === 'nextjs-custom') ?? null, displayName: framework }
+  }
+  return { platform: null, displayName: framework }
 }
 
-// ── Package selection from platform + score ───────────────────────────────────
+// ── Package selection — always Gold Standard ──────────────────────────────────
+// Policy: every client should reach Gold. Legacy platforms need migration first,
+// but the package recommendation never settles for a Shopify-tier plan.
 
-function pickPackage(platform: PlatformEntry | null, overallScore: number): PackagePageData {
-  // Shopify family → Shopify-tier packages
-  if (platform?.slug === 'shopify') {
-    const slug = overallScore >= 40 ? 'shopify-growth' : 'shopify-starter'
-    return PACKAGES.find((p) => p.slug === slug)!
-  }
-  // Legacy platforms (Wix, Squarespace, WordPress heavy) → Silver (partial) + migration path
-  if (platform?.isLegacy) {
-    return PACKAGES.find((p) => p.slug === 'silver')!
-  }
-  // Headless / Next.js → Gold (they can achieve it)
-  if (platform?.slug === 'nextjs-custom') {
-    return PACKAGES.find((p) => p.slug === 'gold')!
-  }
-  // Partial platforms (WordPress light, Webflow) → Silver
-  if (platform && !platform.isLegacy && platform.compliance.goldStandard === 'none') {
-    return PACKAGES.find((p) => p.slug === 'silver')!
-  }
-  // Unknown framework → score-based
-  if (overallScore >= 50) return PACKAGES.find((p) => p.slug === 'gold')!
-  if (overallScore >= 25) return PACKAGES.find((p) => p.slug === 'silver')!
+function pickPackage(overallScore: number): PackagePageData {
+  // Gold is always the target — the only variable is entry point
+  if (overallScore >= 40) return PACKAGES.find((p) => p.slug === 'gold')!
+  if (overallScore >= 20) return PACKAGES.find((p) => p.slug === 'silver')!
   return PACKAGES.find((p) => p.slug === 'bronze')!
+}
+
+function isHydrogenVariant(framework: string | null): boolean {
+  if (!framework) return false
+  const f = framework.toLowerCase()
+  return f.includes('hydrogen') || f.includes('oxygen')
 }
 
 const COMPLIANCE_LABEL: Record<string, string> = {
@@ -103,19 +116,22 @@ function isSSRIssue(platform: PlatformEntry | null, aeoScore: number): boolean {
 function FrameworkAssessment({
   framework,
   platform,
+  displayName,
   overallScore,
   aeoScore,
 }: {
   framework: string | null
   platform: PlatformEntry | null
+  displayName: string | null
   overallScore: number
   aeoScore: number
 }) {
+  const hydrogen = isHydrogenVariant(framework)
   const ssrIssue = isSSRIssue(platform, aeoScore)
   const hasPenalties = (platform?.penalties?.length ?? 0) > 0
   const canAchieveGold = platform?.compliance.goldStandard === 'full'
   const isLegacy = platform?.isLegacy ?? false
-  const detectedName = platform?.name ?? (framework ? `${framework} (unrecognized platform)` : 'Unknown Platform')
+  const detectedName = displayName ?? platform?.name ?? (framework ? `${framework} (unrecognized platform)` : 'Unknown Platform')
 
   return (
     <div className="card overflow-hidden">
@@ -154,15 +170,19 @@ function FrameworkAssessment({
           <div className="flex items-start gap-2">
             <AlertTriangle size={15} className="text-red-600 shrink-0 mt-0.5" />
             <div>
-              <div className="text-xs font-bold text-red-700">Server-Side Rendering (SSR) — Not Detected</div>
+              <div className="text-xs font-bold text-red-700">
+                {hydrogen ? 'Shopify Hydrogen / Oxygen — Still Legacy Architecture' : 'Server-Side Rendering (SSR) — Not Detected'}
+              </div>
               <p className="text-xs text-red-600 mt-0.5 leading-relaxed">
-                {isLegacy
+                {hydrogen
+                  ? 'Shopify Hydrogen is React-based and ships significant client-side JavaScript. While it is an improvement over Shopify Liquid templates, it still runs on Shopify Oxygen hosting — which blocks root-level file placement (no UCP), uses Shopify proprietary checkout (no ACP), and cannot implement custom cryptographic security headers (no AP2). Hydrogen is a better developer experience on a fundamentally limited platform. It is not the Gold Standard.'
+                  : isLegacy
                   ? `${platform?.name ?? 'This platform'} ships 2MB+ of JavaScript that AI crawlers cannot execute. Every page effectively delivers a blank document to ACRABot, Googlebot, and every LLM crawler — your content is invisible to AI systems at the rendering layer.`
                   : `Your AEO score (${aeoScore}/100) suggests content may be loaded via JavaScript rather than server-rendered HTML. AI crawlers cannot execute JS — they need your content directly in the HTML source. This is the #1 cause of AI invisibility for otherwise well-configured sites.`
                 }
               </p>
               <p className="text-xs text-red-700 font-semibold mt-1.5">
-                The ASC stack is built on Next.js 14 App Router with Server Components — 100% of content is in the HTML source before any JavaScript runs.
+                The ASC Gold Standard stack runs on Next.js 14 App Router with Server Components — 100% of content is in the HTML source before any JavaScript runs, with full UCP/ACP/AP2 protocol support.
               </p>
             </div>
           </div>
@@ -251,13 +271,13 @@ function FrameworkAssessment({
 function PackageCard({
   pkg,
   platform,
+  displayName,
   pillarScores,
-  isLegacy,
 }: {
   pkg: PackagePageData
   platform: PlatformEntry | null
+  displayName: string | null
   pillarScores: Record<string, number>
-  isLegacy: boolean
 }) {
   const color = PACKAGE_COLOR[pkg.slug] ?? '#6366f1'
   const gapsClosedBy: string[] = []
@@ -321,14 +341,14 @@ function PackageCard({
         </div>
       </div>
 
-      {/* Migration note for legacy platforms */}
-      {isLegacy && (
+      {/* Migration note for non-headless platforms */}
+      {platform && platform.compliance.goldStandard !== 'full' && (
         <div className="px-5 pb-5">
           <div className="p-3 rounded-lg bg-amber-50 border border-amber-200 text-xs text-amber-700 leading-relaxed">
-            <strong>Note:</strong> {pkg.features.architecture === 'Shopify'
-              ? `This package is optimized for ${platform?.name ?? 'your platform'}. For full Gold Standard compliance (UCP + ACP + AP2), the recommended path is migration to headless Next.js architecture.`
-              : `Silver unlocks partial protocol compliance on ${platform?.name ?? 'your platform'}. Full Gold Standard requires headless migration — we scope this as a separate workstream.`
-            }
+            <strong>Migration included.</strong>{' '}
+            {displayName ?? platform.name} cannot achieve Gold Standard compliance without migrating to a headless Next.js architecture.
+            ASC scopes and executes the full migration — DNS cutover, content transfer, and protocol implementation — as part of the Gold engagement.
+            Most migrations complete in 6–8 weeks. Your existing domain, branding, and content are preserved.
           </div>
         </div>
       )}
@@ -355,8 +375,8 @@ function PackageCard({
 // ── Main export ───────────────────────────────────────────────────────────────
 
 export function PackageRecommendation({ pillarScores, domain, framework, overallScore }: Props) {
-  const platform = detectPlatform(framework)
-  const pkg = pickPackage(platform, overallScore)
+  const { platform, displayName } = detectPlatform(framework)
+  const pkg = pickPackage(overallScore)
   const aeoScore = pillarScores['aeo'] ?? 0
 
   return (
@@ -364,21 +384,22 @@ export function PackageRecommendation({ pillarScores, domain, framework, overall
       <div className="mb-4">
         <h2 className="text-xl font-bold text-[var(--color-text)]">Architecture & Package Recommendation</h2>
         <p className="text-sm text-[var(--color-muted-2)] mt-1">
-          Based on your {framework ? `${framework} architecture` : 'site architecture'} and ACRA scores, here is what ASC recommends for {domain}.
+          Based on your {displayName ?? framework ?? 'site'} architecture and ACRA scores, here is what ASC recommends for {domain}.
         </p>
       </div>
       <div className="space-y-4">
         <FrameworkAssessment
           framework={framework}
           platform={platform}
+          displayName={displayName}
           overallScore={overallScore}
           aeoScore={aeoScore}
         />
         <PackageCard
           pkg={pkg}
           platform={platform}
+          displayName={displayName}
           pillarScores={pillarScores}
-          isLegacy={platform?.isLegacy ?? false}
         />
       </div>
     </div>
