@@ -221,7 +221,7 @@ export function ReportJsonLD({
             priceCurrency: 'USD',
             billingIncrement: 1,
             unitCode: 'MON',
-            name: 'Monthly retainer',
+            name: 'Monthly continuity plan (AI model updates, protocol maintenance, schema evolution)',
           }] : []),
         ],
       } : {}),

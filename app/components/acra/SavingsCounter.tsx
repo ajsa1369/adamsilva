@@ -84,15 +84,15 @@ export function SavingsCounter({ monthlyAtRisk, annualAtRisk, setupPrice, monthl
       <div className="px-5 pt-5 pb-3">
         <div className="flex items-center gap-2 mb-1">
           <DollarSign size={18} className="text-emerald-500" />
-          <h4 className="font-bold text-[var(--color-text)]">Financial Case for the {packageName} Package</h4>
+          <h4 className="font-bold text-[var(--color-text)]">ROI Case — {packageName} Package</h4>
         </div>
         <p className="text-xs text-[var(--color-muted-2)]">
-          Every month you delay costs more than the package. Here is the math.
+          One-time setup fee of <strong className="text-[var(--color-text)]">{formatK(setupPrice)}</strong> builds the infrastructure. The continuity plan keeps it current. Here is the revenue math.
         </p>
       </div>
 
       {/* Four stat tiles */}
-      <div className="grid grid-cols-2 sm:grid-cols-4 gap-px bg-[var(--color-border)] mx-5 mb-5 rounded-xl overflow-hidden">
+      <div className="grid grid-cols-2 sm:grid-cols-4 gap-px bg-[var(--color-border)] mx-5 mb-4 rounded-xl overflow-hidden">
         {/* Tile: monthly at risk */}
         <div className="bg-[var(--color-surface)] p-4 text-center">
           <div className="flex items-center justify-center gap-1 text-red-500 mb-1">
@@ -102,19 +102,19 @@ export function SavingsCounter({ monthlyAtRisk, annualAtRisk, setupPrice, monthl
           <div className="text-2xl font-black tabular-nums" style={{ color: '#ef4444' }}>
             {formatK(animAtRisk)}
           </div>
-          <div className="text-[10px] text-[var(--color-muted-2)] mt-0.5">revenue at risk/mo</div>
+          <div className="text-[10px] text-[var(--color-muted-2)] mt-0.5">AI revenue at risk/mo</div>
         </div>
 
-        {/* Tile: package cost */}
+        {/* Tile: continuity plan cost */}
         <div className="bg-[var(--color-surface)] p-4 text-center">
           <div className="flex items-center justify-center gap-1 text-[var(--color-muted-2)] mb-1">
             <DollarSign size={14} />
-            <span className="text-[10px] font-semibold uppercase tracking-wide">Package Cost</span>
+            <span className="text-[10px] font-semibold uppercase tracking-wide">Continuity Plan</span>
           </div>
           <div className="text-2xl font-black tabular-nums text-[var(--color-muted)]">
             {formatK(animMonthly)}
           </div>
-          <div className="text-[10px] text-[var(--color-muted-2)] mt-0.5">per month retainer</div>
+          <div className="text-[10px] text-[var(--color-muted-2)] mt-0.5">ongoing updates/mo</div>
         </div>
 
         {/* Tile: net monthly recovery */}
@@ -139,8 +139,18 @@ export function SavingsCounter({ monthlyAtRisk, annualAtRisk, setupPrice, monthl
             {animROI > 0 ? `${animROI}%` : '—'}
           </div>
           <div className="text-[10px] text-[var(--color-muted-2)] mt-0.5">
-            {breakEvenMonths ? `break-even: mo ${breakEvenMonths}` : 'within 12 months'}
+            {breakEvenMonths ? `setup breaks even: mo ${breakEvenMonths}` : 'within 12 months'}
           </div>
+        </div>
+      </div>
+
+      {/* Continuity plan explainer */}
+      <div className="px-5 pb-3">
+        <div className="flex items-start gap-2 text-xs text-[var(--color-muted-2)] bg-[var(--color-surface-2)] rounded-lg px-3 py-2">
+          <Clock size={12} className="shrink-0 mt-0.5 text-[var(--color-muted-2)]" />
+          <span>
+            <strong className="text-[var(--color-muted)]">Continuity plan</strong> — a monthly allocation of hours to keep your infrastructure current as AI models, protocols, and ranking signals evolve. New model releases, protocol updates, and schema changes are applied automatically.
+          </span>
         </div>
       </div>
 
@@ -151,12 +161,15 @@ export function SavingsCounter({ monthlyAtRisk, annualAtRisk, setupPrice, monthl
           <span className="text-[var(--color-muted)] leading-relaxed">
             Your site is losing an estimated{' '}
             <strong className="text-[var(--color-text)]">{formatK(annualAtRisk)}/year</strong>{' '}
-            to AI commerce gaps. The {packageName} Package retainer is{' '}
+            to AI commerce gaps. One-time setup investment:{' '}
+            <strong className="text-[var(--color-text)]">{formatK(setupPrice)}</strong>.{' '}
+            Continuity plan to stay current:{' '}
             <strong className="text-[var(--color-text)]">{formatK(monthlyPrice)}/mo</strong>.
             {netMonthlyRecovery > 0 && (
-              <> After fees, you recover a projected <strong className="text-emerald-600">{formatK(netMonthlyRecovery)}/mo net</strong>.
-              {breakEvenMonths && breakEvenMonths <= 12 && (
-                <> Setup costs break even in approximately{' '}
+              <> Net monthly recovery after continuity:{' '}
+              <strong className="text-emerald-600">{formatK(netMonthlyRecovery)}/mo</strong>.
+              {breakEvenMonths && breakEvenMonths <= 18 && (
+                <> Setup investment breaks even in approximately{' '}
                 <strong className="text-[var(--color-text)]">{breakEvenMonths} month{breakEvenMonths !== 1 ? 's' : ''}</strong>.</>
               )}</>
             )}
