@@ -22,6 +22,7 @@ export interface PackagePageData {
   monthlyPrice: number | null  // null = custom pricing (Core)
   setupDisplay: string         // "$16,000" or "From $75,000"
   monthlyDisplay: string       // "$3,500/mo" or "Custom"
+  pagesIncluded: number | null // pages optimized in setup; null = unlimited (Core)
   tier1Slots: number | null    // null = unlimited (Core)
   tier2Slots: number
   tier3Slots: number
@@ -47,11 +48,12 @@ export const PACKAGES: PackagePageData[] = [
   {
     slug: 'bronze',
     name: 'Bronze',
-    tagline: 'Your first AI agent fleet — foundation stack for AI commerce',
+    tagline: 'Full agent fleet — up to 10 pages optimized in setup',
     setupPrice: 16000,
     monthlyPrice: 3500,
     setupDisplay: '$16,000',
     monthlyDisplay: '$3,500/mo',
+    pagesIncluded: 10,
     tier1Slots: 3,
     tier2Slots: 0,
     tier3Slots: 0,
@@ -60,17 +62,17 @@ export const PACKAGES: PackagePageData[] = [
     highlighted: false,
     badge: null,
     highlights: [
+      'Up to 10 pages: full JSON-LD schema, AEO/GEO optimization, and protocol endpoints built in setup',
       'AI Commerce Agent — web channel (24/7 lead capture + commerce)',
-      'Authority Content Agent (1 article/mo) — 2,000 words + Remotion video summary + 2 schema-wrapped PNG images',
-      'Press Release Agent (1/mo) — pre-built schema rules + JSON-LD; you bring your syndication account + AI API',
+      'Authority Content Agent — topical map agent builds your content plan; unlimited 2,000-word articles + Remotion video + 2 schema-wrapped PNG images',
+      'Press Release Agent — client-scheduled; pre-built schema rules + JSON-LD; you bring your syndication account + AI API',
       'UCP Discovery Protocol — AI agents can find and read your site',
-      'JSON-LD schema library — products, org, and services machine-readable',
-      'Continuity plan: model updates + schema evolution included',
+      'Continuity plan: model updates + schema evolution as AI evolves',
     ],
     features: {
-      blogPostsPerMonth: 1,
+      blogPostsPerMonth: 'Unlimited',
       imagesPerPost: 2,
-      pressReleasesPerMonth: 1,
+      pressReleasesPerMonth: 'Client-scheduled',
       chatbotChannels: 'Web',
       protocolStack: 'UCP',
       architecture: 'Any headless',
@@ -80,7 +82,12 @@ export const PACKAGES: PackagePageData[] = [
       {
         question: 'Who is Bronze for?',
         answer:
-          'Bronze is for lean teams establishing their AI commerce foundation. You get a live AI Commerce Agent on your site, a monthly 2,000-word authority article with video summary and schema-wrapped images, and a press release pipeline that trains AI systems to understand and cite your business.',
+          'Bronze is for lean teams or smaller sites (up to 10 pages). You get the exact same agent fleet as Silver and Gold — AI Commerce Agent, Authority Content Agent with topical map planning, and Press Release Agent — applied to 10 pages in the setup. The setup fee reflects the man hours to implement full JSON-LD schema, AEO/GEO optimization, and protocol endpoints across those pages.',
+      },
+      {
+        question: 'What is the difference between Bronze, Silver, and Gold?',
+        answer:
+          'The agent fleet is identical across all three tiers. The only difference is the number of pages included in the setup: Bronze covers 10 pages, Silver covers 25 pages, Gold covers 50 pages. More pages means more man hours — more JSON-LD schema implementations, more AEO/GEO optimization, more protocol endpoints, more structured data coverage. If your site grows, you can add pages at any time.',
       },
       {
         question: 'What does each Authority Content article include?',
@@ -90,20 +97,21 @@ export const PACKAGES: PackagePageData[] = [
       {
         question: 'How does the Press Release Agent work and what do I need to provide?',
         answer:
-          'The Press Release Agent uses pre-populated rules and structure that ASC controls — you cannot break the schema format. JSON-LD entity markup is always included. You bring your own Business Wire or PR Newswire account (billed directly to you) and your own AI API key (also billed to you). ASC provides the agent, the rules, and the schema — you control the distribution costs.',
+          'The Press Release Agent uses pre-populated rules and structure that ASC controls — you cannot break the schema format. JSON-LD entity markup is always included. You set the release schedule yourself and push when you are ready. You bring your own Business Wire or PR Newswire account (billed directly to you) and your own AI API key (also billed to you). ASC provides the agent, the rules, and the schema — you control the timing and distribution costs.',
       },
     ],
     heroDescription:
-      'Bronze deploys your first AI agent fleet: a web commerce agent, a press release agent with pre-built schema rules, and an authority content agent producing 2,000-word articles with Remotion video summaries and schema-wrapped images.',
+      'Bronze is the full agent fleet applied to up to 10 pages: JSON-LD schema, AEO/GEO optimization, UCP protocol, and AI Commerce Agent all built in setup. Same agents as Silver and Gold — the difference is scope, not capability.',
   },
   {
     slug: 'silver',
     name: 'Silver',
-    tagline: 'Multi-channel agent fleet with entity graph and topical authority',
+    tagline: 'Full agent fleet — up to 25 pages optimized in setup',
     setupPrice: 28000,
     monthlyPrice: 6500,
     setupDisplay: '$28,000',
     monthlyDisplay: '$6,500/mo',
+    pagesIncluded: 25,
     tier1Slots: 6,
     tier2Slots: 1,
     tier3Slots: 0,
@@ -112,17 +120,17 @@ export const PACKAGES: PackagePageData[] = [
     highlighted: false,
     badge: 'Best Value',
     highlights: [
+      'Up to 25 pages: full JSON-LD schema, AEO/GEO optimization, and protocol endpoints built in setup',
       'AI Commerce Agent — web + SMS channels (24/7 lead capture + commerce)',
-      'Authority Content Agent (3 articles/mo) — 2,000 words + Remotion video summary + 2 schema-wrapped PNG images each',
-      'Press Release Agent (2/mo) — pre-built schema rules + JSON-LD; you bring your syndication account + AI API',
-      'UCP + ACP (partial) — AI agents can discover and initiate checkout',
-      'Entity graph construction — sameAs + knowledge graph registration',
-      'Continuity plan: agent retraining + protocol updates included',
+      'Authority Content Agent — topical map agent builds your content plan; unlimited 2,000-word articles + Remotion video + 2 schema-wrapped PNG images',
+      'Press Release Agent — client-scheduled; pre-built schema rules + JSON-LD; you bring your syndication account + AI API',
+      'UCP + ACP (partial) + entity graph construction — AI agents can discover and initiate checkout',
+      'Continuity plan: agent retraining + protocol updates as AI evolves',
     ],
     features: {
-      blogPostsPerMonth: 3,
+      blogPostsPerMonth: 'Unlimited',
       imagesPerPost: 2,
-      pressReleasesPerMonth: 2,
+      pressReleasesPerMonth: 'Client-scheduled',
       chatbotChannels: 'Web + SMS',
       protocolStack: 'UCP + ACP (partial)',
       architecture: 'Any headless',
@@ -132,17 +140,17 @@ export const PACKAGES: PackagePageData[] = [
       {
         question: "What's the difference between Bronze and Silver?",
         answer:
-          'Silver runs more agents at higher velocity: 3 authority content articles per month vs 1, 2 press releases vs 1, adds SMS as a second commerce agent channel, and implements partial ACP so AI agents can initiate checkout flows on your site. Entity graph construction is also included, registering your brand across AI knowledge graphs.',
+          'Silver covers 25 pages in the setup vs 10 for Bronze — more man hours to implement JSON-LD schema, AEO/GEO optimization, and protocol endpoints across a larger site. Silver also adds SMS as a second AI Commerce Agent channel, partial ACP for agent-initiated checkout, and entity graph construction. The agent fleet itself is identical.',
       },
       {
-        question: 'What does each Authority Content article include at the Silver tier?',
+        question: 'What does each Authority Content article include?',
         answer:
-          'Every article is 2,000 words, structured for answer engine citation (answer-first paragraphs, SpeakableSpecification markup, FAQ schema, entity linking). It ships with a Remotion-generated video summary with JSON-LD embedded in the video metadata, and 2 PNG images each wrapped in ImageObject schema — giving AI systems multiple machine-readable entry points into the content.',
+          'Every article is 2,000 words, structured for answer engine citation (answer-first paragraphs, SpeakableSpecification markup, FAQ schema, entity linking). It ships with a Remotion-generated video summary with JSON-LD embedded in the video metadata, and 2 PNG images each wrapped in ImageObject schema — giving AI systems multiple machine-readable entry points into the content. The topical map agent determines which articles to write each month based on authority gaps.',
       },
       {
         question: 'How does the Press Release Agent work and what do I need to provide?',
         answer:
-          'The Press Release Agent uses pre-populated rules and structure that ASC controls — you cannot break the schema format. JSON-LD entity markup is always included. You bring your own Business Wire or PR Newswire account (billed directly to you) and your own AI API key (also billed to you). ASC provides the agent, the rules, and the schema — you control the distribution costs.',
+          'The Press Release Agent uses pre-populated rules and structure that ASC controls — you cannot break the schema format. JSON-LD entity markup is always included. You set the release schedule yourself and push when you are ready. You bring your own Business Wire or PR Newswire account (billed directly to you) and your own AI API key (also billed to you). ASC provides the agent, the rules, and the schema — you control the timing and distribution costs.',
       },
       {
         question: 'What is the entity graph construction?',
@@ -151,16 +159,17 @@ export const PACKAGES: PackagePageData[] = [
       },
     ],
     heroDescription:
-      'Silver scales your agent fleet: web and SMS commerce agents, three 2,000-word authority articles per month with Remotion video summaries and schema-wrapped images, two press releases, and entity graph registration that tells AI knowledge graphs exactly who you are and what you sell.',
+      'Silver is the full agent fleet applied to up to 25 pages: same agents as Bronze and Gold, covering more of your site. More pages means more JSON-LD schema, more AEO/GEO optimization, and more protocol surface area — which directly increases the number of entry points AI systems have into your business.',
   },
   {
     slug: 'gold',
     name: 'Gold',
-    tagline: 'Full agent fleet — four channels, Gold Standard protocols, maximum AI authority',
+    tagline: 'Full agent fleet — up to 50 pages optimized in setup',
     setupPrice: 48000,
     monthlyPrice: 12000,
     setupDisplay: '$48,000',
     monthlyDisplay: '$12,000/mo',
+    pagesIncluded: 50,
     tier1Slots: 12,
     tier2Slots: 3,
     tier3Slots: 1,
@@ -169,17 +178,17 @@ export const PACKAGES: PackagePageData[] = [
     highlighted: true,
     badge: 'Most Popular',
     highlights: [
+      'Up to 50 pages: full JSON-LD schema, AEO/GEO optimization, and protocol endpoints built in setup',
       'AI Commerce Agent — web, SMS, voice, and WhatsApp channels (24/7)',
-      'Authority Content Agent (8 articles/mo) — 2,000 words + Remotion video summary + 2 schema-wrapped PNG images each',
-      'Press Release Agent (4/mo) — pre-built schema rules + JSON-LD; you bring your syndication account + AI API',
+      'Authority Content Agent — topical map agent builds your content plan; unlimited 2,000-word articles + Remotion video + 2 schema-wrapped PNG images',
+      'Press Release Agent — client-scheduled; pre-built schema rules + JSON-LD; you bring your syndication account + AI API',
       'Full UCP + ACP + AP2 Gold Standard protocol stack',
-      'Complete JSON-LD schema library — every entity, product, and service machine-readable',
       'Dedicated Client Success Manager',
     ],
     features: {
-      blogPostsPerMonth: 8,
+      blogPostsPerMonth: 'Unlimited',
       imagesPerPost: 2,
-      pressReleasesPerMonth: 4,
+      pressReleasesPerMonth: 'Client-scheduled',
       chatbotChannels: 'Web + SMS + Voice + WhatsApp',
       protocolStack: 'UCP + ACP + AP2 (Gold Standard)',
       architecture: 'Headless required',
@@ -189,17 +198,17 @@ export const PACKAGES: PackagePageData[] = [
       {
         question: "What makes Gold the 'Gold Standard'?",
         answer:
-          'Gold achieves full compliance across all three agentic commerce protocols — UCP for AI discovery, ACP for agent-initiated checkout, and AP2 for cryptographic payment trust. Combined with 4 press releases/month and 8 authority content articles, Gold is the architecture that makes AI systems reliably discover, cite, and transact with your business.',
+          'Gold covers 50 pages in the setup — the most comprehensive schema, AEO/GEO, and protocol implementation of the three tiers. It also achieves full UCP + ACP + AP2 compliance, adds voice and WhatsApp as AI Commerce Agent channels, and includes a Dedicated Client Success Manager. The agent fleet is the same as Bronze and Silver — Gold just applies it to a larger surface area and adds the complete protocol stack.',
       },
       {
-        question: 'What does each Authority Content article include at the Gold tier?',
+        question: 'How does the topical map agent work?',
         answer:
-          'Every article is 2,000 words, structured for answer engine citation (answer-first paragraphs, SpeakableSpecification markup, FAQ schema, entity linking). It ships with a Remotion-generated video summary with JSON-LD embedded in the video metadata, and 2 PNG images each wrapped in ImageObject schema — giving AI systems multiple machine-readable entry points into the content. At 8 articles per month, this builds topical dominance at a pace that compounds quickly.',
+          'The topical map agent analyzes your domain, competitors, and AI citation gaps to produce a monthly content plan targeting the exact topics where AI systems (ChatGPT, Perplexity, Claude, Gemini) are most likely to cite sources. Every article it schedules is 2,000 words with a Remotion video summary and 2 schema-wrapped PNG images — giving AI systems machine-readable entry points into every piece of content.',
       },
       {
         question: 'How does the Press Release Agent work and what do I need to provide?',
         answer:
-          'The Press Release Agent uses pre-populated rules and structure that ASC controls — you cannot break the schema format. JSON-LD entity markup is always included. You bring your own Business Wire or PR Newswire account (billed directly to you) and your own AI API key (also billed to you). ASC provides the agent, the rules, and the schema — you control the distribution costs. At 4 releases per month, branded web mentions compound to dramatically increase AI citation frequency.',
+          'The Press Release Agent uses pre-populated rules and structure that ASC controls — you cannot break the schema format. JSON-LD entity markup is always included. You set the release schedule yourself and push when you are ready. You bring your own Business Wire or PR Newswire account (billed directly to you) and your own AI API key (also billed to you). ASC provides the agent, the rules, and the schema — you control the timing and distribution costs.',
       },
       {
         question: 'How do the four AI Commerce Agent channels work together?',
@@ -208,16 +217,17 @@ export const PACKAGES: PackagePageData[] = [
       },
     ],
     heroDescription:
-      'Gold is the complete agent fleet: four-channel AI Commerce Agent, eight 2,000-word authority articles per month with Remotion video summaries and schema-wrapped images, four press releases with pre-built schema rules, and the full UCP/ACP/AP2 protocol stack that lets AI agents buy from you autonomously.',
+      'Gold is the full agent fleet applied to up to 50 pages: maximum schema coverage, AEO/GEO optimization across your entire site, the full UCP/ACP/AP2 Gold Standard protocol stack, and four-channel AI Commerce Agent. Same agents as Bronze and Silver — Gold is for larger sites where more pages means more AI entry points.',
   },
   {
     slug: 'core',
     name: 'Core',
-    tagline: 'Enterprise-grade with unlimited scale',
+    tagline: 'Enterprise agent fleet — unlimited pages, custom scope',
     setupPrice: null,
     monthlyPrice: null,
     setupDisplay: 'From $75,000',
     monthlyDisplay: 'Custom',
+    pagesIncluded: null,
     tier1Slots: null,
     tier2Slots: 0,
     tier3Slots: 0,
@@ -236,7 +246,7 @@ export const PACKAGES: PackagePageData[] = [
     features: {
       blogPostsPerMonth: 'Unlimited',
       imagesPerPost: 2,
-      pressReleasesPerMonth: 'Unlimited',
+      pressReleasesPerMonth: 'Client-scheduled',
       chatbotChannels: 'All + custom',
       protocolStack: 'Full stack + white-label',
       architecture: 'Custom',
@@ -270,6 +280,7 @@ export const PACKAGES: PackagePageData[] = [
     monthlyPrice: 2000,
     setupDisplay: '$8,500',
     monthlyDisplay: '$2,000/mo',
+    pagesIncluded: 5,
     tier1Slots: 2,
     tier2Slots: 0,
     tier3Slots: 0,
@@ -322,6 +333,7 @@ export const PACKAGES: PackagePageData[] = [
     monthlyPrice: 4000,
     setupDisplay: '$16,000',
     monthlyDisplay: '$4,000/mo',
+    pagesIncluded: 10,
     tier1Slots: 4,
     tier2Slots: 1,
     tier3Slots: 0,
