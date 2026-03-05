@@ -47,7 +47,7 @@ export const PACKAGES: PackagePageData[] = [
   {
     slug: 'bronze',
     name: 'Bronze',
-    tagline: 'Enterprise AI readiness for lean teams',
+    tagline: 'Your first AI agent fleet — foundation stack for AI commerce',
     setupPrice: 16000,
     monthlyPrice: 3500,
     setupDisplay: '$16,000',
@@ -60,18 +60,18 @@ export const PACKAGES: PackagePageData[] = [
     highlighted: false,
     badge: null,
     highlights: [
-      '3 Tier-1 integrations included',
-      'Chatbot (Web channel)',
-      '1 blog post/month',
-      '1 press release/month',
-      'UCP protocol layer',
-      'Email support',
+      'AI Commerce Agent — web channel (24/7 lead capture + commerce)',
+      'Press Release Agent (1/mo) — AI-optimized with entity schema for LLM citation',
+      'Authority Content Agent (1 post/mo) — schema-structured to train AI on your business',
+      'UCP Discovery Protocol — AI agents can find and read your site',
+      'JSON-LD schema library — products, org, and services machine-readable',
+      'Continuity plan: model updates + schema evolution included',
     ],
     features: {
       blogPostsPerMonth: 1,
       imagesPerPost: 3,
       pressReleasesPerMonth: 1,
-      chatbotChannels: 'Web only',
+      chatbotChannels: 'Web',
       protocolStack: 'UCP',
       architecture: 'Any headless',
       support: 'Email',
@@ -80,26 +80,26 @@ export const PACKAGES: PackagePageData[] = [
       {
         question: 'Who is Bronze for?',
         answer:
-          'Bronze is designed for lean teams entering the agentic commerce space. It provides the foundational AI chatbot, authority content pipeline, and UCP protocol layer needed to establish AI discoverability without a large upfront investment.',
+          'Bronze is for lean teams establishing their AI commerce foundation. You get a live AI Commerce Agent on your site, an automated press release pipeline with LLM citation schema, and authority content that actively trains AI systems to understand and recommend your business.',
       },
       {
-        question: 'What integrations are included in Bronze?',
+        question: 'What does the Press Release Agent actually do?',
         answer:
-          'Bronze includes 3 Tier-1 integration slots. Tier-1 integrations cover standard tools like CRM connectors, analytics platforms, and email marketing services. You can choose any 3 from our catalog of 20+ Tier-1 options.',
+          'Our Press Release Agent writes, optimizes, and syndicates a press release each month with dense entity schema embedded. The schema tells AI systems exactly what your company does, what it sells, and why it should be cited — building AI authority faster than any other signal available.',
       },
       {
-        question: 'Can I upgrade from Bronze later?',
+        question: 'How does the Authority Content Agent work?',
         answer:
-          'Yes. All packages are designed for seamless tier progression. When you upgrade from Bronze to Silver or Gold, your existing integrations carry over and we add the new capabilities incrementally — no rebuilds required.',
+          'The agent produces AI-first blog content structured for answer engine citation: answer-first paragraphs, SpeakableSpecification markup, FAQ schema, and entity linking back to your product and organization graph. Each post is designed to be the source AI systems quote when someone asks about your category.',
       },
     ],
     heroDescription:
-      'The Bronze package delivers enterprise AI readiness for lean teams — chatbot, blog pipeline, UCP protocol layer, and 3 core integrations at a predictable monthly cost.',
+      'Bronze deploys your first set of AI agents — a web commerce agent, a press release agent, and an authority content agent — each producing schema-structured output that trains LLMs to understand and recommend your business.',
   },
   {
     slug: 'silver',
     name: 'Silver',
-    tagline: 'Accelerate lead capture with multi-channel AI',
+    tagline: 'Multi-channel agent fleet with entity graph and topical authority',
     setupPrice: 28000,
     monthlyPrice: 6500,
     setupDisplay: '$28,000',
@@ -112,12 +112,12 @@ export const PACKAGES: PackagePageData[] = [
     highlighted: false,
     badge: 'Best Value',
     highlights: [
-      '6 T1 + 1 T2 integrations',
-      'Chatbot (Web + SMS)',
-      '3 blog posts/month',
-      '2 press releases/month',
-      'UCP + partial ACP',
-      'Priority support',
+      'AI Commerce Agent — web + SMS channels',
+      'Press Release Agent (2/mo) — Tier-1 syndication with AI-training entity schema',
+      'Authority Content Agent (3 posts/mo) — topical cluster architecture for LLM citation',
+      'UCP + ACP (partial) — AI agents can discover and initiate checkout',
+      'Entity graph construction — sameAs + knowledge graph registration',
+      'Continuity plan: agent retraining + protocol updates included',
     ],
     features: {
       blogPostsPerMonth: 3,
@@ -132,26 +132,26 @@ export const PACKAGES: PackagePageData[] = [
       {
         question: "What's the difference between Bronze and Silver?",
         answer:
-          'Silver doubles your integration capacity (6 T1 + 1 T2 vs 3 T1), adds SMS as a chatbot channel, triples your content velocity to 3 blog posts per month, and introduces partial ACP checkout protocol support for agent-initiated transactions.',
+          'Silver runs more agents at higher velocity: 3 authority content posts per month vs 1, 2 press releases vs 1, adds SMS as a second commerce agent channel, and implements partial ACP so AI agents can initiate checkout flows on your site. The entity graph build is also included, registering your brand across AI knowledge graphs.',
       },
       {
-        question: 'What is the SMS chatbot channel?',
+        question: 'What does the SMS Commerce Agent do?',
         answer:
-          'The SMS channel extends your AI chatbot beyond your website. Prospects can text a dedicated number to interact with your AI agent, get answers, and book appointments — capturing leads even when they are not on your site.',
+          'The SMS Commerce Agent gives your business a phone number prospects can text. The agent handles product questions, qualifies leads, books appointments, and escalates to your team — all operating against your product schema so responses are always accurate.',
       },
       {
-        question: 'Does Silver include ACP checkout?',
+        question: 'What is the entity graph construction?',
         answer:
-          'Silver includes partial ACP (Agentic Checkout Protocol) support. This means AI agents can discover your product catalog and initiate checkout flows, but the full cryptographic trust layer (AP2) requires Gold tier.',
+          'We register your brand entity across the major AI knowledge graphs — Google Knowledge Panel, Wikidata, Crunchbase, LinkedIn Company — and link them via sameAs in your JSON-LD. This gives AI systems a machine-verified identity for your brand, which directly increases LLM recommendation confidence.',
       },
     ],
     heroDescription:
-      'Silver unlocks SMS-channel chatbot, 3x content velocity, and ACP partial checkout — the right choice for growing teams ready to accelerate lead capture.',
+      'Silver scales your agent fleet: web and SMS commerce agents, a higher-velocity press release and content pipeline, and entity graph registration that tells AI knowledge graphs exactly who you are and what you sell.',
   },
   {
     slug: 'gold',
     name: 'Gold',
-    tagline: 'The complete agentic commerce stack',
+    tagline: 'Full agent fleet — four channels, Gold Standard protocols, maximum AI authority',
     setupPrice: 48000,
     monthlyPrice: 12000,
     setupDisplay: '$48,000',
@@ -164,12 +164,12 @@ export const PACKAGES: PackagePageData[] = [
     highlighted: true,
     badge: 'Most Popular',
     highlights: [
-      '12 T1 + 3 T2 + 1 T3 integrations',
-      'All 4 channels (Web/SMS/Voice/WhatsApp)',
-      '8 blog posts/month',
-      '4 press releases/month',
-      'Full UCP + ACP + AP2 stack',
-      'Dedicated CSM',
+      'AI Commerce Agent — web, SMS, voice, and WhatsApp channels',
+      'Press Release Agent (4/mo) — Business Wire / PR Newswire syndication with citation schema',
+      'Authority Content Agent (8 posts/mo) — full AEO/GEO topical architecture',
+      'Full UCP + ACP + AP2 Gold Standard protocol stack',
+      'Complete JSON-LD schema library — every entity, product, and service machine-readable',
+      'Dedicated Client Success Manager',
     ],
     features: {
       blogPostsPerMonth: 8,
@@ -182,23 +182,23 @@ export const PACKAGES: PackagePageData[] = [
     },
     faqs: [
       {
-        question: "What does 'Gold Standard' compliance mean?",
+        question: "What makes Gold the 'Gold Standard'?",
         answer:
-          'Gold Standard means your site achieves full compliance across all three agentic commerce protocols: UCP (Universal Commerce Protocol) for AI discovery, ACP (Agentic Checkout Protocol) for agent-initiated transactions, and AP2 (Agent Payments Protocol) for cryptographic trust verification.',
+          'Gold achieves full compliance across all three agentic commerce protocols — UCP for AI discovery, ACP for agent-initiated checkout, and AP2 for cryptographic payment trust. Combined with 4 press releases/month and 8 authority content posts, Gold is the architecture that makes AI systems reliably discover, cite, and transact with your business.',
       },
       {
-        question: 'Which chatbot channels does Gold unlock?',
+        question: 'How do the four AI Commerce Agent channels work together?',
         answer:
-          'Gold provides all four AI chatbot channels: Web (embedded on your site), SMS (text messaging), Voice (phone calls via AI), and WhatsApp (messaging app). Each channel connects to the same AI agent with full context continuity.',
+          'Each channel — web, SMS, voice, and WhatsApp — connects to the same underlying AI Commerce Agent with shared context. A prospect can start on your website, follow up via SMS, and close over WhatsApp. The agent maintains full conversation history and product knowledge across all four channels.',
       },
       {
-        question: 'What is the AP2 cryptographic trust layer?',
+        question: 'What does the Press Release Agent produce and why does it matter?',
         answer:
-          'AP2 (Agent Payments Protocol) adds cryptographic verification to every agent-initiated transaction. It ensures AI purchasing agents can verify your business identity, validate pricing authenticity, and execute secure payments — the highest trust standard in agentic commerce.',
+          'The Press Release Agent writes, schema-tags, and syndicates 4 press releases per month through Business Wire and PR Newswire. Each release includes dense JSON-LD that trains AI systems on your company, products, and expertise. Branded web mentions have a 0.664 correlation with AI citation frequency — 4 releases per month is the fastest compound path to becoming the brand AI recommends.',
       },
     ],
     heroDescription:
-      'Gold delivers the complete agentic commerce stack — all four chatbot channels, full UCP/ACP/AP2 protocol compliance, and a dedicated client success manager to orchestrate your AI transformation.',
+      'Gold is the complete agent fleet: four-channel AI Commerce Agent, a press release agent running at Tier-1 syndication velocity, an authority content agent building topical dominance, and the full UCP/ACP/AP2 protocol stack that lets AI agents buy from you autonomously.',
   },
   {
     slug: 'core',
@@ -216,12 +216,12 @@ export const PACKAGES: PackagePageData[] = [
     highlighted: false,
     badge: null,
     highlights: [
-      'Unlimited integrations',
-      'All channels + custom channels',
-      'Unlimited content production',
-      'Custom press release cadence',
-      'Full protocol stack + white-label',
-      '24/7 dedicated team',
+      'Unlimited AI Commerce Agent channels + custom channel development',
+      'Press Release Agent — custom cadence, white-label syndication',
+      'Authority Content Agent — unlimited production velocity',
+      'Full protocol stack + white-label UCP/ACP/AP2 endpoints',
+      'Custom agent training on your full product catalog and business logic',
+      '24/7 dedicated agent operations team',
     ],
     features: {
       blogPostsPerMonth: 'Unlimited',
@@ -236,21 +236,21 @@ export const PACKAGES: PackagePageData[] = [
       {
         question: 'Who is Core designed for?',
         answer:
-          'Core is built for enterprise organizations with complex infrastructure requirements — multi-brand portfolios, high-volume transaction environments, or businesses needing white-label agentic commerce capabilities for their own clients.',
+          'Core is built for enterprises running multi-brand portfolios, high-volume agentic transaction environments, or businesses that want to white-label the entire ASC agent stack for their own clients. The agents are custom-trained on your full product catalog and business logic.',
       },
       {
         question: 'How is Core pricing determined?',
         answer:
-          'Core pricing is custom-quoted based on your specific infrastructure scope: number of brands, integration complexity, content volume requirements, custom channel development, and white-label licensing needs. Setup starts from $75,000.',
+          'Core is custom-quoted based on agent fleet size, number of brands, content production volume, custom channel development, and white-label licensing scope. Setup starts from $75,000 and includes full agent training, protocol implementation, and dedicated operations.',
       },
       {
-        question: 'Does Core include white-label options?',
+        question: 'What does white-label mean for Core clients?',
         answer:
-          'Yes. Core is the only tier that includes white-label capability, allowing you to deploy the full agentic commerce stack under your own brand for your clients or business units — including custom protocol endpoints and branded AI agents.',
+          'Core clients can deploy the full ASC agent stack — commerce agents, press release agents, content agents, and protocol infrastructure — under their own brand. This includes custom protocol endpoints (/.well-known/ucp, /acp, /ap2 under your domain) and branded agent identities for your clients or business units.',
       },
     ],
     heroDescription:
-      'Core is the enterprise tier for organizations that require unlimited scale, white-label capability, and a fully dedicated team — priced custom to your infrastructure requirements.',
+      'Core is the enterprise agent fleet — unlimited channels, custom agent training on your full product catalog, white-label protocol infrastructure, and a 24/7 dedicated team managing your entire agentic commerce operation.',
   },
   {
     slug: 'shopify-starter',
