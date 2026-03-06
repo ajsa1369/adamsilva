@@ -127,10 +127,49 @@ const SERVICE_TO_PILLAR: Record<string, string> = {
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { id } = await params
+  const supabase = createClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.SUPABASE_SERVICE_ROLE_KEY!
+  )
+  const { data } = await supabase
+    .from('acra_reports')
+    .select('overall_score, overall_grade, share_token, acra_scans ( url, company_name )')
+    .eq('id', id)
+    .single()
+
+  if (!data) {
+    return { title: 'Report Not Found' }
+  }
+
+  const report = data as unknown as { overall_score: number; overall_grade: string; share_token: string; acra_scans: { url: string; company_name: string | null } }
+  const domain = (() => {
+    try { return new URL(report.acra_scans.url.startsWith('http') ? report.acra_scans.url : `https://${report.acra_scans.url}`).hostname }
+    catch { return report.acra_scans.url }
+  })()
+  const grade = report.overall_grade
+  const ogImageUrl = `https://www.adamsilvaconsulting.com/api/acra/og/${report.share_token}`
+
   return {
-    title: `ACRA Report — Agentic Commerce Readiness Assessment | Adam Silva Consulting`,
-    description: `Your full Agentic Commerce Readiness Assessment report — 9 pillar scores, LLM recommendation scores, and projected revenue impact.`,
-    robots: { index: false },
+    title: `ACRA Report for ${domain} — Grade ${grade} | Agentic Commerce Readiness Assessment`,
+    description: `Agentic Commerce Readiness Assessment for ${domain}. Overall score: ${report.overall_score}/100 (Grade ${grade}). See 9 pillar scores, LLM recommendation scores, and revenue impact.`,
+    openGraph: {
+      title: `${domain} scored ${report.overall_score}/100 — Grade ${grade}`,
+      description: `See how ${domain} performs across 9 agentic commerce pillars and what it means for AI-driven revenue.`,
+      images: [
+        {
+          url: ogImageUrl,
+          width: 1200,
+          height: 630,
+          alt: `ACRA Report for ${domain} — Grade ${grade}, Score ${report.overall_score}/100`,
+        },
+      ],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: `${domain} scored ${report.overall_score}/100 — Grade ${grade}`,
+      description: `Agentic Commerce Readiness: see 9 pillar scores and what AI agents think of this site.`,
+      images: [ogImageUrl],
+    },
   }
 }
 

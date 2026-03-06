@@ -3,13 +3,12 @@
 /**
  * SiteScreenshotHero
  *
- * GTmetrix-style hero: site screenshot thumbnail with grade badge overlay,
- * plus report metadata (domain, company, date, score, framework).
- * Screenshot from thum.io (free, no API key).
+ * GTmetrix-style hero card. Shows og:image if available, otherwise
+ * a branded gradient panel with favicon + domain. Always looks polished.
  */
 
 import { useState } from 'react'
-import { Globe, Calendar, Cpu, ExternalLink } from 'lucide-react'
+import { Calendar, Cpu, ExternalLink } from 'lucide-react'
 
 interface Props {
   url: string
@@ -42,9 +41,8 @@ const GRADE_LABELS: Record<string, string> = {
 export function SiteScreenshotHero({ url, domain, companyName, framework, overallScore, grade, reportDate, ogImage, favicon }: Props) {
   const [imgError, setImgError] = useState(false)
   const fullUrl = url.startsWith('http') ? url : `https://${url}`
-  // Priority: og:image from scan → Google favicon service fallback
   const heroImgUrl = ogImage || null
-  const faviconUrl = favicon || `https://www.google.com/s2/favicons?domain=${domain}&sz=64`
+  const faviconUrl = favicon || `https://www.google.com/s2/favicons?domain=${domain}&sz=128`
   const gradeStyle = GRADE_COLORS[grade] ?? GRADE_COLORS['F']
   const gradeLabel = GRADE_LABELS[grade] ?? 'Unknown'
   const dateStr = new Date(reportDate).toLocaleDateString('en-US', {
@@ -54,12 +52,19 @@ export function SiteScreenshotHero({ url, domain, companyName, framework, overal
     year: 'numeric',
   })
 
+  const hasImage = heroImgUrl && !imgError
+
   return (
     <div className="card overflow-hidden">
       <div className="flex flex-col sm:flex-row gap-0">
-        {/* Left: Screenshot with grade overlay */}
-        <div className="relative shrink-0 sm:w-[280px] h-[180px] sm:h-auto bg-[var(--color-surface-2)] overflow-hidden">
-          {heroImgUrl && !imgError ? (
+        {/* Left: Site preview panel */}
+        <div
+          className="relative shrink-0 sm:w-[280px] h-[200px] sm:h-auto overflow-hidden"
+          style={{
+            background: hasImage ? undefined : `linear-gradient(135deg, #0f172a 0%, #1e293b 50%, ${gradeStyle.bg}15 100%)`,
+          }}
+        >
+          {hasImage ? (
             <img
               src={heroImgUrl}
               alt={`Preview of ${domain}`}
@@ -68,25 +73,37 @@ export function SiteScreenshotHero({ url, domain, companyName, framework, overal
               loading="eager"
             />
           ) : (
-            <div className="w-full h-full flex items-center justify-center text-[var(--color-muted-2)]">
-              <div className="text-center">
+            <>
+              {/* Subtle grid pattern */}
+              <div
+                className="absolute inset-0 opacity-[0.04]"
+                style={{
+                  backgroundImage: 'repeating-linear-gradient(0deg, transparent, transparent 23px, #fff 23px, #fff 24px), repeating-linear-gradient(90deg, transparent, transparent 23px, #fff 23px, #fff 24px)',
+                }}
+              />
+
+              {/* Favicon + domain centered */}
+              <div className="relative w-full h-full flex flex-col items-center justify-center gap-3 p-6">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src={faviconUrl}
                   alt=""
-                  width={48}
-                  height={48}
-                  className="mx-auto mb-3 rounded-lg"
+                  width={56}
+                  height={56}
+                  className="rounded-xl shadow-lg"
+                  style={{ border: '2px solid rgba(255,255,255,0.15)' }}
                   onError={(e) => { (e.target as HTMLImageElement).style.display = 'none' }}
                 />
-                <div className="text-sm font-semibold">{domain}</div>
+                <div className="text-white/80 text-sm font-semibold tracking-wide text-center">
+                  {domain}
+                </div>
               </div>
-            </div>
+            </>
           )}
 
-          {/* Grade badge overlay — bottom-right of screenshot */}
+          {/* Grade badge overlay */}
           <div
-            className="absolute bottom-3 right-3 flex flex-col items-center justify-center w-[72px] h-[72px] rounded-full shadow-lg"
+            className="absolute bottom-3 right-3 flex flex-col items-center justify-center w-[72px] h-[72px] rounded-full shadow-lg z-10"
             style={{
               background: gradeStyle.bg,
               border: `3px solid ${gradeStyle.ring}`,
@@ -100,7 +117,7 @@ export function SiteScreenshotHero({ url, domain, companyName, framework, overal
           {/* Dark gradient at bottom for badge readability */}
           <div
             className="absolute bottom-0 left-0 right-0 h-20 pointer-events-none"
-            style={{ background: 'linear-gradient(to top, rgba(0,0,0,0.5), transparent)' }}
+            style={{ background: hasImage ? 'linear-gradient(to top, rgba(0,0,0,0.5), transparent)' : 'linear-gradient(to top, rgba(0,0,0,0.3), transparent)' }}
           />
         </div>
 
