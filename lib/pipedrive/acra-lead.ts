@@ -1,7 +1,10 @@
 /**
  * lib/pipedrive/acra-lead.ts
  *
- * Creates a Pipedrive Person + Deal for ACRA strategy call bookings.
+ * Two Pipedrive deal types:
+ *  1. "New ACRA Search" — auto-created on every scan (alert that someone searched a domain)
+ *  2. "ACRA Strategy Call" — created when someone books a call via /api/contact
+ *
  * Requires: PIPEDRIVE_API_TOKEN, PIPEDRIVE_DOMAIN env vars.
  * PIPEDRIVE_DOMAIN = your subdomain, e.g. "adamsilvaconsulting"
  */
@@ -28,6 +31,7 @@ interface ACRALeadPayload {
   criticalGaps?: number
   pillarScores?: Record<string, number>
   message?: string
+  shareUrl?: string
 }
 
 interface PipedrivePersonResponse {
@@ -108,6 +112,44 @@ async function addNote(dealId: number, content: string): Promise<void> {
   })
 }
 
+/**
+ * Lightweight alert: someone ran an ACRA scan. Creates a "New ACRA Search" deal.
+ */
+export async function pushACRASearchToPipedrive(payload: ACRALeadPayload): Promise<{ success: boolean; dealId?: number }> {
+  if (!process.env.PIPEDRIVE_API_TOKEN) {
+    return { success: false }
+  }
+
+  try {
+    const personId = await findOrCreatePerson(payload.name, payload.email, payload.phone, payload.company)
+    if (!personId) return { success: false }
+
+    const dealTitle = `New ACRA Search — ${payload.domain}${payload.acraScore != null ? ` (${payload.acraScore}/100)` : ''}`
+    const dealId = await createDeal(personId, dealTitle)
+    if (!dealId) return { success: false }
+
+    const noteLines = [
+      `<b>New ACRA Search — ${payload.domain}</b>`,
+      `<b>User:</b> ${payload.name} (${payload.email})`,
+      payload.company ? `<b>Company:</b> ${payload.company}` : '',
+      payload.acraScore != null ? `<b>Overall Score:</b> ${payload.acraScore}/100` : '',
+      payload.criticalGaps != null ? `<b>Critical Gaps:</b> ${payload.criticalGaps}` : '',
+      payload.shareUrl ? `<br><b>View Full Report:</b><br><a href="${payload.shareUrl}">${payload.shareUrl}</a>` : '',
+      `<br><i>Auto-generated alert — user ran ACRA scan</i>`,
+    ].filter(Boolean).join('<br>')
+
+    await addNote(dealId, noteLines)
+
+    return { success: true, dealId }
+  } catch {
+    return { success: false }
+  }
+}
+
+/**
+ * Full lead: someone booked a strategy call. Creates an "ACRA Strategy Call" deal
+ * with detailed pillar scores and service recommendations.
+ */
 export async function pushACRALeadToPipedrive(payload: ACRALeadPayload): Promise<{ success: boolean; dealId?: number }> {
   if (!process.env.PIPEDRIVE_API_TOKEN) {
     return { success: false }
@@ -150,8 +192,9 @@ export async function pushACRALeadToPipedrive(payload: ACRALeadPayload): Promise
       payload.criticalGaps != null ? `Critical Gaps: <b>${payload.criticalGaps}</b>` : '',
       pillarTable ? `<br><b>Pillar Scores:</b><br>${pillarTable}` : '',
       recs.length > 0 ? `<br><b>Recommended Services:</b><br>${recs.join('<br>')}` : '',
+      payload.shareUrl ? `<br><b>Shareable Report:</b><br><a href="${payload.shareUrl}">${payload.shareUrl}</a>` : '',
       payload.message ? `<br><b>Message:</b><br>${payload.message.replace(/\n/g, '<br>')}` : '',
-      `<br><i>Lead source: ACRA Tool — Free Strategy Call request</i>`,
+      `<br><i>Lead source: ACRA Tool</i>`,
     ].filter(Boolean).join('<br>')
 
     await addNote(dealId, noteLines)

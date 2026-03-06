@@ -3,16 +3,12 @@
  *
  * Two panels:
  * 1. Framework & Architecture Assessment — SSR status, platform ceiling, penalty flags
- * 2. Recommended Package — always Gold Standard (migration path for legacy platforms)
- *
- * Policy: Shopify (including Hydrogen/Oxygen), Wix, Squarespace, and WordPress
- * are all Legacy Architecture. The recommendation is always Gold + migration.
- * There is no "good enough" answer on a legacy platform — only a migration path.
+ * 2. Book a Strategy Call — drives prospects to talk to a salesperson who handles
+ *    package selection, with a hint that talking to us can unlock discounts.
  */
 import Link from 'next/link'
-import { CheckCircle2, XCircle, ArrowRight, Package, AlertTriangle, Cpu, TrendingUp } from 'lucide-react'
-import { PACKAGES, PLATFORM_MATRIX, type PlatformEntry, type PackagePageData } from '@/lib/data/packages'
-import { SavingsCounter } from '@/app/components/acra/SavingsCounter'
+import { CheckCircle2, XCircle, ArrowRight, AlertTriangle, Cpu, Phone, Gift } from 'lucide-react'
+import { PLATFORM_MATRIX, type PlatformEntry } from '@/lib/data/packages'
 import type { RevenueImpact } from '@/lib/acra/revenue'
 
 interface Props {
@@ -23,19 +19,14 @@ interface Props {
   revenueImpact: RevenueImpact
 }
 
-// ── Platform detection from free-text framework field ────────────────────────
+// -- Platform detection from free-text framework field ----------------------------
 
-// Returns the matched platform entry AND a label override for Hydrogen/Oxygen variants
 function detectPlatform(framework: string | null): { platform: PlatformEntry | null; displayName: string | null } {
   if (!framework) return { platform: null, displayName: null }
   const f = framework.toLowerCase().trim()
 
-  // Shopify Hydrogen / Oxygen — still Shopify legacy architecture
   if (f.includes('hydrogen') || f.includes('oxygen')) {
-    return {
-      platform: PLATFORM_MATRIX.find((p) => p.slug === 'shopify') ?? null,
-      displayName: 'Shopify Hydrogen / Oxygen',
-    }
+    return { platform: PLATFORM_MATRIX.find((p) => p.slug === 'shopify') ?? null, displayName: 'Shopify Hydrogen / Oxygen' }
   }
   if (f.includes('shopify')) {
     return { platform: PLATFORM_MATRIX.find((p) => p.slug === 'shopify') ?? null, displayName: 'Shopify' }
@@ -63,17 +54,6 @@ function detectPlatform(framework: string | null): { platform: PlatformEntry | n
   return { platform: null, displayName: framework }
 }
 
-// ── Package selection — always Gold Standard ──────────────────────────────────
-// Policy: every client should reach Gold. Legacy platforms need migration first,
-// but the package recommendation never settles for a Shopify-tier plan.
-
-function pickPackage(overallScore: number): PackagePageData {
-  // Gold is always the target — the only variable is entry point
-  if (overallScore >= 40) return PACKAGES.find((p) => p.slug === 'gold')!
-  if (overallScore >= 20) return PACKAGES.find((p) => p.slug === 'silver')!
-  return PACKAGES.find((p) => p.slug === 'bronze')!
-}
-
 function isHydrogenVariant(framework: string | null): boolean {
   if (!framework) return false
   const f = framework.toLowerCase()
@@ -95,26 +75,15 @@ const COMPLIANCE_COLOR: Record<string, string> = {
   migration: '#8b5cf6',
 }
 
-const PACKAGE_COLOR: Record<string, string> = {
-  bronze: '#b45309',
-  silver: '#64748b',
-  gold: '#d97706',
-  core: '#7c3aed',
-  'shopify-starter': '#10b981',
-  'shopify-growth': '#0ea5e9',
-}
-
-// ── SSR / rendering assessment from signals ───────────────────────────────────
+// -- SSR / rendering assessment from signals --------------------------------------
 
 function isSSRIssue(platform: PlatformEntry | null, aeoScore: number): boolean {
-  // Legacy platforms inherently have JS hydration issues
   if (platform?.isLegacy) return true
-  // Low AEO score is a strong proxy for non-SSR / thin HTML
   if (aeoScore < 35) return true
   return false
 }
 
-// ── Panel 1: Architecture Assessment ─────────────────────────────────────────
+// -- Panel 1: Architecture Assessment ---------------------------------------------
 
 function FrameworkAssessment({
   framework,
@@ -167,7 +136,6 @@ function FrameworkAssessment({
         </div>
       </div>
 
-      {/* SSR Warning — prominent if issue detected */}
       {ssrIssue && (
         <div className="mx-4 mt-4 p-3 rounded-lg border border-red-200 bg-red-50">
           <div className="flex items-start gap-2">
@@ -192,7 +160,6 @@ function FrameworkAssessment({
         </div>
       )}
 
-      {/* Protocol compliance matrix */}
       {platform && (
         <div className="p-5">
           <div className="text-xs font-semibold text-[var(--color-text)] mb-3">
@@ -218,7 +185,6 @@ function FrameworkAssessment({
         </div>
       )}
 
-      {/* Legacy penalties */}
       {hasPenalties && (
         <div className="px-5 pb-5">
           <div className="text-xs font-semibold text-red-600 mb-2">
@@ -235,7 +201,6 @@ function FrameworkAssessment({
         </div>
       )}
 
-      {/* What ASC does differently */}
       <div className="px-5 pb-5">
         <div
           className="p-4 rounded-xl"
@@ -260,7 +225,7 @@ function FrameworkAssessment({
           {isLegacy && (
             <p className="text-xs text-[var(--color-muted)] mt-2.5 leading-relaxed border-t border-[var(--color-border)] pt-2.5">
               <strong className="text-[var(--color-text)]">Migration path available.</strong>{' '}
-              ASC handles the full migration from {platform?.name ?? 'your current platform'} to a headless Next.js architecture — DNS cutover, content transfer, and full Gold Standard implementation included. Most migrations complete in 6–8 weeks.
+              ASC handles the full migration from {platform?.name ?? 'your current platform'} to a headless Next.js architecture — DNS cutover, content transfer, and full Gold Standard implementation included. Most migrations complete in 6-8 weeks.
             </p>
           )}
         </div>
@@ -269,140 +234,131 @@ function FrameworkAssessment({
   )
 }
 
-// ── Panel 2: Package Recommendation ──────────────────────────────────────────
+// -- Panel 2: Book a Strategy Call CTA --------------------------------------------
 
-function PackageCard({
-  pkg,
-  platform,
-  displayName,
-  pillarScores,
+function BookCallCTA({
+  domain,
+  overallScore,
+  criticalCount,
   revenueImpact,
 }: {
-  pkg: PackagePageData
-  platform: PlatformEntry | null
-  displayName: string | null
-  pillarScores: Record<string, number>
+  domain: string
+  overallScore: number
+  criticalCount: number
   revenueImpact: RevenueImpact
 }) {
-  const color = PACKAGE_COLOR[pkg.slug] ?? '#6366f1'
-  const gapsClosedBy: string[] = []
-
-  if (pillarScores['protocol'] < 60) gapsClosedBy.push('Protocol stack deployed: ' + pkg.features.protocolStack + ' — AI agents can discover and transact')
-  if (pillarScores['press'] < 60) gapsClosedBy.push(`Press Release Agent (client-scheduled) — entity schema in every release trains LLMs to cite your brand`)
-  if (pillarScores['aeo'] < 60) gapsClosedBy.push(`Authority Content Agent (unlimited articles, topical map planning) — AEO-structured to become the source AI systems quote`)
-  if (pillarScores['social'] < 60) gapsClosedBy.push('AI Commerce Agent (' + pkg.features.chatbotChannels + ') — 24/7 lead capture across channels')
-  gapsClosedBy.push('Schema.org JSON-LD library — dense structured data for all entities')
+  const urgencyText = criticalCount > 3
+    ? `${criticalCount} critical gaps identified — this needs immediate attention.`
+    : criticalCount > 0
+    ? `${criticalCount} critical gap${criticalCount > 1 ? 's' : ''} found that ${criticalCount > 1 ? 'are' : 'is'} costing you AI revenue today.`
+    : 'Your report reveals clear opportunities to capture more AI-driven revenue.'
 
   return (
     <div className="card overflow-hidden">
-      <div className="p-5" style={{ background: `${color}10` }}>
-        <div className="flex items-start justify-between gap-4">
-          <div className="flex items-center gap-3">
-            <Package size={20} style={{ color }} />
+      <div
+        className="p-6 text-white"
+        style={{ background: 'linear-gradient(135deg, #1d4ed8 0%, #4f46e5 100%)' }}
+      >
+        <div className="flex items-start gap-4">
+          <div className="w-12 h-12 rounded-xl bg-white/20 flex items-center justify-center shrink-0">
+            <Phone size={24} />
+          </div>
+          <div>
+            <h3 className="text-xl font-bold">Talk to Us Before You Buy Anything</h3>
+            <p className="text-blue-100 text-sm mt-1 leading-relaxed">
+              {urgencyText} Our team will walk through your report, identify the highest-ROI fixes, and build a custom remediation plan for {domain}.
+            </p>
+          </div>
+        </div>
+
+        {/* Discount hint */}
+        <div className="mt-5 p-4 rounded-xl bg-white/10 border border-white/20">
+          <div className="flex items-start gap-3">
+            <Gift size={18} className="shrink-0 mt-0.5 text-amber-300" />
             <div>
-              <div className="flex items-center gap-2">
-                <h3 className="font-bold text-[var(--color-text)]">Recommended: {pkg.name} Package</h3>
-                {pkg.badge && (
-                  <span className="text-xs font-bold px-2 py-0.5 rounded-full" style={{ background: `${color}20`, color }}>
-                    {pkg.badge}
-                  </span>
-                )}
-              </div>
-              <p className="text-xs text-[var(--color-muted-2)] mt-0.5">{pkg.tagline}</p>
+              <div className="text-sm font-bold text-white">Clients who speak with us first save money</div>
+              <p className="text-xs text-blue-100 mt-1 leading-relaxed">
+                Instead of buying off-the-shelf packages, let us scope a custom engagement based on your exact gaps. Clients who book a strategy call typically get a tailored plan that addresses their specific needs at a better price point than our standard packages.
+              </p>
             </div>
           </div>
-          <div className="text-right shrink-0">
-            <div className="text-lg font-bold" style={{ color }}>{pkg.setupDisplay}</div>
-            <div className="text-xs text-[var(--color-muted-2)]">{pkg.monthlyDisplay}</div>
-          </div>
+        </div>
+
+        {/* Value props */}
+        <div className="grid grid-cols-3 gap-3 mt-5">
+          {['100% Free Call', 'Custom Scoping', 'No Obligation'].map((v) => (
+            <div key={v} className="bg-white/10 rounded-lg px-3 py-2 text-center text-xs font-semibold">{v}</div>
+          ))}
         </div>
       </div>
 
-      {/* Animated savings / ROI counter */}
-      {revenueImpact.monthlyAtRisk > 0 && pkg.monthlyPrice && pkg.setupPrice && (
-        <div className="px-5 pb-2">
-          <SavingsCounter
-            monthlyAtRisk={revenueImpact.monthlyAtRisk}
-            annualAtRisk={revenueImpact.annualAtRisk}
-            setupPrice={pkg.setupPrice}
-            monthlyPrice={pkg.monthlyPrice}
-            packageName={pkg.name}
-          />
-        </div>
-      )}
-
-      <div className="p-5 grid sm:grid-cols-2 gap-6">
-        {/* What's included */}
-        <div>
-          <div className="text-xs font-semibold text-[var(--color-text)] mb-2.5">What's Included</div>
-          <ul className="space-y-1.5">
-            {pkg.highlights.map((h) => (
-              <li key={h} className="flex items-start gap-2 text-xs text-[var(--color-muted)]">
-                <CheckCircle2 size={13} style={{ color }} className="shrink-0 mt-0.5" />
-                <span>{h}</span>
-              </li>
-            ))}
-          </ul>
+      {/* What happens on the call */}
+      <div className="p-6">
+        <div className="text-xs font-semibold text-[var(--color-text)] mb-3">What Happens on the Call</div>
+        <div className="space-y-2.5">
+          {[
+            { step: '1', text: 'We review your ACRA report together and explain what each score means for your revenue' },
+            { step: '2', text: 'We identify the 2-3 highest-impact fixes based on your specific architecture and industry' },
+            { step: '3', text: 'We build a custom scope and timeline — not a cookie-cutter package' },
+            { step: '4', text: 'You decide if and when to move forward. No pressure, no follow-up spam' },
+          ].map((item) => (
+            <div key={item.step} className="flex items-start gap-3">
+              <div
+                className="w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold shrink-0"
+                style={{ background: '#2563eb18', color: '#2563eb' }}
+              >
+                {item.step}
+              </div>
+              <span className="text-sm text-[var(--color-muted)] leading-relaxed">{item.text}</span>
+            </div>
+          ))}
         </div>
 
-        {/* Gaps this closes */}
-        <div>
-          <div className="text-xs font-semibold text-[var(--color-text)] mb-2.5">Critical Gaps This Closes</div>
-          <ul className="space-y-1.5">
-            {gapsClosedBy.slice(0, 5).map((g) => (
-              <li key={g} className="flex items-start gap-2 text-xs text-[var(--color-muted)]">
-                <TrendingUp size={13} style={{ color }} className="shrink-0 mt-0.5" />
-                <span>{g}</span>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </div>
-
-      {/* Migration note for non-headless platforms */}
-      {platform && platform.compliance.goldStandard !== 'full' && (
-        <div className="px-5 pb-5">
-          <div className="p-3 rounded-lg bg-amber-50 border border-amber-200 text-xs text-amber-700 leading-relaxed">
-            <strong>Migration included.</strong>{' '}
-            {displayName ?? platform.name} cannot achieve Gold Standard compliance without migrating to a headless Next.js architecture.
-            ASC scopes and executes the full migration — DNS cutover, content transfer, and protocol implementation — as part of the Gold engagement.
-            Most migrations complete in 6–8 weeks. Your existing domain, branding, and content are preserved.
+        {revenueImpact.monthlyAtRisk > 0 && (
+          <div className="mt-4 p-3 rounded-lg bg-amber-50 border border-amber-200">
+            <p className="text-xs text-amber-800 leading-relaxed">
+              <strong>Your report estimates ${revenueImpact.monthlyAtRisk.toLocaleString()}/mo</strong> in AI revenue at risk.
+              Every month without a remediation plan, that number compounds as competitors with protocol-compliant infrastructure capture market share.
+            </p>
           </div>
-        </div>
-      )}
+        )}
 
-      <div className="px-5 pb-5 flex flex-col sm:flex-row gap-3">
-        <Link
-          href={`/packages/${pkg.slug}`}
-          className="btn-primary flex-1 text-center flex items-center justify-center gap-2 text-sm"
-        >
-          View Full Package Details
-          <ArrowRight size={14} />
-        </Link>
-        <Link
-          href="/contact"
-          className="btn-secondary flex-1 text-center flex items-center justify-center gap-2 text-sm"
-        >
-          Book a Strategy Call
-        </Link>
+        <div className="flex flex-col sm:flex-row gap-3 mt-6">
+          <Link
+            href={`/contact?service=ACRA+Strategy+Call&source=acra-report&domain=${encodeURIComponent(domain)}&score=${overallScore}`}
+            className="btn-primary flex-1 text-center flex items-center justify-center gap-2"
+          >
+            Book Your Free Strategy Call
+            <ArrowRight size={14} />
+          </Link>
+          <Link
+            href="/services"
+            className="btn-secondary flex-1 text-center flex items-center justify-center gap-2 text-sm"
+          >
+            Browse All Services
+          </Link>
+        </div>
+        <p className="text-xs text-center text-[var(--color-muted-2)] mt-3">
+          We respond within 24 hours. 30-minute call. Your data is never shared.
+        </p>
       </div>
     </div>
   )
 }
 
-// ── Main export ───────────────────────────────────────────────────────────────
+// -- Main export ------------------------------------------------------------------
 
 export function PackageRecommendation({ pillarScores, domain, framework, overallScore, revenueImpact }: Props) {
   const { platform, displayName } = detectPlatform(framework)
-  const pkg = pickPackage(overallScore)
   const aeoScore = pillarScores['aeo'] ?? 0
+  const criticalCount = Object.values(pillarScores).filter((s) => s < 35).length
 
   return (
     <div>
       <div className="mb-4">
-        <h2 className="text-xl font-bold text-[var(--color-text)]">Architecture & Package Recommendation</h2>
+        <h2 className="text-xl font-bold text-[var(--color-text)]">Architecture & Next Steps</h2>
         <p className="text-sm text-[var(--color-muted-2)] mt-1">
-          Based on your {displayName ?? framework ?? 'site'} architecture and ACRA scores, here is what ASC recommends for {domain}.
+          Based on your {displayName ?? framework ?? 'site'} architecture and ACRA scores, here is what we recommend for {domain}.
         </p>
       </div>
       <div className="space-y-4">
@@ -413,11 +369,10 @@ export function PackageRecommendation({ pillarScores, domain, framework, overall
           overallScore={overallScore}
           aeoScore={aeoScore}
         />
-        <PackageCard
-          pkg={pkg}
-          platform={platform}
-          displayName={displayName}
-          pillarScores={pillarScores}
+        <BookCallCTA
+          domain={domain}
+          overallScore={overallScore}
+          criticalCount={criticalCount}
           revenueImpact={revenueImpact}
         />
       </div>

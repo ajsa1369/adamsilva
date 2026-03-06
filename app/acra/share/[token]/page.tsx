@@ -13,7 +13,6 @@ import { ValueLeversSection } from '@/app/components/acra/ValueLevers'
 import { PackageRecommendation } from '@/app/components/acra/PackageRecommendation'
 import { ReportJsonLD } from '@/app/components/acra/ReportJsonLD'
 import { calculateRevenueImpact, type RevenueRange } from '@/lib/acra/revenue'
-import { PACKAGES } from '@/lib/data/packages'
 import type { PillarScore, LLMScores, Finding, ValueLevers } from '@/lib/acra/scoring'
 
 interface PageProps {
@@ -147,12 +146,29 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     catch { return report.acra_scans.url }
   })()
 
+  const grade = report.overall_grade
+  const ogImageUrl = `https://www.adamsilvaconsulting.com/api/acra/og/${token}`
+
   return {
-    title: `ACRA Report for ${domain} — Agentic Commerce Readiness Assessment`,
-    description: `Agentic Commerce Readiness Assessment for ${domain}. Overall score: ${report.overall_score}/100. See 9 pillar scores, LLM recommendation scores, and revenue impact.`,
+    title: `ACRA Report for ${domain} — Grade ${grade} | Agentic Commerce Readiness Assessment`,
+    description: `Agentic Commerce Readiness Assessment for ${domain}. Overall score: ${report.overall_score}/100 (Grade ${grade}). See 9 pillar scores, LLM recommendation scores, and revenue impact.`,
     openGraph: {
-      title: `ACRA Report: ${domain} scores ${report.overall_score}/100`,
+      title: `${domain} scored ${report.overall_score}/100 — Grade ${grade}`,
       description: `See how ${domain} performs across 9 agentic commerce pillars and what it means for AI-driven revenue.`,
+      images: [
+        {
+          url: ogImageUrl,
+          width: 1200,
+          height: 630,
+          alt: `ACRA Report for ${domain} — Grade ${grade}, Score ${report.overall_score}/100`,
+        },
+      ],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: `${domain} scored ${report.overall_score}/100 — Grade ${grade}`,
+      description: `Agentic Commerce Readiness: see 9 pillar scores and what AI agents think of this site.`,
+      images: [ogImageUrl],
     },
   }
 }
@@ -200,12 +216,6 @@ export default async function ACRASharePage({ params }: PageProps) {
   const grade = r.overall_grade
   const gradeColor: Record<string, string> = { A: '#10b981', B: '#22c55e', C: '#f59e0b', D: '#f97316', F: '#ef4444' }
 
-  const recommendedPkg = r.overall_score >= 40
-    ? PACKAGES.find((p) => p.slug === 'gold')!
-    : r.overall_score >= 20
-    ? PACKAGES.find((p) => p.slug === 'silver')!
-    : PACKAGES.find((p) => p.slug === 'bronze')!
-
   return (
     <>
       {/* Structured data for AI agents — present on public share page too */}
@@ -219,9 +229,6 @@ export default async function ACRASharePage({ params }: PageProps) {
         monthlyAtRisk={revenueImpact.monthlyAtRisk}
         annualAtRisk={revenueImpact.annualAtRisk}
         pillarScores={pillarScoreMap}
-        packageName={recommendedPkg.name}
-        packageSetupPrice={recommendedPkg.setupPrice}
-        packageMonthlyPrice={recommendedPkg.monthlyPrice}
         framework={scan.framework}
         reportDate={r.created_at}
         shareUrl={`https://www.adamsilvaconsulting.com/acra/share/${token}`}

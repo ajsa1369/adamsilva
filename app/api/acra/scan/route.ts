@@ -3,6 +3,7 @@ import { createClient } from '@/lib/supabase/server'
 import { scanUrl } from '@/lib/acra/scanner'
 import { computeScores } from '@/lib/acra/scoring'
 import { calculateRevenueImpact, type RevenueRange } from '@/lib/acra/revenue'
+import { pushACRASearchToPipedrive } from '@/lib/pipedrive/acra-lead'
 
 export const maxDuration = 30
 
@@ -113,12 +114,14 @@ export async function POST(req: NextRequest) {
           valueLevers: scores.valueLevers,
         },
       })
-      .select('id')
+      .select('id, share_token')
       .single()
 
     if (reportError || !report) {
       throw new Error('Failed to store report')
     }
+
+    const reportData = report as { id: string; share_token: string }
 
     // Mark scan complete
     await supabase
@@ -126,7 +129,28 @@ export async function POST(req: NextRequest) {
       .update({ status: 'complete', completed_at: new Date().toISOString() })
       .eq('id', scan.id)
 
-    return NextResponse.json({ scanId: scan.id, reportId: report.id })
+    // Alert Pipedrive: new ACRA search (fire-and-forget — don't block the response)
+    const domain = (() => {
+      try { return new URL(url.startsWith('http') ? url : `https://${url}`).hostname }
+      catch { return url }
+    })()
+    const criticalGaps = Object.values(pillarScores).filter((s) => s < 35).length
+    const shareUrl = reportData.share_token
+      ? `https://www.adamsilvaconsulting.com/acra/share/${reportData.share_token}`
+      : undefined
+
+    void pushACRASearchToPipedrive({
+      name: user.user_metadata?.full_name ?? user.user_metadata?.name ?? user.email?.split('@')[0] ?? 'Unknown',
+      email: user.email ?? '',
+      company: companyName ?? undefined,
+      domain,
+      acraScore: scores.overall,
+      criticalGaps,
+      pillarScores,
+      shareUrl,
+    })
+
+    return NextResponse.json({ scanId: scan.id, reportId: reportData.id })
   } catch (err) {
     await supabase
       .from('acra_scans')
