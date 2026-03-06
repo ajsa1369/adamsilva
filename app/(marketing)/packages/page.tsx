@@ -48,7 +48,7 @@ export const metadata: Metadata = {
     title: 'Agentic Commerce Packages — ASC',
     description:
       'Starter, Pro, Max, Elite — same AI agents, different scope. SSR-first. Zero hydration tax.',
-    images: [`${SITE_URL}/packages/twitter-image`],
+    images: [`${SITE_URL}/packages/opengraph-image`],
   },
 }
 
@@ -223,21 +223,26 @@ const pageSchema = {
         url: `${SITE_URL}/packages/${pkg.slug}`,
       })),
     },
-    // VideoObject (will reference the Remotion-generated video)
+    // VideoObject with full narration transcript
     {
       '@type': 'VideoObject',
       '@id': `${pageUrl}#video`,
       name: 'ASC Agentic Commerce Packages Overview',
       description:
-        'Overview of all four ASC agentic commerce tiers: Starter, Pro, Max, and Elite. Same AI agent fleet, different page scope. SSR architecture with zero hydration tax.',
+        'Narrated overview of all four ASC agentic commerce tiers: Starter ($16K, 30 pages), Pro ($28K, 60 pages), Max ($48K, 100 pages), and Elite (from $75K, unlimited). Covers the SPA hydration tax problem, SSR architecture solution, Gold Standard protocol compliance (UCP, ACP, AP2), and why AI agent discovery requires server-side rendered infrastructure.',
       thumbnailUrl: `${SITE_URL}/packages/opengraph-image`,
       uploadDate: '2026-03-06',
-      duration: 'PT30S',
+      duration: 'PT32S',
       contentUrl: `${SITE_URL}/videos/packages-overview.mp4`,
       embedUrl: `${SITE_URL}/videos/packages-overview.mp4`,
       publisher: { '@id': ORG_ID },
+      transcript:
+        "Eighty-three percent of Google searches now show AI Overviews. If your business isn't visible to AI agents, you're already losing customers. Fourteen million commercial queries flow through AI agents every single day. ChatGPT, Perplexity, and Gemini are where your buyers are searching now. Traditional single-page applications lose forty percent of AI crawl traffic to hydration tax. Server-side rendered architecture eliminates this entirely, making every page instantly readable by AI agents. Adam Silva Consulting offers four agentic commerce packages. Starter at sixteen thousand. Pro at twenty-eight thousand. Max, our most popular, at forty-eight thousand. And Elite, starting at seventy-five thousand for enterprise-scale deployments. Every tier ships with the same battle-tested agent fleet. Full SSR architecture, AI discovery files, and protocol compliance are standard, not add-ons. The difference is scope and scale. All packages include Gold Standard protocol compliance. UCP for universal commerce discovery. ACP for agentic checkout. And AP2 for cryptographic agent payments. These are the protocols that make your business transactable by AI. Ready to make your business visible to the fourteen million AI agents searching right now? Get your custom proposal today. Book a call at adamsilvaconsulting.com. Adam Silva Consulting. Global infrastructure for agentic commerce.",
+      inLanguage: 'en-US',
+      accessMode: ['auditory', 'visual'],
+      accessModeSufficient: [{ '@type': 'ItemList', itemListElement: ['visual', 'auditory'] }],
     },
-    // Primary ImageObject
+    // Primary ImageObject with full description
     {
       '@type': 'ImageObject',
       '@id': `${pageUrl}#primary-image`,
@@ -245,9 +250,12 @@ const pageSchema = {
       width: 1200,
       height: 630,
       caption:
-        'ASC Agentic Commerce Packages: Starter ($16K), Pro ($28K), Max ($48K), Elite (From $75K)',
+        'ASC Agentic Commerce Packages comparison showing four tier cards on a dark navy gradient background. Starter tier at $16,000 for 30-page implementations, Pro tier at $28,000 for 60-page implementations, Max tier at $48,000 for 100-page implementations highlighted as Most Popular with a blue glow accent, and Elite tier starting from $75,000 for unlimited enterprise-scale deployments. Branded with Adam Silva Consulting and the tagline Global Infrastructure for Agentic Commerce. Bottom bar reads SSR Architecture, Zero Hydration Tax, Gold Standard Compliance.',
       representativeOfPage: true,
       creditText: 'Adam Silva Consulting',
+      contentUrl: `${SITE_URL}/packages/opengraph-image`,
+      description:
+        'Open Graph social sharing image for the ASC Agentic Commerce Packages page. Four glassmorphism pricing cards display Starter ($16K), Pro ($28K), Max ($48K, highlighted as Most Popular), and Elite (From $75K) tiers against a dark gradient background with the Adam Silva Consulting brand and agentic commerce tagline.',
     },
     // FAQ schema
     buildFAQSchema(sandlerFAQs),

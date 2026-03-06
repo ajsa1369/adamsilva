@@ -5,7 +5,7 @@ import { HeroAdVideo, type HeroAdProps } from './HeroAd/HeroAdVideo'
 import { ServiceExplainerVideo, type ServiceExplainerProps } from './ServiceExplainer/ServiceExplainerVideo'
 import { CaseStudyVideo } from './CaseStudy/CaseStudyVideo'
 import { ServicesOverviewVideo } from './ServicesOverview/ServicesOverviewVideo'
-import { PackagesOverviewVideo } from './PackagesOverview/PackagesOverviewVideo'
+import { PackagesOverviewVideo, PACKAGES_TOTAL_FRAMES } from './PackagesOverview/PackagesOverviewVideo'
 
 const DEFAULT_BLOG_PROPS: BlogSummaryProps = {
   title: 'The Agentic Commerce Protocols: UCP, ACP, and AP2',
@@ -64,8 +64,8 @@ const CASE_STUDY_DURATION = 780
 // ServicesOverviewVideo: 30fps × 30s = 900 frames
 const SERVICES_OVERVIEW_DURATION = 900
 
-// PackagesOverviewVideo: 30fps × 30s = 900 frames
-const PACKAGES_OVERVIEW_DURATION = 900
+// PackagesOverviewVideo: 30fps × 32s = 960 frames (matched to Asteria narration)
+const PACKAGES_OVERVIEW_DURATION = PACKAGES_TOTAL_FRAMES
 
 export const RemotionRoot: React.FC = () => {
   return (

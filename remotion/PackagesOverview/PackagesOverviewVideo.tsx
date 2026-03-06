@@ -1,11 +1,13 @@
 import React from 'react'
 import {
   AbsoluteFill,
+  Audio,
   useCurrentFrame,
   interpolate,
   spring,
   useVideoConfig,
   Sequence,
+  staticFile,
 } from 'remotion'
 
 const COLORS = {
@@ -22,6 +24,59 @@ const COLORS = {
 
 const FPS = 30
 
+/**
+ * Full narration script (must match public/audio/packages-overview-narration.mp3):
+ *
+ * Scene 1 (0-4s): "Eighty-three percent of Google searches now show AI Overviews.
+ *   If your business isn't visible to AI agents, you're already losing customers."
+ *
+ * Scene 2 (4-8s): "Fourteen million commercial queries flow through AI agents every
+ *   single day. ChatGPT, Perplexity, and Gemini are where your buyers are searching now."
+ *
+ * Scene 3 (8-12s): "Traditional single-page applications lose forty percent of AI crawl
+ *   traffic to hydration tax. Server-side rendered architecture eliminates this entirely,
+ *   making every page instantly readable by AI agents."
+ *
+ * Scene 4 (12-17s): "Adam Silva Consulting offers four agentic commerce packages. Starter
+ *   at sixteen thousand. Pro at twenty-eight thousand. Max, our most popular, at forty-eight
+ *   thousand. And Elite, starting at seventy-five thousand for enterprise-scale deployments."
+ *
+ * Scene 5 (17-21s): "Every tier ships with the same battle-tested agent fleet. Full SSR
+ *   architecture, AI discovery files, and protocol compliance are standard, not add-ons.
+ *   The difference is scope and scale."
+ *
+ * Scene 6 (21-25s): "All packages include Gold Standard protocol compliance. UCP for
+ *   universal commerce discovery. ACP for agentic checkout. And AP2 for cryptographic
+ *   agent payments. These are the protocols that make your business transactable by AI."
+ *
+ * Scene 7 (25-29s): "Ready to make your business visible to the fourteen million AI agents
+ *   searching right now? Get your custom proposal today. Book a call at adam silva
+ *   consulting dot com."
+ *
+ * Scene 8 (29-32s): "Adam Silva Consulting. Global infrastructure for agentic commerce."
+ */
+export const PACKAGES_NARRATION_TRANSCRIPT =
+  'Eighty-three percent of Google searches now show AI Overviews. If your business isn\'t visible to AI agents, you\'re already losing customers. ' +
+  'Fourteen million commercial queries flow through AI agents every single day. ChatGPT, Perplexity, and Gemini are where your buyers are searching now. ' +
+  'Traditional single-page applications lose forty percent of AI crawl traffic to hydration tax. Server-side rendered architecture eliminates this entirely, making every page instantly readable by AI agents. ' +
+  'Adam Silva Consulting offers four agentic commerce packages. Starter at sixteen thousand. Pro at twenty-eight thousand. Max, our most popular, at forty-eight thousand. And Elite, starting at seventy-five thousand for enterprise-scale deployments. ' +
+  'Every tier ships with the same battle-tested agent fleet. Full SSR architecture, AI discovery files, and protocol compliance are standard, not add-ons. The difference is scope and scale. ' +
+  'All packages include Gold Standard protocol compliance. UCP for universal commerce discovery. ACP for agentic checkout. And AP2 for cryptographic agent payments. These are the protocols that make your business transactable by AI. ' +
+  'Ready to make your business visible to the fourteen million AI agents searching right now? Get your custom proposal today. Book a call at adam silva consulting dot com. ' +
+  'Adam Silva Consulting. Global infrastructure for agentic commerce.'
+
+// Scene durations in frames (30fps) — timed to narration paragraphs
+const S1 = 4 * FPS   // 0-4s: 83% stat
+const S2 = 4 * FPS   // 4-8s: 14M queries
+const S3 = 4 * FPS   // 8-12s: SPA hydration tax
+const S4 = 5 * FPS   // 12-17s: Tier cards (longer — 4 tiers to name)
+const S5 = 4 * FPS   // 17-21s: Same agent fleet
+const S6 = 4 * FPS   // 21-25s: Protocols
+const S7 = 4 * FPS   // 25-29s: CTA
+const S8 = 3 * FPS   // 29-32s: Logo outro
+
+export const PACKAGES_TOTAL_FRAMES = S1 + S2 + S3 + S4 + S5 + S6 + S7 + S8 // 960
+
 /* ─── Shared fade-in helper ─── */
 function useFadeIn(delay = 0) {
   const frame = useCurrentFrame()
@@ -31,7 +86,7 @@ function useFadeIn(delay = 0) {
   })
 }
 
-/* ─── Scene 1: Pain Stat (0-4s, frames 0-119) ─── */
+/* ─── Scene 1: 83% AI Overviews ─── */
 const Scene1: React.FC = () => {
   const frame = useCurrentFrame()
   const { fps } = useVideoConfig()
@@ -90,7 +145,7 @@ const Scene1: React.FC = () => {
   )
 }
 
-/* ─── Scene 2: Agent Queries (4-8s, frames 120-239) ─── */
+/* ─── Scene 2: 14M+ Agent Queries ─── */
 const Scene2: React.FC = () => {
   const frame = useCurrentFrame()
   const { fps } = useVideoConfig()
@@ -142,7 +197,7 @@ const Scene2: React.FC = () => {
   )
 }
 
-/* ─── Scene 3: SPA Hydration Tax (8-12s, frames 240-359) ─── */
+/* ─── Scene 3: SPA Hydration Tax ─── */
 const Scene3: React.FC = () => {
   const frame = useCurrentFrame()
   const { fps } = useVideoConfig()
@@ -231,7 +286,7 @@ const Scene3: React.FC = () => {
   )
 }
 
-/* ─── Scene 4: Tier Cards (12-16s, frames 360-479) ─── */
+/* ─── Scene 4: Tier Cards ─── */
 const TIERS = [
   { name: 'Starter', price: '$16K', color: '#3b82f6' },
   { name: 'Pro', price: '$28K', color: '#6366f1' },
@@ -342,10 +397,9 @@ const Scene4: React.FC = () => {
   )
 }
 
-/* ─── Scene 5: Same Agent Fleet (16-20s, frames 480-599) ─── */
+/* ─── Scene 5: Same Agent Fleet ─── */
 const Scene5: React.FC = () => {
   const textOpacity = useFadeIn(0)
-  const subOpacity = useFadeIn(20)
 
   const highlights = [
     'Full SSR architecture on every tier',
@@ -381,11 +435,10 @@ const Scene5: React.FC = () => {
           flexDirection: 'column',
           gap: 20,
           marginTop: 50,
-          opacity: subOpacity,
         }}
       >
         {highlights.map((h, i) => {
-          const itemOpacity = useFadeIn(30 + i * 10)
+          const itemOpacity = useFadeIn(15 + i * 10)
           return (
             <div
               key={i}
@@ -421,7 +474,7 @@ const Scene5: React.FC = () => {
   )
 }
 
-/* ─── Scene 6: Gold Standard Protocols (20-24s, frames 600-719) ─── */
+/* ─── Scene 6: Gold Standard Protocols ─── */
 const PROTOCOLS = [
   { name: 'UCP', label: 'Universal Commerce Protocol', color: COLORS.ucp },
   { name: 'ACP', label: 'Agentic Commerce Protocol', color: COLORS.acp },
@@ -516,7 +569,7 @@ const Scene6: React.FC = () => {
   )
 }
 
-/* ─── Scene 7: CTA (24-28s, frames 720-839) ─── */
+/* ─── Scene 7: CTA ─── */
 const Scene7: React.FC = () => {
   const frame = useCurrentFrame()
   const { fps } = useVideoConfig()
@@ -581,7 +634,7 @@ const Scene7: React.FC = () => {
   )
 }
 
-/* ─── Scene 8: Logo Outro (28-30s, frames 840-899) ─── */
+/* ─── Scene 8: Logo Outro ─── */
 const Scene8: React.FC = () => {
   const frame = useCurrentFrame()
   const { fps } = useVideoConfig()
@@ -590,7 +643,7 @@ const Scene8: React.FC = () => {
     fps,
     config: { damping: 14, stiffness: 60 },
   })
-  const fadeOut = interpolate(frame, [45, 60], [1, 0], {
+  const fadeOut = interpolate(frame, [60, 85], [1, 0], {
     extrapolateLeft: 'clamp',
     extrapolateRight: 'clamp',
   })
@@ -633,32 +686,30 @@ const Scene8: React.FC = () => {
 
 /* ─── Main Composition ─── */
 export const PackagesOverviewVideo: React.FC = () => {
+  let offset = 0
+  const scenes = [
+    { Component: Scene1, dur: S1 },
+    { Component: Scene2, dur: S2 },
+    { Component: Scene3, dur: S3 },
+    { Component: Scene4, dur: S4 },
+    { Component: Scene5, dur: S5 },
+    { Component: Scene6, dur: S6 },
+    { Component: Scene7, dur: S7 },
+    { Component: Scene8, dur: S8 },
+  ]
+
   return (
     <AbsoluteFill style={{ backgroundColor: COLORS.bg }}>
-      <Sequence from={0} durationInFrames={4 * FPS}>
-        <Scene1 />
-      </Sequence>
-      <Sequence from={4 * FPS} durationInFrames={4 * FPS}>
-        <Scene2 />
-      </Sequence>
-      <Sequence from={8 * FPS} durationInFrames={4 * FPS}>
-        <Scene3 />
-      </Sequence>
-      <Sequence from={12 * FPS} durationInFrames={4 * FPS}>
-        <Scene4 />
-      </Sequence>
-      <Sequence from={16 * FPS} durationInFrames={4 * FPS}>
-        <Scene5 />
-      </Sequence>
-      <Sequence from={20 * FPS} durationInFrames={4 * FPS}>
-        <Scene6 />
-      </Sequence>
-      <Sequence from={24 * FPS} durationInFrames={4 * FPS}>
-        <Scene7 />
-      </Sequence>
-      <Sequence from={28 * FPS} durationInFrames={2 * FPS}>
-        <Scene8 />
-      </Sequence>
+      <Audio src={staticFile('audio/packages-overview-narration.mp3')} />
+      {scenes.map(({ Component, dur }, i) => {
+        const from = offset
+        offset += dur
+        return (
+          <Sequence key={i} from={from} durationInFrames={dur}>
+            <Component />
+          </Sequence>
+        )
+      })}
     </AbsoluteFill>
   )
 }

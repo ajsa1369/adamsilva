@@ -1,7 +1,7 @@
 import { ImageResponse } from 'next/og'
 
 export const runtime = 'edge'
-export const alt = 'ASC Agentic Commerce Packages — Starter, Pro, Max, Elite'
+export const alt = 'ASC Agentic Commerce Packages comparison: Starter ($16K, 30 pages), Pro ($28K, 60 pages), Max ($48K, 100 pages, Most Popular), Elite (From $75K, unlimited). Four glassmorphism pricing cards on dark navy gradient. Adam Silva Consulting — Global Infrastructure for Agentic Commerce. SSR Architecture, Zero Hydration Tax, Gold Standard Compliance.'
 export const size = { width: 1200, height: 630 }
 export const contentType = 'image/png'
 
