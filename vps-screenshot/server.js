@@ -1,5 +1,6 @@
 /**
  * Screenshot Service — runs on VPS with real Chrome
+ * Uses puppeteer-extra + stealth plugin to bypass Cloudflare bot detection.
  *
  * GET /screenshot?url=https://example.com&token=SECRET
  * Returns: PNG image (1280x800)
@@ -9,7 +10,10 @@
  */
 
 const http = require('http')
-const puppeteer = require('puppeteer')
+const puppeteer = require('puppeteer-extra')
+const StealthPlugin = require('puppeteer-extra-plugin-stealth')
+
+puppeteer.use(StealthPlugin())
 
 const PORT = 3001
 const SECRET = process.env.SCREENSHOT_SECRET || 'asc-screenshot-2026'
@@ -19,6 +23,7 @@ let browser = null
 async function getBrowser() {
   if (!browser || !browser.connected) {
     browser = await puppeteer.launch({
+      executablePath: '/usr/bin/google-chrome-stable',
       headless: 'new',
       args: [
         '--no-sandbox',
@@ -26,6 +31,7 @@ async function getBrowser() {
         '--disable-dev-shm-usage',
         '--disable-gpu',
         '--single-process',
+        '--disable-blink-features=AutomationControlled',
       ],
     })
   }
@@ -37,7 +43,15 @@ async function captureScreenshot(url) {
   const page = await b.newPage()
 
   try {
+    // Realistic browser fingerprint
     await page.setViewport({ width: 1280, height: 800 })
+    await page.setUserAgent(
+      'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36'
+    )
+    await page.setExtraHTTPHeaders({
+      'Accept-Language': 'en-US,en;q=0.9',
+      'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8',
+    })
 
     // Block heavy resources to speed up load
     await page.setRequestInterception(true)
@@ -55,8 +69,15 @@ async function captureScreenshot(url) {
       timeout: 15000,
     })
 
-    // Brief wait for lazy-loaded hero images
-    await new Promise((r) => setTimeout(r, 1500))
+    // Wait for any Cloudflare challenge to resolve + lazy-loaded content
+    await new Promise((r) => setTimeout(r, 3000))
+
+    // Check if we're still on a Cloudflare challenge page
+    const title = await page.title()
+    if (title.includes('Just a moment') || title.includes('Attention Required')) {
+      // Wait longer for Cloudflare to pass through
+      await new Promise((r) => setTimeout(r, 7000))
+    }
 
     const screenshot = await page.screenshot({
       type: 'png',
