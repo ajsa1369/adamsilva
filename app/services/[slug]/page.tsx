@@ -20,6 +20,18 @@ import { NegativeReverseCTA } from '@/app/components/services/NegativeReverseCTA
 import { VideoShowcase } from '@/app/components/services/VideoShowcase'
 import { ProofQuote } from '@/app/components/services/ProofQuote'
 
+/** Audio durations in seconds — ensures video player doesn't cut off narration */
+const AUDIO_DURATIONS: Record<string, number> = {
+  'acra': 38, 'aeo-audit': 35, 'geo-implementation': 51,
+  'authority-building': 44, 'agent-ready-blog-creator': 40,
+  'press-syndicator': 39, 'unified-sales-agent': 44,
+  'ucp-implementation': 36, 'acp-integration': 45, 'ap2-trust-layer': 44,
+  'quoting-agent': 35, 'off-hours-voice-agent': 34,
+  'lead-enrichment': 32, 'lead-scraping': 27,
+  'auto-appointment-setter': 31, 'social-media-manager': 44,
+  'social-media-poster': 38, 'rag-message-replier': 41,
+}
+
 interface PageProps {
   params: Promise<{ slug: string }>
 }
@@ -443,6 +455,7 @@ export default async function ServicePage({ params }: PageProps) {
         uniqueInsight={service.uniqueInsight}
         accentColor={accentColor}
         audioSrc={`/audio/services/${service.id}.mp3`}
+        audioDurationSec={AUDIO_DURATIONS[service.id]}
       />
 
       {/* ============================================================

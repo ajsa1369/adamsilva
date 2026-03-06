@@ -337,12 +337,13 @@ export function ServiceExplainerVideo({
   serviceSlug,
   audioSrc,
 }: ServiceExplainerProps) {
-  const { fps } = useVideoConfig()
+  const { fps, durationInFrames } = useVideoConfig()
   const introDuration = fps * 5
   const featureDuration = fps * 4
   const insightDuration = uniqueInsight ? fps * 5 : 0
-  const ctaDuration = fps * 4
   const maxFeatures = Math.min(features.length, 6)
+  const ctaFrom = introDuration + maxFeatures * featureDuration + insightDuration
+  const ctaDuration = Math.max(fps * 4, durationInFrames - ctaFrom)
 
   return (
     <AbsoluteFill style={{ fontFamily: 'Inter, sans-serif' }}>
@@ -384,7 +385,7 @@ export function ServiceExplainerVideo({
       )}
 
       <Sequence
-        from={introDuration + maxFeatures * featureDuration + insightDuration}
+        from={ctaFrom}
         durationInFrames={ctaDuration}
       >
         <CTASlide

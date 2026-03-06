@@ -14,6 +14,7 @@ interface Props {
   uniqueInsight?: string
   accentColor: string
   audioSrc: string
+  audioDurationSec?: number
 }
 
 export function VideoShowcase({
@@ -24,6 +25,7 @@ export function VideoShowcase({
   uniqueInsight,
   accentColor,
   audioSrc,
+  audioDurationSec,
 }: Props) {
   const ref = useRef<HTMLDivElement>(null)
   const [visible, setVisible] = useState(true)
@@ -49,7 +51,9 @@ export function VideoShowcase({
   const fps = 30
   const maxFeatures = Math.min(features.length, 6)
   const insightDuration = uniqueInsight ? fps * 5 : 0
-  const totalDuration = fps * 5 + maxFeatures * fps * 4 + insightDuration + fps * 4
+  const visualDuration = fps * 5 + maxFeatures * fps * 4 + insightDuration + fps * 4
+  const audioDuration = audioDurationSec ? Math.ceil(audioDurationSec * fps) + fps : 0
+  const totalDuration = Math.max(visualDuration, audioDuration)
 
   return (
     <section className="section relative overflow-hidden" aria-label={`${serviceName} visual overview`}>
