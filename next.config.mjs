@@ -60,6 +60,8 @@ const nextConfig = {
       // Old insight slugs that overlap with renamed articles
       { source: '/insights/the-ai-authority-imperative-gartner-50-percent-traffic-decline-prediction', destination: '/insights/gartner-50-percent-traffic-decline', permanent: true },
       { source: '/insights/aeo-vs-geo-understanding-the-new-search-landscape', destination: '/insights/aeo-vs-geo-difference', permanent: true },
+      // Legal page aliases (Stripe checkout configured with /legal/ prefix)
+      { source: '/legal/refund-policy', destination: '/refund-policy', permanent: true },
     ]
   },
 }
