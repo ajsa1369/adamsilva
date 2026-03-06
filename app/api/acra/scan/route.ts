@@ -4,8 +4,10 @@ import { scanUrl } from '@/lib/acra/scanner'
 import { computeScores } from '@/lib/acra/scoring'
 import { calculateRevenueImpact, type RevenueRange } from '@/lib/acra/revenue'
 import { pushACRASearchToPipedrive } from '@/lib/pipedrive/acra-lead'
+import { captureScreenshot } from '@/lib/acra/screenshot'
+import { uploadScreenshot } from '@/lib/acra/storage'
 
-export const maxDuration = 30
+export const maxDuration = 45
 
 export async function POST(req: NextRequest) {
   const supabase = await createClient()
@@ -48,7 +50,19 @@ export async function POST(req: NextRequest) {
   }
 
   try {
-    const signals = await scanUrl(url)
+    // Run HTML scan + VPS Chrome screenshot in parallel
+    const fullUrl = url.startsWith('http') ? url : `https://${url}`
+    const [signals, screenshotBuffer] = await Promise.all([
+      scanUrl(url),
+      captureScreenshot(fullUrl).catch(() => null),
+    ])
+
+    // Upload screenshot to Supabase Storage if captured
+    let screenshotUrl: string | null = null
+    if (screenshotBuffer) {
+      screenshotUrl = await uploadScreenshot(scan.id, screenshotBuffer)
+    }
+
     const scores = computeScores(signals)
 
     const pillarScores: Record<string, number> = {}
@@ -113,6 +127,7 @@ export async function POST(req: NextRequest) {
           valueLevers: scores.valueLevers,
           ogImage: signals.ogImage,
           favicon: signals.favicon,
+          screenshotUrl,
         },
       })
       .select('id, share_token')

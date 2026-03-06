@@ -1,0 +1,11 @@
+{
+  "name": "asc-screenshot-service",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "puppeteer": "^23.0.0"
+  }
+}
