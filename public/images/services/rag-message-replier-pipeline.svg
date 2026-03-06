@@ -1,0 +1,141 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="500" viewBox="0 0 800 500">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0f172a" />
+      <stop offset="100%" stop-color="#1e293b" />
+    </linearGradient>
+  </defs>
+  <rect width="800" height="500" rx="16" fill="url(#bg)" />
+  <rect x="1" y="1" width="798" height="498" rx="16" fill="none" stroke="#14b8a6" stroke-opacity="0.15" />
+
+  <!-- Title -->
+  <text x="40" y="45" fill="#f8fafc" font-size="22" font-weight="700" font-family="system-ui, -apple-system, sans-serif">RAG Reply Pipeline</text>
+  <text x="40" y="70" fill="#94a3b8" font-size="13" font-family="system-ui, -apple-system, sans-serif">Retrieval-Augmented Generation for Grounded Responses</text>
+
+  <!-- 4-stage horizontal flow -->
+
+  <!-- Stage 1: Query -->
+  <rect x="30" y="100" width="155" height="170" rx="12" fill="#14b8a6" fill-opacity="0.08" stroke="#14b8a6" stroke-opacity="0.3" />
+  <text x="107" y="125" text-anchor="middle" fill="#14b8a6" font-size="14" font-weight="700" font-family="system-ui, -apple-system, sans-serif">Incoming Query</text>
+  <line x1="45" y1="135" x2="170" y2="135" stroke="#334155" stroke-width="0.5" />
+
+  <!-- Mock message bubbles -->
+  <rect x="45" y="145" width="125" height="28" rx="6" fill="#0f172a" stroke="#334155" />
+  <text x="107" y="163" text-anchor="middle" fill="#94a3b8" font-size="9" font-family="system-ui, -apple-system, sans-serif">"What pricing for GEO?"</text>
+
+  <rect x="45" y="180" width="125" height="28" rx="6" fill="#0f172a" stroke="#334155" />
+  <text x="107" y="198" text-anchor="middle" fill="#94a3b8" font-size="9" font-family="system-ui, -apple-system, sans-serif">"Do you offer ACP?"</text>
+
+  <rect x="45" y="215" width="125" height="28" rx="6" fill="#0f172a" stroke="#334155" />
+  <text x="107" y="233" text-anchor="middle" fill="#94a3b8" font-size="9" font-family="system-ui, -apple-system, sans-serif">"Case study results?"</text>
+
+  <text x="107" y="260" text-anchor="middle" fill="#14b8a6" font-size="10" font-weight="600" font-family="system-ui, -apple-system, sans-serif">Email, Chat, Social</text>
+
+  <!-- Arrow 1 -->
+  <line x1="190" y1="185" x2="215" y2="185" stroke="#14b8a6" stroke-width="2" />
+  <polygon points="215,180 225,185 215,190" fill="#14b8a6" />
+
+  <!-- Stage 2: Vector Search -->
+  <rect x="230" y="100" width="155" height="170" rx="12" fill="#14b8a6" fill-opacity="0.12" stroke="#14b8a6" stroke-opacity="0.4" />
+  <text x="307" y="125" text-anchor="middle" fill="#14b8a6" font-size="14" font-weight="700" font-family="system-ui, -apple-system, sans-serif">Vector Search</text>
+  <line x1="245" y1="135" x2="370" y2="135" stroke="#334155" stroke-width="0.5" />
+
+  <!-- Vector visualization -->
+  <text x="307" y="158" text-anchor="middle" fill="#94a3b8" font-size="10" font-family="system-ui, -apple-system, sans-serif">Embedding Query</text>
+
+  <!-- Dot cluster representing vector space -->
+  <circle cx="270" cy="180" r="3" fill="#14b8a6" opacity="0.3" />
+  <circle cx="285" cy="195" r="3" fill="#14b8a6" opacity="0.4" />
+  <circle cx="300" cy="175" r="3" fill="#14b8a6" opacity="0.5" />
+  <circle cx="310" cy="190" r="4" fill="#14b8a6" opacity="0.9" />
+  <circle cx="325" cy="180" r="3" fill="#14b8a6" opacity="0.6" />
+  <circle cx="340" cy="195" r="3" fill="#14b8a6" opacity="0.3" />
+  <circle cx="295" cy="205" r="3" fill="#14b8a6" opacity="0.4" />
+  <circle cx="320" cy="210" r="3" fill="#14b8a6" opacity="0.5" />
+  <circle cx="275" cy="215" r="3" fill="#14b8a6" opacity="0.3" />
+  <circle cx="340" cy="175" r="3" fill="#14b8a6" opacity="0.4" />
+
+  <!-- Highlight nearest -->
+  <circle cx="310" cy="190" r="12" fill="none" stroke="#14b8a6" stroke-opacity="0.5" stroke-dasharray="3 2" />
+
+  <text x="307" y="240" text-anchor="middle" fill="#94a3b8" font-size="10" font-family="system-ui, -apple-system, sans-serif">Cosine Similarity</text>
+  <text x="307" y="258" text-anchor="middle" fill="#14b8a6" font-size="10" font-weight="600" font-family="system-ui, -apple-system, sans-serif">Top-K: 5 chunks</text>
+
+  <!-- Arrow 2 -->
+  <line x1="390" y1="185" x2="415" y2="185" stroke="#14b8a6" stroke-width="2" />
+  <polygon points="415,180 425,185 415,190" fill="#14b8a6" />
+
+  <!-- Stage 3: Knowledge Base -->
+  <rect x="430" y="100" width="155" height="170" rx="12" fill="#14b8a6" fill-opacity="0.08" stroke="#14b8a6" stroke-opacity="0.3" />
+  <text x="507" y="125" text-anchor="middle" fill="#14b8a6" font-size="14" font-weight="700" font-family="system-ui, -apple-system, sans-serif">Knowledge Base</text>
+  <line x1="445" y1="135" x2="570" y2="135" stroke="#334155" stroke-width="0.5" />
+
+  <!-- KB items -->
+  <rect x="445" y="145" width="125" height="22" rx="4" fill="#0f172a" stroke="#334155" />
+  <text x="507" y="160" text-anchor="middle" fill="#94a3b8" font-size="9" font-family="system-ui, -apple-system, sans-serif">Services Catalog</text>
+
+  <rect x="445" y="172" width="125" height="22" rx="4" fill="#0f172a" stroke="#334155" />
+  <text x="507" y="187" text-anchor="middle" fill="#94a3b8" font-size="9" font-family="system-ui, -apple-system, sans-serif">Pricing Tables</text>
+
+  <rect x="445" y="199" width="125" height="22" rx="4" fill="#0f172a" stroke="#334155" />
+  <text x="507" y="214" text-anchor="middle" fill="#94a3b8" font-size="9" font-family="system-ui, -apple-system, sans-serif">Case Studies</text>
+
+  <rect x="445" y="226" width="125" height="22" rx="4" fill="#0f172a" stroke="#334155" />
+  <text x="507" y="241" text-anchor="middle" fill="#94a3b8" font-size="9" font-family="system-ui, -apple-system, sans-serif">Protocol Docs</text>
+
+  <text x="507" y="265" text-anchor="middle" fill="#14b8a6" font-size="10" font-weight="600" font-family="system-ui, -apple-system, sans-serif">500+ documents</text>
+
+  <!-- Arrow 3 -->
+  <line x1="590" y1="185" x2="615" y2="185" stroke="#14b8a6" stroke-width="2" />
+  <polygon points="615,180 625,185 615,190" fill="#14b8a6" />
+
+  <!-- Stage 4: Grounded Reply -->
+  <rect x="630" y="100" width="140" height="170" rx="12" fill="#14b8a6" fill-opacity="0.15" stroke="#14b8a6" stroke-opacity="0.5" stroke-width="2" />
+  <text x="700" y="125" text-anchor="middle" fill="#14b8a6" font-size="14" font-weight="700" font-family="system-ui, -apple-system, sans-serif">Grounded Reply</text>
+  <line x1="645" y1="135" x2="755" y2="135" stroke="#334155" stroke-width="0.5" />
+
+  <!-- Reply bubble -->
+  <rect x="645" y="145" width="110" height="65" rx="8" fill="#14b8a6" fill-opacity="0.1" stroke="#14b8a6" stroke-opacity="0.3" />
+  <text x="700" y="163" text-anchor="middle" fill="#f8fafc" font-size="9" font-family="system-ui, -apple-system, sans-serif">Contextual answer</text>
+  <text x="700" y="177" text-anchor="middle" fill="#f8fafc" font-size="9" font-family="system-ui, -apple-system, sans-serif">with source refs</text>
+  <text x="700" y="191" text-anchor="middle" fill="#f8fafc" font-size="9" font-family="system-ui, -apple-system, sans-serif">and pricing data</text>
+  <text x="700" y="205" text-anchor="middle" fill="#14b8a6" font-size="9" font-family="system-ui, -apple-system, sans-serif">[2]</text>
+
+  <text x="700" y="230" text-anchor="middle" fill="#94a3b8" font-size="9" font-family="system-ui, -apple-system, sans-serif">Accuracy: 97%</text>
+  <text x="700" y="245" text-anchor="middle" fill="#94a3b8" font-size="9" font-family="system-ui, -apple-system, sans-serif">Hallucination: &lt;1%</text>
+  <text x="700" y="260" text-anchor="middle" fill="#10b981" font-size="10" font-weight="600" font-family="system-ui, -apple-system, sans-serif">Sent in 3.2s</text>
+
+  <!-- Performance Metrics Panel -->
+  <rect x="30" y="295" width="740" height="125" rx="12" fill="#1e293b" stroke="#334155" stroke-width="1" />
+  <text x="400" y="322" text-anchor="middle" fill="#f8fafc" font-size="14" font-weight="700" font-family="system-ui, -apple-system, sans-serif">RAG Pipeline Performance</text>
+
+  <!-- Metric cards -->
+  <rect x="50" y="338" width="125" height="65" rx="8" fill="#0f172a" stroke="#14b8a6" stroke-opacity="0.2" />
+  <text x="112" y="360" text-anchor="middle" fill="#14b8a6" font-size="20" font-weight="700" font-family="system-ui, -apple-system, sans-serif">97%</text>
+  <text x="112" y="378" text-anchor="middle" fill="#64748b" font-size="9" font-family="system-ui, -apple-system, sans-serif">Accuracy Rate</text>
+  <text x="112" y="393" text-anchor="middle" fill="#64748b" font-size="8" font-family="system-ui, -apple-system, sans-serif">vs 72% without RAG</text>
+
+  <rect x="195" y="338" width="125" height="65" rx="8" fill="#0f172a" stroke="#14b8a6" stroke-opacity="0.2" />
+  <text x="257" y="360" text-anchor="middle" fill="#14b8a6" font-size="20" font-weight="700" font-family="system-ui, -apple-system, sans-serif">3.2s</text>
+  <text x="257" y="378" text-anchor="middle" fill="#64748b" font-size="9" font-family="system-ui, -apple-system, sans-serif">Avg Response</text>
+  <text x="257" y="393" text-anchor="middle" fill="#64748b" font-size="8" font-family="system-ui, -apple-system, sans-serif">End-to-end</text>
+
+  <rect x="340" y="338" width="125" height="65" rx="8" fill="#0f172a" stroke="#14b8a6" stroke-opacity="0.2" />
+  <text x="402" y="360" text-anchor="middle" fill="#14b8a6" font-size="20" font-weight="700" font-family="system-ui, -apple-system, sans-serif">500+</text>
+  <text x="402" y="378" text-anchor="middle" fill="#64748b" font-size="9" font-family="system-ui, -apple-system, sans-serif">KB Documents</text>
+  <text x="402" y="393" text-anchor="middle" fill="#64748b" font-size="8" font-family="system-ui, -apple-system, sans-serif">Auto-synced</text>
+
+  <rect x="485" y="338" width="125" height="65" rx="8" fill="#0f172a" stroke="#14b8a6" stroke-opacity="0.2" />
+  <text x="547" y="360" text-anchor="middle" fill="#14b8a6" font-size="20" font-weight="700" font-family="system-ui, -apple-system, sans-serif">85%</text>
+  <text x="547" y="378" text-anchor="middle" fill="#64748b" font-size="9" font-family="system-ui, -apple-system, sans-serif">Auto-Resolved</text>
+  <text x="547" y="393" text-anchor="middle" fill="#64748b" font-size="8" font-family="system-ui, -apple-system, sans-serif">No human needed</text>
+
+  <rect x="630" y="338" width="125" height="65" rx="8" fill="#0f172a" stroke="#14b8a6" stroke-opacity="0.2" />
+  <text x="692" y="360" text-anchor="middle" fill="#14b8a6" font-size="20" font-weight="700" font-family="system-ui, -apple-system, sans-serif">&lt;1%</text>
+  <text x="692" y="378" text-anchor="middle" fill="#64748b" font-size="9" font-family="system-ui, -apple-system, sans-serif">Hallucination</text>
+  <text x="692" y="393" text-anchor="middle" fill="#64748b" font-size="8" font-family="system-ui, -apple-system, sans-serif">Grounded replies</text>
+
+  <!-- Bottom bar -->
+  <rect x="0" y="460" width="800" height="40" rx="0" fill="#14b8a6" opacity="0.08" />
+  <text x="400" y="484" text-anchor="middle" fill="#14b8a6" font-size="11" font-weight="600" font-family="system-ui, -apple-system, sans-serif">Adam Silva Consulting — adamsilvaconsulting.com</text>
+</svg>

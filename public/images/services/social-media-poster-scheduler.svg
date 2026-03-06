@@ -1,0 +1,116 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="500" viewBox="0 0 800 500">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0f172a" />
+      <stop offset="100%" stop-color="#1e293b" />
+    </linearGradient>
+  </defs>
+  <rect width="800" height="500" rx="16" fill="url(#bg)" />
+  <rect x="1" y="1" width="798" height="498" rx="16" fill="none" stroke="#f97316" stroke-opacity="0.15" />
+
+  <!-- Title -->
+  <text x="40" y="45" fill="#f8fafc" font-size="22" font-weight="700" font-family="system-ui, -apple-system, sans-serif">Automated Posting Schedule</text>
+  <text x="40" y="70" fill="#94a3b8" font-size="13" font-family="system-ui, -apple-system, sans-serif">Weekly Content Calendar with Optimal Timing</text>
+
+  <!-- Calendar Grid Header -->
+  <rect x="40" y="90" width="720" height="30" rx="6" fill="#f97316" fill-opacity="0.08" />
+  <text x="115" y="110" text-anchor="middle" fill="#f97316" font-size="11" font-weight="700" font-family="system-ui, -apple-system, sans-serif">MON</text>
+  <text x="218" y="110" text-anchor="middle" fill="#f97316" font-size="11" font-weight="700" font-family="system-ui, -apple-system, sans-serif">TUE</text>
+  <text x="321" y="110" text-anchor="middle" fill="#f97316" font-size="11" font-weight="700" font-family="system-ui, -apple-system, sans-serif">WED</text>
+  <text x="424" y="110" text-anchor="middle" fill="#f97316" font-size="11" font-weight="700" font-family="system-ui, -apple-system, sans-serif">THU</text>
+  <text x="527" y="110" text-anchor="middle" fill="#f97316" font-size="11" font-weight="700" font-family="system-ui, -apple-system, sans-serif">FRI</text>
+  <text x="630" y="110" text-anchor="middle" fill="#f97316" font-size="11" font-weight="700" font-family="system-ui, -apple-system, sans-serif">SAT</text>
+  <text x="720" y="110" text-anchor="middle" fill="#f97316" font-size="11" font-weight="700" font-family="system-ui, -apple-system, sans-serif">SUN</text>
+
+  <!-- Time slots on left -->
+  <text x="35" y="150" text-anchor="end" fill="#475569" font-size="9" font-family="system-ui, -apple-system, sans-serif">9 AM</text>
+  <text x="35" y="200" text-anchor="end" fill="#475569" font-size="9" font-family="system-ui, -apple-system, sans-serif">12 PM</text>
+  <text x="35" y="250" text-anchor="end" fill="#475569" font-size="9" font-family="system-ui, -apple-system, sans-serif">3 PM</text>
+  <text x="35" y="300" text-anchor="end" fill="#475569" font-size="9" font-family="system-ui, -apple-system, sans-serif">6 PM</text>
+
+  <!-- Grid lines -->
+  <line x1="40" y1="130" x2="760" y2="130" stroke="#334155" stroke-width="0.5" />
+  <line x1="40" y1="170" x2="760" y2="170" stroke="#334155" stroke-width="0.3" />
+  <line x1="40" y1="210" x2="760" y2="210" stroke="#334155" stroke-width="0.3" />
+  <line x1="40" y1="250" x2="760" y2="250" stroke="#334155" stroke-width="0.3" />
+  <line x1="40" y1="290" x2="760" y2="290" stroke="#334155" stroke-width="0.3" />
+  <line x1="40" y1="320" x2="760" y2="320" stroke="#334155" stroke-width="0.5" />
+
+  <!-- Vertical grid -->
+  <line x1="165" y1="130" x2="165" y2="320" stroke="#334155" stroke-width="0.3" />
+  <line x1="268" y1="130" x2="268" y2="320" stroke="#334155" stroke-width="0.3" />
+  <line x1="371" y1="130" x2="371" y2="320" stroke="#334155" stroke-width="0.3" />
+  <line x1="474" y1="130" x2="474" y2="320" stroke="#334155" stroke-width="0.3" />
+  <line x1="577" y1="130" x2="577" y2="320" stroke="#334155" stroke-width="0.3" />
+  <line x1="680" y1="130" x2="680" y2="320" stroke="#334155" stroke-width="0.3" />
+
+  <!-- Monday posts -->
+  <rect x="70" y="135" width="85" height="22" rx="4" fill="#0077b5" fill-opacity="0.3" stroke="#0077b5" stroke-opacity="0.5" />
+  <text x="112" y="150" text-anchor="middle" fill="#0077b5" font-size="8" font-weight="600" font-family="system-ui, -apple-system, sans-serif">LinkedIn Article</text>
+
+  <rect x="70" y="215" width="85" height="22" rx="4" fill="#1da1f2" fill-opacity="0.3" stroke="#1da1f2" stroke-opacity="0.5" />
+  <text x="112" y="230" text-anchor="middle" fill="#1da1f2" font-size="8" font-weight="600" font-family="system-ui, -apple-system, sans-serif">X Thread</text>
+
+  <!-- Tuesday posts -->
+  <rect x="173" y="175" width="85" height="22" rx="4" fill="#e1306c" fill-opacity="0.3" stroke="#e1306c" stroke-opacity="0.5" />
+  <text x="215" y="190" text-anchor="middle" fill="#e1306c" font-size="8" font-weight="600" font-family="system-ui, -apple-system, sans-serif">IG Carousel</text>
+
+  <rect x="173" y="255" width="85" height="22" rx="4" fill="#0077b5" fill-opacity="0.3" stroke="#0077b5" stroke-opacity="0.5" />
+  <text x="215" y="270" text-anchor="middle" fill="#0077b5" font-size="8" font-weight="600" font-family="system-ui, -apple-system, sans-serif">LinkedIn Post</text>
+
+  <!-- Wednesday posts -->
+  <rect x="276" y="135" width="85" height="22" rx="4" fill="#1da1f2" fill-opacity="0.3" stroke="#1da1f2" stroke-opacity="0.5" />
+  <text x="318" y="150" text-anchor="middle" fill="#1da1f2" font-size="8" font-weight="600" font-family="system-ui, -apple-system, sans-serif">X Insight</text>
+
+  <rect x="276" y="215" width="85" height="22" rx="4" fill="#e1306c" fill-opacity="0.3" stroke="#e1306c" stroke-opacity="0.5" />
+  <text x="318" y="230" text-anchor="middle" fill="#e1306c" font-size="8" font-weight="600" font-family="system-ui, -apple-system, sans-serif">IG Story</text>
+
+  <rect x="276" y="295" width="85" height="22" rx="4" fill="#0077b5" fill-opacity="0.3" stroke="#0077b5" stroke-opacity="0.5" />
+  <text x="318" y="310" text-anchor="middle" fill="#0077b5" font-size="8" font-weight="600" font-family="system-ui, -apple-system, sans-serif">LinkedIn Poll</text>
+
+  <!-- Thursday posts -->
+  <rect x="379" y="175" width="85" height="22" rx="4" fill="#1da1f2" fill-opacity="0.3" stroke="#1da1f2" stroke-opacity="0.5" />
+  <text x="421" y="190" text-anchor="middle" fill="#1da1f2" font-size="8" font-weight="600" font-family="system-ui, -apple-system, sans-serif">X Analysis</text>
+
+  <rect x="379" y="255" width="85" height="22" rx="4" fill="#e1306c" fill-opacity="0.3" stroke="#e1306c" stroke-opacity="0.5" />
+  <text x="421" y="270" text-anchor="middle" fill="#e1306c" font-size="8" font-weight="600" font-family="system-ui, -apple-system, sans-serif">IG Reel</text>
+
+  <!-- Friday posts -->
+  <rect x="482" y="135" width="85" height="22" rx="4" fill="#0077b5" fill-opacity="0.3" stroke="#0077b5" stroke-opacity="0.5" />
+  <text x="524" y="150" text-anchor="middle" fill="#0077b5" font-size="8" font-weight="600" font-family="system-ui, -apple-system, sans-serif">LinkedIn Case</text>
+
+  <rect x="482" y="215" width="85" height="22" rx="4" fill="#1da1f2" fill-opacity="0.3" stroke="#1da1f2" stroke-opacity="0.5" />
+  <text x="524" y="230" text-anchor="middle" fill="#1da1f2" font-size="8" font-weight="600" font-family="system-ui, -apple-system, sans-serif">X Recap</text>
+
+  <!-- Saturday post -->
+  <rect x="585" y="175" width="85" height="22" rx="4" fill="#e1306c" fill-opacity="0.3" stroke="#e1306c" stroke-opacity="0.5" />
+  <text x="627" y="190" text-anchor="middle" fill="#e1306c" font-size="8" font-weight="600" font-family="system-ui, -apple-system, sans-serif">IG Behind Scenes</text>
+
+  <!-- Sunday post -->
+  <rect x="685" y="215" width="70" height="22" rx="4" fill="#1da1f2" fill-opacity="0.3" stroke="#1da1f2" stroke-opacity="0.5" />
+  <text x="720" y="230" text-anchor="middle" fill="#1da1f2" font-size="8" font-weight="600" font-family="system-ui, -apple-system, sans-serif">X Thread</text>
+
+  <!-- Posting Frequency Summary -->
+  <rect x="40" y="340" width="720" height="80" rx="12" fill="#1e293b" stroke="#334155" />
+  <text x="400" y="365" text-anchor="middle" fill="#f8fafc" font-size="13" font-weight="700" font-family="system-ui, -apple-system, sans-serif">Weekly Posting Frequency</text>
+
+  <!-- Platform frequency bars -->
+  <rect x="80" y="378" width="24" height="24" rx="4" fill="#0077b5" fill-opacity="0.3" />
+  <text x="92" y="395" text-anchor="middle" fill="#0077b5" font-size="8" font-weight="700" font-family="system-ui, -apple-system, sans-serif">in</text>
+  <text x="115" y="395" fill="#94a3b8" font-size="10" font-family="system-ui, -apple-system, sans-serif">LinkedIn: 5/week</text>
+  <rect x="205" y="385" width="75" height="10" rx="3" fill="#0077b5" opacity="0.6" />
+
+  <rect x="310" y="378" width="24" height="24" rx="4" fill="#f8fafc" fill-opacity="0.1" />
+  <text x="322" y="395" text-anchor="middle" fill="#f8fafc" font-size="9" font-weight="700" font-family="system-ui, -apple-system, sans-serif">X</text>
+  <text x="345" y="395" fill="#94a3b8" font-size="10" font-family="system-ui, -apple-system, sans-serif">X: 5/week</text>
+  <rect x="405" y="385" width="75" height="10" rx="3" fill="#94a3b8" opacity="0.5" />
+
+  <rect x="510" y="378" width="24" height="24" rx="4" fill="#e1306c" fill-opacity="0.3" />
+  <text x="522" y="395" text-anchor="middle" fill="#e1306c" font-size="8" font-weight="700" font-family="system-ui, -apple-system, sans-serif">IG</text>
+  <text x="545" y="395" fill="#94a3b8" font-size="10" font-family="system-ui, -apple-system, sans-serif">Instagram: 5/week</text>
+  <rect x="645" y="385" width="75" height="10" rx="3" fill="#e1306c" opacity="0.5" />
+
+  <!-- Bottom bar -->
+  <rect x="0" y="460" width="800" height="40" rx="0" fill="#f97316" opacity="0.08" />
+  <text x="400" y="484" text-anchor="middle" fill="#f97316" font-size="11" font-weight="600" font-family="system-ui, -apple-system, sans-serif">Adam Silva Consulting — adamsilvaconsulting.com</text>
+</svg>

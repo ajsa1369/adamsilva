@@ -1,0 +1,109 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="500" viewBox="0 0 800 500">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0f172a" />
+      <stop offset="100%" stop-color="#1e293b" />
+    </linearGradient>
+  </defs>
+  <rect width="800" height="500" rx="16" fill="url(#bg)" />
+  <rect x="1" y="1" width="798" height="498" rx="16" fill="none" stroke="#06b6d4" stroke-opacity="0.15" />
+
+  <!-- Title -->
+  <text x="40" y="45" fill="#f8fafc" font-size="22" font-weight="700" font-family="system-ui, -apple-system, sans-serif">Unified Sales Agent</text>
+  <text x="40" y="70" fill="#94a3b8" font-size="13" font-family="system-ui, -apple-system, sans-serif">Multi-Channel AI Sales Architecture</text>
+
+  <!-- Left Column: Input Channels -->
+  <text x="80" y="110" text-anchor="middle" fill="#64748b" font-size="11" font-weight="600" font-family="system-ui, -apple-system, sans-serif">CHANNELS</text>
+
+  <!-- Chat -->
+  <rect x="30" y="125" width="100" height="50" rx="8" fill="#06b6d4" fill-opacity="0.1" stroke="#06b6d4" stroke-opacity="0.3" />
+  <text x="80" y="148" text-anchor="middle" fill="#f8fafc" font-size="12" font-weight="600" font-family="system-ui, -apple-system, sans-serif">Chat</text>
+  <text x="80" y="165" text-anchor="middle" fill="#94a3b8" font-size="9" font-family="system-ui, -apple-system, sans-serif">Web, WhatsApp</text>
+
+  <!-- Voice -->
+  <rect x="30" y="190" width="100" height="50" rx="8" fill="#06b6d4" fill-opacity="0.1" stroke="#06b6d4" stroke-opacity="0.3" />
+  <text x="80" y="213" text-anchor="middle" fill="#f8fafc" font-size="12" font-weight="600" font-family="system-ui, -apple-system, sans-serif">Voice</text>
+  <text x="80" y="230" text-anchor="middle" fill="#94a3b8" font-size="9" font-family="system-ui, -apple-system, sans-serif">Phone, Zoom</text>
+
+  <!-- Email -->
+  <rect x="30" y="255" width="100" height="50" rx="8" fill="#06b6d4" fill-opacity="0.1" stroke="#06b6d4" stroke-opacity="0.3" />
+  <text x="80" y="278" text-anchor="middle" fill="#f8fafc" font-size="12" font-weight="600" font-family="system-ui, -apple-system, sans-serif">Email</text>
+  <text x="80" y="295" text-anchor="middle" fill="#94a3b8" font-size="9" font-family="system-ui, -apple-system, sans-serif">Inbox, Sequences</text>
+
+  <!-- Social -->
+  <rect x="30" y="320" width="100" height="50" rx="8" fill="#06b6d4" fill-opacity="0.1" stroke="#06b6d4" stroke-opacity="0.3" />
+  <text x="80" y="343" text-anchor="middle" fill="#f8fafc" font-size="12" font-weight="600" font-family="system-ui, -apple-system, sans-serif">Social</text>
+  <text x="80" y="360" text-anchor="middle" fill="#94a3b8" font-size="9" font-family="system-ui, -apple-system, sans-serif">LinkedIn, X DMs</text>
+
+  <!-- Arrows from channels to AI Core -->
+  <line x1="135" y1="150" x2="255" y2="230" stroke="#06b6d4" stroke-width="1.5" stroke-opacity="0.4" />
+  <line x1="135" y1="215" x2="255" y2="240" stroke="#06b6d4" stroke-width="1.5" stroke-opacity="0.4" />
+  <line x1="135" y1="280" x2="255" y2="255" stroke="#06b6d4" stroke-width="1.5" stroke-opacity="0.4" />
+  <line x1="135" y1="345" x2="255" y2="265" stroke="#06b6d4" stroke-width="1.5" stroke-opacity="0.4" />
+
+  <!-- Center: AI Core -->
+  <rect x="260" y="155" width="200" height="190" rx="14" fill="#06b6d4" fill-opacity="0.08" stroke="#06b6d4" stroke-opacity="0.5" stroke-width="2" />
+  <text x="360" y="185" text-anchor="middle" fill="#06b6d4" font-size="16" font-weight="700" font-family="system-ui, -apple-system, sans-serif">AI Sales Core</text>
+
+  <!-- Core modules -->
+  <rect x="280" y="200" width="160" height="28" rx="5" fill="#0f172a" stroke="#334155" />
+  <text x="360" y="219" text-anchor="middle" fill="#94a3b8" font-size="10" font-family="system-ui, -apple-system, sans-serif">Natural Language Processing</text>
+
+  <rect x="280" y="236" width="160" height="28" rx="5" fill="#0f172a" stroke="#334155" />
+  <text x="360" y="255" text-anchor="middle" fill="#94a3b8" font-size="10" font-family="system-ui, -apple-system, sans-serif">Intent Classification</text>
+
+  <rect x="280" y="272" width="160" height="28" rx="5" fill="#0f172a" stroke="#334155" />
+  <text x="360" y="291" text-anchor="middle" fill="#94a3b8" font-size="10" font-family="system-ui, -apple-system, sans-serif">Product Matching</text>
+
+  <rect x="280" y="308" width="160" height="28" rx="5" fill="#0f172a" stroke="#334155" />
+  <text x="360" y="327" text-anchor="middle" fill="#94a3b8" font-size="10" font-family="system-ui, -apple-system, sans-serif">Proposal Generation</text>
+
+  <!-- Arrows from AI Core to outputs -->
+  <line x1="465" y1="230" x2="540" y2="150" stroke="#06b6d4" stroke-width="1.5" stroke-opacity="0.4" />
+  <line x1="465" y1="250" x2="540" y2="230" stroke="#06b6d4" stroke-width="1.5" stroke-opacity="0.4" />
+  <line x1="465" y1="270" x2="540" y2="310" stroke="#06b6d4" stroke-width="1.5" stroke-opacity="0.4" />
+  <line x1="465" y1="290" x2="540" y2="380" stroke="#06b6d4" stroke-width="1.5" stroke-opacity="0.4" />
+
+  <!-- Right Column: Outputs -->
+  <text x="640" y="110" text-anchor="middle" fill="#64748b" font-size="11" font-weight="600" font-family="system-ui, -apple-system, sans-serif">OUTPUTS</text>
+
+  <!-- CRM -->
+  <rect x="545" y="125" width="120" height="50" rx="8" fill="#06b6d4" fill-opacity="0.1" stroke="#06b6d4" stroke-opacity="0.3" />
+  <text x="605" y="148" text-anchor="middle" fill="#f8fafc" font-size="12" font-weight="600" font-family="system-ui, -apple-system, sans-serif">CRM Update</text>
+  <text x="605" y="165" text-anchor="middle" fill="#94a3b8" font-size="9" font-family="system-ui, -apple-system, sans-serif">Supabase Leads</text>
+
+  <!-- Proposal -->
+  <rect x="545" y="205" width="120" height="50" rx="8" fill="#06b6d4" fill-opacity="0.1" stroke="#06b6d4" stroke-opacity="0.3" />
+  <text x="605" y="228" text-anchor="middle" fill="#f8fafc" font-size="12" font-weight="600" font-family="system-ui, -apple-system, sans-serif">Proposals</text>
+  <text x="605" y="245" text-anchor="middle" fill="#94a3b8" font-size="9" font-family="system-ui, -apple-system, sans-serif">Auto-Generated</text>
+
+  <!-- Checkout -->
+  <rect x="545" y="285" width="120" height="50" rx="8" fill="#06b6d4" fill-opacity="0.15" stroke="#06b6d4" stroke-opacity="0.5" />
+  <text x="605" y="308" text-anchor="middle" fill="#f8fafc" font-size="12" font-weight="600" font-family="system-ui, -apple-system, sans-serif">Checkout</text>
+  <text x="605" y="325" text-anchor="middle" fill="#94a3b8" font-size="9" font-family="system-ui, -apple-system, sans-serif">Stripe SPT</text>
+
+  <!-- Analytics -->
+  <rect x="545" y="360" width="120" height="50" rx="8" fill="#06b6d4" fill-opacity="0.1" stroke="#06b6d4" stroke-opacity="0.3" />
+  <text x="605" y="383" text-anchor="middle" fill="#f8fafc" font-size="12" font-weight="600" font-family="system-ui, -apple-system, sans-serif">Analytics</text>
+  <text x="605" y="400" text-anchor="middle" fill="#94a3b8" font-size="9" font-family="system-ui, -apple-system, sans-serif">Conversion Data</text>
+
+  <!-- KPI strip -->
+  <rect x="690" y="125" width="75" height="285" rx="10" fill="#1e293b" stroke="#334155" />
+  <text x="727" y="150" text-anchor="middle" fill="#64748b" font-size="9" font-weight="600" font-family="system-ui, -apple-system, sans-serif">KPIs</text>
+
+  <text x="727" y="185" text-anchor="middle" fill="#06b6d4" font-size="18" font-weight="700" font-family="system-ui, -apple-system, sans-serif">94%</text>
+  <text x="727" y="200" text-anchor="middle" fill="#64748b" font-size="8" font-family="system-ui, -apple-system, sans-serif">Response Rate</text>
+
+  <text x="727" y="240" text-anchor="middle" fill="#06b6d4" font-size="18" font-weight="700" font-family="system-ui, -apple-system, sans-serif">2.3s</text>
+  <text x="727" y="255" text-anchor="middle" fill="#64748b" font-size="8" font-family="system-ui, -apple-system, sans-serif">Avg Response</text>
+
+  <text x="727" y="295" text-anchor="middle" fill="#06b6d4" font-size="18" font-weight="700" font-family="system-ui, -apple-system, sans-serif">38%</text>
+  <text x="727" y="310" text-anchor="middle" fill="#64748b" font-size="8" font-family="system-ui, -apple-system, sans-serif">Conv. Rate</text>
+
+  <text x="727" y="350" text-anchor="middle" fill="#06b6d4" font-size="18" font-weight="700" font-family="system-ui, -apple-system, sans-serif">24/7</text>
+  <text x="727" y="365" text-anchor="middle" fill="#64748b" font-size="8" font-family="system-ui, -apple-system, sans-serif">Availability</text>
+
+  <!-- Bottom bar -->
+  <rect x="0" y="460" width="800" height="40" rx="0" fill="#06b6d4" opacity="0.08" />
+  <text x="400" y="484" text-anchor="middle" fill="#06b6d4" font-size="11" font-weight="600" font-family="system-ui, -apple-system, sans-serif">Adam Silva Consulting — adamsilvaconsulting.com</text>
+</svg>

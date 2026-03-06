@@ -1,0 +1,95 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="500" viewBox="0 0 800 500">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0f172a" />
+      <stop offset="100%" stop-color="#1e293b" />
+    </linearGradient>
+  </defs>
+  <rect width="800" height="500" rx="16" fill="url(#bg)" />
+  <rect x="1" y="1" width="798" height="498" rx="16" fill="none" stroke="#8b5cf6" stroke-opacity="0.15" />
+
+  <!-- Title -->
+  <text x="40" y="45" fill="#f8fafc" font-size="22" font-weight="700" font-family="system-ui, -apple-system, sans-serif">Authority Flywheel</text>
+  <text x="40" y="70" fill="#94a3b8" font-size="13" font-family="system-ui, -apple-system, sans-serif">Self-Reinforcing Citation Growth Engine</text>
+
+  <!-- Center circle -->
+  <circle cx="300" cy="270" r="40" fill="#8b5cf6" fill-opacity="0.15" stroke="#8b5cf6" stroke-opacity="0.5" stroke-width="2" />
+  <text x="300" y="265" text-anchor="middle" fill="#8b5cf6" font-size="12" font-weight="700" font-family="system-ui, -apple-system, sans-serif">BRAND</text>
+  <text x="300" y="282" text-anchor="middle" fill="#8b5cf6" font-size="10" font-family="system-ui, -apple-system, sans-serif">AUTHORITY</text>
+
+  <!-- Flywheel ring (4 arcs approximated with paths) -->
+  <circle cx="300" cy="270" r="120" fill="none" stroke="#8b5cf6" stroke-opacity="0.2" stroke-width="3" stroke-dasharray="8 4" />
+
+  <!-- Node 1: Research (top) -->
+  <rect x="245" y="100" width="110" height="50" rx="8" fill="#8b5cf6" fill-opacity="0.15" stroke="#8b5cf6" stroke-opacity="0.5" />
+  <text x="300" y="122" text-anchor="middle" fill="#f8fafc" font-size="13" font-weight="600" font-family="system-ui, -apple-system, sans-serif">Research</text>
+  <text x="300" y="139" text-anchor="middle" fill="#94a3b8" font-size="10" font-family="system-ui, -apple-system, sans-serif">Original Studies</text>
+
+  <!-- Node 2: Citations (right) -->
+  <rect x="375" y="245" width="110" height="50" rx="8" fill="#8b5cf6" fill-opacity="0.15" stroke="#8b5cf6" stroke-opacity="0.5" />
+  <text x="430" y="267" text-anchor="middle" fill="#f8fafc" font-size="13" font-weight="600" font-family="system-ui, -apple-system, sans-serif">Citations</text>
+  <text x="430" y="284" text-anchor="middle" fill="#94a3b8" font-size="10" font-family="system-ui, -apple-system, sans-serif">AI References</text>
+
+  <!-- Node 3: Authority (bottom) -->
+  <rect x="245" y="380" width="110" height="50" rx="8" fill="#8b5cf6" fill-opacity="0.15" stroke="#8b5cf6" stroke-opacity="0.5" />
+  <text x="300" y="402" text-anchor="middle" fill="#f8fafc" font-size="13" font-weight="600" font-family="system-ui, -apple-system, sans-serif">Authority</text>
+  <text x="300" y="419" text-anchor="middle" fill="#94a3b8" font-size="10" font-family="system-ui, -apple-system, sans-serif">Domain Trust</text>
+
+  <!-- Node 4: More Citations (left) -->
+  <rect x="115" y="245" width="120" height="50" rx="8" fill="#8b5cf6" fill-opacity="0.15" stroke="#8b5cf6" stroke-opacity="0.5" />
+  <text x="175" y="267" text-anchor="middle" fill="#f8fafc" font-size="13" font-weight="600" font-family="system-ui, -apple-system, sans-serif">More Citations</text>
+  <text x="175" y="284" text-anchor="middle" fill="#94a3b8" font-size="10" font-family="system-ui, -apple-system, sans-serif">Compounding</text>
+
+  <!-- Curved arrows between nodes -->
+  <!-- Top to Right -->
+  <line x1="355" y1="140" x2="385" y2="245" stroke="#8b5cf6" stroke-width="2" stroke-opacity="0.6" />
+  <polygon points="382,240 390,248 380,248" fill="#8b5cf6" opacity="0.6" />
+
+  <!-- Right to Bottom -->
+  <line x1="400" y1="295" x2="340" y2="380" stroke="#8b5cf6" stroke-width="2" stroke-opacity="0.6" />
+  <polygon points="343,375 337,383 345,383" fill="#8b5cf6" opacity="0.6" />
+
+  <!-- Bottom to Left -->
+  <line x1="245" y1="400" x2="210" y2="295" stroke="#8b5cf6" stroke-width="2" stroke-opacity="0.6" />
+  <polygon points="213,300 207,292 215,292" fill="#8b5cf6" opacity="0.6" />
+
+  <!-- Left to Top -->
+  <line x1="195" y1="245" x2="260" y2="150" stroke="#8b5cf6" stroke-width="2" stroke-opacity="0.6" />
+  <polygon points="257,155 263,147 255,147" fill="#8b5cf6" opacity="0.6" />
+
+  <!-- Right side: Growth metrics panel -->
+  <rect x="520" y="100" width="240" height="320" rx="12" fill="#1e293b" stroke="#334155" stroke-width="1" />
+  <text x="640" y="132" text-anchor="middle" fill="#f8fafc" font-size="14" font-weight="700" font-family="system-ui, -apple-system, sans-serif">Growth Metrics</text>
+
+  <!-- Metric rows -->
+  <text x="540" y="170" fill="#94a3b8" font-size="11" font-family="system-ui, -apple-system, sans-serif">Month 1</text>
+  <rect x="620" y="158" width="30" height="14" rx="3" fill="#8b5cf6" opacity="0.5" />
+  <text x="660" y="170" fill="#8b5cf6" font-size="11" font-weight="600" font-family="system-ui, -apple-system, sans-serif">12</text>
+
+  <text x="540" y="200" fill="#94a3b8" font-size="11" font-family="system-ui, -apple-system, sans-serif">Month 3</text>
+  <rect x="620" y="188" width="55" height="14" rx="3" fill="#8b5cf6" opacity="0.6" />
+  <text x="685" y="200" fill="#8b5cf6" font-size="11" font-weight="600" font-family="system-ui, -apple-system, sans-serif">47</text>
+
+  <text x="540" y="230" fill="#94a3b8" font-size="11" font-family="system-ui, -apple-system, sans-serif">Month 6</text>
+  <rect x="620" y="218" width="85" height="14" rx="3" fill="#8b5cf6" opacity="0.7" />
+  <text x="715" y="230" fill="#8b5cf6" font-size="11" font-weight="600" font-family="system-ui, -apple-system, sans-serif">156</text>
+
+  <text x="540" y="260" fill="#94a3b8" font-size="11" font-family="system-ui, -apple-system, sans-serif">Month 9</text>
+  <rect x="620" y="248" width="105" height="14" rx="3" fill="#8b5cf6" opacity="0.8" />
+  <text x="735" y="260" fill="#8b5cf6" font-size="11" font-weight="600" font-family="system-ui, -apple-system, sans-serif">312</text>
+
+  <text x="540" y="290" fill="#94a3b8" font-size="11" font-family="system-ui, -apple-system, sans-serif">Month 12</text>
+  <rect x="620" y="278" width="120" height="14" rx="3" fill="#8b5cf6" opacity="0.9" />
+  <text x="735" y="290" fill="#8b5cf6" font-size="11" font-weight="600" font-family="system-ui, -apple-system, sans-serif">680+</text>
+
+  <text x="640" y="320" text-anchor="middle" fill="#64748b" font-size="10" font-family="system-ui, -apple-system, sans-serif">Citations per month</text>
+
+  <!-- Compound indicator -->
+  <rect x="540" y="340" width="200" height="60" rx="8" fill="#8b5cf6" fill-opacity="0.08" stroke="#8b5cf6" stroke-opacity="0.2" />
+  <text x="640" y="365" text-anchor="middle" fill="#f8fafc" font-size="20" font-weight="700" font-family="system-ui, -apple-system, sans-serif">56x</text>
+  <text x="640" y="385" text-anchor="middle" fill="#8b5cf6" font-size="11" font-family="system-ui, -apple-system, sans-serif">Growth in 12 months</text>
+
+  <!-- Bottom bar -->
+  <rect x="0" y="460" width="800" height="40" rx="0" fill="#8b5cf6" opacity="0.08" />
+  <text x="400" y="484" text-anchor="middle" fill="#8b5cf6" font-size="11" font-weight="600" font-family="system-ui, -apple-system, sans-serif">Adam Silva Consulting — adamsilvaconsulting.com</text>
+</svg>
