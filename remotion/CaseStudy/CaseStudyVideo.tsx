@@ -1,5 +1,6 @@
 import {
   AbsoluteFill,
+  Audio,
   Sequence,
   useCurrentFrame,
   useVideoConfig,
@@ -536,10 +537,14 @@ function CTASlide() {
   )
 }
 
+const NARRATION_SRC = staticFile('audio/case-study-narration.mp3')
+
 // --- Main Composition ---
 export function CaseStudyVideo() {
   return (
     <AbsoluteFill style={{ fontFamily: 'Inter, sans-serif' }}>
+      <Audio src={NARRATION_SRC} volume={1} />
+
       {/* Slide 1: Title — 0-5s (frames 0-149) */}
       <Sequence from={0} durationInFrames={FPS * 5}>
         <TitleSlide />

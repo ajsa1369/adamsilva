@@ -926,3 +926,13 @@
 !/app/
 !/app/**
 .vercel
+
+# ==============================================================================
+# ASCv2 — Non-project directories in workspace
+# ==============================================================================
+.obsidian/
+ASC/
+Obsidian/
+New Text Document.txt
+test-chatbot.html
+supabase/.temp/
