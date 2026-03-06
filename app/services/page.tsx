@@ -6,6 +6,7 @@ import { buildPageSchema, SITE_URL } from '@/lib/schemas/organization'
 import { buildServiceSchema, buildHowToSchema } from '@/lib/schemas/service'
 import { buildFAQSchema } from '@/lib/schemas/faq'
 import { SERVICES } from '@/lib/data/services'
+import { ServicesVideoShowcase } from '@/app/components/services/ServicesVideoShowcase'
 
 export const metadata: Metadata = {
   title: 'Agentic Commerce Services — UCP, ACP, AP2 Implementation | Adam Silva Consulting',
@@ -155,6 +156,9 @@ export default function ServicesPage() {
           </div>
         </div>
       </section>
+
+      {/* Video Showcase */}
+      <ServicesVideoShowcase />
 
       {/* Category Filters (static visual — no JS required) */}
       <section className="section-sm bg-[var(--color-surface)]" aria-label="Service categories">
