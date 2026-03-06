@@ -1,0 +1,115 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="800" height="500">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0f172a"/>
+      <stop offset="100%" stop-color="#1e293b"/>
+    </linearGradient>
+    <linearGradient id="ucpGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#3b82f6"/>
+      <stop offset="100%" stop-color="#60a5fa"/>
+    </linearGradient>
+    <linearGradient id="acpGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#8b5cf6"/>
+      <stop offset="100%" stop-color="#a78bfa"/>
+    </linearGradient>
+    <linearGradient id="ap2Grad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#10b981"/>
+      <stop offset="100%" stop-color="#34d399"/>
+    </linearGradient>
+    <pattern id="dots" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
+      <circle cx="10" cy="10" r="0.8" fill="#334155" opacity="0.5"/>
+    </pattern>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="500" fill="url(#bg)" rx="12"/>
+  <rect width="800" height="500" fill="url(#dots)" rx="12"/>
+
+  <!-- Title -->
+  <text x="400" y="42" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="20" font-weight="700" fill="#f1f5f9">The Agentic Commerce Protocol Stack</text>
+  <line x1="280" y1="52" x2="520" y2="52" stroke="#334155" stroke-width="1"/>
+
+  <!-- UCP Layer (Top) -->
+  <rect x="180" y="75" width="380" height="90" rx="12" fill="url(#ucpGrad)" opacity="0.15" stroke="#3b82f6" stroke-width="1.5"/>
+  <rect x="180" y="75" width="6" height="90" rx="3" fill="#3b82f6"/>
+  <!-- Globe icon -->
+  <circle cx="220" cy="120" r="18" fill="none" stroke="#3b82f6" stroke-width="1.5"/>
+  <ellipse cx="220" cy="120" rx="8" ry="18" fill="none" stroke="#3b82f6" stroke-width="1"/>
+  <line x1="202" y1="120" x2="238" y2="120" stroke="#3b82f6" stroke-width="1"/>
+  <line x1="205" y1="110" x2="235" y2="110" stroke="#3b82f6" stroke-width="0.7"/>
+  <line x1="205" y1="130" x2="235" y2="130" stroke="#3b82f6" stroke-width="0.7"/>
+  <!-- Search icon -->
+  <circle cx="265" cy="116" r="10" fill="none" stroke="#60a5fa" stroke-width="1.5"/>
+  <line x1="272" y1="123" x2="280" y2="131" stroke="#60a5fa" stroke-width="1.5" stroke-linecap="round"/>
+  <text x="305" y="112" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="700" fill="#3b82f6">UCP</text>
+  <text x="305" y="132" font-family="Inter, system-ui, sans-serif" font-size="13" fill="#94a3b8">Universal Commerce Protocol</text>
+  <text x="305" y="150" font-family="Inter, system-ui, sans-serif" font-size="11" fill="#64748b">AI-native product discovery and schema</text>
+
+  <!-- Arrow UCP to ACP -->
+  <line x1="370" y1="165" x2="370" y2="190" stroke="#475569" stroke-width="1.5" stroke-dasharray="4,3"/>
+  <polygon points="364,187 370,197 376,187" fill="#475569"/>
+  <text x="385" y="182" font-family="Inter, system-ui, sans-serif" font-size="9" fill="#64748b">context</text>
+
+  <!-- ACP Layer (Middle) -->
+  <rect x="180" y="200" width="380" height="90" rx="12" fill="url(#acpGrad)" opacity="0.15" stroke="#8b5cf6" stroke-width="1.5"/>
+  <rect x="180" y="200" width="6" height="90" rx="3" fill="#8b5cf6"/>
+  <!-- Cart icon -->
+  <path d="M208 230 L216 230 L226 254 L240 254" fill="none" stroke="#8b5cf6" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="228" cy="260" r="3" fill="#8b5cf6"/>
+  <circle cx="238" cy="260" r="3" fill="#8b5cf6"/>
+  <!-- Payment card icon -->
+  <rect x="254" y="232" width="28" height="20" rx="3" fill="none" stroke="#a78bfa" stroke-width="1.5"/>
+  <line x1="254" y1="240" x2="282" y2="240" stroke="#a78bfa" stroke-width="1.5"/>
+  <rect x="258" y="244" width="10" height="3" rx="1" fill="#a78bfa" opacity="0.5"/>
+  <text x="305" y="237" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="700" fill="#8b5cf6">ACP</text>
+  <text x="305" y="257" font-family="Inter, system-ui, sans-serif" font-size="13" fill="#94a3b8">Agentic Commerce Protocol</text>
+  <text x="305" y="275" font-family="Inter, system-ui, sans-serif" font-size="11" fill="#64748b">Negotiate, quote, and checkout via AI</text>
+
+  <!-- Arrow ACP to AP2 -->
+  <line x1="370" y1="290" x2="370" y2="315" stroke="#475569" stroke-width="1.5" stroke-dasharray="4,3"/>
+  <polygon points="364,312 370,322 376,312" fill="#475569"/>
+  <text x="385" y="307" font-family="Inter, system-ui, sans-serif" font-size="9" fill="#64748b">payment</text>
+
+  <!-- AP2 Layer (Bottom) -->
+  <rect x="180" y="325" width="380" height="90" rx="12" fill="url(#ap2Grad)" opacity="0.15" stroke="#10b981" stroke-width="1.5"/>
+  <rect x="180" y="325" width="6" height="90" rx="3" fill="#10b981"/>
+  <!-- Shield icon -->
+  <path d="M220 345 L220 370 Q220 385 234 390 Q248 385 248 370 L248 345 L234 338 Z" fill="none" stroke="#10b981" stroke-width="1.5"/>
+  <path d="M230 365 L234 370 L242 358" fill="none" stroke="#34d399" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Lock icon -->
+  <rect x="260" y="360" width="18" height="14" rx="2" fill="none" stroke="#34d399" stroke-width="1.5"/>
+  <path d="M264 360 L264 354 Q264 347 269 347 Q274 347 274 354 L274 360" fill="none" stroke="#34d399" stroke-width="1.5"/>
+  <circle cx="269" cy="368" r="2" fill="#34d399"/>
+  <text x="305" y="362" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="700" fill="#10b981">AP2</text>
+  <text x="305" y="382" font-family="Inter, system-ui, sans-serif" font-size="13" fill="#94a3b8">Agent Payments Protocol</text>
+  <text x="305" y="400" font-family="Inter, system-ui, sans-serif" font-size="11" fill="#64748b">Escrow, trust verification, settlement</text>
+
+  <!-- Side labels - AI Platforms -->
+  <rect x="610" y="90" width="150" height="32" rx="8" fill="#1e293b" stroke="#334155" stroke-width="1"/>
+  <circle cx="630" cy="106" r="6" fill="#3b82f6" opacity="0.6"/>
+  <text x="644" y="111" font-family="Inter, system-ui, sans-serif" font-size="12" font-weight="600" fill="#e2e8f0">Google AI Mode</text>
+  <line x1="560" y1="106" x2="610" y2="106" stroke="#3b82f6" stroke-width="1" stroke-dasharray="4,3" opacity="0.5"/>
+
+  <rect x="610" y="215" width="150" height="32" rx="8" fill="#1e293b" stroke="#334155" stroke-width="1"/>
+  <circle cx="630" cy="231" r="6" fill="#8b5cf6" opacity="0.6"/>
+  <text x="644" y="236" font-family="Inter, system-ui, sans-serif" font-size="12" font-weight="600" fill="#e2e8f0">ChatGPT</text>
+  <line x1="560" y1="231" x2="610" y2="231" stroke="#8b5cf6" stroke-width="1" stroke-dasharray="4,3" opacity="0.5"/>
+
+  <rect x="610" y="340" width="150" height="32" rx="8" fill="#1e293b" stroke="#334155" stroke-width="1"/>
+  <circle cx="630" cy="356" r="6" fill="#10b981" opacity="0.6"/>
+  <text x="644" y="361" font-family="Inter, system-ui, sans-serif" font-size="12" font-weight="600" fill="#e2e8f0">Perplexity</text>
+  <line x1="560" y1="356" x2="610" y2="356" stroke="#10b981" stroke-width="1" stroke-dasharray="4,3" opacity="0.5"/>
+
+  <!-- Data flow arrows on left -->
+  <text x="120" y="185" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="9" fill="#475569" transform="rotate(-90,120,185)">DATA FLOW</text>
+  <line x1="140" y1="100" x2="140" y2="390" stroke="#334155" stroke-width="1" stroke-dasharray="2,4"/>
+  <polygon points="134,387 140,397 146,387" fill="#334155"/>
+
+  <!-- Footer -->
+  <text x="400" y="465" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="10" fill="#475569">Adam Silva Consulting</text>
+  <text x="400" y="480" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="9" fill="#334155">Global Infrastructure for Agentic Commerce</text>
+</svg>

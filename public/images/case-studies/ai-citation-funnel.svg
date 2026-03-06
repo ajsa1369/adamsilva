@@ -1,0 +1,98 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="800" height="500">
+  <defs>
+    <linearGradient id="bg2" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0f172a"/>
+      <stop offset="100%" stop-color="#1e293b"/>
+    </linearGradient>
+    <linearGradient id="pinkGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#ec4899"/>
+      <stop offset="100%" stop-color="#f472b6"/>
+    </linearGradient>
+    <linearGradient id="grayGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#475569"/>
+      <stop offset="100%" stop-color="#64748b"/>
+    </linearGradient>
+    <pattern id="dots2" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
+      <circle cx="10" cy="10" r="0.8" fill="#334155" opacity="0.5"/>
+    </pattern>
+    <filter id="glow2">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <linearGradient id="faqGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#3b82f6"/>
+      <stop offset="100%" stop-color="#60a5fa"/>
+    </linearGradient>
+    <linearGradient id="qaGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#8b5cf6"/>
+      <stop offset="100%" stop-color="#a78bfa"/>
+    </linearGradient>
+    <linearGradient id="prodGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#10b981"/>
+      <stop offset="100%" stop-color="#34d399"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="500" fill="url(#bg2)" rx="12"/>
+  <rect width="800" height="500" fill="url(#dots2)" rx="12"/>
+
+  <!-- Title -->
+  <text x="400" y="42" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="20" font-weight="700" fill="#f1f5f9">AI Citation Rate: Schema.org Impact</text>
+  <line x1="260" y1="52" x2="540" y2="52" stroke="#334155" stroke-width="1"/>
+
+  <!-- Main comparison section -->
+  <!-- Grid lines -->
+  <line x1="100" y1="260" x2="700" y2="260" stroke="#1e293b" stroke-width="1"/>
+
+  <!-- Without Schema bar -->
+  <text x="250" y="90" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="14" font-weight="600" fill="#64748b">Without Schema</text>
+  <rect x="185" y="100" width="130" height="150" rx="8" fill="url(#grayGrad)" opacity="0.3" stroke="#475569" stroke-width="1"/>
+  <rect x="210" y="200" width="80" height="50" rx="4" fill="url(#grayGrad)" opacity="0.8"/>
+  <text x="250" y="232" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="28" font-weight="700" fill="#94a3b8">1x</text>
+  <text x="250" y="268" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="11" fill="#64748b">Baseline citation rate</text>
+
+  <!-- Arrow -->
+  <line x1="340" y1="175" x2="410" y2="175" stroke="#475569" stroke-width="2"/>
+  <polygon points="407,169 420,175 407,181" fill="#475569"/>
+  <text x="375" y="165" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="10" fill="#475569">+220%</text>
+
+  <!-- With Schema bar -->
+  <text x="550" y="90" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="14" font-weight="600" fill="#ec4899">With Schema.org + AEO</text>
+  <rect x="485" y="100" width="130" height="150" rx="8" fill="#ec4899" opacity="0.1" stroke="#ec4899" stroke-width="1.5"/>
+  <!-- Glow effect bar -->
+  <rect x="510" y="120" width="80" height="130" rx="4" fill="#ec4899" opacity="0.15"/>
+  <rect x="510" y="120" width="80" height="130" rx="4" fill="url(#pinkGrad)" opacity="0.8" filter="url(#glow2)"/>
+  <text x="550" y="195" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="32" font-weight="700" fill="#fff">3.2x</text>
+  <text x="550" y="268" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="11" fill="#f472b6">AI citation rate increase</text>
+
+  <!-- Divider -->
+  <line x1="80" y1="295" x2="720" y2="295" stroke="#1e293b" stroke-width="1"/>
+  <text x="400" y="320" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="13" font-weight="600" fill="#94a3b8">Schema Type Citation Rates</text>
+
+  <!-- Schema type bars -->
+  <!-- FAQPage -->
+  <text x="135" y="358" text-anchor="end" font-family="Inter, system-ui, sans-serif" font-size="12" font-weight="600" fill="#3b82f6">FAQPage</text>
+  <rect x="150" y="344" width="0" height="22" rx="4" fill="url(#faqGrad)">
+    <animate attributeName="width" from="0" to="335" dur="1s" fill="freeze"/>
+  </rect>
+  <rect x="150" y="344" width="335" height="22" rx="4" fill="url(#faqGrad)" opacity="0.8"/>
+  <text x="495" y="360" font-family="Inter, system-ui, sans-serif" font-size="13" font-weight="700" fill="#60a5fa">67%</text>
+  <text x="525" y="360" font-family="Inter, system-ui, sans-serif" font-size="10" fill="#64748b">citation rate</text>
+
+  <!-- QAPage -->
+  <text x="135" y="398" text-anchor="end" font-family="Inter, system-ui, sans-serif" font-size="12" font-weight="600" fill="#8b5cf6">QAPage</text>
+  <rect x="150" y="384" width="290" height="22" rx="4" fill="url(#qaGrad)" opacity="0.8"/>
+  <text x="450" y="400" font-family="Inter, system-ui, sans-serif" font-size="13" font-weight="700" fill="#a78bfa">58%</text>
+  <text x="480" y="400" font-family="Inter, system-ui, sans-serif" font-size="10" fill="#64748b">citation rate</text>
+
+  <!-- Product -->
+  <text x="135" y="438" text-anchor="end" font-family="Inter, system-ui, sans-serif" font-size="12" font-weight="600" fill="#10b981">Product</text>
+  <rect x="150" y="424" width="230" height="22" rx="4" fill="url(#prodGrad)" opacity="0.8"/>
+  <text x="390" y="440" font-family="Inter, system-ui, sans-serif" font-size="13" font-weight="700" fill="#34d399">46%</text>
+  <text x="420" y="440" font-family="Inter, system-ui, sans-serif" font-size="10" fill="#64748b">citation rate</text>
+
+  <!-- Source -->
+  <text x="400" y="478" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="9" fill="#475569">Sources: Conductor, SearchVIU, Ahrefs (2025-2026)</text>
+  <text x="400" y="492" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="9" fill="#334155">Adam Silva Consulting</text>
+</svg>

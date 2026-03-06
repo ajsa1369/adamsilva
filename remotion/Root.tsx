@@ -3,6 +3,7 @@ import { BlogSummaryVideo, type BlogSummaryProps } from './BlogSummary/BlogSumma
 import { HomepageExplainerVideo, type HomepageExplainerProps } from './HomepageExplainer/HomepageExplainerVideo'
 import { HeroAdVideo, type HeroAdProps } from './HeroAd/HeroAdVideo'
 import { ServiceExplainerVideo, type ServiceExplainerProps } from './ServiceExplainer/ServiceExplainerVideo'
+import { CaseStudyVideo } from './CaseStudy/CaseStudyVideo'
 
 const DEFAULT_BLOG_PROPS: BlogSummaryProps = {
   title: 'The Agentic Commerce Protocols: UCP, ACP, and AP2',
@@ -54,6 +55,9 @@ const DEFAULT_SERVICE_PROPS: ServiceExplainerProps = {
 
 // ServiceExplainer: 30fps × (5s intro + 6×4s features + 5s insight + 4s CTA) = 30 × 34 = 1020 frames max
 const SERVICE_EXPLAINER_DURATION = 1020
+
+// CaseStudyVideo: 30fps × 26s = 780 frames
+const CASE_STUDY_DURATION = 780
 
 export const RemotionRoot: React.FC = () => {
   return (
@@ -116,6 +120,15 @@ export const RemotionRoot: React.FC = () => {
             durationInFrames: introDuration + maxFeatures * featureDuration + insightDuration + ctaDuration,
           }
         }}
+      />
+
+      <Composition
+        id="CaseStudyVideo"
+        component={CaseStudyVideo}
+        durationInFrames={CASE_STUDY_DURATION}
+        fps={30}
+        width={1920}
+        height={1080}
       />
     </>
   )
