@@ -2,6 +2,7 @@ import { Composition } from 'remotion'
 import { BlogSummaryVideo, type BlogSummaryProps } from './BlogSummary/BlogSummaryVideo'
 import { HomepageExplainerVideo, type HomepageExplainerProps } from './HomepageExplainer/HomepageExplainerVideo'
 import { HeroAdVideo, type HeroAdProps } from './HeroAd/HeroAdVideo'
+import { ServiceExplainerVideo, type ServiceExplainerProps } from './ServiceExplainer/ServiceExplainerVideo'
 
 const DEFAULT_BLOG_PROPS: BlogSummaryProps = {
   title: 'The Agentic Commerce Protocols: UCP, ACP, and AP2',
@@ -35,6 +36,23 @@ const HERO_AD_DURATION = 1379
 const DEFAULT_HERO_AD_PROPS: HeroAdProps = {
   tagline: 'AI Agents. Lead Gen. Advertising. Results.',
 }
+
+const DEFAULT_SERVICE_PROPS: ServiceExplainerProps = {
+  serviceName: 'Off-Hours Voice Agent',
+  description: 'AI-powered voice agent that answers calls, qualifies leads, and books appointments 24/7.',
+  features: [
+    '24/7 call handling with natural conversation',
+    'Real-time lead qualification and CRM sync',
+    'Automated appointment booking with calendar integration',
+    'Custom voice and personality training',
+  ],
+  uniqueInsight: 'Businesses lose 15-20 calls per week to voicemail. Our voice agent converts those missed calls into booked appointments at a 23% rate.',
+  accentColor: '#3b82f6',
+  serviceSlug: 'off-hours-voice-agent',
+}
+
+// ServiceExplainer: 30fps × (5s intro + 6×4s features + 5s insight + 4s CTA) = 30 × 34 = 1020 frames max
+const SERVICE_EXPLAINER_DURATION = 1020
 
 export const RemotionRoot: React.FC = () => {
   return (
@@ -76,6 +94,27 @@ export const RemotionRoot: React.FC = () => {
         width={1920}
         height={1080}
         defaultProps={DEFAULT_HERO_AD_PROPS}
+      />
+
+      <Composition
+        id="ServiceExplainer"
+        component={ServiceExplainerVideo}
+        durationInFrames={SERVICE_EXPLAINER_DURATION}
+        fps={30}
+        width={1920}
+        height={1080}
+        defaultProps={DEFAULT_SERVICE_PROPS}
+        calculateMetadata={({ props }) => {
+          const fps = 30
+          const introDuration = fps * 5
+          const featureDuration = fps * 4
+          const maxFeatures = Math.min(props.features.length, 6)
+          const insightDuration = props.uniqueInsight ? fps * 5 : 0
+          const ctaDuration = fps * 4
+          return {
+            durationInFrames: introDuration + maxFeatures * featureDuration + insightDuration + ctaDuration,
+          }
+        }}
       />
     </>
   )

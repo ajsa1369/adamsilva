@@ -1,9 +1,12 @@
 'use client'
 
 import { useEffect, useRef, useState } from 'react'
+import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import type { NegativeReverse } from '@/lib/data/services'
+import { useCart } from '@/lib/cart/context'
 import { XCircle, CheckCircle, ArrowRight } from 'lucide-react'
+import type { CartItem } from '@/lib/cart/types'
 
 interface Props {
   data: NegativeReverse
@@ -11,9 +14,12 @@ interface Props {
   priceDisplay: string
   accentColor: string
   isFree?: boolean
+  cartItem?: CartItem
 }
 
-export function NegativeReverseCTA({ data, serviceId, priceDisplay, accentColor, isFree }: Props) {
+export function NegativeReverseCTA({ data, serviceId, priceDisplay, accentColor, isFree, cartItem }: Props) {
+  const { addItem, isInCart } = useCart()
+  const router = useRouter()
   const ref = useRef<HTMLDivElement>(null)
   const [visible, setVisible] = useState(false)
 
@@ -139,17 +145,34 @@ export function NegativeReverseCTA({ data, serviceId, priceDisplay, accentColor,
               transitionDelay: '600ms',
             }}
           >
-            <Link
-              href={isFree ? `/contact?service=${serviceId}` : `/checkout?service=${serviceId}`}
-              className="btn-primary text-lg px-8 py-4 inline-flex items-center gap-3"
-              style={{
-                background: accentColor,
-                boxShadow: `0 4px 24px color-mix(in srgb, ${accentColor} 35%, transparent)`,
-              }}
-            >
-              {data.ctaText}
-              <ArrowRight size={18} />
-            </Link>
+            {isFree ? (
+              <Link
+                href="/acra/run"
+                className="btn-primary text-lg px-8 py-4 inline-flex items-center gap-3"
+                style={{
+                  background: accentColor,
+                  boxShadow: `0 4px 24px color-mix(in srgb, ${accentColor} 35%, transparent)`,
+                }}
+              >
+                {data.ctaText}
+                <ArrowRight size={18} />
+              </Link>
+            ) : (
+              <button
+                onClick={() => {
+                  if (cartItem && !isInCart(cartItem.id)) addItem(cartItem)
+                  router.push('/checkout')
+                }}
+                className="btn-primary text-lg px-8 py-4 inline-flex items-center gap-3"
+                style={{
+                  background: accentColor,
+                  boxShadow: `0 4px 24px color-mix(in srgb, ${accentColor} 35%, transparent)`,
+                }}
+              >
+                {data.ctaText}
+                <ArrowRight size={18} />
+              </button>
+            )}
             <p className="text-xs text-[var(--color-muted-2)] mt-4">
               {isFree
                 ? 'No credit card. No commitment. Just clarity.'

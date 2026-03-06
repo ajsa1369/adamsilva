@@ -8,6 +8,7 @@ import { buildPageSchema, SITE_URL } from '@/lib/schemas/organization'
 import { buildServiceSchema, buildHowToSchema } from '@/lib/schemas/service'
 import { buildFAQSchema, buildWebPageSchema } from '@/lib/schemas/faq'
 import { SERVICES, getServiceById } from '@/lib/data/services'
+import { serviceToCartItem } from '@/lib/cart/helpers'
 import { RelatedContent } from '@/app/components/sections/RelatedContent'
 import { ServiceCTASection } from '@/app/components/cart/ServiceCTASection'
 import { ServiceHeroStats } from '@/app/components/services/ServiceHeroStats'
@@ -132,11 +133,28 @@ export default async function ServicePage({ params }: PageProps) {
     url: `${SITE_URL}/services/${service.id}`,
   })
 
+  const videoSchema = {
+    '@type': 'VideoObject',
+    name: `${service.name} — Service Overview`,
+    description: service.description,
+    thumbnailUrl: service.heroImage ? `${SITE_URL}${service.heroImage}` : `${SITE_URL}/images/og-default.png`,
+    uploadDate: '2026-03-01',
+    contentUrl: `${SITE_URL}/services/${service.id}`,
+    embedUrl: `${SITE_URL}/services/${service.id}`,
+    duration: `PT${Math.ceil((5 + Math.min(service.features.length, 6) * 4 + (service.uniqueInsight ? 5 : 0) + 4))}S`,
+    publisher: {
+      '@type': 'Organization',
+      name: 'Adam Silva Consulting',
+      url: SITE_URL,
+    },
+  }
+
   const pageJsonLd = buildPageSchema(`/services/${service.id}`, [
     webPageSchema,
     serviceSchemaData,
     deliverableHowTo,
     buildFAQSchema(serviceFAQs),
+    videoSchema,
   ])
 
   return (
@@ -417,14 +435,14 @@ export default async function ServicePage({ params }: PageProps) {
       {/* ============================================================
           SECTION 4: VIDEO SHOWCASE — Visual + audio combined
           ============================================================ */}
-      {hasVisual && (
-        <VideoShowcase
-          heroImage={service.heroImage!}
-          serviceName={service.name}
-          audioSrc={`/audio/services/${service.id}.mp3`}
-          accentColor={accentColor}
-        />
-      )}
+      <VideoShowcase
+        serviceName={service.name}
+        serviceSlug={service.id}
+        description={service.description}
+        features={service.features}
+        uniqueInsight={service.uniqueInsight}
+        accentColor={accentColor}
+      />
 
       {/* ============================================================
           SECTION 5: SOCIAL PROOF
@@ -740,6 +758,7 @@ export default async function ServicePage({ params }: PageProps) {
           priceDisplay={service.priceDisplay}
           accentColor={accentColor}
           isFree={service.price === '0'}
+          cartItem={service.price !== '0' && service.price !== 'Custom' ? serviceToCartItem(service) : undefined}
         />
       ) : (
         /* Fallback CTA for services without Sandler data */

@@ -12,7 +12,7 @@ interface Props {
 
 export function ProofQuote({ text, author, role, accentColor }: Props) {
   const ref = useRef<HTMLDivElement>(null)
-  const [visible, setVisible] = useState(false)
+  const [visible, setVisible] = useState(true)
 
   useEffect(() => {
     const el = ref.current
