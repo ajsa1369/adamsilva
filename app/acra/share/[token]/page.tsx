@@ -12,6 +12,7 @@ import { RecommendedServices } from '@/app/components/acra/RecommendedServices'
 import { ValueLeversSection } from '@/app/components/acra/ValueLevers'
 import { PackageRecommendation } from '@/app/components/acra/PackageRecommendation'
 import { ReportJsonLD } from '@/app/components/acra/ReportJsonLD'
+import { SiteScreenshotHero } from '@/app/components/acra/SiteScreenshotHero'
 import { calculateRevenueImpact, type RevenueRange } from '@/lib/acra/revenue'
 import type { PillarScore, LLMScores, Finding, ValueLevers } from '@/lib/acra/scoring'
 
@@ -280,6 +281,17 @@ export default async function ACRASharePage({ params }: PageProps) {
           )}
 
           {/* Overall score hero — animated client component */}
+          {/* GTmetrix-style screenshot hero */}
+          <SiteScreenshotHero
+            url={scan.url}
+            domain={domain}
+            companyName={scan.company_name}
+            framework={scan.framework}
+            overallScore={r.overall_score}
+            grade={grade}
+            reportDate={r.created_at}
+          />
+
           <ScoreHero
             overallScore={r.overall_score}
             grade={grade}
