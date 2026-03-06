@@ -1,6 +1,5 @@
 'use client'
 
-import { useEffect, useRef, useState } from 'react'
 import { Quote } from 'lucide-react'
 
 interface Props {
@@ -11,31 +10,14 @@ interface Props {
 }
 
 export function ProofQuote({ text, author, role, accentColor }: Props) {
-  const ref = useRef<HTMLDivElement>(null)
-  const [visible, setVisible] = useState(true)
-
-  useEffect(() => {
-    const el = ref.current
-    if (!el) return
-    const observer = new IntersectionObserver(
-      ([entry]) => { if (entry.isIntersecting) setVisible(true) },
-      { threshold: 0.3 }
-    )
-    observer.observe(el)
-    return () => observer.disconnect()
-  }, [])
-
   return (
     <section className="section-sm" aria-label="Social proof">
       <div className="container max-w-3xl">
         <div
-          ref={ref}
-          className="relative rounded-2xl p-8 lg:p-10 transition-all duration-700"
+          className="relative rounded-2xl p-8 lg:p-10"
           style={{
-            opacity: visible ? 1 : 0,
-            transform: visible ? 'translateY(0)' : 'translateY(20px)',
-            background: `color-mix(in srgb, ${accentColor} 4%, var(--color-surface))`,
-            border: `1px solid color-mix(in srgb, ${accentColor} 15%, transparent)`,
+            background: `color-mix(in srgb, ${accentColor} 8%, var(--color-surface, #ffffff))`,
+            border: `1px solid color-mix(in srgb, ${accentColor} 20%, transparent)`,
           }}
         >
           {/* Quote mark */}
@@ -49,7 +31,10 @@ export function ProofQuote({ text, author, role, accentColor }: Props) {
             <Quote size={14} fill="#fff" stroke="#fff" />
           </div>
 
-          <blockquote className="text-base lg:text-lg text-[var(--color-text)] leading-relaxed italic mb-6 mt-2">
+          <blockquote
+            className="text-base lg:text-lg leading-relaxed italic mb-6 mt-2"
+            style={{ color: 'var(--color-text, #0a0f1e)' }}
+          >
             &ldquo;{text}&rdquo;
           </blockquote>
 
@@ -61,8 +46,8 @@ export function ProofQuote({ text, author, role, accentColor }: Props) {
               {author.charAt(0)}
             </div>
             <div>
-              <div className="text-sm font-bold text-[var(--color-text)]">{author}</div>
-              <div className="text-xs text-[var(--color-muted-2)]">{role}</div>
+              <div className="text-sm font-bold" style={{ color: 'var(--color-text, #0a0f1e)' }}>{author}</div>
+              <div className="text-xs" style={{ color: 'var(--color-muted-2, #6b7280)' }}>{role}</div>
             </div>
           </div>
         </div>
