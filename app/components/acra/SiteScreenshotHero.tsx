@@ -18,6 +18,7 @@ interface Props {
   overallScore: number
   grade: string
   reportDate: string
+  screenshotUrl?: string | null
   ogImage?: string | null
   favicon?: string | null
 }
@@ -38,10 +39,11 @@ const GRADE_LABELS: Record<string, string> = {
   F: 'Critical',
 }
 
-export function SiteScreenshotHero({ url, domain, companyName, framework, overallScore, grade, reportDate, ogImage, favicon }: Props) {
+export function SiteScreenshotHero({ url, domain, companyName, framework, overallScore, grade, reportDate, screenshotUrl, ogImage, favicon }: Props) {
   const [imgError, setImgError] = useState(false)
   const fullUrl = url.startsWith('http') ? url : `https://${url}`
-  const heroImgUrl = ogImage || null
+  // Priority: Chrome screenshot → og:image → branded fallback
+  const heroImgUrl = screenshotUrl || ogImage || null
   const faviconUrl = favicon || `https://www.google.com/s2/favicons?domain=${domain}&sz=128`
   const gradeStyle = GRADE_COLORS[grade] ?? GRADE_COLORS['F']
   const gradeLabel = GRADE_LABELS[grade] ?? 'Unknown'

@@ -64,12 +64,13 @@ export async function GET(req: NextRequest, { params }: RouteParams) {
   const gradeStyle = GRADE_COLORS[grade] ?? GRADE_COLORS['F']
   const gradeLabel = GRADE_LABELS[grade] ?? 'Unknown'
 
-  // Use og:image captured during scan (no thum.io — gets blocked by Cloudflare)
+  // Use Chrome screenshot (preferred) or og:image from scan
   let screenshotSrc: string | null = null
-  const ogImageUrl = report.scan_meta?.ogImage as string | undefined
-  if (ogImageUrl) {
+  const imageUrl = (report.scan_meta?.screenshotUrl as string | undefined)
+    || (report.scan_meta?.ogImage as string | undefined)
+  if (imageUrl) {
     try {
-      const imgRes = await fetch(ogImageUrl, { signal: AbortSignal.timeout(6000) })
+      const imgRes = await fetch(imageUrl, { signal: AbortSignal.timeout(6000) })
       if (imgRes.ok) {
         const contentType = imgRes.headers.get('content-type') || 'image/png'
         const buf = await imgRes.arrayBuffer()
