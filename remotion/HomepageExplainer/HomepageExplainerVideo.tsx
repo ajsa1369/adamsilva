@@ -27,9 +27,9 @@ function TitleSlide() {
       }}
     >
       <img
-        src="https://www.adamsilvaconsulting.com/images/logo-clear.png"
+        src={staticFile('images/logo-clear.png')}
         alt=""
-        style={{ height: 56, filter: 'brightness(0) invert(1)', marginBottom: 40 }}
+        style={{ height: 80, marginBottom: 40 }}
       />
       <h1 style={{
         color: COLORS.text,
@@ -514,9 +514,9 @@ function CTASlide() {
       }}
     >
       <img
-        src="https://www.adamsilvaconsulting.com/images/logo-clear.png"
+        src={staticFile('images/logo-clear.png')}
         alt=""
-        style={{ height: 56, filter: 'brightness(0) invert(1)', marginBottom: 40 }}
+        style={{ height: 80, marginBottom: 40 }}
       />
       <h2 style={{
         color: '#fff',

@@ -1,4 +1,4 @@
-import { AbsoluteFill, Sequence, useVideoConfig, spring, useCurrentFrame, interpolate } from 'remotion'
+import { AbsoluteFill, Sequence, Audio, useVideoConfig, spring, useCurrentFrame, interpolate, staticFile } from 'remotion'
 import { COLORS } from '../shared/colors'
 
 export interface ServiceExplainerProps {
@@ -8,7 +8,10 @@ export interface ServiceExplainerProps {
   uniqueInsight?: string
   accentColor: string
   serviceSlug: string
+  audioSrc?: string
 }
+
+const LOGO_SRC = staticFile('images/logo-clear.png')
 
 function IntroSlide({ serviceName, description, accentColor }: {
   serviceName: string
@@ -34,9 +37,9 @@ function IntroSlide({ serviceName, description, accentColor }: {
       }}
     >
       <img
-        src="https://www.adamsilvaconsulting.com/images/logo-clear.png"
+        src={LOGO_SRC}
         alt="Adam Silva Consulting"
-        style={{ height: 48, filter: 'brightness(0) invert(1)', marginBottom: 32 }}
+        style={{ height: 80, marginBottom: 32 }}
       />
       <div style={{
         background: `${accentColor}33`,
@@ -118,6 +121,19 @@ function FeatureSlide({ feature, index, total, accentColor }: {
         }} />
       </div>
 
+      {/* Logo watermark top-right */}
+      <img
+        src={LOGO_SRC}
+        alt=""
+        style={{
+          position: 'absolute',
+          top: 24,
+          right: 40,
+          height: 36,
+          opacity: 0.6,
+        }}
+      />
+
       <div style={{
         display: 'flex',
         alignItems: 'center',
@@ -198,6 +214,19 @@ function InsightSlide({ insight, accentColor }: {
         transform: `scale(${scaleIn})`,
       }}
     >
+      {/* Logo watermark */}
+      <img
+        src={LOGO_SRC}
+        alt=""
+        style={{
+          position: 'absolute',
+          top: 24,
+          right: 40,
+          height: 36,
+          opacity: 0.6,
+        }}
+      />
+
       <div style={{
         width: 64,
         height: 64,
@@ -260,9 +289,9 @@ function CTASlide({ serviceName, accentColor, serviceSlug }: {
       }}
     >
       <img
-        src="https://www.adamsilvaconsulting.com/images/logo-clear.png"
+        src={LOGO_SRC}
         alt="Adam Silva Consulting"
-        style={{ height: 56, filter: 'brightness(0) invert(1)', marginBottom: 32 }}
+        style={{ height: 80, marginBottom: 32 }}
       />
       <h2 style={{
         color: '#ffffff',
@@ -306,6 +335,7 @@ export function ServiceExplainerVideo({
   uniqueInsight,
   accentColor,
   serviceSlug,
+  audioSrc,
 }: ServiceExplainerProps) {
   const { fps } = useVideoConfig()
   const introDuration = fps * 5
@@ -316,6 +346,11 @@ export function ServiceExplainerVideo({
 
   return (
     <AbsoluteFill style={{ fontFamily: 'Inter, sans-serif' }}>
+      {/* Narration audio track — plays across the entire video */}
+      {audioSrc && (
+        <Audio src={audioSrc} volume={1} />
+      )}
+
       <Sequence from={0} durationInFrames={introDuration}>
         <IntroSlide
           serviceName={serviceName}

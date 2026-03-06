@@ -1,4 +1,4 @@
-import { Composition } from 'remotion'
+import { Composition, staticFile } from 'remotion'
 import { BlogSummaryVideo, type BlogSummaryProps } from './BlogSummary/BlogSummaryVideo'
 import { HomepageExplainerVideo, type HomepageExplainerProps } from './HomepageExplainer/HomepageExplainerVideo'
 import { HeroAdVideo, type HeroAdProps } from './HeroAd/HeroAdVideo'
@@ -49,6 +49,7 @@ const DEFAULT_SERVICE_PROPS: ServiceExplainerProps = {
   uniqueInsight: 'Businesses lose 15-20 calls per week to voicemail. Our voice agent converts those missed calls into booked appointments at a 23% rate.',
   accentColor: '#3b82f6',
   serviceSlug: 'off-hours-voice-agent',
+  audioSrc: staticFile('audio/services/off-hours-voice-agent.mp3'),
 }
 
 // ServiceExplainer: 30fps × (5s intro + 6×4s features + 5s insight + 4s CTA) = 30 × 34 = 1020 frames max

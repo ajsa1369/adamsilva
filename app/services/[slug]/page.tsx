@@ -442,6 +442,7 @@ export default async function ServicePage({ params }: PageProps) {
         features={service.features}
         uniqueInsight={service.uniqueInsight}
         accentColor={accentColor}
+        audioSrc={`/audio/services/${service.id}.mp3`}
       />
 
       {/* ============================================================

@@ -1,4 +1,4 @@
-import { AbsoluteFill, Sequence, useVideoConfig, spring, useCurrentFrame, interpolate } from 'remotion'
+import { AbsoluteFill, Sequence, useVideoConfig, spring, useCurrentFrame, interpolate, staticFile } from 'remotion'
 import { COLORS } from '../shared/colors'
 
 export interface BlogSummaryProps {
@@ -40,9 +40,9 @@ function TitleCard({ title, category, protocols = [] }: { title: string; categor
       {/* Logo */}
       <div style={{ marginBottom: 32, display: 'flex', alignItems: 'center', gap: 12 }}>
         <img
-          src="https://www.adamsilvaconsulting.com/images/logo-clear.png"
+          src={staticFile('images/logo-clear.png')}
           alt="Adam Silva Consulting"
-          style={{ height: 48, filter: 'brightness(0) invert(1)' }}
+          style={{ height: 48, objectFit: 'contain' as const }}
         />
       </div>
 
@@ -224,9 +224,9 @@ function CTASlide({ slug }: { slug: string }) {
       }}
     >
       <img
-        src="https://www.adamsilvaconsulting.com/images/logo-clear.png"
+        src={staticFile('images/logo-clear.png')}
         alt="Adam Silva Consulting"
-        style={{ height: 56, filter: 'brightness(0) invert(1)', marginBottom: 32 }}
+        style={{ height: 56, objectFit: 'contain' as const, marginBottom: 32 }}
       />
       <h2 style={{
         color: '#ffffff',

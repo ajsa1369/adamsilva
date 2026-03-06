@@ -13,6 +13,7 @@ interface Props {
   features: string[]
   uniqueInsight?: string
   accentColor: string
+  audioSrc: string
 }
 
 export function VideoShowcase({
@@ -22,6 +23,7 @@ export function VideoShowcase({
   features,
   uniqueInsight,
   accentColor,
+  audioSrc,
 }: Props) {
   const ref = useRef<HTMLDivElement>(null)
   const [visible, setVisible] = useState(true)
@@ -125,6 +127,7 @@ export function VideoShowcase({
                       uniqueInsight,
                       accentColor,
                       serviceSlug,
+                      audioSrc,
                     }}
                     durationInFrames={totalDuration}
                     compositionWidth={1920}
