@@ -28,6 +28,9 @@ kanban-plugin: board
 
 ## ✅ Done
 
+- [x] Services page Sandler redesign — pain-first, infographics, negative reverse CTA
+- [x] Services overview Remotion video — 5 slides, Deepgram TTS narration
+- [x] 6 new animated infographic components for /services
 - [x] Next.js 52 pages — zero TypeScript errors
 - [x] Stripe live mode — 22 products, 52 prices, webhook
 - [x] ACH + card fallback in checkout code

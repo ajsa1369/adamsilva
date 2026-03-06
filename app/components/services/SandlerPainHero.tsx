@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react'
 import Link from 'next/link'
-import { ArrowRight, AlertTriangle } from 'lucide-react'
+import { ArrowRight, TrendingUp } from 'lucide-react'
 
 function AnimatedCounter({ end, suffix = '', prefix = '', duration = 2000 }: {
   end: number
@@ -38,9 +38,9 @@ function AnimatedCounter({ end, suffix = '', prefix = '', duration = 2000 }: {
 }
 
 const PAIN_STATS = [
-  { value: 69, suffix: '%', label: 'Searches End Without a Click', source: 'Similarweb 2025', color: '#ef4444' },
+  { value: 69, suffix: '%', label: 'Searches End Without a Click', source: 'Similarweb 2025', color: '#2563eb' },
   { value: 67, prefix: '$', suffix: 'B', label: 'AI Agent Sales Last Cyber Week', source: 'Salesforce 2025', color: '#f59e0b' },
-  { value: 61, suffix: '%', label: 'CTR Drop in AI Overviews', source: 'Seer Interactive', color: '#ef4444' },
+  { value: 61, suffix: '%', label: 'CTR Drop in AI Overviews', source: 'Seer Interactive', color: '#2563eb' },
   { value: 83, suffix: '%', label: 'Zero-Click on AI Overviews', source: 'Semrush 2025', color: '#f59e0b' },
 ]
 
@@ -63,7 +63,7 @@ export function SandlerPainHero() {
       aria-labelledby="pain-hero-heading"
       style={{
         background: `
-          radial-gradient(ellipse 80% 60% at 50% 0%, rgba(239, 68, 68, 0.06) 0%, transparent 60%),
+          radial-gradient(ellipse 80% 60% at 50% 0%, rgba(37, 99, 235, 0.06) 0%, transparent 60%),
           radial-gradient(ellipse 40% 40% at 20% 80%, rgba(245, 158, 11, 0.04) 0%, transparent 50%),
           var(--color-base)
         `,
@@ -74,7 +74,7 @@ export function SandlerPainHero() {
         <div
           className="absolute top-20 right-20 w-96 h-96 rounded-full opacity-0"
           style={{
-            background: 'radial-gradient(circle, rgba(239, 68, 68, 0.08) 0%, transparent 70%)',
+            background: 'radial-gradient(circle, rgba(37, 99, 235, 0.08) 0%, transparent 70%)',
             animation: visible ? 'pulse 3s ease-in-out infinite' : 'none',
             opacity: visible ? 0.6 : 0,
           }}
@@ -87,15 +87,15 @@ export function SandlerPainHero() {
           <div
             className="inline-flex items-center gap-2 px-4 py-2 rounded-full mb-8 transition-all duration-700"
             style={{
-              background: 'rgba(239, 68, 68, 0.08)',
-              border: '1px solid rgba(239, 68, 68, 0.2)',
-              color: '#ef4444',
+              background: 'rgba(37, 99, 235, 0.08)',
+              border: '1px solid rgba(37, 99, 235, 0.2)',
+              color: '#2563eb',
               opacity: visible ? 1 : 0,
               transform: visible ? 'translateY(0)' : 'translateY(20px)',
             }}
           >
-            <AlertTriangle size={14} />
-            <span className="text-xs font-bold tracking-wider uppercase font-mono">The Cost of Waiting</span>
+            <TrendingUp size={14} />
+            <span className="text-xs font-bold tracking-wider uppercase font-mono">The Market Is Moving</span>
           </div>
 
           {/* Pain headline */}
@@ -109,7 +109,7 @@ export function SandlerPainHero() {
             }}
           >
             Your Competitors Are Already
-            <span className="block" style={{ color: '#ef4444' }}>
+            <span className="block" style={{ color: '#2563eb' }}>
               Visible to AI Agents.
             </span>
             <span className="block text-[var(--color-muted-2)] text-3xl lg:text-4xl mt-2 font-sans font-medium">
@@ -169,12 +169,12 @@ export function SandlerPainHero() {
           <div
             className="card p-8 text-center relative overflow-hidden"
             style={{
-              background: 'linear-gradient(135deg, rgba(239, 68, 68, 0.04) 0%, rgba(245, 158, 11, 0.04) 100%)',
-              borderColor: 'rgba(239, 68, 68, 0.15)',
+              background: 'linear-gradient(135deg, rgba(37, 99, 235, 0.04) 0%, rgba(245, 158, 11, 0.04) 100%)',
+              borderColor: 'rgba(37, 99, 235, 0.15)',
             }}
           >
             <div className="text-xs font-bold tracking-widest uppercase text-[var(--color-muted-2)] mb-3">Cost of Inaction</div>
-            <div className="text-5xl lg:text-6xl font-black font-display mb-3" style={{ color: '#ef4444' }}>
+            <div className="text-5xl lg:text-6xl font-black font-display mb-3" style={{ color: '#2563eb' }}>
               <AnimatedCounter end={15} prefix="$" suffix="T" duration={1500} />
             </div>
             <p className="text-[var(--color-muted)] text-lg leading-relaxed max-w-xl mx-auto">

@@ -33,6 +33,7 @@ app/                    # Next.js App Router pages + API routes
     checkout/           # PaymentMethodSelector, NoRefundsDisclaimer
     layout/             # Header, Footer (Terms + Privacy links)
     sections/           # ContactForm, ServiceCTASection
+    services/           # Sandler selling components (see below)
   checkout/             # /checkout and /checkout/success pages
   services/[slug]/      # Dynamic service detail pages
   terms/                # Terms of Service
@@ -52,7 +53,31 @@ lib/
 supabase/migrations/    # SQL migration files
 public/                 # Static assets, AI discovery files
 remotion/               # Blog video components (excluded from TS build)
+  ServicesOverview/     # 5-slide Sandler services video (30s, Deepgram TTS)
+scripts/                # One-off scripts (gitignored)
+  generate-services-audio.mjs  # Deepgram TTS generation
 ```
+
+## Services Page Components (Sandler Methodology)
+The `/services` page uses animated infographic components following the Sandler selling system:
+
+| Component | Purpose |
+|-----------|---------|
+| `SandlerPainHero` | Pain-first hero with animated counters (69%, $67B, 61%, 83%) |
+| `MarketShiftInfographic` | Before/After comparison + market growth bars |
+| `ServicesVideoShowcase` | Lazy-loaded Remotion Player with Deepgram TTS audio |
+| `ProtocolStackInfographic` | 6-layer protocol visualization (UCP, ACP, AP2, Schema, MCP, AEO/GEO) |
+| `RoadmapInfographic` | Animated 16-week timeline with 5 phases |
+| `SandlerNegativeReverse` | "This Is Not for Everyone" negative reverse CTA |
+
+All components use `IntersectionObserver` for scroll-triggered animations with staggered CSS transitions.
+
+Per-service Sandler components (used on `/services/[slug]` pages):
+| Component | Purpose |
+|-----------|---------|
+| `PainHero` | Per-service pain points (takes `SandlerPain` prop) |
+| `CostOfInaction` | Per-service cost stat (takes stat/context/source props) |
+| `NegativeReverseCTA` | Per-service negative reverse with cart integration |
 
 ## Deployment
 - **Branch:** `ASCv2` on GitHub → Vercel auto-deploys

@@ -56,9 +56,9 @@ export function MarketShiftInfographic() {
           <div
             className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full mb-4"
             style={{
-              background: 'rgba(239, 68, 68, 0.08)',
-              border: '1px solid rgba(239, 68, 68, 0.2)',
-              color: '#ef4444',
+              background: 'rgba(37, 99, 235, 0.08)',
+              border: '1px solid rgba(37, 99, 235, 0.2)',
+              color: '#2563eb',
             }}
           >
             <AlertCircle size={14} />
@@ -96,10 +96,10 @@ export function MarketShiftInfographic() {
                   </div>
                 </div>
                 <div className="flex items-center gap-2">
-                  <Icon size={14} style={{ color: item.icon === TrendingDown ? '#ef4444' : '#10b981' }} />
+                  <Icon size={14} style={{ color: item.icon === TrendingDown ? '#6366f1' : '#10b981' }} />
                   <span
                     className="text-xs font-bold font-mono"
-                    style={{ color: item.icon === TrendingDown ? '#ef4444' : '#10b981' }}
+                    style={{ color: item.icon === TrendingDown ? '#6366f1' : '#10b981' }}
                   >
                     {item.metric}
                   </span>

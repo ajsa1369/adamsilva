@@ -39,6 +39,8 @@ status: active
 | Vercel | ✅ ASCv2 deployed | Merge to main after QA |
 | Privacy + Terms pages | ✅ Done | GDPR, CCPA, legal@ email |
 | Buy Now button | ✅ Done | Direct checkout from service pages |
+| Services page Sandler redesign | ✅ Done | Pain-first, infographics, negative reverse CTA |
+| Services overview video | ✅ Done | Remotion + Deepgram TTS narration |
 
 ---
 

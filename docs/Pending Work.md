@@ -53,6 +53,9 @@ Deploy these (written but not yet deployed):
 - Use Stripe CLI to test webhook locally: `stripe listen --forward-to localhost:3000/api/stripe/webhook`
 
 ## ✅ Recently Completed
+- **Services page Sandler redesign** — Full page rewrite with pain-first messaging, 5 animated infographic components, negative reverse CTA, objection-handling FAQ
+- **Services overview video** — Remotion 5-slide composition with Deepgram TTS narration (aura-orion-en voice, 30s)
+- **6 new components** — SandlerPainHero, MarketShiftInfographic, ProtocolStackInfographic, RoadmapInfographic, SandlerNegativeReverse, ServicesVideoShowcase
 - Live Stripe mode (all 22 products, 52 prices, webhook)
 - No refunds policy + 4% card convenience fee
 - ACH/wire preferred payment method

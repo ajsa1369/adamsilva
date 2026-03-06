@@ -42,7 +42,7 @@ const PHASES = [
     weeks: 'Week 15-16',
     title: 'Launch & QA',
     items: ['Full protocol QA', 'Agent discovery verification', 'Performance benchmarks', 'Go live'],
-    color: '#ef4444',
+    color: '#ec4899',
     service: null,
   },
 ]
@@ -82,7 +82,7 @@ export function RoadmapInfographic() {
             className="absolute left-6 lg:left-8 top-0 bottom-0 w-0.5 hidden md:block"
             style={{
               background: visible
-                ? 'linear-gradient(to bottom, #3b82f6, #8b5cf6, #10b981, #f59e0b, #ef4444)'
+                ? 'linear-gradient(to bottom, #3b82f6, #8b5cf6, #10b981, #f59e0b, #ec4899)'
                 : 'var(--color-border)',
               transition: 'background 2s ease',
             }}

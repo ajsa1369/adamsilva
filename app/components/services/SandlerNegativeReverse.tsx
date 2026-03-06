@@ -53,7 +53,7 @@ export function SandlerNegativeReverse() {
           >
             <span
               className="badge mb-4"
-              style={{ background: 'rgba(239, 68, 68, 0.08)', color: '#ef4444', borderColor: 'rgba(239, 68, 68, 0.2)' }}
+              style={{ background: 'rgba(37, 99, 235, 0.08)', color: '#2563eb', borderColor: 'rgba(37, 99, 235, 0.2)' }}
             >
               Fair Warning
             </span>
@@ -74,13 +74,13 @@ export function SandlerNegativeReverse() {
                 opacity: visible ? 1 : 0,
                 transform: visible ? 'translateX(0)' : 'translateX(-30px)',
                 transitionDelay: '200ms',
-                borderColor: 'rgba(239, 68, 68, 0.15)',
-                background: 'linear-gradient(135deg, rgba(239, 68, 68, 0.03) 0%, var(--color-surface) 100%)',
+                borderColor: 'rgba(100, 116, 139, 0.15)',
+                background: 'linear-gradient(135deg, rgba(100, 116, 139, 0.03) 0%, var(--color-surface) 100%)',
               }}
             >
               <div className="flex items-center gap-2 mb-6">
-                <div className="w-8 h-8 rounded-full flex items-center justify-center" style={{ background: 'rgba(239, 68, 68, 0.1)' }}>
-                  <X size={16} style={{ color: '#ef4444' }} />
+                <div className="w-8 h-8 rounded-full flex items-center justify-center" style={{ background: 'rgba(100, 116, 139, 0.1)' }}>
+                  <X size={16} style={{ color: '#64748b' }} />
                 </div>
                 <h3 className="text-lg font-bold text-[var(--color-text)] font-display">Do NOT contact us if:</h3>
               </div>
@@ -95,7 +95,7 @@ export function SandlerNegativeReverse() {
                       transitionDelay: `${400 + i * 100}ms`,
                     }}
                   >
-                    <X size={16} className="shrink-0 mt-1" style={{ color: '#ef4444' }} />
+                    <X size={16} className="shrink-0 mt-1" style={{ color: '#64748b' }} />
                     <span className="text-sm text-[var(--color-muted)] leading-relaxed">{item}</span>
                   </div>
                 ))}

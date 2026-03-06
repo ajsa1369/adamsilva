@@ -115,7 +115,7 @@ const CATEGORY_COLORS: Record<string, string> = {
   optimization: '#8b5cf6',
   automation: '#10b981',
   protocol: '#f59e0b',
-  content: '#ef4444',
+  content: '#ec4899',
 }
 
 export default function ServicesPage() {
@@ -128,36 +128,31 @@ export default function ServicesPage() {
       {/* 1. SANDLER PAIN HERO — Lead with pain, not features */}
       <SandlerPainHero />
 
-      {/* 2. MARKET SHIFT INFOGRAPHIC — Before/After + market growth bars */}
-      <MarketShiftInfographic />
-
-      {/* 3. VIDEO SHOWCASE — Sandler narration video */}
-      <ServicesVideoShowcase />
-
-      {/* 4. PROTOCOL STACK INFOGRAPHIC — 6-layer visual */}
-      <ProtocolStackInfographic />
-
-      {/* 5. SERVICE GRID — grouped by category with category filter anchors */}
-      <section className="section-sm bg-[var(--color-surface)]" aria-label="Service categories">
-        <div className="container">
-          <div className="flex flex-wrap gap-3 justify-center">
-            {categories.map((cat) => (
-              <a
-                key={cat}
-                href={`#category-${cat}`}
-                className="badge"
-                style={{
-                  background: `color-mix(in srgb, ${CATEGORY_COLORS[cat]} 15%, transparent)`,
-                  color: CATEGORY_COLORS[cat],
-                }}
-              >
-                {CATEGORY_LABELS[cat]}
-              </a>
-            ))}
-          </div>
+      {/* 2. STICKY NAV */}
+      <nav className="py-3 bg-[var(--color-surface)] border-b border-[var(--color-border)] sticky top-16 z-30" aria-label="Page navigation">
+        <div className="container flex flex-wrap items-center justify-center gap-2 sm:gap-3">
+          <a href="#services-grid" className="btn-primary text-sm py-2 px-4">
+            Browse Services <ArrowRight size={14} className="inline ml-1" />
+          </a>
+          {categories.map((cat) => (
+            <a
+              key={cat}
+              href={`#category-${cat}`}
+              className="badge text-xs hover:scale-105 transition-transform"
+              style={{
+                background: `color-mix(in srgb, ${CATEGORY_COLORS[cat]} 15%, transparent)`,
+                color: CATEGORY_COLORS[cat],
+              }}
+            >
+              {CATEGORY_LABELS[cat]}
+            </a>
+          ))}
+          <a href="#comparison" className="text-xs text-[var(--color-muted)] hover:text-[var(--color-accent)] transition-colors font-semibold">Compare</a>
+          <a href="#services-faq" className="text-xs text-[var(--color-muted)] hover:text-[var(--color-accent)] transition-colors font-semibold">FAQ</a>
         </div>
-      </section>
+      </nav>
 
+      {/* 3. SERVICE GRID */}
       <section id="services-grid" className="section" aria-labelledby="services-grid-heading">
         <div className="container">
           <div className="text-center max-w-2xl mx-auto mb-12">
@@ -253,6 +248,7 @@ export default function ServicesPage() {
 
       {/* 6. COMPARISON TABLE */}
       <section
+        id="comparison"
         className="section bg-[var(--color-surface)]"
         aria-labelledby="comparison-heading"
       >
@@ -333,18 +329,28 @@ export default function ServicesPage() {
         </div>
       </section>
 
-      {/* 7. 16-WEEK ROADMAP INFOGRAPHIC — animated timeline */}
+      {/* 5. MARKET SHIFT INFOGRAPHIC */}
+      <MarketShiftInfographic />
+
+      {/* 6. VIDEO SHOWCASE */}
+      <ServicesVideoShowcase />
+
+      {/* 7. PROTOCOL STACK INFOGRAPHIC */}
+      <ProtocolStackInfographic />
+
+      {/* 8. 16-WEEK ROADMAP — animated timeline */}
       <RoadmapInfographic />
 
-      {/* 8. OBJECTION-HANDLING FAQ — Sandler style */}
+      {/* 9. FAQ */}
       <section
+        id="services-faq"
         className="section bg-[var(--color-surface)]"
         aria-labelledby="services-faq-heading"
       >
         <div className="container max-w-3xl">
           <div className="text-center mb-10">
-            <span className="badge mb-4" style={{ background: 'rgba(245, 158, 11, 0.08)', color: '#f59e0b', borderColor: 'rgba(245, 158, 11, 0.2)' }}>
-              Objections
+            <span className="badge mb-4">
+              FAQ
             </span>
             <h2
               id="services-faq-heading"
@@ -374,7 +380,7 @@ export default function ServicesPage() {
         </div>
       </section>
 
-      {/* 9. SANDLER NEGATIVE REVERSE CTA — "This isn't for everyone" */}
+      {/* 10. SANDLER NEGATIVE REVERSE CTA — "This isn't for everyone" */}
       <SandlerNegativeReverse />
     </>
   )
