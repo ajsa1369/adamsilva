@@ -112,6 +112,8 @@ export async function POST(req: NextRequest) {
           hasSitemap: signals.hasSitemap,
           hasRobotsTxt: signals.hasRobotsTxt,
           valueLevers: scores.valueLevers,
+          ogImage: signals.ogImage,
+          favicon: signals.favicon,
         },
       })
       .select('id, share_token')

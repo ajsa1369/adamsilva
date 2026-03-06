@@ -39,7 +39,7 @@ export async function GET(req: NextRequest, { params }: RouteParams) {
 
   const { data, error } = await supabase
     .from('acra_reports')
-    .select(`overall_score, overall_grade, acra_scans ( url, company_name )`)
+    .select(`overall_score, overall_grade, scan_meta, acra_scans ( url, company_name )`)
     .eq('share_token', token)
     .single()
 
@@ -47,7 +47,7 @@ export async function GET(req: NextRequest, { params }: RouteParams) {
     return new Response('Report not found', { status: 404 })
   }
 
-  const report = data as unknown as { overall_score: number; overall_grade: string; acra_scans: { url: string; company_name: string | null } }
+  const report = data as unknown as { overall_score: number; overall_grade: string; scan_meta: Record<string, unknown> | null; acra_scans: { url: string; company_name: string | null } }
   const grade = report.overall_grade
   const score = report.overall_score
   const domain = (() => {
@@ -64,22 +64,25 @@ export async function GET(req: NextRequest, { params }: RouteParams) {
   const gradeStyle = GRADE_COLORS[grade] ?? GRADE_COLORS['F']
   const gradeLabel = GRADE_LABELS[grade] ?? 'Unknown'
 
-  // Fetch site screenshot thumbnail from thum.io (free, no API key)
+  // Use og:image captured during scan (no thum.io — gets blocked by Cloudflare)
   let screenshotSrc: string | null = null
-  try {
-    const thumbUrl = `https://image.thum.io/get/width/800/crop/500/noanimate/${fullUrl}`
-    const thumbRes = await fetch(thumbUrl, { signal: AbortSignal.timeout(6000) })
-    if (thumbRes.ok) {
-      const buf = await thumbRes.arrayBuffer()
-      const bytes = new Uint8Array(buf)
-      let binary = ''
-      for (let i = 0; i < bytes.length; i++) {
-        binary += String.fromCharCode(bytes[i])
+  const ogImageUrl = report.scan_meta?.ogImage as string | undefined
+  if (ogImageUrl) {
+    try {
+      const imgRes = await fetch(ogImageUrl, { signal: AbortSignal.timeout(6000) })
+      if (imgRes.ok) {
+        const contentType = imgRes.headers.get('content-type') || 'image/png'
+        const buf = await imgRes.arrayBuffer()
+        const bytes = new Uint8Array(buf)
+        let binary = ''
+        for (let i = 0; i < bytes.length; i++) {
+          binary += String.fromCharCode(bytes[i])
+        }
+        screenshotSrc = `data:${contentType};base64,${btoa(binary)}`
       }
-      screenshotSrc = `data:image/png;base64,${btoa(binary)}`
+    } catch {
+      // Fallback: no screenshot, just show grade card
     }
-  } catch {
-    // Fallback: no screenshot, just show grade card
   }
 
   return new ImageResponse(

@@ -262,6 +262,8 @@ export default async function ACRAReportPage({ params }: PageProps) {
             overallScore={r.overall_score}
             grade={grade}
             reportDate={r.created_at}
+            ogImage={(r.scan_meta as Record<string, unknown>)?.ogImage as string | undefined}
+            favicon={(r.scan_meta as Record<string, unknown>)?.favicon as string | undefined}
           />
 
           <ScoreHero

@@ -19,6 +19,8 @@ interface Props {
   overallScore: number
   grade: string
   reportDate: string
+  ogImage?: string | null
+  favicon?: string | null
 }
 
 const GRADE_COLORS: Record<string, { bg: string; ring: string }> = {
@@ -37,10 +39,12 @@ const GRADE_LABELS: Record<string, string> = {
   F: 'Critical',
 }
 
-export function SiteScreenshotHero({ url, domain, companyName, framework, overallScore, grade, reportDate }: Props) {
+export function SiteScreenshotHero({ url, domain, companyName, framework, overallScore, grade, reportDate, ogImage, favicon }: Props) {
   const [imgError, setImgError] = useState(false)
   const fullUrl = url.startsWith('http') ? url : `https://${url}`
-  const thumbUrl = `https://image.thum.io/get/width/600/crop/380/noanimate/${fullUrl}`
+  // Priority: og:image from scan → Google favicon service fallback
+  const heroImgUrl = ogImage || null
+  const faviconUrl = favicon || `https://www.google.com/s2/favicons?domain=${domain}&sz=64`
   const gradeStyle = GRADE_COLORS[grade] ?? GRADE_COLORS['F']
   const gradeLabel = GRADE_LABELS[grade] ?? 'Unknown'
   const dateStr = new Date(reportDate).toLocaleDateString('en-US', {
@@ -55,10 +59,10 @@ export function SiteScreenshotHero({ url, domain, companyName, framework, overal
       <div className="flex flex-col sm:flex-row gap-0">
         {/* Left: Screenshot with grade overlay */}
         <div className="relative shrink-0 sm:w-[280px] h-[180px] sm:h-auto bg-[var(--color-surface-2)] overflow-hidden">
-          {!imgError ? (
+          {heroImgUrl && !imgError ? (
             <img
-              src={thumbUrl}
-              alt={`Screenshot of ${domain}`}
+              src={heroImgUrl}
+              alt={`Preview of ${domain}`}
               className="w-full h-full object-cover object-top"
               onError={() => setImgError(true)}
               loading="eager"
@@ -66,7 +70,15 @@ export function SiteScreenshotHero({ url, domain, companyName, framework, overal
           ) : (
             <div className="w-full h-full flex items-center justify-center text-[var(--color-muted-2)]">
               <div className="text-center">
-                <Globe size={32} className="mx-auto mb-2 opacity-40" />
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={faviconUrl}
+                  alt=""
+                  width={48}
+                  height={48}
+                  className="mx-auto mb-3 rounded-lg"
+                  onError={(e) => { (e.target as HTMLImageElement).style.display = 'none' }}
+                />
                 <div className="text-sm font-semibold">{domain}</div>
               </div>
             </div>

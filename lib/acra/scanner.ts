@@ -92,6 +92,10 @@ export interface ScanSignals {
   hasCoreWebVitalsHints: boolean
   hasPreloadLinks: boolean
   hasStructuredNavigation: boolean
+
+  // Site preview
+  ogImage: string | null
+  favicon: string | null
 }
 
 const WELL_KNOWN_PATHS = [
@@ -301,6 +305,22 @@ export async function scanUrl(rawUrl: string): Promise<ScanSignals> {
   const hasStructuredNavigation = /<nav[^>]*>/i.test(html)
   const hasWellKnown = hasUCPManifest || hasACPEndpoint || hasAP2Endpoint || hasAgentJson || hasAIPlugin
 
+  // Extract og:image for site preview
+  const ogImageMatch = html.match(/property="og:image"\s+content="([^"]+)"/i)
+    || html.match(/content="([^"]+)"\s+property="og:image"/i)
+  let ogImage: string | null = ogImageMatch ? ogImageMatch[1] : null
+  if (ogImage && !ogImage.startsWith('http')) {
+    ogImage = ogImage.startsWith('/') ? `${origin}${ogImage}` : `${origin}/${ogImage}`
+  }
+
+  // Extract favicon
+  const faviconMatch = html.match(/rel="(?:shortcut )?icon"[^>]*href="([^"]+)"/i)
+    || html.match(/href="([^"]+)"[^>]*rel="(?:shortcut )?icon"/i)
+  let favicon: string | null = faviconMatch ? faviconMatch[1] : null
+  if (favicon && !favicon.startsWith('http')) {
+    favicon = favicon.startsWith('/') ? `${origin}${favicon}` : `${origin}/${favicon}`
+  }
+
   return {
     statusCode,
     redirectChain,
@@ -381,5 +401,8 @@ export async function scanUrl(rawUrl: string): Promise<ScanSignals> {
     hasCoreWebVitalsHints,
     hasPreloadLinks,
     hasStructuredNavigation,
+
+    ogImage,
+    favicon,
   }
 }
