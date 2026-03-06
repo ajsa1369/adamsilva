@@ -1,8 +1,8 @@
 import type { Metadata } from 'next'
-import { notFound, redirect } from 'next/navigation'
+import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import { ArrowLeft, ArrowRight, Download, RefreshCw, AlertTriangle, CheckCircle2, XCircle, Star } from 'lucide-react'
-import { createClient } from '@/lib/supabase/server'
+import { createClient } from '@supabase/supabase-js'
 import { ShareReportButton } from '@/app/components/acra/ShareReportButton'
 import { ScoreCard } from '@/app/components/acra/ScoreCard'
 import { ScoreHero } from '@/app/components/acra/ScoreHero'
@@ -136,10 +136,10 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
 export default async function ACRAReportPage({ params }: PageProps) {
   const { id } = await params
-  const supabase = await createClient()
-  const { data: { user } } = await supabase.auth.getUser()
-
-  if (!user) redirect('/acra/login')
+  const supabase = createClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.SUPABASE_SERVICE_ROLE_KEY!
+  )
 
   const { data: report, error } = await supabase
     .from('acra_reports')
@@ -147,7 +147,6 @@ export default async function ACRAReportPage({ params }: PageProps) {
       *, acra_scans ( url, company_name, industry, monthly_revenue_range, framework, created_at )
     `)
     .eq('id', id)
-    .eq('user_id', user.id)
     .single()
 
   if (error || !report) notFound()
