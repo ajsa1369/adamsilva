@@ -145,7 +145,7 @@ export interface LookupOrderStatusResult {
 /** Client config — loaded from Supabase to determine CRM, tier, allowed channels */
 export interface ChatClientConfig {
   clientId: string
-  packageTier: 'bronze' | 'silver' | 'gold' | 'core' | 'legacy'
+  packageTier: 'starter' | 'pro' | 'max' | 'elite' | 'legacy'
   crmType:
     | 'hubspot'
     | 'salesforce'

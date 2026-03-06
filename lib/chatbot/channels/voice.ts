@@ -8,7 +8,7 @@
  * BLAND_AI_API_KEY or VAPI_API_KEY required
  * Scaffold: parse incoming voice call webhook, convert speech-to-text, call chatbot API, TTS response
  *
- * CHAT-05 compliance: Gold+ tier required (enforced in API route).
+ * CHAT-05 compliance: Max+ tier required (enforced in API route).
  */
 
 export interface VoiceWebhookPayload {

@@ -25,7 +25,7 @@ export function resolveCta(topic: AuthorityMapTopic): CtaService {
       name: 'Universal Commerce Protocol Readiness',
       url: '/protocols/ucp',
       ctaText: 'Get UCP Ready',
-      ctaSubtext: 'See how we implement Universal Commerce Protocol for your stack — Bronze to Core tiers available.',
+      ctaSubtext: 'See how we implement Universal Commerce Protocol for your stack — Starter to Elite tiers available.',
     }
   }
   if (/acp|agent commerce|agent checkout|agentic purchase|negotiat/.test(text)) {

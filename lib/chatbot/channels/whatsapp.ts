@@ -8,7 +8,7 @@
  * DIALOG360_API_KEY required
  * Scaffold: parse WhatsApp message webhook, extract text, call chatbot API, send reply
  *
- * CHAT-05 compliance: Gold+ tier required (enforced in API route).
+ * CHAT-05 compliance: Max+ tier required (enforced in API route).
  */
 
 export interface WhatsAppMessage {

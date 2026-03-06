@@ -2,7 +2,7 @@
  * app/api/chatbot/[clientId]/voice/route.ts
  *
  * Voice webhook scaffold for Bland.ai / Vapi.
- * Tier enforcement: Gold+ required. Silver/Bronze clients receive 403.
+ * Tier enforcement: Max+ required. Pro/Starter clients receive 403.
  * Full implementation deferred to v2 per CONTEXT.md.
  *
  * TODO(v2): Full Bland.ai/Vapi voice flow
@@ -19,7 +19,7 @@ export async function POST(req: Request, { params }: { params: { clientId: strin
   const { clientId } = params
   const config = await getChannelConfig(clientId)
   if (!isChannelAllowed(config, 'voice')) {
-    return Response.json({ error: 'Voice channel requires Gold tier or higher.' }, { status: 403 })
+    return Response.json({ error: 'Voice channel requires Max tier or higher.' }, { status: 403 })
   }
   // TODO(v2): Full Bland.ai/Vapi voice flow
   const payload = await parseVoiceWebhook(req)

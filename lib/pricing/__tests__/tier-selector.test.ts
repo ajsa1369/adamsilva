@@ -4,16 +4,16 @@
  * Unit tests for selectTier() — all LOCKED edge cases + standard trigger conditions.
  *
  * LOCKED edge cases (must all pass):
- *   selectTier({ integrations:[], ... }) → 'bronze'
- *   selectTier({ integrations:[10+], ... }) → 'core'
- *   selectTier({ integrations:[{name:'SAP',tier:3}], ... }) → 'core'
- *   selectTier({ integrations:[{name:'HubSpot',tier:1}], goals:['ucp'], ... }) → 'gold'
+ *   selectTier({ integrations:[], ... }) → 'starter'
+ *   selectTier({ integrations:[10+], ... }) → 'elite'
+ *   selectTier({ integrations:[{name:'SAP',tier:3}], ... }) → 'elite'
+ *   selectTier({ integrations:[{name:'HubSpot',tier:1}], goals:['ucp'], ... }) → 'max'
  *
  * Priority order:
  *   1. Legacy platform (shopify/wix/squarespace/wordpress)
  *   2. Enterprise ERP (SAP/NetSuite/Oracle ERP/Microsoft Dynamics)
- *   3. 10+ integrations → core
- *   4. Zero integrations → bronze
+ *   3. 10+ integrations → elite
+ *   4. Zero integrations → starter
  *   5. Goal/lead/location overrides
  *   6. Slot-fit check
  */
@@ -47,35 +47,35 @@ function input(overrides: Partial<TierSelectorInput>): TierSelectorInput {
 // ---------------------------------------------------------------------------
 
 describe('selectTier — LOCKED edge cases', () => {
-  // LOCKED 1: No tools → 'bronze'
-  it('LOCKED: No integrations selected → bronze', () => {
+  // LOCKED 1: No tools → 'starter'
+  it('LOCKED: No integrations selected → starter', () => {
     const result = selectTier(input({ integrations: [] }))
-    expect(result.recommendedSlug).toBe('bronze')
+    expect(result.recommendedSlug).toBe('starter')
     expect(result.isLegacyPath).toBe(false)
   })
 
-  // LOCKED 2: 10+ integrations (any mix) → 'core'
-  it('LOCKED: 10 or more integrations → core', () => {
+  // LOCKED 2: 10+ integrations (any mix) → 'elite'
+  it('LOCKED: 10 or more integrations → elite', () => {
     const integrations = Array.from({ length: 10 }, (_, i) => t1(`Tool${i + 1}`))
     const result = selectTier(input({ integrations }))
-    expect(result.recommendedSlug).toBe('core')
+    expect(result.recommendedSlug).toBe('elite')
     expect(result.isLegacyPath).toBe(false)
   })
 
-  // LOCKED 3: SAP present → 'core' (enterprise ERP)
-  it('LOCKED: SAP integration → core (enterprise ERP)', () => {
+  // LOCKED 3: SAP present → 'elite' (enterprise ERP)
+  it('LOCKED: SAP integration → elite (enterprise ERP)', () => {
     const result = selectTier(input({ integrations: [{ name: 'SAP', tier: 3 }] }))
-    expect(result.recommendedSlug).toBe('core')
+    expect(result.recommendedSlug).toBe('elite')
     expect(result.isLegacyPath).toBe(false)
   })
 
-  // LOCKED 4: HubSpot + UCP goal → 'gold' (protocol goal overrides bronze slot-fit)
-  it('LOCKED: HubSpot (T1) + ucp goal → gold', () => {
+  // LOCKED 4: HubSpot + UCP goal → 'max' (protocol goal overrides starter slot-fit)
+  it('LOCKED: HubSpot (T1) + ucp goal → max', () => {
     const result = selectTier(input({
       integrations: [t1('HubSpot')],
       goals: ['ucp'],
     }))
-    expect(result.recommendedSlug).toBe('gold')
+    expect(result.recommendedSlug).toBe('max')
     expect(result.isLegacyPath).toBe(false)
   })
 })
@@ -85,24 +85,24 @@ describe('selectTier — LOCKED edge cases', () => {
 // ---------------------------------------------------------------------------
 
 describe('selectTier — enterprise ERP checks', () => {
-  // LOCKED: NetSuite → core
-  it('LOCKED: NetSuite integration → core (enterprise ERP)', () => {
+  // LOCKED: NetSuite → elite
+  it('LOCKED: NetSuite integration → elite (enterprise ERP)', () => {
     const result = selectTier(input({ integrations: [{ name: 'NetSuite', tier: 3 }] }))
-    expect(result.recommendedSlug).toBe('core')
+    expect(result.recommendedSlug).toBe('elite')
     expect(result.isLegacyPath).toBe(false)
   })
 
-  // LOCKED: Oracle ERP → core
-  it('LOCKED: Oracle ERP integration → core (enterprise ERP)', () => {
+  // LOCKED: Oracle ERP → elite
+  it('LOCKED: Oracle ERP integration → elite (enterprise ERP)', () => {
     const result = selectTier(input({ integrations: [{ name: 'Oracle ERP', tier: 3 }] }))
-    expect(result.recommendedSlug).toBe('core')
+    expect(result.recommendedSlug).toBe('elite')
     expect(result.isLegacyPath).toBe(false)
   })
 
-  // LOCKED: Microsoft Dynamics → core
-  it('LOCKED: Microsoft Dynamics integration → core (enterprise ERP)', () => {
+  // LOCKED: Microsoft Dynamics → elite
+  it('LOCKED: Microsoft Dynamics integration → elite (enterprise ERP)', () => {
     const result = selectTier(input({ integrations: [{ name: 'Microsoft Dynamics', tier: 3 }] }))
-    expect(result.recommendedSlug).toBe('core')
+    expect(result.recommendedSlug).toBe('elite')
     expect(result.isLegacyPath).toBe(false)
   })
 })
@@ -112,17 +112,17 @@ describe('selectTier — enterprise ERP checks', () => {
 // ---------------------------------------------------------------------------
 
 describe('selectTier — protocol goal overrides', () => {
-  // LOCKED: UCP goal → minimum 'gold'
-  it('LOCKED: ucp goal → minimum gold', () => {
+  // LOCKED: UCP goal → minimum 'max'
+  it('LOCKED: ucp goal → minimum max', () => {
     const result = selectTier(input({ integrations: [t1('Stripe')], goals: ['ucp'] }))
-    expect(result.recommendedSlug).toBe('gold')
+    expect(result.recommendedSlug).toBe('max')
     expect(result.isLegacyPath).toBe(false)
   })
 
-  // LOCKED: ACP goal → minimum 'gold'
-  it('LOCKED: acp goal → minimum gold', () => {
+  // LOCKED: ACP goal → minimum 'max'
+  it('LOCKED: acp goal → minimum max', () => {
     const result = selectTier(input({ integrations: [t1('Stripe')], goals: ['acp'] }))
-    expect(result.recommendedSlug).toBe('gold')
+    expect(result.recommendedSlug).toBe('max')
     expect(result.isLegacyPath).toBe(false)
   })
 })
@@ -201,24 +201,24 @@ describe('selectTier — legacy platform routing', () => {
 // ---------------------------------------------------------------------------
 
 describe('selectTier — lead volume triggers', () => {
-  // Case 13: monthlyLeads=200 → minimum silver
-  it('200 monthly leads → minimum silver', () => {
+  // Case 13: monthlyLeads=200 → minimum pro
+  it('200 monthly leads → minimum pro', () => {
     const result = selectTier(input({ integrations: [t1('Stripe')], monthlyLeads: 200 }))
-    expect(result.recommendedSlug).toBe('silver')
+    expect(result.recommendedSlug).toBe('pro')
     expect(result.isLegacyPath).toBe(false)
   })
 
-  // Case 14: monthlyLeads=500 → minimum gold
-  it('500 monthly leads → minimum gold', () => {
+  // Case 14: monthlyLeads=500 → minimum max
+  it('500 monthly leads → minimum max', () => {
     const result = selectTier(input({ integrations: [t1('Stripe')], monthlyLeads: 500 }))
-    expect(result.recommendedSlug).toBe('gold')
+    expect(result.recommendedSlug).toBe('max')
     expect(result.isLegacyPath).toBe(false)
   })
 
-  // 499 leads → silver (just below gold threshold)
-  it('499 monthly leads → silver (below 500 threshold)', () => {
+  // 499 leads → pro (just below max threshold)
+  it('499 monthly leads → pro (below 500 threshold)', () => {
     const result = selectTier(input({ integrations: [t1('Stripe')], monthlyLeads: 499 }))
-    expect(result.recommendedSlug).toBe('silver')
+    expect(result.recommendedSlug).toBe('pro')
     expect(result.isLegacyPath).toBe(false)
   })
 })
@@ -228,18 +228,18 @@ describe('selectTier — lead volume triggers', () => {
 // ---------------------------------------------------------------------------
 
 describe('selectTier — location count trigger', () => {
-  // Case 15: locationCount=6 → minimum silver
-  it('6 locations → minimum silver', () => {
+  // Case 15: locationCount=6 → minimum pro
+  it('6 locations → minimum pro', () => {
     const result = selectTier(input({ integrations: [t1('Stripe')], locationCount: 6 }))
-    expect(result.recommendedSlug).toBe('silver')
+    expect(result.recommendedSlug).toBe('pro')
     expect(result.isLegacyPath).toBe(false)
   })
 
-  // 5 locations → no silver trigger
-  it('5 locations does not trigger silver minimum', () => {
+  // 5 locations → no pro trigger
+  it('5 locations does not trigger pro minimum', () => {
     const result = selectTier(input({ integrations: [t1('Stripe')], locationCount: 5 }))
-    // Should be bronze (1 T1, no other triggers)
-    expect(result.recommendedSlug).toBe('bronze')
+    // Should be starter (1 T1, no other triggers)
+    expect(result.recommendedSlug).toBe('starter')
     expect(result.isLegacyPath).toBe(false)
   })
 })
@@ -249,23 +249,23 @@ describe('selectTier — location count trigger', () => {
 // ---------------------------------------------------------------------------
 
 describe('selectTier — integration tier triggers', () => {
-  // Case 16: T2 integration present → minimum silver
-  it('T2 integration present → minimum silver', () => {
+  // Case 16: T2 integration present → minimum pro
+  it('T2 integration present → minimum pro', () => {
     const result = selectTier(input({ integrations: [t2('Brevo')] }))
-    expect(result.recommendedSlug).toBe('silver')
+    expect(result.recommendedSlug).toBe('pro')
     expect(result.isLegacyPath).toBe(false)
   })
 
-  // Case 17: T3 integration (non-enterprise) → minimum gold (e.g. Mindbody, Vagaro)
-  it('Mindbody (T3, non-enterprise) → minimum gold', () => {
+  // Case 17: T3 integration (non-enterprise) → minimum max (e.g. Mindbody, Vagaro)
+  it('Mindbody (T3, non-enterprise) → minimum max', () => {
     const result = selectTier(input({ integrations: [{ name: 'Mindbody', tier: 3 }] }))
-    expect(result.recommendedSlug).toBe('gold')
+    expect(result.recommendedSlug).toBe('max')
     expect(result.isLegacyPath).toBe(false)
   })
 
-  it('Vagaro (T3, non-enterprise) → minimum gold', () => {
+  it('Vagaro (T3, non-enterprise) → minimum max', () => {
     const result = selectTier(input({ integrations: [{ name: 'Vagaro', tier: 3 }] }))
-    expect(result.recommendedSlug).toBe('gold')
+    expect(result.recommendedSlug).toBe('max')
     expect(result.isLegacyPath).toBe(false)
   })
 })
@@ -275,48 +275,48 @@ describe('selectTier — integration tier triggers', () => {
 // ---------------------------------------------------------------------------
 
 describe('selectTier — slot-fit upgrades', () => {
-  // Case 18: 1 T1 integration, no triggers → 'bronze' (fits in bronze T1 slots)
-  it('1 T1 integration with no other triggers → bronze', () => {
+  // Case 18: 1 T1 integration, no triggers → 'starter' (fits in starter T1 slots)
+  it('1 T1 integration with no other triggers → starter', () => {
     const result = selectTier(input({ integrations: [t1('Stripe')] }))
-    expect(result.recommendedSlug).toBe('bronze')
+    expect(result.recommendedSlug).toBe('starter')
     expect(result.isLegacyPath).toBe(false)
   })
 
-  // Case 19: 4 T1 integrations → 'silver' (Bronze only has 3 T1 slots)
-  it('4 T1 integrations → silver (slot-fit upgrade from bronze)', () => {
+  // Case 19: 4 T1 integrations → 'pro' (Starter only has 3 T1 slots)
+  it('4 T1 integrations → pro (slot-fit upgrade from starter)', () => {
     const result = selectTier(input({
       integrations: [t1('Stripe'), t1('HubSpot'), t1('Calendly'), t1('Mailchimp')],
     }))
-    expect(result.recommendedSlug).toBe('silver')
+    expect(result.recommendedSlug).toBe('pro')
     expect(result.isLegacyPath).toBe(false)
   })
 
-  // Case 20: 7 T1 integrations → 'gold' (Silver has 6 T1 slots)
-  it('7 T1 integrations → gold (slot-fit upgrade from silver)', () => {
+  // Case 20: 7 T1 integrations → 'max' (Pro has 6 T1 slots)
+  it('7 T1 integrations → max (slot-fit upgrade from pro)', () => {
     const result = selectTier(input({
       integrations: [
         t1('Stripe'), t1('HubSpot'), t1('Calendly'), t1('Mailchimp'),
         t1('Pipedrive'), t1('Xero'), t1('Salesforce'),
       ],
     }))
-    expect(result.recommendedSlug).toBe('gold')
+    expect(result.recommendedSlug).toBe('max')
     expect(result.isLegacyPath).toBe(false)
   })
 
-  // 3 T1 integrations → bronze (fits exactly in Bronze's 3 T1 slots)
-  it('3 T1 integrations → bronze (fits exactly in bronze T1 slots)', () => {
+  // 3 T1 integrations → starter (fits exactly in Starter's 3 T1 slots)
+  it('3 T1 integrations → starter (fits exactly in starter T1 slots)', () => {
     const result = selectTier(input({
       integrations: [t1('Stripe'), t1('HubSpot'), t1('Calendly')],
     }))
-    expect(result.recommendedSlug).toBe('bronze')
+    expect(result.recommendedSlug).toBe('starter')
     expect(result.isLegacyPath).toBe(false)
   })
 
-  // 13 T1 integrations → core (Gold has 12 T1 slots — overflow to core)
-  it('13 T1 integrations → core (slot-fit overflow: Gold has 12 T1 slots)', () => {
+  // 13 T1 integrations → elite (Max has 12 T1 slots — overflow to elite)
+  it('13 T1 integrations → elite (slot-fit overflow: Max has 12 T1 slots)', () => {
     const integrations = Array.from({ length: 13 }, (_, i) => t1(`Tool${i + 1}`))
     const result = selectTier(input({ integrations }))
-    expect(result.recommendedSlug).toBe('core')
+    expect(result.recommendedSlug).toBe('elite')
     expect(result.isLegacyPath).toBe(false)
   })
 })

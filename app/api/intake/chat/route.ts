@@ -57,7 +57,7 @@ Present goals (multi-select, up to 3):
 ## Step 4: Platform Branch Logic
 If detectPlatformTier returned 'legacy' (Shopify/Wix/Squarespace/WordPress):
 - Inform the prospect of the limitation
-- Ask whether they prefer: PATH A (Legacy Add-On — protocol layer on top of current platform, limited to Bronze/Silver) or PATH B (Migration — move to headless stack, full compliance, all tiers)
+- Ask whether they prefer: PATH A (Legacy Add-On — protocol layer on top of current platform, limited to Starter/Pro) or PATH B (Migration — move to headless stack, full compliance, all tiers)
 
 If 'full' or 'migration': proceed directly to Step 5.
 
@@ -70,9 +70,9 @@ Lead midpoints: Under 50→25, 50-200→125, 200-500→350, 500+→750
 Goal codes: appointments, leads, blog, citations, press, followup, connect, ucp, acp, voice
 
 EDGE CASES (mandatory routing):
-- 10 or more integrations detected → Core tier; note this in your message
-- No existing tools → Bronze with CRM guidance
-- SAP, NetSuite, Oracle ERP, or Microsoft Dynamics in stack → Core auto-route
+- 10 or more integrations detected → Elite tier; note this in your message
+- No existing tools → Starter with CRM guidance
+- SAP, NetSuite, Oracle ERP, or Microsoft Dynamics in stack → Elite auto-route
 - Any tool not found in catalog → flag for technical review, recommend booking a discovery call
 
 ## Step 6: Proposal Delivery

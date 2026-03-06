@@ -1,10 +1,10 @@
 // Package tier -> Stripe pricing mapping
-// Bronze:          setup $16,000  | monthly $3,500
-// Silver:          setup $28,000  | monthly $6,500
-// Gold:            setup $48,000  | monthly $12,000
+// Starter:         setup $16,000  | monthly $3,500
+// Pro:             setup $28,000  | monthly $6,500
+// Max:             setup $48,000  | monthly $12,000
 // Shopify Starter: setup $8,500   | monthly $2,000
 // Shopify Growth:  setup $16,000  | monthly $4,000
-// Core:            custom-quoted  (no Stripe Price -- null)
+// Elite:           custom-quoted  (no Stripe Price -- null)
 //
 // Products and Prices are created in Stripe Dashboard (test mode).
 // Copy IDs to .env.local. See RESEARCH.md "Dashboard Product Creation Guide".
@@ -36,20 +36,20 @@ let _products: StripePriceMap | null = null
 function getProducts(): StripePriceMap {
   if (!_products) {
     _products = {
-      bronze: {
-        productId: getEnv('STRIPE_PRODUCT_BRONZE'),
-        setupPriceId: getEnv('STRIPE_PRICE_BRONZE_SETUP'),
-        monthlyPriceId: getEnv('STRIPE_PRICE_BRONZE_MONTHLY'),
+      starter: {
+        productId: getEnv('STRIPE_PRODUCT_STARTER'),
+        setupPriceId: getEnv('STRIPE_PRICE_STARTER_SETUP'),
+        monthlyPriceId: getEnv('STRIPE_PRICE_STARTER_MONTHLY'),
       },
-      silver: {
-        productId: getEnv('STRIPE_PRODUCT_SILVER'),
-        setupPriceId: getEnv('STRIPE_PRICE_SILVER_SETUP'),
-        monthlyPriceId: getEnv('STRIPE_PRICE_SILVER_MONTHLY'),
+      pro: {
+        productId: getEnv('STRIPE_PRODUCT_PRO'),
+        setupPriceId: getEnv('STRIPE_PRICE_PRO_SETUP'),
+        monthlyPriceId: getEnv('STRIPE_PRICE_PRO_MONTHLY'),
       },
-      gold: {
-        productId: getEnv('STRIPE_PRODUCT_GOLD'),
-        setupPriceId: getEnv('STRIPE_PRICE_GOLD_SETUP'),
-        monthlyPriceId: getEnv('STRIPE_PRICE_GOLD_MONTHLY'),
+      max: {
+        productId: getEnv('STRIPE_PRODUCT_MAX'),
+        setupPriceId: getEnv('STRIPE_PRICE_MAX_SETUP'),
+        monthlyPriceId: getEnv('STRIPE_PRICE_MAX_MONTHLY'),
       },
       'shopify-starter': {
         productId: getEnv('STRIPE_PRODUCT_SHOPIFY_STARTER'),
@@ -61,7 +61,7 @@ function getProducts(): StripePriceMap {
         setupPriceId: getEnv('STRIPE_PRICE_SHOPIFY_GROWTH_SETUP'),
         monthlyPriceId: getEnv('STRIPE_PRICE_SHOPIFY_GROWTH_MONTHLY'),
       },
-      core: null,
+      elite: null,
     }
   }
   return _products

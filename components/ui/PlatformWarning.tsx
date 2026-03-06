@@ -44,7 +44,7 @@ export function PlatformWarning({
                 Legacy Add-On Path
               </p>
               <p className="text-xs text-[var(--color-muted)] mb-3">
-                Protocol layer on top of {platform}. Limited ceiling — Bronze or Silver tier only.
+                Protocol layer on top of {platform}. Limited ceiling — Starter or Pro tier only.
               </p>
               {onContinueWithLegacy && (
                 <Button variant="secondary" size="sm" onClick={onContinueWithLegacy}>

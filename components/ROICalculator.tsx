@@ -7,44 +7,44 @@ import Link from 'next/link'
 
 export interface ROICalculatorProps {
   /** Pre-selected tier (from /packages/[tier] page) */
-  defaultTier?: 'bronze' | 'silver' | 'gold'
+  defaultTier?: 'starter' | 'pro' | 'max'
   /** Current values from URL searchParams */
   tier?: string
   leads?: string
   rate?: string
   deal?: string
-  /** Form action URL — e.g. "/packages" or "/packages/gold" */
+  /** Form action URL — e.g. "/packages" or "/packages/max" */
   formAction: string
   /** Extra hidden inputs to preserve in form (e.g. { view: 'monthly' }) */
   hiddenParams?: Record<string, string>
   className?: string
 }
 
-type Tier = 'bronze' | 'silver' | 'gold'
+type Tier = 'starter' | 'pro' | 'max'
 
 // ---------------------------------------------------------------------------
 // Constants
 // ---------------------------------------------------------------------------
 
 const CAPTURE_RATES: Record<Tier, number> = {
-  bronze: 0.15,
-  silver: 0.25,
-  gold: 0.40,
+  starter: 0.15,
+  pro: 0.25,
+  max: 0.40,
 }
 
 const ANNUAL_COSTS: Record<Tier, { setup: number; monthly: number }> = {
-  bronze: { setup: 16000, monthly: 3500 },
-  silver: { setup: 28000, monthly: 6500 },
-  gold: { setup: 48000, monthly: 12000 },
+  starter: { setup: 16000, monthly: 3500 },
+  pro: { setup: 28000, monthly: 6500 },
+  max: { setup: 48000, monthly: 12000 },
 }
 
 const TIER_LABELS: Record<Tier, string> = {
-  bronze: 'Bronze',
-  silver: 'Silver',
-  gold: 'Gold',
+  starter: 'Starter',
+  pro: 'Pro',
+  max: 'Max',
 }
 
-const TIERS: Tier[] = ['bronze', 'silver', 'gold']
+const TIERS: Tier[] = ['starter', 'pro', 'max']
 
 // ---------------------------------------------------------------------------
 // ROI Computation (pure function — runs on server)
@@ -100,7 +100,7 @@ function formatPayback(months: number | null): string {
 }
 
 function isValidTier(value: string | undefined): value is Tier {
-  return value === 'bronze' || value === 'silver' || value === 'gold'
+  return value === 'starter' || value === 'pro' || value === 'max'
 }
 
 // ---------------------------------------------------------------------------
@@ -120,7 +120,7 @@ export function ROICalculator({
   // Parse URL params with fallbacks
   const selectedTier: Tier = isValidTier(tierParam)
     ? tierParam
-    : defaultTier ?? 'gold'
+    : defaultTier ?? 'max'
   const leadsPerMonth = Math.max(1, Math.min(10000, Number(leadsParam) || 200))
   const closeRate = Math.max(1, Math.min(100, Number(rateParam) || 15))
   const avgDealSize = Math.max(100, Number(dealParam) || 5000)

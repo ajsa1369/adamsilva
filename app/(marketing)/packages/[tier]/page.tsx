@@ -52,10 +52,10 @@ export async function generateMetadata({
 // ---------------------------------------------------------------------------
 
 const TIER_ORDER = [
-  'bronze',
-  'silver',
-  'gold',
-  'core',
+  'starter',
+  'pro',
+  'max',
+  'elite',
   'shopify-starter',
   'shopify-growth',
 ] as const
@@ -64,10 +64,10 @@ const TIER_ORDER = [
 function getBadgeVariant(
   slug: string,
 ): NonNullable<BadgeProps['variant']> {
-  if (slug === 'bronze') return 'bronze'
-  if (slug === 'silver') return 'silver'
-  if (slug === 'gold') return 'gold'
-  if (slug === 'core') return 'core'
+  if (slug === 'starter') return 'starter'
+  if (slug === 'pro') return 'pro'
+  if (slug === 'max') return 'max'
+  if (slug === 'elite') return 'elite'
   return 'legacy'
 }
 
@@ -102,12 +102,12 @@ export default function TierPage({
     ? PACKAGES.find((p) => p.slug === nextTierSlug)
     : null
 
-  // ROI calculator tier (only for bronze/silver/gold)
-  const roiTier = (['bronze', 'silver', 'gold'] as const).includes(
-    pkg.slug as 'bronze' | 'silver' | 'gold',
+  // ROI calculator tier (only for starter/pro/max)
+  const roiTier = (['starter', 'pro', 'max'] as const).includes(
+    pkg.slug as 'starter' | 'pro' | 'max',
   )
-    ? (pkg.slug as 'bronze' | 'silver' | 'gold')
-    : 'gold'
+    ? (pkg.slug as 'starter' | 'pro' | 'max')
+    : 'max'
 
   // Upgrade nudge comparison rows
   const nudgeRows: ComparisonRow[] | null =
@@ -389,8 +389,8 @@ export default function TierPage({
         </div>
       </section>
 
-      {/* ROI Calculator (non-core tiers only) */}
-      {pkg.slug !== 'core' && (
+      {/* ROI Calculator (non-elite tiers only) */}
+      {pkg.slug !== 'elite' && (
         <section className="section">
           <div className="container">
             <ROICalculator

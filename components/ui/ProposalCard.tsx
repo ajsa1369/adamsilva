@@ -6,7 +6,7 @@ import { Badge } from './Badge'
 import { Button } from './Button'
 
 export interface ProposalCardProps {
-  tier: 'bronze' | 'silver' | 'gold' | 'core' | 'legacy'
+  tier: 'starter' | 'pro' | 'max' | 'elite' | 'legacy'
   setupTotal: number      // dollars, no cents
   monthlyTotal: number    // dollars, no cents
   integrationCount: number
@@ -16,19 +16,19 @@ export interface ProposalCardProps {
 }
 
 const tierAccentLine: Record<ProposalCardProps['tier'], string> = {
-  bronze: 'border-t-2 border-amber-400',
-  silver: 'border-t-2 border-[#85C1DF]',
-  gold:   'border-t-2 border-yellow-400',
-  core:   'border-t-2 border-[#4D8EC0]',
-  legacy: 'border-t-2 border-slate-400',
+  starter: 'border-t-2 border-amber-400',
+  pro:     'border-t-2 border-[#85C1DF]',
+  max:     'border-t-2 border-yellow-400',
+  elite:   'border-t-2 border-[#4D8EC0]',
+  legacy:  'border-t-2 border-slate-400',
 }
 
 const tierLabel: Record<ProposalCardProps['tier'], string> = {
-  bronze: 'Bronze',
-  silver: 'Silver',
-  gold:   'Gold',
-  core:   'Core',
-  legacy: 'Legacy',
+  starter: 'Starter',
+  pro:     'Pro',
+  max:     'Max',
+  elite:   'Elite',
+  legacy:  'Legacy',
 }
 
 export function ProposalCard({

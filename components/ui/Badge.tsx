@@ -4,7 +4,7 @@ export interface BadgeProps {
   variant?:
     | 'default'
     // Tier variants
-    | 'bronze' | 'silver' | 'gold' | 'core' | 'legacy'
+    | 'starter' | 'pro' | 'max' | 'elite' | 'legacy'
     // Status variants
     | 'success' | 'warning' | 'error' | 'info'
     // Protocol variants — reuse existing globals.css classes
@@ -26,10 +26,10 @@ const variantClasses: Record<NonNullable<BadgeProps['variant']>, string> = {
   ap2:     'badge badge-ap2',
 
   // Tier variants
-  bronze: `${BASE} bg-amber-100 text-amber-800 border border-amber-300`,
-  silver: `${BASE} bg-[rgba(133,193,223,0.15)] text-[#2a6a8f] border border-[rgba(77,142,192,0.4)]`,
-  gold:   `${BASE} bg-yellow-100 text-yellow-800 border border-yellow-300`,
-  core:   `${BASE} bg-[#1B2E4B] text-white border border-[rgba(77,142,192,0.5)]`,
+  starter: `${BASE} bg-amber-100 text-amber-800 border border-amber-300`,
+  pro:     `${BASE} bg-[rgba(133,193,223,0.15)] text-[#2a6a8f] border border-[rgba(77,142,192,0.4)]`,
+  max:     `${BASE} bg-yellow-100 text-yellow-800 border border-yellow-300`,
+  elite:   `${BASE} bg-[#1B2E4B] text-white border border-[rgba(77,142,192,0.5)]`,
   legacy: `${BASE} bg-slate-100 text-slate-600 border border-slate-300`,
 
   // Status variants

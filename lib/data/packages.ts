@@ -15,20 +15,20 @@
 // ---------------------------------------------------------------------------
 
 export interface PackagePageData {
-  slug: 'bronze' | 'silver' | 'gold' | 'core' | 'shopify-starter' | 'shopify-growth'
+  slug: 'starter' | 'pro' | 'max' | 'elite' | 'shopify-starter' | 'shopify-growth'
   name: string
   tagline: string
-  setupPrice: number | null    // null = custom pricing (Core)
-  monthlyPrice: number | null  // null = custom pricing (Core)
+  setupPrice: number | null    // null = custom pricing (Elite)
+  monthlyPrice: number | null  // null = custom pricing (Elite)
   setupDisplay: string         // "$16,000" or "From $75,000"
   monthlyDisplay: string       // "$3,500/mo" or "Custom"
-  pagesIncluded: number | null // pages optimized in setup; null = unlimited (Core)
-  tier1Slots: number | null    // null = unlimited (Core)
+  pagesIncluded: number | null // pages optimized in setup; null = unlimited (Elite)
+  tier1Slots: number | null    // null = unlimited (Elite)
   tier2Slots: number
   tier3Slots: number
   slotsDisplay: string         // "3 T1 / 0 T2 / 0 T3" or "Unlimited"
   isLegacy: boolean            // true for shopify-starter and shopify-growth
-  highlighted: boolean         // true for gold (most popular)
+  highlighted: boolean         // true for max (most popular)
   badge: string | null         // "Most Popular" | "Best Value" | null
   highlights: string[]         // 4-6 bullet strings for PricingTable
   features: {                  // for ComparisonTable rows
@@ -46,8 +46,8 @@ export interface PackagePageData {
 
 export const PACKAGES: PackagePageData[] = [
   {
-    slug: 'bronze',
-    name: 'Bronze',
+    slug: 'starter',
+    name: 'Starter',
     tagline: 'Full agent fleet — up to 30 pages optimized in setup',
     setupPrice: 16000,
     monthlyPrice: 3500,
@@ -75,19 +75,19 @@ export const PACKAGES: PackagePageData[] = [
       pressReleasesPerMonth: 'Client-scheduled',
       chatbotChannels: 'Web',
       protocolStack: 'UCP',
-      architecture: 'Any headless',
+      architecture: 'SSR headless (no SPA hydration tax)',
       support: 'Email',
     },
     faqs: [
       {
-        question: 'Who is Bronze for?',
+        question: 'Who is Starter for?',
         answer:
-          'Bronze is for lean teams or smaller sites (up to 30 pages). You get the exact same agent fleet as Silver and Gold — AI Commerce Agent, Authority Content Agent with topical map planning, and Press Release Agent — applied to 30 pages in the setup. The setup fee reflects the man hours to implement full JSON-LD schema, AEO/GEO optimization, and protocol endpoints across those pages.',
+          'Starter is for lean teams or smaller sites (up to 30 pages). You get the exact same agent fleet as Pro and Max — AI Commerce Agent, Authority Content Agent with topical map planning, and Press Release Agent — applied to 30 pages in the setup. The setup fee reflects the man hours to implement full JSON-LD schema, AEO/GEO optimization, and protocol endpoints across those pages.',
       },
       {
-        question: 'What is the difference between Bronze, Silver, and Gold?',
+        question: 'What is the difference between Starter, Pro, and Max?',
         answer:
-          'The agent fleet is identical across all three tiers. The only difference is the number of pages included in the setup: Bronze covers 30 pages, Silver covers 60 pages, Gold covers 100 pages. More pages means more man hours — more JSON-LD schema implementations, more AEO/GEO optimization, more protocol endpoints, more structured data coverage. If your site grows, you can add pages at any time.',
+          'The agent fleet is identical across all three tiers. The only difference is the number of pages included in the setup: Starter covers 30 pages, Pro covers 60 pages, Max covers 100 pages. More pages means more man hours — more JSON-LD schema implementations, more AEO/GEO optimization, more protocol endpoints, more structured data coverage. If your site grows, you can add pages at any time.',
       },
       {
         question: 'What does each Authority Content article include?',
@@ -101,11 +101,11 @@ export const PACKAGES: PackagePageData[] = [
       },
     ],
     heroDescription:
-      'Bronze is the full agent fleet applied to up to 30 pages: JSON-LD schema, AEO/GEO optimization, UCP protocol, and AI Commerce Agent all built in setup. Same agents as Silver and Gold — the difference is scope, not capability.',
+      'Starter is the full agent fleet applied to up to 30 pages: JSON-LD schema, AEO/GEO optimization, UCP protocol, and AI Commerce Agent all built in setup. Same agents as Pro and Max — the difference is scope, not capability.',
   },
   {
-    slug: 'silver',
-    name: 'Silver',
+    slug: 'pro',
+    name: 'Pro',
     tagline: 'Full agent fleet — up to 60 pages optimized in setup',
     setupPrice: 28000,
     monthlyPrice: 6500,
@@ -133,14 +133,14 @@ export const PACKAGES: PackagePageData[] = [
       pressReleasesPerMonth: 'Client-scheduled',
       chatbotChannels: 'Web + SMS',
       protocolStack: 'UCP + ACP (partial)',
-      architecture: 'Any headless',
+      architecture: 'SSR headless (no SPA hydration tax)',
       support: 'Priority email',
     },
     faqs: [
       {
-        question: "What's the difference between Bronze and Silver?",
+        question: "What's the difference between Starter and Pro?",
         answer:
-          'Silver covers 60 pages in the setup vs 30 for Bronze — more man hours to implement JSON-LD schema, AEO/GEO optimization, and protocol endpoints across a larger site. Silver also adds SMS as a second AI Commerce Agent channel, partial ACP for agent-initiated checkout, and entity graph construction. The agent fleet itself is identical.',
+          'Pro covers 60 pages in the setup vs 30 for Starter — more man hours to implement JSON-LD schema, AEO/GEO optimization, and protocol endpoints across a larger site. Pro also adds SMS as a second AI Commerce Agent channel, partial ACP for agent-initiated checkout, and entity graph construction. The agent fleet itself is identical.',
       },
       {
         question: 'What does each Authority Content article include?',
@@ -159,11 +159,11 @@ export const PACKAGES: PackagePageData[] = [
       },
     ],
     heroDescription:
-      'Silver is the full agent fleet applied to up to 60 pages: same agents as Bronze and Gold, covering more of your site. More pages means more JSON-LD schema, more AEO/GEO optimization, and more protocol surface area — which directly increases the number of entry points AI systems have into your business.',
+      'Pro is the full agent fleet applied to up to 60 pages: same agents as Starter and Max, covering more of your site. More pages means more JSON-LD schema, more AEO/GEO optimization, and more protocol surface area — which directly increases the number of entry points AI systems have into your business.',
   },
   {
-    slug: 'gold',
-    name: 'Gold',
+    slug: 'max',
+    name: 'Max',
     tagline: 'Full agent fleet — up to 100 pages optimized in setup',
     setupPrice: 48000,
     monthlyPrice: 12000,
@@ -191,14 +191,14 @@ export const PACKAGES: PackagePageData[] = [
       pressReleasesPerMonth: 'Client-scheduled',
       chatbotChannels: 'Web + SMS + Voice + WhatsApp',
       protocolStack: 'UCP + ACP + AP2 (Gold Standard)',
-      architecture: 'Headless required',
+      architecture: 'SSR headless required (no SPA hydration tax)',
       support: 'Dedicated CSM',
     },
     faqs: [
       {
-        question: "What makes Gold the 'Gold Standard'?",
+        question: "What makes Max the 'Gold Standard'?",
         answer:
-          'Gold covers 100 pages in the setup — the most comprehensive schema, AEO/GEO, and protocol implementation of the three tiers. It also achieves full UCP + ACP + AP2 compliance, adds voice and WhatsApp as AI Commerce Agent channels, and includes a Dedicated Client Success Manager. The agent fleet is the same as Bronze and Silver — Gold just applies it to a larger surface area and adds the complete protocol stack.',
+          'Max covers 100 pages in the setup — the most comprehensive schema, AEO/GEO, and protocol implementation of the three tiers. It also achieves full UCP + ACP + AP2 compliance, adds voice and WhatsApp as AI Commerce Agent channels, and includes a Dedicated Client Success Manager. The agent fleet is the same as Starter and Pro — Max just applies it to a larger surface area and adds the complete protocol stack.',
       },
       {
         question: 'How does the topical map agent work?',
@@ -217,11 +217,11 @@ export const PACKAGES: PackagePageData[] = [
       },
     ],
     heroDescription:
-      'Gold is the full agent fleet applied to up to 100 pages: maximum schema coverage, AEO/GEO optimization across your entire site, the full UCP/ACP/AP2 Gold Standard protocol stack, and four-channel AI Commerce Agent. Same agents as Bronze and Silver — Gold is for larger sites where more pages means more AI entry points.',
+      'Max is the full agent fleet applied to up to 100 pages: maximum schema coverage, AEO/GEO optimization across your entire site, the full UCP/ACP/AP2 Gold Standard protocol stack, and four-channel AI Commerce Agent. Same agents as Starter and Pro — Max is for larger sites where more pages means more AI entry points.',
   },
   {
-    slug: 'core',
-    name: 'Core',
+    slug: 'elite',
+    name: 'Elite',
     tagline: 'Enterprise agent fleet — unlimited pages, custom scope',
     setupPrice: null,
     monthlyPrice: null,
@@ -249,28 +249,28 @@ export const PACKAGES: PackagePageData[] = [
       pressReleasesPerMonth: 'Client-scheduled',
       chatbotChannels: 'All + custom',
       protocolStack: 'Full stack + white-label',
-      architecture: 'Custom',
+      architecture: 'Custom SSR (zero hydration tax)',
       support: '24/7 dedicated team',
     },
     faqs: [
       {
-        question: 'Who is Core designed for?',
+        question: 'Who is Elite designed for?',
         answer:
-          'Core is built for enterprises running multi-brand portfolios, high-volume agentic transaction environments, or businesses that want to white-label the entire ASC agent stack for their own clients. The agents are custom-trained on your full product catalog and business logic.',
+          'Elite is built for enterprises running multi-brand portfolios, high-volume agentic transaction environments, or businesses that want to white-label the entire ASC agent stack for their own clients. The agents are custom-trained on your full product catalog and business logic.',
       },
       {
-        question: 'How is Core pricing determined?',
+        question: 'How is Elite pricing determined?',
         answer:
-          'Core is custom-quoted based on agent fleet size, number of brands, content production volume, custom channel development, and white-label licensing scope. Setup starts from $75,000 and includes full agent training, protocol implementation, and dedicated operations. Content production (articles, press releases) scales to your volume — you bring your own syndication accounts and AI API keys so distribution costs are billed directly to you.',
+          'Elite is custom-quoted based on agent fleet size, number of brands, content production volume, custom channel development, and white-label licensing scope. Setup starts from $75,000 and includes full agent training, protocol implementation, and dedicated operations. Content production (articles, press releases) scales to your volume — you bring your own syndication accounts and AI API keys so distribution costs are billed directly to you.',
       },
       {
-        question: 'What does white-label mean for Core clients?',
+        question: 'What does white-label mean for Elite clients?',
         answer:
-          'Core clients can deploy the full ASC agent stack — commerce agents, press release agents, content agents, and protocol infrastructure — under their own brand. This includes custom protocol endpoints (/.well-known/ucp, /acp, /ap2 under your domain) and branded agent identities for your clients or business units.',
+          'Elite clients can deploy the full ASC agent stack — commerce agents, press release agents, content agents, and protocol infrastructure — under their own brand. This includes custom protocol endpoints (/.well-known/ucp, /acp, /ap2 under your domain) and branded agent identities for your clients or business units.',
       },
     ],
     heroDescription:
-      'Core is the enterprise agent fleet — unlimited channels, unlimited 2,000-word authority articles with Remotion video summaries and schema-wrapped images, custom press release cadence with pre-built schema rules, white-label protocol infrastructure, and a 24/7 dedicated team managing your entire agentic commerce operation.',
+      'Elite is the enterprise agent fleet — unlimited channels, unlimited 2,000-word authority articles with Remotion video summaries and schema-wrapped images, custom press release cadence with pre-built schema rules, white-label protocol infrastructure, and a 24/7 dedicated team managing your entire agentic commerce operation.',
   },
   {
     slug: 'shopify-starter',
@@ -309,7 +309,7 @@ export const PACKAGES: PackagePageData[] = [
       {
         question: 'Why is Shopify limited in protocol compliance?',
         answer:
-          "Shopify's closed architecture prevents root-level file placement (blocking UCP discovery), uses proprietary checkout (blocking ACP), and doesn't allow custom security headers (blocking AP2). These are platform-level constraints, not service limitations.",
+          "Shopify's SPA architecture imposes the hydration tax — AI agents must download and execute 2MB+ of JavaScript before seeing any content. SSR (Server-Side Rendering) delivers complete HTML on the first request, eliminating this entirely. Beyond the hydration tax, Shopify prevents root-level file placement (blocking UCP discovery), uses proprietary checkout (blocking ACP), and doesn't allow custom security headers (blocking AP2). These are platform-level constraints, not service limitations.",
       },
       {
         question: "What is the 'subdomain blog' for Shopify?",
@@ -317,13 +317,13 @@ export const PACKAGES: PackagePageData[] = [
           "Since Shopify's native blog lacks the structured data and performance characteristics needed for AI discovery, we deploy your authority content on a headless subdomain (e.g., blog.yourdomain.com) that achieves full SEO and AI indexing standards.",
       },
       {
-        question: 'Can I migrate from Shopify Starter to Gold?',
+        question: 'Can I migrate from Shopify Starter to Max?',
         answer:
-          'Yes — and we recommend it. Migration from Shopify to a headless architecture unlocks full Gold Standard compliance. We handle the migration planning, content transfer, and DNS cutover as part of the upgrade process.',
+          'Yes — and we recommend it. Migration from Shopify (SPA) to an SSR headless architecture eliminates the hydration tax and unlocks full Gold Standard compliance. AI agents go from seeing a blank page to receiving complete HTML instantly. We handle the migration planning, content transfer, and DNS cutover as part of the upgrade process.',
       },
     ],
     heroDescription:
-      'Shopify Starter brings AI chatbot and authority content to Shopify merchants — operating within Shopify\'s architectural constraints with a clear upgrade path to headless Gold.',
+      'Shopify Starter brings AI chatbot and authority content to Shopify merchants — operating within Shopify\'s architectural constraints with a clear upgrade path to headless Max.',
   },
   {
     slug: 'shopify-growth',
@@ -400,10 +400,10 @@ export interface PlatformEntry {
     goldStandard: ComplianceLevel
   }
   recommendedPackage:
-    | 'bronze'
-    | 'silver'
-    | 'gold'
-    | 'core'
+    | 'starter'
+    | 'pro'
+    | 'max'
+    | 'elite'
     | 'shopify-starter'
     | 'shopify-growth'
     | 'migration'
@@ -414,7 +414,7 @@ export interface PlatformEntry {
 export const PLATFORM_MATRIX: PlatformEntry[] = [
   {
     slug: 'nextjs-custom',
-    name: 'Next.js / Custom SPA',
+    name: 'Next.js SSR / Custom Headless',
     isLegacy: false,
     compliance: {
       chatbot: 'full',
@@ -425,9 +425,9 @@ export const PLATFORM_MATRIX: PlatformEntry[] = [
       ap2: 'full',
       goldStandard: 'full',
     },
-    recommendedPackage: 'gold',
+    recommendedPackage: 'max',
     ceiling:
-      'Gold Standard: Full UCP + ACP + AP2 compliance achievable',
+      'Gold Standard: Full UCP + ACP + AP2 compliance achievable. SSR eliminates the hydration tax — AI agents see complete HTML on first request.',
     penalties: [],
   },
   {
@@ -443,7 +443,7 @@ export const PLATFORM_MATRIX: PlatformEntry[] = [
       ap2: 'none',
       goldStandard: 'none',
     },
-    recommendedPackage: 'silver',
+    recommendedPackage: 'pro',
     ceiling:
       'Partial: UCP layer achievable, ACP/AP2 require architecture changes',
     penalties: [],
@@ -461,7 +461,7 @@ export const PLATFORM_MATRIX: PlatformEntry[] = [
       ap2: 'none',
       goldStandard: 'none',
     },
-    recommendedPackage: 'silver',
+    recommendedPackage: 'pro',
     ceiling:
       'Partial: UCP achievable with optimization, ACP/AP2 blocked by WordPress checkout architecture',
     penalties: [],
@@ -481,9 +481,9 @@ export const PLATFORM_MATRIX: PlatformEntry[] = [
     },
     recommendedPackage: 'shopify-starter',
     ceiling:
-      'Limited: Chatbot + press release only. Blog requires subdomain. No UCP/ACP/AP2.',
+      'Limited: SPA architecture imposes hydration tax — AI agents must execute 2MB+ JavaScript before seeing content. SSR platforms eliminate this entirely. Chatbot + press release only. Blog requires subdomain. No UCP/ACP/AP2.',
     penalties: [
-      'Hydration Tax (2MB+ JS) → -40% agent crawl frequency',
+      'SPA Hydration Tax (2MB+ JS) → AI agents must execute JavaScript before seeing content; SSR delivers full HTML instantly',
       'Root-Level Restriction → 0% UCP capability discovery',
       'Proprietary Checkout → Cannot implement ACP',
       'No Custom Security Headers → 0% AP2 cryptographic trust score',
@@ -504,9 +504,9 @@ export const PLATFORM_MATRIX: PlatformEntry[] = [
     },
     recommendedPackage: 'shopify-starter',
     ceiling:
-      'Limited: Same architectural constraints as Shopify.',
+      'Limited: Same SPA hydration tax as Shopify — AI agents cannot read content without JavaScript execution.',
     penalties: [
-      'Hydration Tax (2MB+ JS) → -40% agent crawl frequency',
+      'SPA Hydration Tax (2MB+ JS) → AI agents must execute JavaScript before seeing content; SSR delivers full HTML instantly',
       'Token Inefficiency → AI deprioritizes the site',
       'Root-Level Restriction → 0% UCP capability discovery',
       'Proprietary Checkout → Cannot implement ACP',
@@ -528,9 +528,9 @@ export const PLATFORM_MATRIX: PlatformEntry[] = [
     },
     recommendedPackage: 'shopify-starter',
     ceiling:
-      'Limited: Same architectural constraints as Shopify.',
+      'Limited: Same SPA hydration tax as Shopify — AI agents cannot read content without JavaScript execution.',
     penalties: [
-      'Hydration Tax (2MB+ JS) → -40% agent crawl frequency',
+      'SPA Hydration Tax (2MB+ JS) → AI agents must execute JavaScript before seeing content; SSR delivers full HTML instantly',
       'Token Inefficiency → AI deprioritizes the site',
       'Root-Level Restriction → 0% UCP capability discovery',
       'Proprietary Checkout → Cannot implement ACP',
@@ -552,9 +552,9 @@ export const PLATFORM_MATRIX: PlatformEntry[] = [
     },
     recommendedPackage: 'shopify-starter',
     ceiling:
-      'Limited: Heavy theme overhead blocks UCP/ACP/AP2. Blog partially achievable.',
+      'Limited: Heavy theme SPA hydration tax blocks UCP/ACP/AP2. Blog partially achievable.',
     penalties: [
-      'Hydration Tax (2MB+ JS) → -40% agent crawl frequency',
+      'SPA Hydration Tax (2MB+ JS) → AI agents must execute JavaScript before seeing content; SSR delivers full HTML instantly',
       'Token Inefficiency → AI deprioritizes the site',
       'Root-Level Restriction → 0% UCP capability discovery',
       'Proprietary Checkout → Cannot implement ACP',

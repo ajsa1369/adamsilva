@@ -118,7 +118,7 @@ function buildPillarsFromDB(report: DBReport): PillarScore[] {
       report.score_ai_authority < 60 ? { name: 'Authority Building', slug: 'authority-building', price: '$15,000', urgency: 'AI authority compounds. Every month delayed, competitors build advantages.' } : null),
     make('llm-recommendation', 'LLM Recommendation Score', report.score_llm_recommendation,
       (s) => s < 20 ? 'No AI model would reliably recommend your brand for agentic commerce.' : s < 50 ? 'AI models have limited confidence in your brand.' : 'Strong AI recommendation signals.',
-      report.score_llm_recommendation < 50 ? { name: 'Gold Package', slug: 'gold', price: '$48,000 + $12,000/mo', urgency: 'Agentic commerce will drive 31% of e-commerce revenue by 2027.' } : null),
+      report.score_llm_recommendation < 50 ? { name: 'Max Package', slug: 'max', price: '$48,000 + $12,000/mo', urgency: 'Agentic commerce will drive 31% of e-commerce revenue by 2027.' } : null),
   ]
 }
 

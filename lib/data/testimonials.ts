@@ -23,7 +23,7 @@ export const TESTIMONIALS: Testimonial[] = [
     name: 'Jennifer Park',
     company: 'NovaTech Solutions',
     role: 'Head of E-Commerce',
-    text: 'The ACRA assessment was the best free resource we\'ve ever received. It identified protocol compliance gaps we didn\'t even know existed and gave us a clear roadmap. We immediately contracted for the full Gold package.',
+    text: 'The ACRA assessment was the best free resource we\'ve ever received. It identified protocol compliance gaps we didn\'t even know existed and gave us a clear roadmap. We immediately contracted for the full Max package.',
     rating: 5,
     service: 'acra',
     date: '2025-12-20',

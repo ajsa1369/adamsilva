@@ -79,6 +79,24 @@ async function captureScreenshot(url) {
       await new Promise((r) => setTimeout(r, 7000))
     }
 
+    // Detect error pages that shouldn't be saved as screenshots
+    const pageTitle = (await page.title()).toLowerCase()
+    const bodyText = await page.evaluate(() =>
+      document.body?.innerText?.substring(0, 500)?.toLowerCase() || ''
+    )
+    const errorPatterns = [
+      'forbidden', '403 forbidden', 'access denied',
+      "you don't have permission", 'not found', '404',
+      'just a moment', 'attention required', 'checking your browser',
+      'please verify you are a human', 'enable javascript and cookies',
+    ]
+    const isErrorPage = errorPatterns.some(
+      (p) => pageTitle.includes(p) || bodyText.includes(p)
+    )
+    if (isErrorPage) {
+      throw new Error(`Blocked by target site: "${pageTitle}" — ${bodyText.substring(0, 100)}`)
+    }
+
     const screenshot = await page.screenshot({
       type: 'png',
       clip: { x: 0, y: 0, width: 1280, height: 800 },

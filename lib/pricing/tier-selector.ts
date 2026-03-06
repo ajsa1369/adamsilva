@@ -8,8 +8,8 @@
  * LOCKED priority order:
  *   1. Legacy platform check (shopify/wix/squarespace/wordpress)
  *   2. Enterprise ERP check (SAP/NetSuite/Oracle ERP/Microsoft Dynamics)
- *   3. 10+ integrations → core
- *   4. Zero integrations → bronze
+ *   3. 10+ integrations → elite
+ *   4. Zero integrations → starter
  *   5. Goal/lead/location overrides → compute minimum tier
  *   6. Slot-fit check → upgrade until no overages
  */
@@ -23,7 +23,7 @@ import { calculatePricing } from '@/lib/pricing/calculator'
 // ---------------------------------------------------------------------------
 
 /** Canonical order from lowest to highest */
-const TIER_ORDER: readonly string[] = ['bronze', 'silver', 'gold', 'core']
+const TIER_ORDER: readonly string[] = ['starter', 'pro', 'max', 'elite']
 
 /** Returns the index of a slug in TIER_ORDER. Returns -1 for unknown slugs. */
 function tierIndex(slug: string): number {
@@ -31,7 +31,7 @@ function tierIndex(slug: string): number {
 }
 
 /**
- * Returns the higher of two package slugs in the bronze→silver→gold→core ordering.
+ * Returns the higher of two package slugs in the starter→pro→max→elite ordering.
  * If either slug is unknown, the known one wins. If both unknown, returns current.
  */
 function upgradeTier(current: string, candidate: string): string {
@@ -79,9 +79,9 @@ export function selectTier(input: TierSelectorInput): TierRecommendation {
     const normalizedName = integration.name.toLowerCase().trim()
     if (ENTERPRISE_TOOLS.includes(normalizedName)) {
       return {
-        recommendedSlug: 'core',
+        recommendedSlug: 'elite',
         isLegacyPath: false,
-        reasoning: `Enterprise ERP detected (${integration.name}) — Core tier required`,
+        reasoning: `Enterprise ERP detected (${integration.name}) — Elite tier required`,
       }
     }
   }
@@ -91,9 +91,9 @@ export function selectTier(input: TierSelectorInput): TierRecommendation {
   // -----------------------------------------------------------------------
   if (integrations.length >= 10) {
     return {
-      recommendedSlug: 'core',
+      recommendedSlug: 'elite',
       isLegacyPath: false,
-      reasoning: `${integrations.length} integrations selected — Core tier required (10+ threshold)`,
+      reasoning: `${integrations.length} integrations selected — Elite tier required (10+ threshold)`,
     }
   }
 
@@ -102,56 +102,56 @@ export function selectTier(input: TierSelectorInput): TierRecommendation {
   // -----------------------------------------------------------------------
   if (integrations.length === 0) {
     return {
-      recommendedSlug: 'bronze',
+      recommendedSlug: 'starter',
       isLegacyPath: false,
-      reasoning: 'No integrations selected — Bronze is the starting tier',
+      reasoning: 'No integrations selected — Starter is the starting tier',
     }
   }
 
   // -----------------------------------------------------------------------
   // Step 5 — Goal/lead/location overrides (compute minimum tier)
   // -----------------------------------------------------------------------
-  let minSlug = 'bronze'
+  let minSlug = 'starter'
   const appliedRules: string[] = []
 
-  // T3 integration present → minimum gold
+  // T3 integration present → minimum max
   const hasT3 = integrations.some((i) => i.tier === 3)
   if (hasT3) {
-    minSlug = upgradeTier(minSlug, 'gold')
-    appliedRules.push('Tier 3 integration requires minimum Gold')
+    minSlug = upgradeTier(minSlug, 'max')
+    appliedRules.push('Tier 3 integration requires minimum Max')
   }
 
-  // UCP or ACP in goals → minimum gold
+  // UCP or ACP in goals → minimum max
   if (normalizedGoals.includes('ucp') || normalizedGoals.includes('acp')) {
-    minSlug = upgradeTier(minSlug, 'gold')
+    minSlug = upgradeTier(minSlug, 'max')
     const protocolGoals = normalizedGoals
       .filter((g) => g === 'ucp' || g === 'acp')
       .map((g) => g.toUpperCase())
       .join('/')
-    appliedRules.push(`${protocolGoals} goal requires minimum Gold`)
+    appliedRules.push(`${protocolGoals} goal requires minimum Max`)
   }
 
-  // 500+ monthly leads → minimum gold
+  // 500+ monthly leads → minimum max
   if (monthlyLeads >= 500) {
-    minSlug = upgradeTier(minSlug, 'gold')
-    appliedRules.push(`${monthlyLeads} monthly leads requires minimum Gold`)
+    minSlug = upgradeTier(minSlug, 'max')
+    appliedRules.push(`${monthlyLeads} monthly leads requires minimum Max`)
   } else if (monthlyLeads >= 200) {
-    // 200–499 monthly leads → minimum silver
-    minSlug = upgradeTier(minSlug, 'silver')
-    appliedRules.push(`${monthlyLeads} monthly leads requires minimum Silver`)
+    // 200–499 monthly leads → minimum pro
+    minSlug = upgradeTier(minSlug, 'pro')
+    appliedRules.push(`${monthlyLeads} monthly leads requires minimum Pro`)
   }
 
-  // 6+ locations → minimum silver
+  // 6+ locations → minimum pro
   if (locationCount >= 6) {
-    minSlug = upgradeTier(minSlug, 'silver')
-    appliedRules.push(`${locationCount} locations requires minimum Silver`)
+    minSlug = upgradeTier(minSlug, 'pro')
+    appliedRules.push(`${locationCount} locations requires minimum Pro`)
   }
 
-  // T2 integration present → minimum silver
+  // T2 integration present → minimum pro
   const hasT2 = integrations.some((i) => i.tier === 2)
   if (hasT2) {
-    minSlug = upgradeTier(minSlug, 'silver')
-    appliedRules.push('Tier 2 integration requires minimum Silver')
+    minSlug = upgradeTier(minSlug, 'pro')
+    appliedRules.push('Tier 2 integration requires minimum Pro')
   }
 
   // -----------------------------------------------------------------------
@@ -168,9 +168,9 @@ export function selectTier(input: TierSelectorInput): TierRecommendation {
       finalSlug = candidateSlug
       break
     }
-    // If we reach core, it always fits (99 slots)
+    // If we reach elite, it always fits (99 slots)
     if (i === TIER_ORDER.length - 1) {
-      finalSlug = 'core'
+      finalSlug = 'elite'
     }
   }
 

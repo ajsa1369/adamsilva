@@ -59,18 +59,18 @@ const pageSchema = {
         question:
           'Which platforms work with ASC agentic commerce packages?',
         answer:
-          'Next.js, custom SPAs, and Webflow headless all support full or partial compliance. Shopify, Wix, Squarespace, and WordPress (heavy theme) face architectural constraints that limit UCP, ACP, and AP2 compliance. ASC offers dedicated Shopify Starter and Shopify Growth packages for merchants who want AI capabilities without migrating.',
+          'SSR (Server-Side Rendered) platforms like Next.js, Remix, and Nuxt achieve full compliance because AI agents receive complete HTML on the first request — zero hydration tax. SPA (Single-Page Application) platforms like Shopify, Wix, and Squarespace force AI crawlers to execute 2MB+ of JavaScript before seeing any content, which most AI agents cannot or will not do. ASC offers dedicated Shopify Starter and Shopify Growth packages for merchants who want AI capabilities without migrating.',
       },
       {
         question:
           "Why can't Shopify achieve full protocol compliance?",
         answer:
-          "Shopify's closed commerce architecture creates five blockers: (1) 2MB+ JavaScript hydration tax reduces AI agent crawl frequency by 40%, (2) Shopify's root-level restriction prevents UCP capability discovery, (3) proprietary checkout cannot implement ACP agent payments, (4) no custom security headers means 0% AP2 cryptographic trust score, and (5) token inefficiency causes AI systems to deprioritize the site.",
+          "Shopify's SPA architecture creates five blockers: (1) SPA hydration tax (2MB+ JavaScript) means AI agents must execute the entire JS bundle before seeing content — SSR delivers full HTML instantly, reducing crawl cost by 40%+; (2) Shopify's root-level restriction prevents UCP capability discovery; (3) proprietary checkout cannot implement ACP agent payments; (4) no custom security headers means 0% AP2 cryptographic trust score; and (5) token inefficiency from SPA overhead causes AI systems to deprioritize the site.",
       },
       {
         question: 'What is Gold Standard compliance?',
         answer:
-          'Gold Standard compliance means your site has full UCP (AI agent discovery), ACP (agent checkout), and AP2 (cryptographic payment mandates) protocol implementation. Only Next.js / custom headless architectures or a fresh build from scratch can achieve Gold Standard. Gold Standard unlocks the full ASC Gold package and positions your business to transact directly with AI shopping agents.',
+          'Gold Standard compliance means your site has full UCP (AI agent discovery), ACP (agent checkout), and AP2 (cryptographic payment mandates) protocol implementation. Only SSR architectures (Next.js, Remix, Nuxt) or a fresh headless build can achieve Gold Standard — the key is SSR delivering complete HTML to AI agents on the first request, eliminating the SPA hydration tax entirely. Gold Standard unlocks the full ASC Max package and positions your business to transact directly with AI shopping agents.',
       },
     ]),
   ],

@@ -21,14 +21,14 @@ import {
 
 export const metadata: Metadata = {
   title:
-    'Agentic Commerce Packages — Bronze, Silver, Gold | Adam Silva Consulting',
+    'Agentic Commerce Packages — Starter, Pro, Max | Adam Silva Consulting',
   description:
-    'Compare ASC agentic commerce packages. Bronze from $16,000 setup, Silver from $28,000, Gold from $48,000. Same agent fleet — full JSON-LD schema, AEO/GEO, and protocol stack applied to 30, 60, or 100 pages.',
+    'Compare ASC agentic commerce packages. Starter from $16,000 setup, Pro from $28,000, Max from $48,000. Same agent fleet — full JSON-LD schema, AEO/GEO, and protocol stack applied to 30, 60, or 100 pages.',
   alternates: { canonical: `${SITE_URL}/packages` },
   openGraph: {
     title: 'Agentic Commerce Packages — ASC',
     description:
-      'Compare Bronze, Silver, and Gold packages for agentic commerce implementation. Same agents, different page scope.',
+      'Compare Starter, Pro, and Max packages for agentic commerce implementation. Same agents, different page scope.',
     url: `${SITE_URL}/packages`,
     type: 'website',
   },
@@ -38,7 +38,7 @@ export const metadata: Metadata = {
 // Static data derivations
 // ---------------------------------------------------------------------------
 
-// Bronze, Silver, Gold — the three purchasable tiers (Core is enterprise/custom, shown separately)
+// Starter, Pro, Max — the three purchasable tiers (Elite is enterprise/custom, shown separately)
 const mainTiers = PACKAGES.filter((p) => !p.isLegacy && p.setupPrice !== null)
 
 const tierData: TierData[] = mainTiers.map((pkg) => ({
@@ -52,7 +52,7 @@ const tierData: TierData[] = mainTiers.map((pkg) => ({
   highlighted: pkg.highlighted,
 }))
 
-const comparisonColumns = ['Bronze', 'Silver', 'Gold']
+const comparisonColumns = ['Starter', 'Pro', 'Max']
 
 const comparisonRows: ComparisonRow[] = [
   {
@@ -117,7 +117,7 @@ const pageSchema = {
       '@id': `${SITE_URL}/packages#list`,
       name: 'ASC Agentic Commerce Packages',
       description:
-        'Bronze, Silver, Gold, Core, and Shopify packages for agentic commerce protocol implementation.',
+        'Starter, Pro, Max, Elite, and Shopify packages for agentic commerce protocol implementation.',
       numberOfItems: PACKAGES.length,
       itemListElement: PACKAGES.map((pkg, i) => ({
         '@type': 'ListItem',
@@ -136,19 +136,19 @@ const pageSchema = {
     },
     buildFAQSchema([
       {
-        question: 'What is the difference between Bronze, Silver, and Gold?',
+        question: 'What is the difference between Starter, Pro, and Max?',
         answer:
-          'All three tiers deploy the same agent fleet — AI Commerce Agent, Authority Content Agent (with topical map planning), and Press Release Agent. The only difference is the number of pages optimized in setup: Bronze covers 30 pages ($16,000), Silver covers 60 pages ($28,000), Gold covers 100 pages ($48,000). More pages means more JSON-LD schema implementations, AEO/GEO optimization, and protocol endpoints — which means more entry points for AI systems to find, cite, and transact with your business.',
+          'All three tiers deploy the same agent fleet — AI Commerce Agent, Authority Content Agent (with topical map planning), and Press Release Agent. The only difference is the number of pages optimized in setup: Starter covers 30 pages ($16,000), Pro covers 60 pages ($28,000), Max covers 100 pages ($48,000). More pages means more JSON-LD schema implementations, AEO/GEO optimization, and protocol endpoints — which means more entry points for AI systems to find, cite, and transact with your business.',
       },
       {
         question: 'Which platforms are compatible with ASC packages?',
         answer:
-          'Any headless or custom architecture (Next.js, custom SPA, Webflow headless) achieves full compliance. Shopify, Wix, Squarespace, and WordPress platforms have architectural limitations — ASC offers dedicated Shopify Starter and Shopify Growth packages for these merchants.',
+          'Any SSR (Server-Side Rendered) headless architecture — Next.js, Remix, Nuxt, or custom SSR — achieves full Gold Standard compliance. SSR is the key differentiator: AI agents receive complete HTML on the first request with zero hydration tax. SPA (Single-Page Application) architectures force AI crawlers to execute JavaScript before seeing any content, which most AI agents cannot do. Shopify, Wix, Squarespace, and WordPress platforms carry the SPA hydration tax — ASC offers dedicated Shopify Starter and Shopify Growth packages for these merchants.',
       },
       {
         question: 'How long until I see ROI from an ASC package?',
         answer:
-          'Based on industry benchmarks, Bronze clients see payback in 8-18 months, Silver in 5-12 months, and Gold in 3-8 months. The ROI calculator above shows projections based on your specific leads/month, close rate, and average deal size.',
+          'Based on industry benchmarks, Starter clients see payback in 8-18 months, Pro in 5-12 months, and Max in 3-8 months. The ROI calculator above shows projections based on your specific leads/month, close rate, and average deal size.',
       },
     ]),
   ],
@@ -182,7 +182,7 @@ export default function PackagesPage({
             Agentic Commerce Packages
           </h1>
           <p className="text-lg text-[var(--color-muted)] max-w-2xl mx-auto mb-6">
-            Bronze, Silver, and Gold — the same agent fleet (AI Commerce Agent, Authority Content Agent, Press Release Agent) applied to 30, 60, or 100 pages. The price reflects the scope of the setup, not the capability.
+            Starter, Pro, and Max — the same agent fleet (AI Commerce Agent, Authority Content Agent, Press Release Agent) applied to 30, 60, or 100 pages. The price reflects the scope of the setup, not the capability.
           </p>
           <Link href="/get-started" className="btn-primary inline-block">
             Get Your Custom Proposal &rarr;
@@ -256,11 +256,11 @@ export default function PackagesPage({
                 Need more than 100 pages — or multi-brand / white-label?
               </p>
               <p className="text-[var(--color-muted)] text-sm">
-                Core is a custom-scoped engagement for enterprises, agencies, and multi-brand portfolios. Unlimited pages, custom agent training, white-label protocol endpoints. Priced from $75,000.
+                Elite is a custom-scoped engagement for enterprises, agencies, and multi-brand portfolios. Unlimited pages, custom agent training, white-label protocol endpoints. Priced from $75,000.
               </p>
             </div>
-            <Link href="/packages/core" className="btn-secondary text-sm shrink-0">
-              Learn About Core &rarr;
+            <Link href="/packages/elite" className="btn-secondary text-sm shrink-0">
+              Learn About Elite &rarr;
             </Link>
           </div>
         </div>

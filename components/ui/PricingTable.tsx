@@ -5,8 +5,8 @@ import { Badge } from './Badge'
 import { Button } from './Button'
 
 export interface TierData {
-  id: 'bronze' | 'silver' | 'gold' | 'core' | 'legacy'
-  name: string           // e.g. "Bronze"
+  id: 'starter' | 'pro' | 'max' | 'elite' | 'legacy'
+  name: string           // e.g. "Starter"
   setupPrice: number     // e.g. 2500
   monthlyPrice: number   // e.g. 500
   slots: number          // integration slots included

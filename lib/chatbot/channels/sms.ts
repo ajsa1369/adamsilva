@@ -4,7 +4,7 @@
  * Inbound SMS handler for Twilio and Vonage webhook formats.
  * Twilio sends application/x-www-form-urlencoded; Vonage sends JSON.
  *
- * CHAT-05 compliance: Silver+ tier required (enforced in API route).
+ * CHAT-05 compliance: Pro+ tier required (enforced in API route).
  */
 
 export interface SMSMessage {

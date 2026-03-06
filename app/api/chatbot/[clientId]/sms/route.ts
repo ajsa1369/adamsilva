@@ -20,10 +20,10 @@ export const runtime = 'nodejs'
 export async function POST(req: Request, { params }: { params: { clientId: string } }) {
   const { clientId } = params
 
-  // Tier enforcement: SMS requires Silver+ tier
+  // Tier enforcement: SMS requires Pro+ tier
   const config = await getChannelConfig(clientId)
   if (!isChannelAllowed(config, 'sms')) {
-    return Response.json({ error: 'SMS channel not available on your plan. Upgrade to Silver or higher.' }, { status: 403 })
+    return Response.json({ error: 'SMS channel not available on your plan. Upgrade to Pro or higher.' }, { status: 403 })
   }
 
   const smsMsg = await parseSMSWebhook(req)
