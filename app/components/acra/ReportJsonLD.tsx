@@ -151,7 +151,7 @@ export function ReportJsonLD({
       },
       sameAs: [
         'https://www.linkedin.com/company/adam-silva-consulting',
-        'https://twitter.com/adamsilvaconsulting',
+        'https://x.com/adamsilvacons',
       ],
     },
     publisher: {

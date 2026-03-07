@@ -1,4 +1,5 @@
 import { SITE_URL, ORG_ID } from './organization'
+import { PERSONAL_SOCIAL_LINKS } from '@/lib/data/social'
 
 export const adamSilvaSchema = {
   '@type': 'Person',
@@ -11,11 +12,7 @@ export const adamSilvaSchema = {
     'Adam Silva is the founder and CEO of Adam Silva Consulting — the definitive authority on agentic commerce protocols (UCP, ACP, AP2). With 50+ enterprise protocol implementations, he pioneered the Authority Flywheel methodology and leads the industry in Answer Engine Optimization (AEO), Generative Engine Optimization (GEO), and AI agent deployment for commerce.',
   url: `${SITE_URL}/about`,
   image: `${SITE_URL}/images/adam-silva-agentic-commerce-consultant.png`,
-  sameAs: [
-    'https://www.linkedin.com/in/adamsilvacons',
-    'https://twitter.com/adamsilvacons',
-    'https://github.com/ajsa1369',
-  ],
+  sameAs: PERSONAL_SOCIAL_LINKS,
   worksFor: { '@id': ORG_ID },
   knowsAbout: [
     'Universal Commerce Protocol (UCP)',

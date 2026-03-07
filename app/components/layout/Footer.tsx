@@ -1,7 +1,18 @@
 'use client'
 
 import Link from 'next/link'
-import { ArrowRight, Linkedin, Twitter, Rss, Zap } from 'lucide-react'
+import { ArrowRight, Rss, Zap, type LucideIcon } from 'lucide-react'
+import { Linkedin, Twitter, Youtube, Facebook, Instagram, MessageCircle } from 'lucide-react'
+import { FOOTER_SOCIAL_LINKS } from '@/lib/data/social'
+
+const SOCIAL_ICONS: Record<string, LucideIcon> = {
+  LinkedIn: Linkedin,
+  X: Twitter,
+  YouTube: Youtube,
+  Facebook: Facebook,
+  Instagram: Instagram,
+  Discord: MessageCircle,
+}
 
 const FOOTER_LINKS = {
   Services: [
@@ -107,10 +118,13 @@ export function Footer() {
             <p className="text-sm leading-relaxed mb-5" style={{ color: 'var(--color-muted-2)' }}>
               The definitive authority for UCP, ACP, and AP2 protocol implementation.
             </p>
-            <div className="flex items-center gap-1">
+            <div className="flex items-center gap-1 flex-wrap">
               {[
-                { href: 'https://www.linkedin.com/company/adam-silva-consulting', label: 'LinkedIn', icon: Linkedin },
-                { href: 'https://twitter.com/adamsilvacons', label: 'Twitter', icon: Twitter },
+                ...FOOTER_SOCIAL_LINKS.map(({ platform, url }) => ({
+                  href: url,
+                  label: platform,
+                  icon: SOCIAL_ICONS[platform] || Rss,
+                })),
                 { href: '/feed.xml', label: 'RSS Feed', icon: Rss },
               ].map(({ href, label, icon: Icon }) => (
                 <a

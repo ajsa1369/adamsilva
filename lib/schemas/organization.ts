@@ -1,5 +1,6 @@
 import { TESTIMONIALS } from '@/lib/data/testimonials'
 import { buildAggregateRatingSchema } from './review'
+import { SOCIAL_URLS } from '@/lib/data/social'
 
 const SITE_URL = 'https://www.adamsilvaconsulting.com'
 const ORG_ID = `${SITE_URL}/#organization`
@@ -89,11 +90,23 @@ export const organizationSchema = {
   slogan: 'Global Infrastructure for Agentic Commerce',
   foundingDate: '2023',
   email: 'info@adamsilvaconsulting.com',
-  sameAs: [
-    'https://www.linkedin.com/company/adam-silva-consulting',
-    'https://twitter.com/adamsilvacons',
-    'https://github.com/ajsa1369',
-  ],
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: '12195 NW 24th Street',
+    addressLocality: 'Coral Springs',
+    addressRegion: 'FL',
+    postalCode: '33065',
+    addressCountry: 'US',
+  },
+  contactPoint: {
+    '@type': 'ContactPoint',
+    contactType: 'Sales',
+    email: 'info@adamsilvaconsulting.com',
+    url: `${SITE_URL}/contact`,
+    availableLanguage: 'English',
+  },
+  areaServed: 'Worldwide',
+  sameAs: SOCIAL_URLS,
   knowsAbout: [
     'Universal Commerce Protocol (UCP)',
     'Agentic Commerce Protocol (ACP)',
