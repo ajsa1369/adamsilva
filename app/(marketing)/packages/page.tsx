@@ -231,7 +231,7 @@ const pageSchema = {
       description:
         'Narrated overview of all four ASC agentic commerce tiers: Genesis ($16K, 50 pages), Essentials ($28K, 100 pages), Prime ($48K, 150 pages), and Scale (from $75K, 250 pages). Covers the SPA hydration tax problem, SSR architecture solution, Gold Standard protocol compliance (UCP, ACP, AP2), and why AI agent discovery requires server-side rendered infrastructure.',
       thumbnailUrl: `${SITE_URL}/packages/opengraph-image`,
-      uploadDate: '2026-03-06',
+      uploadDate: '2026-03-06T00:00:00-05:00',
       duration: 'PT32S',
       contentUrl: `${SITE_URL}/videos/packages-overview.mp4`,
       embedUrl: `${SITE_URL}/videos/packages-overview.mp4`,

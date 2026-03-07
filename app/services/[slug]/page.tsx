@@ -150,7 +150,7 @@ export default async function ServicePage({ params }: PageProps) {
     name: `${service.name} — Service Overview`,
     description: service.description,
     thumbnailUrl: service.heroImage ? `${SITE_URL}${service.heroImage}` : `${SITE_URL}/images/og-default.png`,
-    uploadDate: '2026-03-01',
+    uploadDate: '2026-03-01T00:00:00-05:00',
     contentUrl: `${SITE_URL}/services/${service.id}`,
     embedUrl: `${SITE_URL}/services/${service.id}`,
     duration: `PT${Math.ceil((5 + Math.min(service.features.length, 6) * 4 + (service.uniqueInsight ? 5 : 0) + 4))}S`,

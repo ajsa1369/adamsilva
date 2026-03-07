@@ -137,7 +137,7 @@ export function buildPressReleaseSchema(input: PressReleaseSchemaInput): object[
       contentUrl: video.videoPath,
       thumbnailUrl: video.stillImageUrl,
       duration: 'PT60S', // PR-03: always 60 seconds, never use video.duration (stub)
-      uploadDate: publishedAt,
+      uploadDate: publishedAt.includes('T') ? publishedAt : `${publishedAt}T00:00:00-05:00`,
       hasPart: { '@id': `${video.captionTrack.captionUrl}#caption` },
       transcript: video.transcript, // full text for LLM consumption without vision/playback
     })

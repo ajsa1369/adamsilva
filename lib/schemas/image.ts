@@ -46,6 +46,7 @@ export function buildImageObjectSchema(config: ImageObjectConfig) {
     copyrightHolder: { '@id': ORG_ID },
     license: `${SITE_URL}/terms`,
     acquireLicensePage: `${SITE_URL}/terms`,
+    copyrightNotice: '© 2026 Adam Silva Consulting. All rights reserved.',
     creditText: 'Adam Silva Consulting',
     creator: { '@id': ORG_ID },
   }

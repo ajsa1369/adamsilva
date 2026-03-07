@@ -555,7 +555,7 @@ const videoSchema = {
   name: 'Agentic Commerce Protocol Stack — Case Studies Overview',
   description: '26-second animated overview of 10 case studies across UCP, ACP, AP2, MCP, Schema.org, and RAG protocol implementations.',
   thumbnailUrl: `${SITE_URL_CONST}/images/case-studies/protocol-stack-architecture.svg`,
-  uploadDate: '2026-03-05',
+  uploadDate: '2026-03-05T00:00:00-05:00',
   duration: 'PT26S',
   contentUrl: `${SITE_URL_CONST}/case-studies`,
   creator: { '@id': ORG_ID },

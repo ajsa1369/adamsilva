@@ -1,4 +1,6 @@
-import React from 'react'
+'use client'
+
+import React, { useState, useMemo } from 'react'
 import Link from 'next/link'
 
 // ---------------------------------------------------------------------------
@@ -7,15 +9,13 @@ import Link from 'next/link'
 
 export interface ROICalculatorProps {
   /** Pre-selected tier (from /packages/[tier] page) */
-  defaultTier?: 'genesis' | 'essentials' | 'prime' | 'scale'
-  /** Current values from URL searchParams */
+  defaultTier?: Tier
+  /** Unused — kept for backwards compat with server component callers */
   tier?: string
   leads?: string
   rate?: string
   deal?: string
-  /** Form action URL — e.g. "/packages" or "/packages/max" */
-  formAction: string
-  /** Extra hidden inputs to preserve in form (e.g. { view: 'monthly' }) */
+  formAction?: string
   hiddenParams?: Record<string, string>
   className?: string
 }
@@ -47,15 +47,31 @@ const TIER_LABELS: Record<Tier, string> = {
   scale: 'Scale',
 }
 
+const TIER_PAGES: Record<Tier, number> = {
+  genesis: 50,
+  essentials: 100,
+  prime: 150,
+  scale: 250,
+}
+
 const TIERS: Tier[] = ['genesis', 'essentials', 'prime', 'scale']
 
+const TIER_COLORS: Record<Tier, string> = {
+  genesis: '#3b82f6',
+  essentials: '#6366f1',
+  prime: '#2563eb',
+  scale: '#8b5cf6',
+}
+
 // ---------------------------------------------------------------------------
-// ROI Computation (pure function — runs on server)
+// ROI Computation
 // ---------------------------------------------------------------------------
 
 interface ROIResult {
   monthlyRevenueLift: number
   annualRevenueLift: number
+  annualCost: number
+  netProfit: number
   roi: number
   paybackMonths: number | null
 }
@@ -72,17 +88,17 @@ function computeROI(
 
   const monthlyRevenueLift = leads * captureRate * closeRate * dealSize
   const annualRevenueLift = monthlyRevenueLift * 12
-  const annualCost = pkg.monthly * 12
-  const roi =
-    annualCost > 0
-      ? ((annualRevenueLift - annualCost) / pkg.setup) * 100
-      : 0
+  const annualCost = pkg.setup + pkg.monthly * 12
+  const netProfit = annualRevenueLift - annualCost
+  const roi = annualCost > 0 ? (netProfit / annualCost) * 100 : 0
   const paybackMonths =
-    monthlyRevenueLift > 0 ? Math.ceil(pkg.setup / monthlyRevenueLift) : null
+    monthlyRevenueLift > 0 ? Math.ceil(annualCost / monthlyRevenueLift) : null
 
   return {
     monthlyRevenueLift,
     annualRevenueLift,
+    annualCost,
+    netProfit,
     roi: Math.max(0, roi),
     paybackMonths,
   }
@@ -92,22 +108,177 @@ function computeROI(
 // Formatting helpers
 // ---------------------------------------------------------------------------
 
-function formatCurrency(value: number): string {
+function fmt(value: number): string {
+  if (value >= 1000000) return '$' + (value / 1000000).toFixed(1) + 'M'
+  if (value >= 1000) return '$' + Math.round(value / 1000) + 'K'
   return '$' + Math.round(value).toLocaleString('en-US')
 }
 
-function formatPayback(months: number | null): string {
-  if (months === null) return '\u2014'
-  if (months <= 1) return '< 1 month'
-  return `${months} months`
-}
-
-function isValidTier(value: string | undefined): value is Tier {
-  return value === 'genesis' || value === 'essentials' || value === 'prime' || value === 'scale'
+function fmtFull(value: number): string {
+  return '$' + Math.round(value).toLocaleString('en-US')
 }
 
 // ---------------------------------------------------------------------------
-// Component (server component — no 'use client')
+// Bar Chart component
+// ---------------------------------------------------------------------------
+
+function BarChart({
+  results,
+}: {
+  results: { tier: Tier; result: ROIResult }[]
+}) {
+  const maxRevenue = Math.max(...results.map((r) => r.result.annualRevenueLift), 1)
+
+  return (
+    <div className="space-y-3">
+      {results.map(({ tier, result }) => {
+        const revPct = (result.annualRevenueLift / maxRevenue) * 100
+        const costPct = (result.annualCost / maxRevenue) * 100
+        const isProfit = result.netProfit > 0
+
+        return (
+          <div key={tier} className="space-y-1">
+            <div className="flex items-center justify-between text-xs">
+              <span
+                className="font-semibold"
+                style={{ color: 'var(--color-text)' }}
+              >
+                {TIER_LABELS[tier]}{' '}
+                <span style={{ color: 'var(--color-muted)' }}>
+                  ({TIER_PAGES[tier]} pages)
+                </span>
+              </span>
+              <span
+                className="font-mono font-bold"
+                style={{ color: isProfit ? '#16a34a' : '#dc2626' }}
+              >
+                {isProfit ? '+' : ''}{fmtFull(result.netProfit)}
+              </span>
+            </div>
+
+            {/* Revenue bar */}
+            <div className="relative h-6 rounded-md overflow-hidden"
+              style={{ background: 'var(--color-surface)' }}
+            >
+              <div
+                className="absolute inset-y-0 left-0 rounded-md transition-all duration-500 ease-out"
+                style={{
+                  width: `${Math.max(revPct, 2)}%`,
+                  background: TIER_COLORS[tier],
+                  opacity: 0.85,
+                }}
+              />
+              {/* Cost overlay */}
+              <div
+                className="absolute inset-y-0 left-0 rounded-md transition-all duration-500 ease-out"
+                style={{
+                  width: `${Math.min(costPct, 100)}%`,
+                  background: 'var(--color-text)',
+                  opacity: 0.12,
+                }}
+              />
+              <div className="absolute inset-0 flex items-center px-2">
+                <span className="text-[10px] font-bold text-white drop-shadow-sm">
+                  {fmt(result.annualRevenueLift)} rev
+                </span>
+              </div>
+            </div>
+
+            {/* ROI + payback */}
+            <div className="flex items-center gap-3 text-[10px]" style={{ color: 'var(--color-muted)' }}>
+              <span>{Math.round(result.roi)}% ROI</span>
+              <span>
+                Payback:{' '}
+                {result.paybackMonths === null
+                  ? '\u2014'
+                  : result.paybackMonths <= 1
+                    ? '< 1mo'
+                    : `${result.paybackMonths}mo`}
+              </span>
+              <span>Cost: {fmt(result.annualCost)}</span>
+            </div>
+          </div>
+        )
+      })}
+
+      {/* Legend */}
+      <div className="flex items-center gap-4 pt-2 text-[10px]" style={{ color: 'var(--color-muted)' }}>
+        <span className="flex items-center gap-1">
+          <span className="inline-block w-3 h-2 rounded-sm" style={{ background: '#3b82f6' }} />
+          Annual Revenue
+        </span>
+        <span className="flex items-center gap-1">
+          <span className="inline-block w-3 h-2 rounded-sm" style={{ background: 'var(--color-text)', opacity: 0.15 }} />
+          Year 1 Cost
+        </span>
+      </div>
+    </div>
+  )
+}
+
+// ---------------------------------------------------------------------------
+// Slider input
+// ---------------------------------------------------------------------------
+
+function SliderInput({
+  label,
+  id,
+  value,
+  onChange,
+  min,
+  max,
+  step,
+  prefix = '',
+  suffix = '',
+}: {
+  label: string
+  id: string
+  value: number
+  onChange: (v: number) => void
+  min: number
+  max: number
+  step: number
+  prefix?: string
+  suffix?: string
+}) {
+  return (
+    <div>
+      <div className="flex items-center justify-between mb-2">
+        <label
+          htmlFor={id}
+          className="text-sm font-semibold"
+          style={{ color: 'var(--color-text)' }}
+        >
+          {label}
+        </label>
+        <span
+          className="text-sm font-mono font-bold"
+          style={{ color: 'var(--color-accent)' }}
+        >
+          {prefix}{value.toLocaleString('en-US')}{suffix}
+        </span>
+      </div>
+      <input
+        id={id}
+        type="range"
+        min={min}
+        max={max}
+        step={step}
+        value={value}
+        onChange={(e) => onChange(Number(e.target.value))}
+        className="w-full h-2 rounded-lg appearance-none cursor-pointer accent-[var(--color-accent)]"
+        style={{ background: 'var(--color-border)' }}
+      />
+      <div className="flex justify-between text-[10px] mt-1" style={{ color: 'var(--color-muted)' }}>
+        <span>{prefix}{min.toLocaleString('en-US')}{suffix}</span>
+        <span>{prefix}{max.toLocaleString('en-US')}{suffix}</span>
+      </div>
+    </div>
+  )
+}
+
+// ---------------------------------------------------------------------------
+// Component
 // ---------------------------------------------------------------------------
 
 export function ROICalculator({
@@ -116,255 +287,204 @@ export function ROICalculator({
   leads: leadsParam,
   rate: rateParam,
   deal: dealParam,
-  formAction,
-  hiddenParams,
   className = '',
 }: ROICalculatorProps): React.JSX.Element {
-  // Parse URL params with fallbacks
-  const selectedTier: Tier = isValidTier(tierParam)
-    ? tierParam
-    : defaultTier ?? 'prime'
-  const leadsPerMonth = Math.max(1, Math.min(10000, Number(leadsParam) || 200))
-  const closeRate = Math.max(1, Math.min(100, Number(rateParam) || 15))
-  const avgDealSize = Math.max(100, Number(dealParam) || 5000)
+  const initialTier: Tier =
+    (tierParam as Tier) ?? defaultTier ?? 'prime'
 
-  // Compute ROI server-side
-  const result = computeROI(selectedTier, leadsPerMonth, closeRate, avgDealSize)
+  const [selectedTier, setSelectedTier] = useState<Tier>(
+    TIERS.includes(initialTier as Tier) ? initialTier : 'prime'
+  )
+  const [leadsPerMonth, setLeadsPerMonth] = useState(
+    Math.max(10, Math.min(10000, Number(leadsParam) || 200))
+  )
+  const [closeRate, setCloseRate] = useState(
+    Math.max(1, Math.min(100, Number(rateParam) || 15))
+  )
+  const [avgDealSize, setAvgDealSize] = useState(
+    Math.max(500, Math.min(100000, Number(dealParam) || 5000))
+  )
 
-  // Check if user has submitted the form (any roi param present)
-  const hasSubmitted = tierParam || leadsParam || rateParam || dealParam
+  // Compute ROI for all tiers (for chart comparison)
+  const allResults = useMemo(
+    () =>
+      TIERS.map((tier) => ({
+        tier,
+        result: computeROI(tier, leadsPerMonth, closeRate, avgDealSize),
+      })),
+    [leadsPerMonth, closeRate, avgDealSize]
+  )
+
+  const selectedResult = allResults.find((r) => r.tier === selectedTier)!.result
 
   return (
     <section className={`py-12 ${className}`}>
       <h2
-        className="font-display text-3xl font-bold tracking-tight mb-8"
+        className="font-display text-3xl font-bold tracking-tight mb-2"
         style={{ color: 'var(--color-text)' }}
       >
         Calculate Your ROI
       </h2>
+      <p className="text-sm mb-8" style={{ color: 'var(--color-muted)' }}>
+        Drag the sliders to see real-time projections across all tiers.
+      </p>
 
-      <form method="GET" action={formAction}>
-        {/* Preserve non-ROI params */}
-        {hiddenParams &&
-          Object.entries(hiddenParams).map(([key, value]) => (
-            <input key={key} type="hidden" name={key} value={value} />
-          ))}
-
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-          {/* ---- Left panel: Inputs ---- */}
-          <div className="space-y-6">
-            {/* Tier selector — radio buttons (server-friendly) */}
-            <fieldset>
-              <legend
-                className="block text-sm font-semibold mb-2"
-                style={{ color: 'var(--color-text)' }}
-              >
-                Package
-              </legend>
-              <div className="flex gap-2">
-                {TIERS.map((tier) => (
-                  <label
-                    key={tier}
-                    className={`px-4 py-2 rounded-lg text-sm font-medium border cursor-pointer transition-colors ${
-                      selectedTier === tier
-                        ? 'bg-[var(--color-accent)] text-white border-transparent'
-                        : 'border-[var(--color-border)] text-[var(--color-muted)] hover:border-[var(--color-accent)]'
-                    }`}
-                  >
-                    <input
-                      type="radio"
-                      name="tier"
-                      value={tier}
-                      defaultChecked={selectedTier === tier}
-                      className="sr-only"
-                    />
-                    {TIER_LABELS[tier]}
-                  </label>
-                ))}
-              </div>
-            </fieldset>
-
-            {/* Leads per month */}
-            <div>
-              <label
-                htmlFor="roi-leads"
-                className="block text-sm font-semibold mb-2"
-                style={{ color: 'var(--color-text)' }}
-              >
-                Leads per Month
-              </label>
-              <input
-                id="roi-leads"
-                name="leads"
-                type="number"
-                min={1}
-                max={10000}
-                defaultValue={leadsPerMonth}
-                className="w-full rounded-lg px-4 py-2.5 text-sm outline-none transition-colors"
-                style={{
-                  background: 'var(--color-surface)',
-                  border: '1px solid var(--color-border)',
-                  color: 'var(--color-text)',
-                }}
-              />
-            </div>
-
-            {/* Close rate */}
-            <div>
-              <label
-                htmlFor="roi-close-rate"
-                className="block text-sm font-semibold mb-2"
-                style={{ color: 'var(--color-text)' }}
-              >
-                Close Rate (%)
-              </label>
-              <input
-                id="roi-close-rate"
-                name="rate"
-                type="number"
-                min={1}
-                max={100}
-                defaultValue={closeRate}
-                className="w-full rounded-lg px-4 py-2.5 text-sm outline-none transition-colors"
-                style={{
-                  background: 'var(--color-surface)',
-                  border: '1px solid var(--color-border)',
-                  color: 'var(--color-text)',
-                }}
-              />
-            </div>
-
-            {/* Average deal size */}
-            <div>
-              <label
-                htmlFor="roi-deal-size"
-                className="block text-sm font-semibold mb-2"
-                style={{ color: 'var(--color-text)' }}
-              >
-                Average Deal Size ($)
-              </label>
-              <input
-                id="roi-deal-size"
-                name="deal"
-                type="number"
-                min={100}
-                defaultValue={avgDealSize}
-                className="w-full rounded-lg px-4 py-2.5 text-sm outline-none transition-colors"
-                style={{
-                  background: 'var(--color-surface)',
-                  border: '1px solid var(--color-border)',
-                  color: 'var(--color-text)',
-                }}
-              />
-            </div>
-
-            {/* Submit button */}
-            <button
-              type="submit"
-              className="btn-primary w-full"
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        {/* ---- Left panel: Inputs ---- */}
+        <div className="space-y-6">
+          {/* Tier selector */}
+          <fieldset>
+            <legend
+              className="block text-sm font-semibold mb-2"
+              style={{ color: 'var(--color-text)' }}
             >
-              Calculate ROI
-            </button>
-          </div>
+              Selected Package
+            </legend>
+            <div className="flex gap-2 flex-wrap">
+              {TIERS.map((tier) => (
+                <button
+                  key={tier}
+                  type="button"
+                  onClick={() => setSelectedTier(tier)}
+                  className={`px-4 py-2 rounded-lg text-sm font-medium border transition-all duration-200 ${
+                    selectedTier === tier
+                      ? 'text-white border-transparent shadow-md'
+                      : 'border-[var(--color-border)] text-[var(--color-muted)] hover:border-[var(--color-accent)]'
+                  }`}
+                  style={
+                    selectedTier === tier
+                      ? { background: TIER_COLORS[tier] }
+                      : undefined
+                  }
+                >
+                  {TIER_LABELS[tier]}
+                </button>
+              ))}
+            </div>
+          </fieldset>
 
-          {/* ---- Right panel: Output stat cards ---- */}
-          <div className="space-y-4">
-            {hasSubmitted ? (
-              <>
-                {/* Monthly Revenue Lift */}
-                <div
-                  className="card rounded-xl p-6"
-                  style={{
-                    background: 'var(--color-surface)',
-                    border: '1px solid var(--color-border)',
-                  }}
-                >
-                  <p
-                    className="text-sm font-medium mb-1"
-                    style={{ color: 'var(--color-muted)' }}
-                  >
-                    Monthly Revenue Lift
-                  </p>
-                  <p
-                    className="text-3xl font-bold font-display"
-                    style={{ color: 'var(--color-accent)' }}
-                  >
-                    {formatCurrency(result.monthlyRevenueLift)}
-                  </p>
-                </div>
+          <SliderInput
+            label="Leads per Month"
+            id="roi-leads"
+            value={leadsPerMonth}
+            onChange={setLeadsPerMonth}
+            min={10}
+            max={2000}
+            step={10}
+          />
 
-                {/* Annual ROI */}
-                <div
-                  className="card rounded-xl p-6"
-                  style={{
-                    background: 'var(--color-surface)',
-                    border: '1px solid var(--color-border)',
-                  }}
-                >
-                  <p
-                    className="text-sm font-medium mb-1"
-                    style={{ color: 'var(--color-muted)' }}
-                  >
-                    Annual ROI
-                  </p>
-                  <p
-                    className="text-3xl font-bold font-display"
-                    style={{ color: 'var(--color-accent)' }}
-                  >
-                    {Math.round(result.roi).toLocaleString('en-US')}%
-                  </p>
-                </div>
+          <SliderInput
+            label="Close Rate"
+            id="roi-close-rate"
+            value={closeRate}
+            onChange={setCloseRate}
+            min={1}
+            max={50}
+            step={1}
+            suffix="%"
+          />
 
-                {/* Payback Period */}
-                <div
-                  className="card rounded-xl p-6"
-                  style={{
-                    background: 'var(--color-surface)',
-                    border: '1px solid var(--color-border)',
-                  }}
-                >
-                  <p
-                    className="text-sm font-medium mb-1"
-                    style={{ color: 'var(--color-muted)' }}
-                  >
-                    Payback Period
-                  </p>
-                  <p
-                    className="text-3xl font-bold font-display"
-                    style={{ color: 'var(--color-accent)' }}
-                  >
-                    {formatPayback(result.paybackMonths)}
-                  </p>
-                </div>
-
-                {/* Disclaimer */}
-                <p
-                  className="text-xs mt-2"
-                  style={{ color: 'var(--color-muted-2)' }}
-                >
-                  Projections based on industry benchmarks. Actual results vary.
-                </p>
-              </>
-            ) : (
-              <div
-                className="card rounded-xl p-8 flex items-center justify-center min-h-[280px]"
-                style={{
-                  background: 'var(--color-surface)',
-                  border: '1px solid var(--color-border)',
-                }}
-              >
-                <p
-                  className="text-sm text-center"
-                  style={{ color: 'var(--color-muted)' }}
-                >
-                  Adjust your inputs and click <strong>Calculate ROI</strong> to
-                  see your projected returns.
-                </p>
-              </div>
-            )}
-          </div>
+          <SliderInput
+            label="Average Deal Size"
+            id="roi-deal-size"
+            value={avgDealSize}
+            onChange={setAvgDealSize}
+            min={500}
+            max={50000}
+            step={500}
+            prefix="$"
+          />
         </div>
-      </form>
+
+        {/* ---- Right panel: Results ---- */}
+        <div className="space-y-6">
+          {/* Stat cards row */}
+          <div className="grid grid-cols-3 gap-3">
+            <div
+              className="rounded-xl p-4 text-center"
+              style={{
+                background: 'var(--color-surface)',
+                border: '1px solid var(--color-border)',
+              }}
+            >
+              <p className="text-[10px] font-medium mb-1" style={{ color: 'var(--color-muted)' }}>
+                Monthly Lift
+              </p>
+              <p
+                className="text-lg font-bold font-display"
+                style={{ color: 'var(--color-accent)' }}
+              >
+                {fmt(selectedResult.monthlyRevenueLift)}
+              </p>
+            </div>
+
+            <div
+              className="rounded-xl p-4 text-center"
+              style={{
+                background: 'var(--color-surface)',
+                border: '1px solid var(--color-border)',
+              }}
+            >
+              <p className="text-[10px] font-medium mb-1" style={{ color: 'var(--color-muted)' }}>
+                Annual ROI
+              </p>
+              <p
+                className="text-lg font-bold font-display"
+                style={{ color: selectedResult.roi > 0 ? '#16a34a' : 'var(--color-accent)' }}
+              >
+                {Math.round(selectedResult.roi)}%
+              </p>
+            </div>
+
+            <div
+              className="rounded-xl p-4 text-center"
+              style={{
+                background: 'var(--color-surface)',
+                border: '1px solid var(--color-border)',
+              }}
+            >
+              <p className="text-[10px] font-medium mb-1" style={{ color: 'var(--color-muted)' }}>
+                Payback
+              </p>
+              <p
+                className="text-lg font-bold font-display"
+                style={{ color: 'var(--color-accent)' }}
+              >
+                {selectedResult.paybackMonths === null
+                  ? '\u2014'
+                  : selectedResult.paybackMonths <= 1
+                    ? '< 1mo'
+                    : `${selectedResult.paybackMonths}mo`}
+              </p>
+            </div>
+          </div>
+
+          {/* Comparison bar chart */}
+          <div
+            className="rounded-xl p-5"
+            style={{
+              background: 'var(--color-surface)',
+              border: '1px solid var(--color-border)',
+            }}
+          >
+            <p
+              className="text-xs font-semibold mb-4"
+              style={{ color: 'var(--color-text)' }}
+            >
+              Year 1 Revenue vs Cost — All Tiers
+            </p>
+            <BarChart results={allResults} />
+          </div>
+
+          <p
+            className="text-xs"
+            style={{ color: 'var(--color-muted-2)' }}
+          >
+            Projections based on AI capture rate benchmarks per tier. Actual results vary.
+            Year 1 cost includes setup fee + 12 months support.
+          </p>
+        </div>
+      </div>
 
       {/* CTA */}
       <div className="mt-8 text-center">

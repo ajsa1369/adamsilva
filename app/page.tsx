@@ -76,7 +76,7 @@ const videoSchema = {
   description: 'A narrated explainer video covering the three protocols that power agentic commerce: UCP (discovery), ACP (checkout), and AP2 (trust).',
   thumbnailUrl: `${SITE_URL}/images/hero/business-hero.jpg`,
   contentUrl: `${SITE_URL}/videos/homepage-explainer.mp4`,
-  uploadDate: '2026-03-04',
+  uploadDate: '2026-03-04T00:00:00-05:00',
   duration: 'PT75S',
   publisher: { '@type': 'Organization', name: 'Adam Silva Consulting' },
   inLanguage: 'en-US',

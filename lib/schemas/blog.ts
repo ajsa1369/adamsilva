@@ -77,7 +77,7 @@ export function buildBlogPostSchema(config: BlogPostSchemaConfig) {
         : `${SITE_URL}/images/${config.coverImage}`,
       contentUrl: config.videoUrl,
       ...(config.videoEmbedUrl && { embedUrl: config.videoEmbedUrl }),
-      uploadDate: config.publishedAt,
+      uploadDate: config.publishedAt.includes('T') ? config.publishedAt : `${config.publishedAt}T00:00:00-05:00`,
       ...(config.videoDuration && { duration: `PT${config.videoDuration}S` }),
       ...(config.videoTranscript && { transcript: config.videoTranscript }),
       regionsAllowed: 'US,CA,GB,AU,DE,FR,JP',

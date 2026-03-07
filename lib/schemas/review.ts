@@ -1,4 +1,4 @@
-import { SITE_URL, ORG_ID } from './organization'
+import { ORG_ID } from './organization'
 
 export interface Testimonial {
   name: string
@@ -30,7 +30,11 @@ export function buildReviewSchema(testimonial: Testimonial) {
       '@type': 'Organization',
       name: testimonial.company,
     },
-    itemReviewed: { '@id': ORG_ID },
+    itemReviewed: {
+      '@type': 'Organization',
+      '@id': ORG_ID,
+      name: 'Adam Silva Consulting',
+    },
   }
 }
 
