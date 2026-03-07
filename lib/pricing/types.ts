@@ -24,7 +24,7 @@ export interface IntegrationSelection {
   tier: IntegrationTier
 }
 
-// A package definition (Starter/Pro/Max/Elite/Legacy)
+// A package definition (Genesis/Essentials/Prime/Scale/Legacy)
 export interface PackageDefinition {
   slug: string
   name: string

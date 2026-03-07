@@ -170,7 +170,7 @@ export function SandlerNegativeReverse() {
                 </Link>
               </div>
               <p className="text-xs text-[var(--color-muted-2)] mt-4">
-                Over 60% of our Max and Enterprise clients started with a free ACRA.
+                Over 60% of our Prime and Scale clients started with a free ACRA.
               </p>
             </div>
           </div>

@@ -30,9 +30,9 @@ export function serviceToCartItem(service: Service): CartItem {
   }
 }
 
-/** Returns null for Elite tier (custom pricing, not purchasable via cart) */
+/** Returns null if package has no fixed pricing (e.g. setupPrice/monthlyPrice is null) */
 export function packageToCartItem(pkg: PackagePageData): CartItem | null {
-  if (pkg.slug === 'elite' || pkg.setupPrice === null || pkg.monthlyPrice === null) {
+  if (pkg.setupPrice === null || pkg.monthlyPrice === null) {
     return null
   }
 

@@ -7,7 +7,7 @@ import Link from 'next/link'
 
 export interface ROICalculatorProps {
   /** Pre-selected tier (from /packages/[tier] page) */
-  defaultTier?: 'starter' | 'pro' | 'max'
+  defaultTier?: 'genesis' | 'essentials' | 'prime' | 'scale'
   /** Current values from URL searchParams */
   tier?: string
   leads?: string
@@ -20,31 +20,34 @@ export interface ROICalculatorProps {
   className?: string
 }
 
-type Tier = 'starter' | 'pro' | 'max'
+type Tier = 'genesis' | 'essentials' | 'prime' | 'scale'
 
 // ---------------------------------------------------------------------------
 // Constants
 // ---------------------------------------------------------------------------
 
 const CAPTURE_RATES: Record<Tier, number> = {
-  starter: 0.15,
-  pro: 0.25,
-  max: 0.40,
+  genesis: 0.15,
+  essentials: 0.25,
+  prime: 0.40,
+  scale: 0.55,
 }
 
 const ANNUAL_COSTS: Record<Tier, { setup: number; monthly: number }> = {
-  starter: { setup: 16000, monthly: 3500 },
-  pro: { setup: 28000, monthly: 6500 },
-  max: { setup: 48000, monthly: 12000 },
+  genesis: { setup: 16000, monthly: 3500 },
+  essentials: { setup: 28000, monthly: 6500 },
+  prime: { setup: 48000, monthly: 12000 },
+  scale: { setup: 75000, monthly: 20000 },
 }
 
 const TIER_LABELS: Record<Tier, string> = {
-  starter: 'Starter',
-  pro: 'Pro',
-  max: 'Max',
+  genesis: 'Genesis',
+  essentials: 'Essentials',
+  prime: 'Prime',
+  scale: 'Scale',
 }
 
-const TIERS: Tier[] = ['starter', 'pro', 'max']
+const TIERS: Tier[] = ['genesis', 'essentials', 'prime', 'scale']
 
 // ---------------------------------------------------------------------------
 // ROI Computation (pure function — runs on server)
@@ -100,7 +103,7 @@ function formatPayback(months: number | null): string {
 }
 
 function isValidTier(value: string | undefined): value is Tier {
-  return value === 'starter' || value === 'pro' || value === 'max'
+  return value === 'genesis' || value === 'essentials' || value === 'prime' || value === 'scale'
 }
 
 // ---------------------------------------------------------------------------
@@ -120,7 +123,7 @@ export function ROICalculator({
   // Parse URL params with fallbacks
   const selectedTier: Tier = isValidTier(tierParam)
     ? tierParam
-    : defaultTier ?? 'max'
+    : defaultTier ?? 'prime'
   const leadsPerMonth = Math.max(1, Math.min(10000, Number(leadsParam) || 200))
   const closeRate = Math.max(1, Math.min(100, Number(rateParam) || 15))
   const avgDealSize = Math.max(100, Number(dealParam) || 5000)

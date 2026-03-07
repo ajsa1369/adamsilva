@@ -515,7 +515,7 @@ function scoreLLMRecommendation(s: ScanSignals): { pillar: PillarScore; llm: LLM
       status: toStatus(avgLLM),
       summary: avgLLM < 20 ? 'No AI model would reliably recommend your brand for agentic commerce.' : avgLLM < 50 ? `AI models have limited confidence in your brand. ChatGPT: ${chatgpt}/100 · Perplexity: ${perplexity}/100 · Claude: ${claude}/100` : `Strong AI recommendation signals across key LLMs. ChatGPT: ${chatgpt}/100 · Perplexity: ${perplexity}/100`,
       findings,
-      serviceUpsell: avgLLM < 50 ? { name: 'Max Package', slug: 'max', price: '$48,000 setup + $12,000/mo', urgency: 'Agentic commerce will drive 31% of e-commerce revenue by 2027. Your share is currently $0.' } : null,
+      serviceUpsell: avgLLM < 50 ? { name: 'Prime Package', slug: 'prime', price: '$48,000 setup + $12,000/mo', urgency: 'Agentic commerce will drive 31% of e-commerce revenue by 2027. Your share is currently $0.' } : null,
     },
     llm: { chatgpt, perplexity, claude, gemini, copilot },
   }

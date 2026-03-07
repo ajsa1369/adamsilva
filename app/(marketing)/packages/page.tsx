@@ -20,16 +20,16 @@ import {
 
 const pageUrl = `${SITE_URL}/packages`
 const pageTitle =
-  'Agentic Commerce Packages — Starter, Pro, Max, Elite | Adam Silva Consulting'
+  'Agentic Commerce Packages — Genesis, Essentials, Prime, Scale | Adam Silva Consulting'
 const pageDescription =
-  'Compare all 4 ASC agentic commerce tiers. Same AI agent fleet — different scope. Starter from $16,000 (30 pages), Pro $28,000 (60 pages), Max $48,000 (100 pages), Elite from $75,000 (unlimited). SSR architecture, zero hydration tax, full Gold Standard protocol compliance.'
+  'Compare all 4 ASC agentic commerce tiers. Same AI agent fleet, same protocols — different page scope. Genesis from $16,000 (50 pages), Essentials $28,000 (100 pages), Prime $48,000 (150 pages), Scale from $75,000 (250 pages). SSR for AI agent readability, SPA for speed, full Gold Standard protocol compliance.'
 
 export const metadata: Metadata = {
   title: pageTitle,
   description: pageDescription,
   alternates: { canonical: pageUrl },
   openGraph: {
-    title: 'Agentic Commerce Packages — Starter, Pro, Max, Elite | ASC',
+    title: 'Agentic Commerce Packages — Genesis, Essentials, Prime, Scale | ASC',
     description:
       'Compare all 4 tiers: same agent fleet, different page scope. SSR architecture eliminates the hydration tax. From $16,000 setup.',
     url: pageUrl,
@@ -39,7 +39,7 @@ export const metadata: Metadata = {
         url: `${SITE_URL}/packages/opengraph-image`,
         width: 1200,
         height: 630,
-        alt: 'ASC Agentic Commerce Packages — Starter, Pro, Max, Elite',
+        alt: 'ASC Agentic Commerce Packages — Genesis, Essentials, Prime, Scale',
       },
     ],
   },
@@ -47,7 +47,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Agentic Commerce Packages — ASC',
     description:
-      'Starter, Pro, Max, Elite — same AI agents, different scope. SSR-first. Zero hydration tax.',
+      'Genesis, Essentials, Prime, Scale — same AI agents, same protocols, different scope. SSR-first. Zero hydration tax.',
     images: [`${SITE_URL}/packages/opengraph-image`],
   },
 }
@@ -61,7 +61,7 @@ const purchasableTiers = PACKAGES.filter(
   (p) => !p.isLegacy && p.setupPrice !== null
 )
 
-const comparisonColumns = ['Starter', 'Pro', 'Max', 'Elite']
+const comparisonColumns = ['Genesis', 'Essentials', 'Prime', 'Scale']
 
 const comparisonRows: ComparisonRow[] = [
   {
@@ -76,7 +76,7 @@ const comparisonRows: ComparisonRow[] = [
   },
   {
     feature: 'Pages Optimized in Setup',
-    values: ['30', '60', '100', 'Unlimited'],
+    values: ['50', '100', '150', '250'],
     highlight: true,
   },
   {
@@ -115,9 +115,9 @@ const comparisonRows: ComparisonRow[] = [
 
 const sandlerFAQs = [
   {
-    question: 'What is the difference between Starter, Pro, Max, and Elite?',
+    question: 'What is the difference between Genesis, Essentials, Prime, and Scale?',
     answer:
-      'All four tiers deploy the same AI agent fleet — AI Commerce Agent, Authority Content Agent (with topical map planning), and Press Release Agent. The difference is scope: Starter covers 30 pages ($16,000), Pro covers 60 pages ($28,000), Max covers 100 pages ($48,000), Elite is unlimited (from $75,000). More pages means more JSON-LD schema, AEO/GEO optimization, and protocol endpoints — more entry points for AI systems to discover, cite, and transact with your business.',
+      'All four tiers deploy the same AI agent fleet, the same full Gold Standard protocol stack (UCP + ACP + AP2), and the same SSR (AI readability) + SPA (speed) architecture. The only difference is page scope: Genesis covers 50 pages ($16,000), Essentials covers 100 pages ($28,000), Prime covers 150 pages ($48,000), Scale covers 250 pages (from $75,000). More pages means more JSON-LD schema, AEO/GEO optimization, and protocol endpoints — more entry points for AI systems to discover, cite, and transact with your business.',
   },
   {
     question: 'Why does the setup cost $16,000 or more?',
@@ -142,12 +142,12 @@ const sandlerFAQs = [
   {
     question: 'How long until I see ROI from an ASC package?',
     answer:
-      'Based on client benchmarks: Starter clients see payback in 8-18 months, Pro in 5-12 months, Max in 3-8 months. The ROI accelerates as AI agent transaction volume grows — current industry projections show agentic commerce reaching $4.6 trillion by 2028. Early movers capture disproportionate share because AI agents build trust scores over time; the first businesses with Gold Standard compliance in each vertical become the default recommendation.',
+      'Based on client benchmarks: Genesis clients see payback in 8-18 months, Essentials in 5-12 months, Prime in 3-8 months. The ROI accelerates as AI agent transaction volume grows — current industry projections show agentic commerce reaching $4.6 trillion by 2028. Early movers capture disproportionate share because AI agents build trust scores over time; the first businesses with Gold Standard compliance in each vertical become the default recommendation.',
   },
   {
-    question: 'Can we start with Starter and upgrade later?',
+    question: 'Can we start with Genesis and upgrade later?',
     answer:
-      'Yes. Every page optimized in Starter carries forward. Upgrading from Starter (30 pages) to Pro (60 pages) means we optimize 30 additional pages — you never re-pay for work already done. The agent fleet, protocol endpoints, and schema infrastructure scale with you. Most clients who start with Starter upgrade within 6-12 months as AI-attributed revenue grows.',
+      'Yes. Every page optimized in Genesis carries forward. Upgrading from Genesis (50 pages) to Essentials (100 pages) means we optimize 50 additional pages — you never re-pay for work already done. The agent fleet, protocol endpoints, and schema infrastructure scale with you. Most clients who start with Genesis upgrade within 6-12 months as AI-attributed revenue grows.',
   },
 ]
 
@@ -229,7 +229,7 @@ const pageSchema = {
       '@id': `${pageUrl}#video`,
       name: 'ASC Agentic Commerce Packages Overview',
       description:
-        'Narrated overview of all four ASC agentic commerce tiers: Starter ($16K, 30 pages), Pro ($28K, 60 pages), Max ($48K, 100 pages), and Elite (from $75K, unlimited). Covers the SPA hydration tax problem, SSR architecture solution, Gold Standard protocol compliance (UCP, ACP, AP2), and why AI agent discovery requires server-side rendered infrastructure.',
+        'Narrated overview of all four ASC agentic commerce tiers: Genesis ($16K, 50 pages), Essentials ($28K, 100 pages), Prime ($48K, 150 pages), and Scale (from $75K, 250 pages). Covers the SPA hydration tax problem, SSR architecture solution, Gold Standard protocol compliance (UCP, ACP, AP2), and why AI agent discovery requires server-side rendered infrastructure.',
       thumbnailUrl: `${SITE_URL}/packages/opengraph-image`,
       uploadDate: '2026-03-06',
       duration: 'PT32S',
@@ -237,7 +237,7 @@ const pageSchema = {
       embedUrl: `${SITE_URL}/videos/packages-overview.mp4`,
       publisher: { '@id': ORG_ID },
       transcript:
-        "Eighty-three percent of Google searches now show AI Overviews. If your business isn't visible to AI agents, you're already losing customers. Fourteen million commercial queries flow through AI agents every single day. ChatGPT, Perplexity, and Gemini are where your buyers are searching now. Traditional single-page applications lose forty percent of AI crawl traffic to hydration tax. Server-side rendered architecture eliminates this entirely, making every page instantly readable by AI agents. Adam Silva Consulting offers four agentic commerce packages. Starter at sixteen thousand. Pro at twenty-eight thousand. Max, our most popular, at forty-eight thousand. And Elite, starting at seventy-five thousand for enterprise-scale deployments. Every tier ships with the same battle-tested agent fleet. Full SSR architecture, AI discovery files, and protocol compliance are standard, not add-ons. The difference is scope and scale. All packages include Gold Standard protocol compliance. UCP for universal commerce discovery. ACP for agentic checkout. And AP2 for cryptographic agent payments. These are the protocols that make your business transactable by AI. Ready to make your business visible to the fourteen million AI agents searching right now? Get your custom proposal today. Book a call at adamsilvaconsulting.com. Adam Silva Consulting. Global infrastructure for agentic commerce.",
+        "Eighty-three percent of Google searches now show AI Overviews. If your business isn't visible to AI agents, you're already losing customers. Fourteen million commercial queries flow through AI agents every single day. ChatGPT, Perplexity, and Gemini are where your buyers are searching now. Traditional single-page applications lose forty percent of AI crawl traffic to hydration tax. Server-side rendered architecture eliminates this entirely, making every page instantly readable by AI agents. Adam Silva Consulting offers four agentic commerce packages. Genesis at sixteen thousand for fifty pages. Essentials at twenty-eight thousand for one hundred pages. Prime, our most popular, at forty-eight thousand for one hundred fifty pages. And Scale, starting at seventy-five thousand for up to two hundred fifty pages. Every tier ships with the same battle-tested agent fleet, the same full Gold Standard protocol stack, and the same SSR plus SPA architecture. The only difference is the number of pages. All packages include full Gold Standard protocol compliance. UCP for universal commerce discovery. ACP for agentic checkout. And AP2 for cryptographic agent payments. Support fees do not begin until one hundred days after project start or when initial setup is complete. Ready to make your business visible to the fourteen million AI agents searching right now? Get your custom proposal today. Book a call at adamsilvaconsulting.com. Adam Silva Consulting. Global infrastructure for agentic commerce.",
       inLanguage: 'en-US',
       accessMode: ['auditory', 'visual'],
       accessModeSufficient: [{ '@type': 'ItemList', itemListElement: ['visual', 'auditory'] }],
@@ -250,12 +250,12 @@ const pageSchema = {
       width: 1200,
       height: 630,
       caption:
-        'ASC Agentic Commerce Packages comparison showing four tier cards on a dark navy gradient background. Starter tier at $16,000 for 30-page implementations, Pro tier at $28,000 for 60-page implementations, Max tier at $48,000 for 100-page implementations highlighted as Most Popular with a blue glow accent, and Elite tier starting from $75,000 for unlimited enterprise-scale deployments. Branded with Adam Silva Consulting and the tagline Global Infrastructure for Agentic Commerce. Bottom bar reads SSR Architecture, Zero Hydration Tax, Gold Standard Compliance.',
+        'ASC Agentic Commerce Packages comparison showing four tier cards on a dark navy gradient background. Genesis tier at $16,000 for 50-page implementations, Essentials tier at $28,000 for 100-page implementations, Prime tier at $48,000 for 150-page implementations highlighted as Most Popular with a blue glow accent, and Scale tier starting from $75,000 for 250-page enterprise-scale deployments. Branded with Adam Silva Consulting and the tagline Global Infrastructure for Agentic Commerce. Bottom bar reads SSR Architecture, Zero Hydration Tax, Gold Standard Compliance.',
       representativeOfPage: true,
       creditText: 'Adam Silva Consulting',
       contentUrl: `${SITE_URL}/packages/opengraph-image`,
       description:
-        'Open Graph social sharing image for the ASC Agentic Commerce Packages page. Four glassmorphism pricing cards display Starter ($16K), Pro ($28K), Max ($48K, highlighted as Most Popular), and Elite (From $75K) tiers against a dark gradient background with the Adam Silva Consulting brand and agentic commerce tagline.',
+        'Open Graph social sharing image for the ASC Agentic Commerce Packages page. Four glassmorphism pricing cards display Genesis ($16K), Essentials ($28K), Prime ($48K, highlighted as Most Popular), and Scale (From $75K) tiers against a dark gradient background with the Adam Silva Consulting brand and agentic commerce tagline.',
     },
     // FAQ schema
     buildFAQSchema(sandlerFAQs),
@@ -277,7 +277,7 @@ export default function PackagesPage({
     deal?: string
   }
 }) {
-  const elitePkg = PACKAGES.find((p) => p.slug === 'elite')
+  const scalePkg = PACKAGES.find((p) => p.slug === 'scale')
 
   return (
     <>
@@ -376,7 +376,7 @@ export default function PackagesPage({
                 Every ASC package deploys the same AI agent fleet: AI Commerce Agent for 24/7 lead capture,
                 Authority Content Agent with topical map planning for unlimited 2,000-word articles,
                 and Press Release Agent with pre-built schema rules. The only difference between tiers
-                is how many pages we optimize in setup — 30, 60, 100, or unlimited.
+                is how many pages we optimize in setup — 50, 100, 150, or 250.
               </p>
               <ul className="space-y-3">
                 {[
@@ -417,16 +417,16 @@ export default function PackagesPage({
           {/* 4-tier grid */}
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-5">
             {allMainTiers.map((pkg) => {
-              const isMax = pkg.slug === 'max'
-              const isElite = pkg.slug === 'elite'
+              const isPrime = pkg.slug === 'prime'
+              const isScale = pkg.slug === 'scale'
               return (
                 <div
                   key={pkg.slug}
                   className={`card-glass p-5 flex flex-col relative ${
-                    isMax
+                    isPrime
                       ? 'border-[var(--color-accent)] shadow-[0_0_30px_rgba(37,99,235,0.15)] lg:scale-105 lg:-my-2'
                       : ''
-                  } ${isElite ? 'bg-gradient-to-b from-[rgba(248,250,255,0.9)] to-[rgba(37,99,235,0.04)]' : ''}`}
+                  } ${isScale ? 'bg-gradient-to-b from-[rgba(248,250,255,0.9)] to-[rgba(37,99,235,0.04)]' : ''}`}
                 >
                   {/* Badge */}
                   {pkg.badge && (
@@ -488,10 +488,10 @@ export default function PackagesPage({
 
                   {/* CTA */}
                   <Link
-                    href={isElite ? '/contact?package=elite' : `/packages/${pkg.slug}`}
-                    className={`${isMax ? 'btn-primary' : 'btn-secondary'} w-full text-center text-sm justify-center`}
+                    href={`/packages/${pkg.slug}`}
+                    className={`${isPrime ? 'btn-primary' : 'btn-secondary'} w-full text-center text-sm justify-center`}
                   >
-                    {isElite ? 'Request Custom Scope' : `View ${pkg.name} Details`} &rarr;
+                    View {pkg.name} Details &rarr;
                   </Link>
                 </div>
               )
@@ -601,7 +601,7 @@ export default function PackagesPage({
           <ComparisonTable
             columns={comparisonColumns}
             rows={comparisonRows}
-            caption="Complete feature comparison of all ASC agentic commerce packages including Elite enterprise tier"
+            caption="Complete feature comparison of all ASC agentic commerce packages including Scale enterprise tier"
           />
         </div>
       </section>
@@ -758,8 +758,8 @@ export default function PackagesPage({
             </Link>
           </div>
           <p className="text-[var(--color-muted)] max-w-2xl mx-auto text-sm">
-            Max and Elite packages achieve full Gold Standard compliance — all three protocols
-            implemented, verified, and maintained. Starter includes UCP. Pro adds partial ACP.
+            All packages — Genesis, Essentials, Prime, and Scale — achieve full Gold Standard compliance.
+            All three protocols implemented, verified, and maintained across every tier.
           </p>
         </div>
       </section>

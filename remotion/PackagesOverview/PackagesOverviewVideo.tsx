@@ -37,21 +37,22 @@ const FPS = 30
  *   traffic to hydration tax. Server-side rendered architecture eliminates this entirely,
  *   making every page instantly readable by AI agents."
  *
- * Scene 4 (12-17s): "Adam Silva Consulting offers four agentic commerce packages. Starter
- *   at sixteen thousand. Pro at twenty-eight thousand. Max, our most popular, at forty-eight
- *   thousand. And Elite, starting at seventy-five thousand for enterprise-scale deployments."
+ * Scene 4 (12-17s): "Adam Silva Consulting offers four agentic commerce packages. Genesis
+ *   at sixteen thousand for fifty pages. Essentials at twenty-eight thousand for one hundred
+ *   pages. Prime, our most popular, at forty-eight thousand for one hundred fifty pages. And
+ *   Scale, starting at seventy-five thousand for up to two hundred fifty pages."
  *
- * Scene 5 (17-21s): "Every tier ships with the same battle-tested agent fleet. Full SSR
- *   architecture, AI discovery files, and protocol compliance are standard, not add-ons.
- *   The difference is scope and scale."
+ * Scene 5 (17-21s): "Every tier ships with the same battle-tested agent fleet, the same full
+ *   Gold Standard protocol stack, and the same SSR plus SPA architecture — SSR for AI agent
+ *   readability, SPA for speed. The only difference is the number of pages."
  *
- * Scene 6 (21-25s): "All packages include Gold Standard protocol compliance. UCP for
+ * Scene 6 (21-25s): "All packages include full Gold Standard protocol compliance. UCP for
  *   universal commerce discovery. ACP for agentic checkout. And AP2 for cryptographic
  *   agent payments. These are the protocols that make your business transactable by AI."
  *
- * Scene 7 (25-29s): "Ready to make your business visible to the fourteen million AI agents
- *   searching right now? Get your custom proposal today. Book a call at adam silva
- *   consulting dot com."
+ * Scene 7 (25-29s): "Support fees do not begin until one hundred days after project start
+ *   or when initial setup is complete. Ready to make your business visible to the fourteen
+ *   million AI agents searching right now? Book a call at adam silva consulting dot com."
  *
  * Scene 8 (29-32s): "Adam Silva Consulting. Global infrastructure for agentic commerce."
  */
@@ -59,10 +60,10 @@ export const PACKAGES_NARRATION_TRANSCRIPT =
   'Eighty-three percent of Google searches now show AI Overviews. If your business isn\'t visible to AI agents, you\'re already losing customers. ' +
   'Fourteen million commercial queries flow through AI agents every single day. ChatGPT, Perplexity, and Gemini are where your buyers are searching now. ' +
   'Traditional single-page applications lose forty percent of AI crawl traffic to hydration tax. Server-side rendered architecture eliminates this entirely, making every page instantly readable by AI agents. ' +
-  'Adam Silva Consulting offers four agentic commerce packages. Starter at sixteen thousand. Pro at twenty-eight thousand. Max, our most popular, at forty-eight thousand. And Elite, starting at seventy-five thousand for enterprise-scale deployments. ' +
-  'Every tier ships with the same battle-tested agent fleet. Full SSR architecture, AI discovery files, and protocol compliance are standard, not add-ons. The difference is scope and scale. ' +
-  'All packages include Gold Standard protocol compliance. UCP for universal commerce discovery. ACP for agentic checkout. And AP2 for cryptographic agent payments. These are the protocols that make your business transactable by AI. ' +
-  'Ready to make your business visible to the fourteen million AI agents searching right now? Get your custom proposal today. Book a call at adam silva consulting dot com. ' +
+  'Adam Silva Consulting offers four agentic commerce packages. Genesis at sixteen thousand for fifty pages. Essentials at twenty-eight thousand for one hundred pages. Prime, our most popular, at forty-eight thousand for one hundred fifty pages. And Scale, starting at seventy-five thousand for up to two hundred fifty pages. ' +
+  'Every tier ships with the same battle-tested agent fleet, the same full Gold Standard protocol stack, and the same SSR plus SPA architecture — SSR for AI agent readability, SPA for speed. The only difference is the number of pages. ' +
+  'All packages include full Gold Standard protocol compliance. UCP for universal commerce discovery. ACP for agentic checkout. And AP2 for cryptographic agent payments. These are the protocols that make your business transactable by AI. ' +
+  'Support fees do not begin until one hundred days after project start or when initial setup is complete. Ready to make your business visible to the fourteen million AI agents searching right now? Book a call at adam silva consulting dot com. ' +
   'Adam Silva Consulting. Global infrastructure for agentic commerce.'
 
 // Scene durations in frames (30fps) — timed to narration paragraphs
@@ -288,10 +289,10 @@ const Scene3: React.FC = () => {
 
 /* ─── Scene 4: Tier Cards ─── */
 const TIERS = [
-  { name: 'Starter', price: '$16K', color: '#3b82f6' },
-  { name: 'Pro', price: '$28K', color: '#6366f1' },
-  { name: 'Max', price: '$48K', color: COLORS.accent, highlighted: true },
-  { name: 'Elite', price: 'From $75K', color: '#8b5cf6' },
+  { name: 'Genesis', price: '$16K', pages: '50 pages', color: '#3b82f6' },
+  { name: 'Essentials', price: '$28K', pages: '100 pages', color: '#6366f1' },
+  { name: 'Prime', price: '$48K', pages: '150 pages', color: COLORS.accent, highlighted: true },
+  { name: 'Scale', price: '$75K', pages: '250 pages', color: '#8b5cf6' },
 ]
 
 const Scene4: React.FC = () => {
@@ -389,6 +390,17 @@ const Scene4: React.FC = () => {
               >
                 {tier.price}
               </div>
+              <div
+                style={{
+                  fontSize: 18,
+                  fontWeight: 500,
+                  color: COLORS.muted,
+                  marginTop: 8,
+                  fontFamily: 'system-ui, sans-serif',
+                }}
+              >
+                {tier.pages}
+              </div>
             </div>
           )
         })}
@@ -402,9 +414,9 @@ const Scene5: React.FC = () => {
   const textOpacity = useFadeIn(0)
 
   const highlights = [
-    'Full SSR architecture on every tier',
-    'AI discovery files included',
-    'Protocol-compliant from day one',
+    'SSR (AI readability) + SPA (speed) on every tier',
+    'Full Gold Standard protocol stack included',
+    'Support begins after 100-day setup window',
   ]
 
   return (
@@ -427,7 +439,7 @@ const Scene5: React.FC = () => {
           fontFamily: 'system-ui, sans-serif',
         }}
       >
-        Same Agent Fleet. Different Scope.
+        Same Agent Fleet. Only Pages Differ.
       </div>
       <div
         style={{

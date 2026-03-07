@@ -2,7 +2,7 @@
  * app/api/chatbot/[clientId]/whatsapp/route.ts
  *
  * WhatsApp webhook scaffold for 360dialog.
- * Tier enforcement: Max+ required. Pro/Starter clients receive 403.
+ * Tier enforcement: all main tiers (Genesis+) include WhatsApp.
  * Full implementation deferred to v2 per CONTEXT.md.
  *
  * TODO(v2): Full 360dialog WhatsApp flow
@@ -19,7 +19,7 @@ export async function POST(req: Request, { params }: { params: { clientId: strin
   const { clientId } = params
   const config = await getChannelConfig(clientId)
   if (!isChannelAllowed(config, 'whatsapp')) {
-    return Response.json({ error: 'WhatsApp channel requires Max tier or higher.' }, { status: 403 })
+    return Response.json({ error: 'WhatsApp channel not available on your plan.' }, { status: 403 })
   }
   // TODO(v2): Full 360dialog WhatsApp flow
   const msg = await parseWhatsAppWebhook(req)

@@ -52,10 +52,10 @@ export async function generateMetadata({
 // ---------------------------------------------------------------------------
 
 const TIER_ORDER = [
-  'starter',
-  'pro',
-  'max',
-  'elite',
+  'genesis',
+  'essentials',
+  'prime',
+  'scale',
   'shopify-starter',
   'shopify-growth',
 ] as const
@@ -64,10 +64,10 @@ const TIER_ORDER = [
 function getBadgeVariant(
   slug: string,
 ): NonNullable<BadgeProps['variant']> {
-  if (slug === 'starter') return 'starter'
-  if (slug === 'pro') return 'pro'
-  if (slug === 'max') return 'max'
-  if (slug === 'elite') return 'elite'
+  if (slug === 'genesis') return 'genesis'
+  if (slug === 'essentials') return 'essentials'
+  if (slug === 'prime') return 'prime'
+  if (slug === 'scale') return 'scale'
   return 'legacy'
 }
 
@@ -102,12 +102,12 @@ export default function TierPage({
     ? PACKAGES.find((p) => p.slug === nextTierSlug)
     : null
 
-  // ROI calculator tier (only for starter/pro/max)
-  const roiTier = (['starter', 'pro', 'max'] as const).includes(
-    pkg.slug as 'starter' | 'pro' | 'max',
+  // ROI calculator tier
+  const roiTier = (['genesis', 'essentials', 'prime', 'scale'] as const).includes(
+    pkg.slug as 'genesis' | 'essentials' | 'prime' | 'scale',
   )
-    ? (pkg.slug as 'starter' | 'pro' | 'max')
-    : 'max'
+    ? (pkg.slug as 'genesis' | 'essentials' | 'prime' | 'scale')
+    : 'prime'
 
   // Upgrade nudge comparison rows
   const nudgeRows: ComparisonRow[] | null =
@@ -389,21 +389,19 @@ export default function TierPage({
         </div>
       </section>
 
-      {/* ROI Calculator (non-elite tiers only) */}
-      {pkg.slug !== 'elite' && (
-        <section className="section">
-          <div className="container">
-            <ROICalculator
-              defaultTier={roiTier}
-              formAction={`/packages/${pkg.slug}`}
-              tier={searchParams.tier}
-              leads={searchParams.leads}
-              rate={searchParams.rate}
-              deal={searchParams.deal}
-            />
-          </div>
-        </section>
-      )}
+      {/* ROI Calculator */}
+      <section className="section">
+        <div className="container">
+          <ROICalculator
+            defaultTier={roiTier}
+            formAction={`/packages/${pkg.slug}`}
+            tier={searchParams.tier}
+            leads={searchParams.leads}
+            rate={searchParams.rate}
+            deal={searchParams.deal}
+          />
+        </div>
+      </section>
     </>
   )
 }

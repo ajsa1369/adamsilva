@@ -57,7 +57,7 @@ export function resolveCartItems(items: CartLineItem[]): ResolvedCartItems {
   for (const item of items) {
     if (item.type === 'package') {
       const pricing = getStripePricing(item.id as PackageSlug)
-      if (!pricing) continue // Elite tier — skip (custom quoted)
+      if (!pricing) continue
 
       // Package always has recurring monthly
       hasRecurring = true

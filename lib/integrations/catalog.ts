@@ -442,9 +442,9 @@ export const LEGACY_PLATFORMS: readonly string[] = [
 // ---------------------------------------------------------------------------
 
 export const PACKAGES: Record<string, PackageDefinition> = {
-  starter: {
-    slug: 'starter',
-    name: 'Starter',
+  genesis: {
+    slug: 'genesis',
+    name: 'Genesis',
     baseSetup: 16000,
     baseMonthly: 3500,
     tier1Slots: 3,
@@ -452,9 +452,9 @@ export const PACKAGES: Record<string, PackageDefinition> = {
     tier3Slots: 0,
     isLegacyOnly: false,
   },
-  pro: {
-    slug: 'pro',
-    name: 'Pro',
+  essentials: {
+    slug: 'essentials',
+    name: 'Essentials',
     baseSetup: 28000,
     baseMonthly: 6500,
     tier1Slots: 6,
@@ -462,9 +462,9 @@ export const PACKAGES: Record<string, PackageDefinition> = {
     tier3Slots: 0,
     isLegacyOnly: false,
   },
-  max: {
-    slug: 'max',
-    name: 'Max',
+  prime: {
+    slug: 'prime',
+    name: 'Prime',
     baseSetup: 48000,
     baseMonthly: 12000,
     tier1Slots: 12,
@@ -472,9 +472,9 @@ export const PACKAGES: Record<string, PackageDefinition> = {
     tier3Slots: 1,
     isLegacyOnly: false,
   },
-  elite: {
-    slug: 'elite',
-    name: 'Elite',
+  scale: {
+    slug: 'scale',
+    name: 'Scale',
     baseSetup: 75000,
     baseMonthly: 0,   // custom engagement — not used in auto-calculation
     tier1Slots: 99,

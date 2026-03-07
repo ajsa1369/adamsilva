@@ -2,7 +2,7 @@
  * app/api/chatbot/[clientId]/sms/route.ts
  *
  * Inbound SMS webhook for Twilio and Vonage.
- * Tier enforcement: Silver+ required. Bronze clients receive 403.
+ * Tier enforcement: all main tiers (Genesis+) include SMS.
  * Uses generateText() (non-streaming) — SMS needs a plain string, not SSE stream.
  *
  * CHAT-05 compliance.
@@ -20,10 +20,10 @@ export const runtime = 'nodejs'
 export async function POST(req: Request, { params }: { params: { clientId: string } }) {
   const { clientId } = params
 
-  // Tier enforcement: SMS requires Pro+ tier
+  // Tier enforcement: all main tiers include SMS
   const config = await getChannelConfig(clientId)
   if (!isChannelAllowed(config, 'sms')) {
-    return Response.json({ error: 'SMS channel not available on your plan. Upgrade to Pro or higher.' }, { status: 403 })
+    return Response.json({ error: 'SMS channel not available on your plan.' }, { status: 403 })
   }
 
   const smsMsg = await parseSMSWebhook(req)

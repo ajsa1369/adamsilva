@@ -5,7 +5,7 @@ import { Badge } from './Badge'
 import { Button } from './Button'
 
 export interface TierData {
-  id: 'starter' | 'pro' | 'max' | 'elite' | 'legacy'
+  id: 'genesis' | 'essentials' | 'prime' | 'scale' | 'legacy'
   name: string           // e.g. "Starter"
   setupPrice: number     // e.g. 2500
   monthlyPrice: number   // e.g. 500

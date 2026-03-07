@@ -40,11 +40,11 @@ interface PlatformTierResult {
 }
 
 // Map package slug to ProposalCard tier prop
-function slugToTier(slug: string): 'starter' | 'pro' | 'max' | 'elite' | 'legacy' {
-  if (slug.includes('starter')) return 'starter'
-  if (slug.includes('pro')) return 'pro'
-  if (slug.includes('max')) return 'max'
-  if (slug.includes('elite')) return 'elite'
+function slugToTier(slug: string): 'genesis' | 'essentials' | 'prime' | 'scale' | 'legacy' {
+  if (slug.includes('genesis')) return 'genesis'
+  if (slug.includes('essentials')) return 'essentials'
+  if (slug.includes('prime')) return 'prime'
+  if (slug.includes('scale')) return 'scale'
   return 'legacy'
 }
 

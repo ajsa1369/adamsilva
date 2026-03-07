@@ -1,16 +1,16 @@
 import { ImageResponse } from 'next/og'
 
 export const runtime = 'edge'
-export const alt = 'ASC Agentic Commerce Packages comparison: Starter ($16K, 30 pages), Pro ($28K, 60 pages), Max ($48K, 100 pages, Most Popular), Elite (From $75K, unlimited). Four glassmorphism pricing cards on dark navy gradient. Adam Silva Consulting — Global Infrastructure for Agentic Commerce. SSR Architecture, Zero Hydration Tax, Gold Standard Compliance.'
+export const alt = 'ASC Agentic Commerce Packages comparison: Genesis ($16K, 50 pages), Essentials ($28K, 100 pages), Prime ($48K, 150 pages, Most Popular), Scale ($75K, 250 pages). Four glassmorphism pricing cards on dark navy gradient. Adam Silva Consulting — Global Infrastructure for Agentic Commerce. SSR Architecture, Zero Hydration Tax, Gold Standard Compliance.'
 export const size = { width: 1200, height: 630 }
 export const contentType = 'image/png'
 
 export default async function Image() {
   const tiers = [
-    { name: 'Starter', price: '$16K', highlighted: false },
-    { name: 'Pro', price: '$28K', highlighted: false },
-    { name: 'Max', price: '$48K', highlighted: true },
-    { name: 'Elite', price: 'From $75K', highlighted: false },
+    { name: 'Genesis', price: '$16K', highlighted: false },
+    { name: 'Essentials', price: '$28K', highlighted: false },
+    { name: 'Prime', price: '$48K', highlighted: true },
+    { name: 'Scale', price: '$75K', highlighted: false },
   ]
 
   return new ImageResponse(

@@ -10,12 +10,8 @@ export interface StripeProductPricing {
   monthlyPriceId: string    // recurring Price for monthly retainer
 }
 
-// Map from package slug to Stripe pricing (null for custom-quoted Elite tier)
-export type StripePriceMap = {
-  [K in Exclude<PackageSlug, 'elite'>]: StripeProductPricing
-} & {
-  elite: null
-}
+// Map from package slug to Stripe pricing
+export type StripePriceMap = Record<PackageSlug, StripeProductPricing>
 
 // Stripe Product/Price IDs for an individual service
 // Some services are one-time only (no monthly), some have setup + monthly

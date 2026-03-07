@@ -8,6 +8,14 @@
  * This file is SEPARATE from lib/integrations/catalog.ts which serves
  * the pricing engine. This file provides richer page-level data for
  * display on /packages, /packages/[tier], and /platform-check pages.
+ *
+ * IMPORTANT: These packages are sales-rep only — deeply discounted
+ * vs à la carte pricing. The only difference between tiers is pages.
+ * All tiers ship the same agent fleet, full protocol stack, SSR (AI readability) + SPA (speed)
+ * architecture, heavy schema, and content assets.
+ *
+ * Support/maintenance fees begin 100 days after project start OR
+ * upon completion of initial setup, whichever comes first.
  */
 
 // ---------------------------------------------------------------------------
@@ -15,30 +23,31 @@
 // ---------------------------------------------------------------------------
 
 export interface PackagePageData {
-  slug: 'starter' | 'pro' | 'max' | 'elite' | 'shopify-starter' | 'shopify-growth'
+  slug: 'genesis' | 'essentials' | 'prime' | 'scale' | 'shopify-starter' | 'shopify-growth'
   name: string
   tagline: string
-  setupPrice: number | null    // null = custom pricing (Elite)
-  monthlyPrice: number | null  // null = custom pricing (Elite)
+  setupPrice: number | null    // null = custom pricing
+  monthlyPrice: number | null  // null = custom pricing
   setupDisplay: string         // "$16,000" or "From $75,000"
   monthlyDisplay: string       // "$3,500/mo" or "Custom"
-  pagesIncluded: number | null // pages optimized in setup; null = unlimited (Elite)
-  tier1Slots: number | null    // null = unlimited (Elite)
+  pagesIncluded: number        // pages optimized in setup
+  tier1Slots: number | null    // null = unlimited (Scale)
   tier2Slots: number
   tier3Slots: number
   slotsDisplay: string         // "3 T1 / 0 T2 / 0 T3" or "Unlimited"
   isLegacy: boolean            // true for shopify-starter and shopify-growth
-  highlighted: boolean         // true for max (most popular)
+  highlighted: boolean         // true for prime (most popular)
   badge: string | null         // "Most Popular" | "Best Value" | null
   highlights: string[]         // 4-6 bullet strings for PricingTable
   features: {                  // for ComparisonTable rows
     blogPostsPerMonth: number | string
-    imagesPerPost: number
+    imagesPerPost: string
     pressReleasesPerMonth: number | string
     chatbotChannels: string
     protocolStack: string
     architecture: string
     support: string
+    supportDelay: string
   }
   faqs: Array<{ question: string; answer: string }>  // min 3 per tier
   heroDescription: string      // 2-sentence description for /packages/[tier] hero
@@ -46,14 +55,14 @@ export interface PackagePageData {
 
 export const PACKAGES: PackagePageData[] = [
   {
-    slug: 'starter',
-    name: 'Starter',
-    tagline: 'Full agent fleet — up to 30 pages optimized in setup',
+    slug: 'genesis',
+    name: 'Genesis',
+    tagline: 'Full agent fleet — up to 50 pages optimized in setup',
     setupPrice: 16000,
     monthlyPrice: 3500,
     setupDisplay: '$16,000',
     monthlyDisplay: '$3,500/mo',
-    pagesIncluded: 30,
+    pagesIncluded: 50,
     tier1Slots: 3,
     tier2Slots: 0,
     tier3Slots: 0,
@@ -62,56 +71,57 @@ export const PACKAGES: PackagePageData[] = [
     highlighted: false,
     badge: null,
     highlights: [
-      'Up to 30 pages: full JSON-LD schema, AEO/GEO optimization, and protocol endpoints built in setup',
-      'AI Commerce Agent — web channel (24/7 lead capture + commerce)',
-      'Authority Content Agent — topical map agent builds your content plan; unlimited 2,000-word articles + Remotion video + 2 schema-wrapped PNG images',
+      'Up to 50 pages: full JSON-LD schema, AEO/GEO optimization, and protocol endpoints built in setup',
+      'AI Commerce Agent — all channels (24/7 lead capture + commerce)',
+      'Authority Content Agent — topical map agent builds your content plan; unlimited 2,000-word articles + Remotion video + 3 schema-wrapped images (or 2 images + 1 video)',
       'Press Release Agent — client-scheduled; pre-built schema rules + JSON-LD; you bring your syndication account + AI API',
-      'UCP Discovery Protocol — AI agents can find and read your site',
-      'Continuity plan: model updates + schema evolution as AI evolves',
+      'Full UCP + ACP + AP2 Gold Standard protocol stack',
+      'Support fees begin 100 days after project start or upon setup completion',
     ],
     features: {
       blogPostsPerMonth: 'Unlimited',
-      imagesPerPost: 2,
+      imagesPerPost: '3 images or 2 images + 1 video',
       pressReleasesPerMonth: 'Client-scheduled',
-      chatbotChannels: 'Web',
-      protocolStack: 'UCP',
-      architecture: 'SSR headless (no SPA hydration tax)',
+      chatbotChannels: 'Web + SMS + Voice + WhatsApp',
+      protocolStack: 'UCP + ACP + AP2 (Gold Standard)',
+      architecture: 'SSR (AI readability) + SPA (speed)',
       support: 'Email',
+      supportDelay: 'Starts at 100 days or setup completion',
     },
     faqs: [
       {
-        question: 'Who is Starter for?',
+        question: 'Who is Genesis for?',
         answer:
-          'Starter is for lean teams or smaller sites (up to 30 pages). You get the exact same agent fleet as Pro and Max — AI Commerce Agent, Authority Content Agent with topical map planning, and Press Release Agent — applied to 30 pages in the setup. The setup fee reflects the man hours to implement full JSON-LD schema, AEO/GEO optimization, and protocol endpoints across those pages.',
+          'Genesis is for lean teams or smaller sites (up to 50 pages). You get the exact same agent fleet, protocol stack, and content assets as every other tier — the only difference is the number of pages covered in the initial setup. The setup fee reflects the man hours to implement full JSON-LD schema, AEO/GEO optimization, and protocol endpoints across those pages.',
       },
       {
-        question: 'What is the difference between Starter, Pro, and Max?',
+        question: 'What is the difference between Genesis, Essentials, Prime, and Scale?',
         answer:
-          'The agent fleet is identical across all three tiers. The only difference is the number of pages included in the setup: Starter covers 30 pages, Pro covers 60 pages, Max covers 100 pages. More pages means more man hours — more JSON-LD schema implementations, more AEO/GEO optimization, more protocol endpoints, more structured data coverage. If your site grows, you can add pages at any time.',
+          'The agent fleet, protocol stack, architecture, and content assets are identical across all four tiers. The only difference is the number of pages included in the setup: Genesis covers 50 pages, Essentials covers 100 pages, Prime covers 150 pages, Scale covers 250 pages. More pages means more man hours — more JSON-LD schema implementations, more AEO/GEO optimization, more protocol endpoints, more structured data coverage.',
       },
       {
         question: 'What does each Authority Content article include?',
         answer:
-          'Every article is 2,000 words, structured for answer engine citation (answer-first paragraphs, SpeakableSpecification markup, FAQ schema, entity linking). It ships with a Remotion-generated video summary with JSON-LD embedded in the video metadata, and 2 PNG images each wrapped in ImageObject schema — giving AI systems multiple machine-readable entry points into the content.',
+          'Every article is 2,000 words, structured for answer engine citation (answer-first paragraphs, SpeakableSpecification markup, FAQ schema, entity linking). It ships with a Remotion-generated video summary with JSON-LD embedded in the video metadata, and 3 PNG images each wrapped in ImageObject schema — or 2 images plus 1 video. This gives AI systems multiple machine-readable entry points into every piece of content.',
       },
       {
-        question: 'How does the Press Release Agent work and what do I need to provide?',
+        question: 'When do support fees start?',
         answer:
-          'The Press Release Agent uses pre-populated rules and structure that ASC controls — you cannot break the schema format. JSON-LD entity markup is always included. You set the release schedule yourself and push when you are ready. You bring your own Business Wire or PR Newswire account (billed directly to you) and your own AI API key (also billed to you). ASC provides the agent, the rules, and the schema — you control the timing and distribution costs.',
+          'Monthly support and maintenance fees do not begin until 100 days after project start or when the initial setup is completed, whichever comes first. This ensures you are only paying for ongoing support once the foundation is built. The ongoing fee keeps your site current as AI protocols and models evolve — because AI is a moving target.',
       },
     ],
     heroDescription:
-      'Starter is the full agent fleet applied to up to 30 pages: JSON-LD schema, AEO/GEO optimization, UCP protocol, and AI Commerce Agent all built in setup. Same agents as Pro and Max — the difference is scope, not capability.',
+      'Genesis is the full agent fleet applied to up to 50 pages: JSON-LD schema, AEO/GEO optimization, full Gold Standard protocol stack, and AI Commerce Agent all built in setup. Same agents and protocols as every tier — the difference is scope, not capability.',
   },
   {
-    slug: 'pro',
-    name: 'Pro',
-    tagline: 'Full agent fleet — up to 60 pages optimized in setup',
+    slug: 'essentials',
+    name: 'Essentials',
+    tagline: 'Full agent fleet — up to 100 pages optimized in setup',
     setupPrice: 28000,
     monthlyPrice: 6500,
     setupDisplay: '$28,000',
     monthlyDisplay: '$6,500/mo',
-    pagesIncluded: 60,
+    pagesIncluded: 100,
     tier1Slots: 6,
     tier2Slots: 1,
     tier3Slots: 0,
@@ -120,56 +130,57 @@ export const PACKAGES: PackagePageData[] = [
     highlighted: false,
     badge: 'Best Value',
     highlights: [
-      'Up to 60 pages: full JSON-LD schema, AEO/GEO optimization, and protocol endpoints built in setup',
-      'AI Commerce Agent — web + SMS channels (24/7 lead capture + commerce)',
-      'Authority Content Agent — topical map agent builds your content plan; unlimited 2,000-word articles + Remotion video + 2 schema-wrapped PNG images',
+      'Up to 100 pages: full JSON-LD schema, AEO/GEO optimization, and protocol endpoints built in setup',
+      'AI Commerce Agent — all channels (24/7 lead capture + commerce)',
+      'Authority Content Agent — topical map agent builds your content plan; unlimited 2,000-word articles + Remotion video + 3 schema-wrapped images (or 2 images + 1 video)',
       'Press Release Agent — client-scheduled; pre-built schema rules + JSON-LD; you bring your syndication account + AI API',
-      'UCP + ACP (partial) + entity graph construction — AI agents can discover and initiate checkout',
-      'Continuity plan: agent retraining + protocol updates as AI evolves',
+      'Full UCP + ACP + AP2 Gold Standard protocol stack + entity graph construction',
+      'Support fees begin 100 days after project start or upon setup completion',
     ],
     features: {
       blogPostsPerMonth: 'Unlimited',
-      imagesPerPost: 2,
+      imagesPerPost: '3 images or 2 images + 1 video',
       pressReleasesPerMonth: 'Client-scheduled',
-      chatbotChannels: 'Web + SMS',
-      protocolStack: 'UCP + ACP (partial)',
-      architecture: 'SSR headless (no SPA hydration tax)',
+      chatbotChannels: 'Web + SMS + Voice + WhatsApp',
+      protocolStack: 'UCP + ACP + AP2 (Gold Standard)',
+      architecture: 'SSR (AI readability) + SPA (speed)',
       support: 'Priority email',
+      supportDelay: 'Starts at 100 days or setup completion',
     },
     faqs: [
       {
-        question: "What's the difference between Starter and Pro?",
+        question: "What's the difference between Genesis and Essentials?",
         answer:
-          'Pro covers 60 pages in the setup vs 30 for Starter — more man hours to implement JSON-LD schema, AEO/GEO optimization, and protocol endpoints across a larger site. Pro also adds SMS as a second AI Commerce Agent channel, partial ACP for agent-initiated checkout, and entity graph construction. The agent fleet itself is identical.',
+          'Essentials covers 100 pages in the setup vs 50 for Genesis — more man hours to implement JSON-LD schema, AEO/GEO optimization, and protocol endpoints across a larger site. Essentials also adds entity graph construction (registering your brand across AI knowledge graphs). The agent fleet, protocol stack, and content assets are identical.',
       },
       {
         question: 'What does each Authority Content article include?',
         answer:
-          'Every article is 2,000 words, structured for answer engine citation (answer-first paragraphs, SpeakableSpecification markup, FAQ schema, entity linking). It ships with a Remotion-generated video summary with JSON-LD embedded in the video metadata, and 2 PNG images each wrapped in ImageObject schema — giving AI systems multiple machine-readable entry points into the content. The topical map agent determines which articles to write each month based on authority gaps.',
-      },
-      {
-        question: 'How does the Press Release Agent work and what do I need to provide?',
-        answer:
-          'The Press Release Agent uses pre-populated rules and structure that ASC controls — you cannot break the schema format. JSON-LD entity markup is always included. You set the release schedule yourself and push when you are ready. You bring your own Business Wire or PR Newswire account (billed directly to you) and your own AI API key (also billed to you). ASC provides the agent, the rules, and the schema — you control the timing and distribution costs.',
+          'Every article is 2,000 words, structured for answer engine citation (answer-first paragraphs, SpeakableSpecification markup, FAQ schema, entity linking). It ships with a Remotion-generated video summary with JSON-LD embedded in the video metadata, and 3 PNG images each wrapped in ImageObject schema — or 2 images plus 1 video. The topical map agent determines which articles to write each month based on authority gaps.',
       },
       {
         question: 'What is the entity graph construction?',
         answer:
           'We register your brand entity across the major AI knowledge graphs — Google Knowledge Panel, Wikidata, Crunchbase, LinkedIn Company — and link them via sameAs in your JSON-LD. This gives AI systems a machine-verified identity for your brand, which directly increases LLM recommendation confidence.',
       },
+      {
+        question: 'When do support fees start?',
+        answer:
+          'Monthly support and maintenance fees do not begin until 100 days after project start or when the initial setup is completed, whichever comes first. The ongoing fee keeps your site current as AI protocols and models evolve — because AI is a moving target.',
+      },
     ],
     heroDescription:
-      'Pro is the full agent fleet applied to up to 60 pages: same agents as Starter and Max, covering more of your site. More pages means more JSON-LD schema, more AEO/GEO optimization, and more protocol surface area — which directly increases the number of entry points AI systems have into your business.',
+      'Essentials is the full agent fleet applied to up to 100 pages: same agents, same Gold Standard protocol stack as every tier, covering more of your site. More pages means more JSON-LD schema, more AEO/GEO optimization, and more protocol surface area — which directly increases the number of entry points AI systems have into your business.',
   },
   {
-    slug: 'max',
-    name: 'Max',
-    tagline: 'Full agent fleet — up to 100 pages optimized in setup',
+    slug: 'prime',
+    name: 'Prime',
+    tagline: 'Full agent fleet — up to 150 pages optimized in setup',
     setupPrice: 48000,
     monthlyPrice: 12000,
     setupDisplay: '$48,000',
     monthlyDisplay: '$12,000/mo',
-    pagesIncluded: 100,
+    pagesIncluded: 150,
     tier1Slots: 12,
     tier2Slots: 3,
     tier3Slots: 1,
@@ -178,32 +189,33 @@ export const PACKAGES: PackagePageData[] = [
     highlighted: true,
     badge: 'Most Popular',
     highlights: [
-      'Up to 100 pages: full JSON-LD schema, AEO/GEO optimization, and protocol endpoints built in setup',
-      'AI Commerce Agent — web, SMS, voice, and WhatsApp channels (24/7)',
-      'Authority Content Agent — topical map agent builds your content plan; unlimited 2,000-word articles + Remotion video + 2 schema-wrapped PNG images',
+      'Up to 150 pages: full JSON-LD schema, AEO/GEO optimization, and protocol endpoints built in setup',
+      'AI Commerce Agent — all channels (24/7 lead capture + commerce)',
+      'Authority Content Agent — topical map agent builds your content plan; unlimited 2,000-word articles + Remotion video + 3 schema-wrapped images (or 2 images + 1 video)',
       'Press Release Agent — client-scheduled; pre-built schema rules + JSON-LD; you bring your syndication account + AI API',
       'Full UCP + ACP + AP2 Gold Standard protocol stack',
       'Dedicated Client Success Manager',
     ],
     features: {
       blogPostsPerMonth: 'Unlimited',
-      imagesPerPost: 2,
+      imagesPerPost: '3 images or 2 images + 1 video',
       pressReleasesPerMonth: 'Client-scheduled',
       chatbotChannels: 'Web + SMS + Voice + WhatsApp',
       protocolStack: 'UCP + ACP + AP2 (Gold Standard)',
-      architecture: 'SSR headless required (no SPA hydration tax)',
+      architecture: 'SSR (AI readability) + SPA (speed)',
       support: 'Dedicated CSM',
+      supportDelay: 'Starts at 100 days or setup completion',
     },
     faqs: [
       {
-        question: "What makes Max the 'Gold Standard'?",
+        question: "What makes Prime the most popular?",
         answer:
-          'Max covers 100 pages in the setup — the most comprehensive schema, AEO/GEO, and protocol implementation of the three tiers. It also achieves full UCP + ACP + AP2 compliance, adds voice and WhatsApp as AI Commerce Agent channels, and includes a Dedicated Client Success Manager. The agent fleet is the same as Starter and Pro — Max just applies it to a larger surface area and adds the complete protocol stack.',
+          'Prime covers 150 pages in the setup — the largest standard implementation. It includes a Dedicated Client Success Manager and the same full Gold Standard protocol stack, agent fleet, and content assets as every other tier. For most mid-market businesses, 150 pages covers the entire site with room to grow.',
       },
       {
         question: 'How does the topical map agent work?',
         answer:
-          'The topical map agent analyzes your domain, competitors, and AI citation gaps to produce a monthly content plan targeting the exact topics where AI systems (ChatGPT, Perplexity, Claude, Gemini) are most likely to cite sources. Every article it schedules is 2,000 words with a Remotion video summary and 2 schema-wrapped PNG images — giving AI systems machine-readable entry points into every piece of content.',
+          'The topical map agent analyzes your domain, competitors, and AI citation gaps to produce a monthly content plan targeting the exact topics where AI systems (ChatGPT, Perplexity, Claude, Gemini) are most likely to cite sources. Every article it schedules is 2,000 words with a Remotion video summary and 3 schema-wrapped images (or 2 images + 1 video) — giving AI systems machine-readable entry points into every piece of content.',
       },
       {
         question: 'How does the Press Release Agent work and what do I need to provide?',
@@ -211,23 +223,23 @@ export const PACKAGES: PackagePageData[] = [
           'The Press Release Agent uses pre-populated rules and structure that ASC controls — you cannot break the schema format. JSON-LD entity markup is always included. You set the release schedule yourself and push when you are ready. You bring your own Business Wire or PR Newswire account (billed directly to you) and your own AI API key (also billed to you). ASC provides the agent, the rules, and the schema — you control the timing and distribution costs.',
       },
       {
-        question: 'How do the four AI Commerce Agent channels work together?',
+        question: 'When do support fees start?',
         answer:
-          'Each channel — web, SMS, voice, and WhatsApp — connects to the same underlying AI Commerce Agent with shared context. A prospect can start on your website, follow up via SMS, and close over WhatsApp. The agent maintains full conversation history and product knowledge across all four channels.',
+          'Monthly support and maintenance fees do not begin until 100 days after project start or when the initial setup is completed, whichever comes first. The ongoing fee keeps your site current as AI protocols and models evolve — because AI is a moving target.',
       },
     ],
     heroDescription:
-      'Max is the full agent fleet applied to up to 100 pages: maximum schema coverage, AEO/GEO optimization across your entire site, the full UCP/ACP/AP2 Gold Standard protocol stack, and four-channel AI Commerce Agent. Same agents as Starter and Pro — Max is for larger sites where more pages means more AI entry points.',
+      'Prime is the full agent fleet applied to up to 150 pages: comprehensive schema coverage, AEO/GEO optimization across your entire site, the full Gold Standard protocol stack, and a Dedicated Client Success Manager. Same agents as every tier — Prime is the sweet spot for mid-market businesses.',
   },
   {
-    slug: 'elite',
-    name: 'Elite',
-    tagline: 'Enterprise agent fleet — unlimited pages, custom scope',
-    setupPrice: null,
-    monthlyPrice: null,
-    setupDisplay: 'From $75,000',
-    monthlyDisplay: 'Custom',
-    pagesIncluded: null,
+    slug: 'scale',
+    name: 'Scale',
+    tagline: 'Full agent fleet — up to 250 pages optimized in setup',
+    setupPrice: 75000,
+    monthlyPrice: 20000,
+    setupDisplay: '$75,000',
+    monthlyDisplay: '$20,000/mo',
+    pagesIncluded: 250,
     tier1Slots: null,
     tier2Slots: 0,
     tier3Slots: 0,
@@ -236,41 +248,47 @@ export const PACKAGES: PackagePageData[] = [
     highlighted: false,
     badge: null,
     highlights: [
-      'Unlimited AI Commerce Agent channels + custom channel development',
-      'Authority Content Agent — unlimited 2,000-word articles, each with Remotion video summary + 2 schema-wrapped PNG images',
+      'Up to 250 pages: full JSON-LD schema, AEO/GEO optimization, and protocol endpoints built in setup',
+      'AI Commerce Agent — all channels + custom channel development',
+      'Authority Content Agent — unlimited 2,000-word articles, each with Remotion video summary + 3 schema-wrapped images (or 2 images + 1 video)',
       'Press Release Agent — custom cadence; pre-built schema rules + JSON-LD; you bring your syndication account + AI API',
       'Full protocol stack + white-label UCP/ACP/AP2 endpoints',
-      'Custom agent training on your full product catalog and business logic',
       '24/7 dedicated agent operations team',
     ],
     features: {
       blogPostsPerMonth: 'Unlimited',
-      imagesPerPost: 2,
+      imagesPerPost: '3 images or 2 images + 1 video',
       pressReleasesPerMonth: 'Client-scheduled',
       chatbotChannels: 'All + custom',
       protocolStack: 'Full stack + white-label',
-      architecture: 'Custom SSR (zero hydration tax)',
+      architecture: 'SSR (AI readability) + SPA (speed)',
       support: '24/7 dedicated team',
+      supportDelay: 'Starts at 100 days or setup completion',
     },
     faqs: [
       {
-        question: 'Who is Elite designed for?',
+        question: 'Who is Scale designed for?',
         answer:
-          'Elite is built for enterprises running multi-brand portfolios, high-volume agentic transaction environments, or businesses that want to white-label the entire ASC agent stack for their own clients. The agents are custom-trained on your full product catalog and business logic.',
+          'Scale is built for enterprises running multi-brand portfolios, high-volume agentic transaction environments, or businesses that want to white-label the entire ASC agent stack for their own clients. It covers up to 250 pages with custom agent training on your full product catalog and business logic.',
       },
       {
-        question: 'How is Elite pricing determined?',
+        question: 'How is Scale pricing determined?',
         answer:
-          'Elite is custom-quoted based on agent fleet size, number of brands, content production volume, custom channel development, and white-label licensing scope. Setup starts from $75,000 and includes full agent training, protocol implementation, and dedicated operations. Content production (articles, press releases) scales to your volume — you bring your own syndication accounts and AI API keys so distribution costs are billed directly to you.',
+          'Scale is $75,000 setup with $20,000/month support. The setup fee reflects the man hours to implement full JSON-LD schema, AEO/GEO optimization, and protocol endpoints across 250 pages, plus custom agent training, white-label protocol infrastructure, and dedicated operations. Content production (articles, press releases) scales to your volume — you bring your own syndication accounts and AI API keys so distribution costs are billed directly to you.',
       },
       {
-        question: 'What does white-label mean for Elite clients?',
+        question: 'What does white-label mean for Scale clients?',
         answer:
-          'Elite clients can deploy the full ASC agent stack — commerce agents, press release agents, content agents, and protocol infrastructure — under their own brand. This includes custom protocol endpoints (/.well-known/ucp, /acp, /ap2 under your domain) and branded agent identities for your clients or business units.',
+          'Scale clients can deploy the full ASC agent stack — commerce agents, press release agents, content agents, and protocol infrastructure — under their own brand. This includes custom protocol endpoints (/.well-known/ucp, /acp, /ap2 under your domain) and branded agent identities for your clients or business units.',
+      },
+      {
+        question: 'When do support fees start?',
+        answer:
+          'Monthly support and maintenance fees do not begin until 100 days after project start or when the initial setup is completed, whichever comes first. The ongoing fee keeps your site current as AI protocols and models evolve — because AI is a moving target.',
       },
     ],
     heroDescription:
-      'Elite is the enterprise agent fleet — unlimited channels, unlimited 2,000-word authority articles with Remotion video summaries and schema-wrapped images, custom press release cadence with pre-built schema rules, white-label protocol infrastructure, and a 24/7 dedicated team managing your entire agentic commerce operation.',
+      'Scale is the enterprise agent fleet — up to 250 pages, all channels plus custom channel development, unlimited 2,000-word authority articles with Remotion video summaries and schema-wrapped images, custom press release cadence, white-label protocol infrastructure, and a 24/7 dedicated team managing your entire agentic commerce operation.',
   },
   {
     slug: 'shopify-starter',
@@ -298,12 +316,13 @@ export const PACKAGES: PackagePageData[] = [
     ],
     features: {
       blogPostsPerMonth: 1,
-      imagesPerPost: 3,
+      imagesPerPost: '3 images or 2 images + 1 video',
       pressReleasesPerMonth: 1,
       chatbotChannels: 'Web only',
       protocolStack: 'UCP (limited)',
       architecture: 'Shopify',
       support: 'Email',
+      supportDelay: 'Starts at 100 days or setup completion',
     },
     faqs: [
       {
@@ -317,13 +336,13 @@ export const PACKAGES: PackagePageData[] = [
           "Since Shopify's native blog lacks the structured data and performance characteristics needed for AI discovery, we deploy your authority content on a headless subdomain (e.g., blog.yourdomain.com) that achieves full SEO and AI indexing standards.",
       },
       {
-        question: 'Can I migrate from Shopify Starter to Max?',
+        question: 'Can I migrate from Shopify Starter to Prime?',
         answer:
           'Yes — and we recommend it. Migration from Shopify (SPA) to an SSR headless architecture eliminates the hydration tax and unlocks full Gold Standard compliance. AI agents go from seeing a blank page to receiving complete HTML instantly. We handle the migration planning, content transfer, and DNS cutover as part of the upgrade process.',
       },
     ],
     heroDescription:
-      'Shopify Starter brings AI chatbot and authority content to Shopify merchants — operating within Shopify\'s architectural constraints with a clear upgrade path to headless Max.',
+      'Shopify Starter brings AI chatbot and authority content to Shopify merchants — operating within Shopify\'s architectural constraints with a clear upgrade path to headless Prime.',
   },
   {
     slug: 'shopify-growth',
@@ -351,12 +370,13 @@ export const PACKAGES: PackagePageData[] = [
     ],
     features: {
       blogPostsPerMonth: 2,
-      imagesPerPost: 5,
+      imagesPerPost: '3 images or 2 images + 1 video',
       pressReleasesPerMonth: 2,
       chatbotChannels: 'Web + SMS',
       protocolStack: 'UCP (limited)',
       architecture: 'Shopify',
       support: 'Priority email',
+      supportDelay: 'Starts at 100 days or setup completion',
     },
     faqs: [
       {
@@ -400,10 +420,10 @@ export interface PlatformEntry {
     goldStandard: ComplianceLevel
   }
   recommendedPackage:
-    | 'starter'
-    | 'pro'
-    | 'max'
-    | 'elite'
+    | 'genesis'
+    | 'essentials'
+    | 'prime'
+    | 'scale'
     | 'shopify-starter'
     | 'shopify-growth'
     | 'migration'
@@ -425,7 +445,7 @@ export const PLATFORM_MATRIX: PlatformEntry[] = [
       ap2: 'full',
       goldStandard: 'full',
     },
-    recommendedPackage: 'max',
+    recommendedPackage: 'prime',
     ceiling:
       'Gold Standard: Full UCP + ACP + AP2 compliance achievable. SSR eliminates the hydration tax — AI agents see complete HTML on first request.',
     penalties: [],
@@ -443,7 +463,7 @@ export const PLATFORM_MATRIX: PlatformEntry[] = [
       ap2: 'none',
       goldStandard: 'none',
     },
-    recommendedPackage: 'pro',
+    recommendedPackage: 'essentials',
     ceiling:
       'Partial: UCP layer achievable, ACP/AP2 require architecture changes',
     penalties: [],
@@ -461,7 +481,7 @@ export const PLATFORM_MATRIX: PlatformEntry[] = [
       ap2: 'none',
       goldStandard: 'none',
     },
-    recommendedPackage: 'pro',
+    recommendedPackage: 'essentials',
     ceiling:
       'Partial: UCP achievable with optimization, ACP/AP2 blocked by WordPress checkout architecture',
     penalties: [],

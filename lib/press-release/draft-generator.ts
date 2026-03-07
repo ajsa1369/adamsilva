@@ -60,7 +60,7 @@ SITE URL: ${siteUrl}
 DATELINE: ${dateline}
 ${researchBlock}
 BOILERPLATE (use exactly):
-"About Adam Silva Consulting: Adam Silva Consulting builds the infrastructure that makes businesses AI-commerce-ready. We implement UCP, ACP, and AP2 protocols across Starter, Pro, Max, and Elite tiers. Learn more at ${siteUrl}"
+"About Adam Silva Consulting: Adam Silva Consulting builds the infrastructure that makes businesses AI-commerce-ready. We implement UCP, ACP, and AP2 protocols across Genesis, Essentials, Prime, and Scale tiers. Learn more at ${siteUrl}"
 
 MEDIA CONTACT (use exactly):
 "Contact: ${authorName} | press@adamsilvaconsulting.com | ${siteUrl}"
